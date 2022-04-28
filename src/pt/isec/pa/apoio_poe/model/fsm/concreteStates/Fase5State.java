@@ -1,0 +1,149 @@
+package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
+
+import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
+import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashSet;
+
+public class Fase5State extends ApoioPoeAdapter{
+    public Fase5State(ApoioPoeContext context, ApoioPoeManager data) {
+        super(context, data);
+    }
+
+    @Override
+    public boolean terminarAplicacao(String file) {
+        if(!file.isBlank())
+            data.saveStateInFile(file, context.getState());
+
+        changeState(ApoioPoeState.INICIO);
+        return true;
+    }
+
+    @Override
+    public String consultarAlunos(boolean... filtros) {
+
+        if(filtros.length != 1)
+            return null;
+
+        boolean comPropostaAtribuida = filtros[0];
+
+        HashSet<Aluno> resultado = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+
+        if(comPropostaAtribuida)
+
+            for (var propostasAtribuidas : data.getPropostasAtribuidas())
+                resultado.add(data.getAluno(propostasAtribuidas.getnAlunoAssociado()));
+
+        else{
+            HashSet<Long> alunosComProposta = new HashSet<>();
+
+            for(var propostasAtribuidas : data.getPropostasAtribuidas())
+                alunosComProposta.add(propostasAtribuidas.getnAlunoAssociado());
+
+            for(var aluno : data.getAlunos())
+                if(!alunosComProposta.contains(aluno.getnAluno()) && data.getCandidatura(aluno.getnAluno()) != null)
+                    resultado.add(aluno);
+        }
+
+        ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
+        Collections.sort(resultadoOrdenado);
+
+        for(var aluno : resultadoOrdenado) {
+
+            if (comPropostaAtribuida) {
+
+                sb.append("Ordem da preferência: ");
+
+                for(var propostaAtrib : data.getPropostasAtribuidas())
+                    if(propostaAtrib.getnAlunoAssociado() == aluno.getnAluno())
+                        sb.append(propostaAtrib.getOrdemPreferencia()).append(System.lineSeparator());
+
+            }
+                sb.append(aluno).append(System.lineSeparator());
+        }
+
+        return sb.toString();
+    }
+
+    @Override
+    public String consultarPropostas(boolean... filtros) {
+
+        if(filtros.length != 1)
+            return null;
+
+        boolean propostasAtribuidas = filtros[0];
+
+        HashSet<Proposta> resultado = new HashSet<>();
+        StringBuilder sb = new StringBuilder();
+
+        if(propostasAtribuidas){
+            for(var proposta : data.getPropostas())
+                for(var propostasAtribuida : data.getPropostasAtribuidas())
+                    if(propostasAtribuida.getId().equals(proposta.getId())) {
+                        resultado.add(proposta);
+                        break;
+                    }
+        }else {
+
+            HashSet<Proposta> propostasAtribuidaHS = new HashSet<>();
+
+            for(var proposta : data.getPropostas())
+                for(var propostasAtribuida : data.getPropostasAtribuidas())
+                    if(propostasAtribuida.getId().equals(proposta.getId())) {
+                        propostasAtribuidaHS.add(proposta);
+                        break;
+                    }
+
+            for(var proposta : data.getPropostas())
+                if(!propostasAtribuidaHS.contains(proposta))
+                    resultado.add(proposta);
+
+        }
+
+        ArrayList<Proposta> resultadoOrdenado = new ArrayList<>(resultado);
+        Collections.sort(resultadoOrdenado);
+
+        for(var proposta : resultadoOrdenado)
+            sb.append(proposta).append(System.lineSeparator());
+
+        return sb.toString();
+    }
+
+    @Override
+    public String consultarDocentes(String filtro) {
+        return ApoioPoeState.FASE4.createState(context, data).consultarDocentes(filtro);
+    }
+
+    @Override
+    public boolean exportarAlunosFicheiroCsv(String filename) {
+        return data.exportAlunosCsv(filename);
+    }
+    @Override
+    public boolean exportarDocentesFicheiroCsv(String filename) {
+        return data.exportDocentesCsv(filename);
+    }
+    @Override
+    public boolean exportarPropostasFicheiroCsv(String filename) {
+        return data.exportPropostasCsv(filename);
+    }
+    @Override
+    public boolean exportarCandidaturasFicheiroCsv(String filename) {
+        return data.exportCandidaturasCsv(filename);
+    }
+    @Override
+    public boolean exportarPropostasAtribuidasFicheiroCsv(String filename, boolean guardarOrientador) {
+        return data.exportPropostasAtribuidasCsv(filename, guardarOrientador);
+    }
+
+
+    @Override
+    public ApoioPoeState getState() {
+        return ApoioPoeState.FASE5;
+    }
+}
