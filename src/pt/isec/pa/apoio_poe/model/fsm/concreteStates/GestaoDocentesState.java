@@ -16,7 +16,7 @@ public class GestaoDocentesState extends ApoioPoeAdapter{
         return true;
     }
 
-    //TODO: A implemetar com o Command e Facade (adicionar, editar, remover)
+    //TODO: A implemetar com o memento
     @Override
     public boolean adicionarDados(String... dados) {
         return super.adicionarDados(dados);
