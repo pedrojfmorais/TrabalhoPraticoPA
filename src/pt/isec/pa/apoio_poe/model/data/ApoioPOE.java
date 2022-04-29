@@ -305,13 +305,64 @@ public class ApoioPOE implements Serializable {
       return (ArrayList<PropostaAtribuida>) propostaAtribuidaOrdenadas.clone();
    }
 
-   //TODO: verificações
    public boolean removeAluno(long nAluno){
+
+      removeCandidatura(nAluno);
+
+      ArrayList<String> propostasRemover = new ArrayList<>();
+
+      for (var proposta : getPropostas()) {
+         if (proposta instanceof Autoproposto && proposta.getnAlunoAssociado() == nAluno)
+            propostasRemover.add(proposta.getId());
+
+         if(proposta.getnAlunoAssociado() == nAluno)
+            proposta.setnAlunoAssociado(0);
+      }
+
+      for(var p : propostasRemover)
+         removeProposta(p);
+
+      //já é removida a proposta atribuida ou no removeCandidatura() ou no removeProposta()
+
       return alunos.remove(nAluno) != null;
    }
-   public boolean removeDocente(String email){return docentes.remove(email) != null;}
-   public boolean removeProposta(String id){return propostas.remove(id) != null;}
-   public boolean removeCandidatura(long id){return candidaturas.remove(id) != null;}
+   public boolean removeDocente(String email){
+
+      ArrayList<String> propostasRemover = new ArrayList<>();
+
+      for(var proposta : getPropostas())
+         if(proposta instanceof Projeto p)
+            if(p.getEmailDocente().equals(email))
+               propostasRemover.add(proposta.getId());
+
+      for(var idPropostaRemover : propostasRemover)
+         removeProposta(idPropostaRemover);
+
+      for(var propostaAtribuida : getPropostasAtribuidas())
+         if(propostaAtribuida.getEmailDocenteOrientador().equals(email))
+            removeOrientadorPropostaAtribuida(propostaAtribuida.getId());
+
+      return docentes.remove(email) != null;
+   }
+   public boolean removeProposta(String id){
+      removePropostaAtribuida(id);
+
+      for(var candidatura : getCandidaturas())
+         candidatura.removeProposta(id);
+
+      return propostas.remove(id) != null;
+   }
+   public boolean removeCandidatura(long nAluno){
+
+      if(getCandidatura(nAluno)==null)
+         return false;
+
+      for(var propostaAtribuida : getPropostasAtribuidas())
+         if(propostaAtribuida.getnAlunoAssociado() == nAluno)
+            removePropostaAtribuida(propostaAtribuida.getId());
+
+      return candidaturas.remove(nAluno) != null;
+   }
    public boolean removePropostaAtribuida(String id){return propostasAtribuidas.remove(id) != null;}
    public boolean removeOrientadorPropostaAtribuida(String id){
 

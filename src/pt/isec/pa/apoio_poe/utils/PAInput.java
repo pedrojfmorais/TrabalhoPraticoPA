@@ -48,36 +48,6 @@ public final class PAInput {
         return value;
     }
 
-    public static int readInt(String title) {
-        while (true) {
-            if (title != null)
-                System.out.print(title);
-            else
-                System.out.print("> ");
-            if (sc.hasNextInt()) {
-                int intValue = sc.nextInt();
-                sc.nextLine();
-                return intValue;
-            } else
-                sc.nextLine();
-        }
-    }
-
-    public static double readNumber(String title) {
-        while (true) {
-            if (title != null)
-                System.out.print(title);
-            else
-                System.out.print("> ");
-            if (sc.hasNextDouble()) {
-                double doubleValue = sc.nextDouble();
-                sc.nextLine();
-                return doubleValue;
-            } else
-                sc.nextLine();
-        }
-    }
-
     public static int chooseOption(String title, String ... options) {
         int option = -1;
         do {
