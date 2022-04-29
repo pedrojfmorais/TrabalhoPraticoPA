@@ -202,7 +202,7 @@ public class ApoioPoeManager implements Serializable {
                         else
                             adicionaProposta(tokens[0], tokens[1], tokens[3], tokens[2], tokens[4]); // sem numero de aluno associado
                     }
-                    case "T3" -> {adicionaProposta(tokens[0], tokens[1], tokens[2], Long.parseLong(tokens[3]));}
+                    case "T3" -> adicionaProposta(tokens[0], tokens[1], tokens[2], Long.parseLong(tokens[3]));
                 }
             }
 
@@ -286,7 +286,7 @@ public class ApoioPoeManager implements Serializable {
                 sb.append(aluno.isAcessoEstagio()).append(System.lineSeparator());
             }
 
-            pw.println(sb.toString().trim()); // remove espaços e linhas que estejam a mais
+            pw.print(sb);
 
         }catch (IOException e) {
             ExceptionOccurred.setException(ExceptionsTypes.IOException);
@@ -310,7 +310,7 @@ public class ApoioPoeManager implements Serializable {
 
             }
 
-            pw.println(sb.toString().trim());
+            pw.print(sb);
 
         } catch (IOException e) {
             ExceptionOccurred.setException(ExceptionsTypes.IOException);
@@ -352,7 +352,7 @@ public class ApoioPoeManager implements Serializable {
                     sb.append(a.getnAlunoAssociado()).append(System.lineSeparator());
                 }
             }
-            pw.println(sb.toString().trim());
+            pw.print(sb);
 
         }catch (IOException e) {
             ExceptionOccurred.setException(ExceptionsTypes.IOException);
@@ -379,7 +379,7 @@ public class ApoioPoeManager implements Serializable {
                 sb.append(System.lineSeparator());
             }
 
-            pw.println(sb.toString().trim());
+            pw.print(sb);
 
         }catch (IOException e) {
             ExceptionOccurred.setException(ExceptionsTypes.IOException);
@@ -407,7 +407,7 @@ public class ApoioPoeManager implements Serializable {
                 sb.append(System.lineSeparator());
             }
 
-            pw.println(sb.toString().trim());
+            pw.print(sb);
 
         }catch (IOException e) {
             ExceptionOccurred.setException(ExceptionsTypes.IOException);

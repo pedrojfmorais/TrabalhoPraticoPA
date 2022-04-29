@@ -93,7 +93,6 @@ public class GestaoManualOrientadoresState extends ApoioPoeAdapter{
         ArrayList<PropostaAtribuida> propostaAtribuidasFinal = new ArrayList<>();
 
         if(!filtro.isBlank()) {
-            String idPropostaAtribuida = null;
 
             for(var propostasAtribuidas : data.getPropostasAtribuidas()) {
 

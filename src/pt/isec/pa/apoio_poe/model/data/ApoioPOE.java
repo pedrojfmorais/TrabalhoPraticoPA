@@ -91,7 +91,7 @@ public class ApoioPOE implements Serializable {
          return false;
 
       switch (tipo){
-         case "T1" -> {propostas.put(id, new Estagio(id, titulo, nAlunoAssociado, areasDestino, entidadeOuDocente));}
+         case "T1" -> propostas.put(id, new Estagio(id, titulo, nAlunoAssociado, areasDestino, entidadeOuDocente));
          case "T2" -> {
 
             if(!docentes.containsKey(entidadeOuDocente))
@@ -115,7 +115,7 @@ public class ApoioPOE implements Serializable {
          return false;
 
       switch (tipo){
-         case "T1" -> {propostas.put(id, new Estagio(id, titulo, areasDestino, entidadeOuDocente));}
+         case "T1" -> propostas.put(id, new Estagio(id, titulo, areasDestino, entidadeOuDocente));
          case "T2" -> {
 
             if(!docentes.containsKey(entidadeOuDocente))
@@ -140,10 +140,10 @@ public class ApoioPOE implements Serializable {
          if(proposta.getnAlunoAssociado() == nAlunoAssociado)
             return false;
 
-      switch (tipo){
-         case "T3" -> {propostas.put(id, new Autoproposto(id, titulo, nAlunoAssociado));}
-         default -> {return false;}
-      }
+      if ("T3".equals(tipo)) {
+         propostas.put(id, new Autoproposto(id, titulo, nAlunoAssociado));
+      } else
+         return false;
 
       return true;
    }

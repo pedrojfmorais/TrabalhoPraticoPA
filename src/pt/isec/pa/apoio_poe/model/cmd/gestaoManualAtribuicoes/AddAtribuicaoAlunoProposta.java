@@ -5,8 +5,8 @@ import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
 
 public class AddAtribuicaoAlunoProposta extends CommandAdapter {
 
-    private long nAluno;
-    private String idProposta;
+    private final long nAluno;
+    private final String idProposta;
 
     public AddAtribuicaoAlunoProposta(ApoioPoeManager apoioPoeManager, long nAluno, String idProposta) {
         super(apoioPoeManager);

@@ -1,15 +1,10 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPOE;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 import pt.isec.pa.apoio_poe.model.fsm.IApoioPoeState;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 
 abstract class ApoioPoeAdapter implements IApoioPoeState {
 

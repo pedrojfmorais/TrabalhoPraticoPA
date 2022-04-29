@@ -320,45 +320,8 @@ public class ApoioPoeUI {
                 "Sair"
         )){
             case 1 -> fsm.gerirDados();
-            case 2 -> {
-                boolean autoproposta = false, comCandidatura = false, semCandidatura = false;
-
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Com Autoproposta: ", "Sim", "Não") == 1)
-                    autoproposta = true;
-
-                if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
-                    comCandidatura = true;
-
-
-                if(PAInput.chooseOption("Sem Candidatura registada: ", "Sim", "Não") == 1)
-                    semCandidatura = true;
-
-                System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, semCandidatura));
-            }
-            case 3 -> {
-                boolean autopropostasAlunos = false, propostasDocentes = false,
-                        comCandidatura = false, semCandidatura = false;
-
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Autopropostas de Alunos: ", "Sim", "Não") == 1)
-                    autopropostasAlunos = true;
-
-                if(PAInput.chooseOption("Propostas de Docentes: ", "Sim", "Não") == 1)
-                    propostasDocentes = true;
-
-                if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
-                    comCandidatura = true;
-
-
-                if(PAInput.chooseOption("Sem Candidatura registada: ", "Sim", "Não") == 1)
-                    semCandidatura = true;
-
-                System.out.println(fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
-                        comCandidatura, semCandidatura));
-            }
+            case 2 -> listaAlunosFase2();
+            case 3 -> listaPropostasFase2();
             case 4 -> fsm.regressarFase();
             case 5 -> {
                 if(PAInput.chooseOption("Pretende bloquear a Fase 2?", "Sim", "Não") == 1) {
@@ -375,6 +338,47 @@ public class ApoioPoeUI {
                     fsm.terminarAplicacao("");
             }
         }
+    }
+
+    private void listaPropostasFase2() {
+        boolean autopropostasAlunos = false, propostasDocentes = false,
+                comCandidatura = false, semCandidatura = false;
+
+        System.out.println("Selecione um ou mais filtros: \n");
+
+        if(PAInput.chooseOption("Autopropostas de Alunos: ", "Sim", "Não") == 1)
+            autopropostasAlunos = true;
+
+        if(PAInput.chooseOption("Propostas de Docentes: ", "Sim", "Não") == 1)
+            propostasDocentes = true;
+
+        if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
+            comCandidatura = true;
+
+
+        if(PAInput.chooseOption("Sem Candidatura registada: ", "Sim", "Não") == 1)
+            semCandidatura = true;
+
+        System.out.println(fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
+                comCandidatura, semCandidatura));
+    }
+
+    private void listaAlunosFase2() {
+        boolean autoproposta = false, comCandidatura = false, semCandidatura = false;
+
+        System.out.println("Selecione um ou mais filtros: \n");
+
+        if(PAInput.chooseOption("Com Autoproposta: ", "Sim", "Não") == 1)
+            autoproposta = true;
+
+        if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
+            comCandidatura = true;
+
+
+        if(PAInput.chooseOption("Sem Candidatura registada: ", "Sim", "Não") == 1)
+            semCandidatura = true;
+
+        System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, semCandidatura));
     }
 
     private void fase2BloqueadaUI() {
@@ -407,45 +411,8 @@ public class ApoioPoeUI {
             case 2 -> fsm.exportarDadosFicheiroCsv(
                     PAInput.readString("Insira o nome do ficheiro: ", false)
                 );
-            case 3 -> {
-                boolean autoproposta = false, comCandidatura = false, semCandidatura = false;
-
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Com Autoproposta: ", "Sim", "Não") == 1)
-                    autoproposta = true;
-
-                if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
-                    comCandidatura = true;
-
-
-                if(PAInput.chooseOption("Sem Candidatura registada: ", "Sim", "Não") == 1)
-                    semCandidatura = true;
-
-                System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, semCandidatura));
-            }
-            case 4 -> {
-                boolean autopropostasAlunos = false, propostasDocentes = false,
-                        comCandidatura = false, semCandidatura = false;
-
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Autopropostas de Alunos: ", "Sim", "Não") == 1)
-                    autopropostasAlunos = true;
-
-                if(PAInput.chooseOption("Propostas de Docentes: ", "Sim", "Não") == 1)
-                    propostasDocentes = true;
-
-                if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
-                    comCandidatura = true;
-
-
-                if(PAInput.chooseOption("Sem Candidatura registada: ", "Sim", "Não") == 1)
-                    semCandidatura = true;
-
-                System.out.println(fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
-                        comCandidatura, semCandidatura));
-            }
+            case 3 -> listaAlunosFase2();
+            case 4 -> listaPropostasFase2();
             case 5 -> fsm.regressarFase();
             case 6 -> fsm.avancarFase(false);
             case 7 -> {
@@ -519,63 +486,10 @@ public class ApoioPoeUI {
             case 1 -> fsm.atribuicaoAutomaticaPropostasComAluno();
             case 2 -> fsm.atribuicaoAutomaticaPropostasDisponiveis();
             case 3 -> fsm.gerirDados();
-            case 4 -> {
-                boolean autoproposta = false, comCandidatura = false, comPropostaAtribuida = false,
-                        semPropostaAtribuida = false;
+            case 4 -> listaAlunosFase3();
+            case 5 -> listaPropostasFase3();
+            case 6 -> exportarDados(false);
 
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Com Autoproposta: ", "Sim", "Não") == 1)
-                    autoproposta = true;
-
-                if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
-                    comCandidatura = true;
-
-
-                if(PAInput.chooseOption("Com proposta atribuida: ", "Sim", "Não") == 1)
-                    comPropostaAtribuida = true;
-
-                if(PAInput.chooseOption("Sem proposta atribuida: ", "Sim", "Não") == 1)
-                    semPropostaAtribuida = true;
-
-                System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida,
-                        semPropostaAtribuida));
-            }
-            case 5 -> {
-                boolean autopropostasAlunos = false, propostasDocentes = false,
-                        propostasDisponiveis = false, propostasAtribuidas = false;
-
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Autopropostas de Alunos: ", "Sim", "Não") == 1)
-                    autopropostasAlunos = true;
-
-                if(PAInput.chooseOption("Propostas de Docentes: ", "Sim", "Não") == 1)
-                    propostasDocentes = true;
-
-                if(PAInput.chooseOption("Propostas disponiveis: ", "Sim", "Não") == 1)
-                    propostasDisponiveis = true;
-
-
-                if(PAInput.chooseOption("Propostas atribuidas: ", "Sim", "Não") == 1)
-                    propostasAtribuidas = true;
-
-                System.out.println(fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
-                        propostasDisponiveis, propostasAtribuidas));
-            }
-            case 6 -> {
-                int opcao = PAInput.chooseOption("Que dados pretende exportar: ", "Alunos", "Docentes",
-                        "Propostas", "Candidaturas", "Propostas Atribuidas");
-
-                String filename = PAInput.readString("Insira o nome do ficheiro: ", false);
-                switch (opcao){
-                    case 1 -> fsm.exportarAlunosFicheiroCsv(filename);
-                    case 2 -> fsm.exportarDocentesFicheiroCsv(filename);
-                    case 3 -> fsm.exportarPropostasFicheiroCsv(filename);
-                    case 4 -> fsm.exportarCandidaturasFicheiroCsv(filename);
-                    case 5 -> fsm.exportarPropostasAtribuidasFicheiroCsv(filename, false);
-                }
-            }
             case 7 -> fsm.regressarFase();
             case 8 -> {
                 if(PAInput.chooseOption("Pretende bloquear a Fase 3?", "Sim", "Não") == 1) {
@@ -593,6 +507,53 @@ public class ApoioPoeUI {
             }
         }
     }
+
+    private void listaPropostasFase3() {
+        boolean autopropostasAlunos = false, propostasDocentes = false,
+                propostasDisponiveis = false, propostasAtribuidas = false;
+
+        System.out.println("Selecione um ou mais filtros: \n");
+
+        if(PAInput.chooseOption("Autopropostas de Alunos: ", "Sim", "Não") == 1)
+            autopropostasAlunos = true;
+
+        if(PAInput.chooseOption("Propostas de Docentes: ", "Sim", "Não") == 1)
+            propostasDocentes = true;
+
+        if(PAInput.chooseOption("Propostas disponiveis: ", "Sim", "Não") == 1)
+            propostasDisponiveis = true;
+
+
+        if(PAInput.chooseOption("Propostas atribuidas: ", "Sim", "Não") == 1)
+            propostasAtribuidas = true;
+
+        System.out.println(fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
+                propostasDisponiveis, propostasAtribuidas));
+    }
+
+    private void listaAlunosFase3() {
+        boolean autoproposta = false, comCandidatura = false, comPropostaAtribuida = false,
+                semPropostaAtribuida = false;
+
+        System.out.println("Selecione um ou mais filtros: \n");
+
+        if(PAInput.chooseOption("Com Autoproposta: ", "Sim", "Não") == 1)
+            autoproposta = true;
+
+        if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
+            comCandidatura = true;
+
+
+        if(PAInput.chooseOption("Com proposta atribuida: ", "Sim", "Não") == 1)
+            comPropostaAtribuida = true;
+
+        if(PAInput.chooseOption("Sem proposta atribuida: ", "Sim", "Não") == 1)
+            semPropostaAtribuida = true;
+
+        System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida,
+                semPropostaAtribuida));
+    }
+
     private void fase3MasFase2AbertaStateUI(){
         switch (PAInput.chooseOption(
                 "Fase 3 - Atribuição de propostas",
@@ -605,63 +566,9 @@ public class ApoioPoeUI {
                 "Sair"
         )){
             case 1 -> fsm.atribuicaoAutomaticaPropostasComAluno();
-            case 2 -> {
-                boolean autoproposta = false, comCandidatura = false, comPropostaAtribuida = false,
-                        semPropostaAtribuida = false;
-
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Com Autoproposta: ", "Sim", "Não") == 1)
-                    autoproposta = true;
-
-                if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
-                    comCandidatura = true;
-
-
-                if(PAInput.chooseOption("Com proposta atribuida: ", "Sim", "Não") == 1)
-                    comPropostaAtribuida = true;
-
-                if(PAInput.chooseOption("Sem proposta atribuida: ", "Sim", "Não") == 1)
-                    semPropostaAtribuida = true;
-
-                System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida,
-                        semPropostaAtribuida));
-            }
-            case 3 -> {
-                boolean autopropostasAlunos = false, propostasDocentes = false,
-                        propostasDisponiveis = false, propostasAtribuidas = false;
-
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Autopropostas de Alunos: ", "Sim", "Não") == 1)
-                    autopropostasAlunos = true;
-
-                if(PAInput.chooseOption("Propostas de Docentes: ", "Sim", "Não") == 1)
-                    propostasDocentes = true;
-
-                if(PAInput.chooseOption("Propostas disponiveis: ", "Sim", "Não") == 1)
-                    propostasDisponiveis = true;
-
-
-                if(PAInput.chooseOption("Propostas atribuidas: ", "Sim", "Não") == 1)
-                    propostasAtribuidas = true;
-
-                System.out.println(fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
-                        propostasDisponiveis, propostasAtribuidas));
-            }
-            case 4 -> {
-                int opcao = PAInput.chooseOption("Que dados pretende exportar: ", "Alunos", "Docentes",
-                        "Propostas", "Candidaturas", "Propostas Atribuidas");
-
-                String filename = PAInput.readString("Insira o nome do ficheiro: ", false);
-                switch (opcao){
-                    case 1 -> fsm.exportarAlunosFicheiroCsv(filename);
-                    case 2 -> fsm.exportarDocentesFicheiroCsv(filename);
-                    case 3 -> fsm.exportarPropostasFicheiroCsv(filename);
-                    case 4 -> fsm.exportarCandidaturasFicheiroCsv(filename);
-                    case 5 -> fsm.exportarPropostasAtribuidasFicheiroCsv(filename, false);
-                }
-            }
+            case 2 -> listaAlunosFase3();
+            case 3 -> listaPropostasFase3();
+            case 4 -> exportarDados(false);
             case 5 -> fsm.regressarFase();
             case 6 -> fsm.avancarFase(false);
             case 7 -> {
@@ -682,63 +589,9 @@ public class ApoioPoeUI {
                 "Avançar para a próxima Fase",
                 "Sair"
         )){
-            case 1 -> {
-                boolean autoproposta = false, comCandidatura = false, comPropostaAtribuida = false,
-                        semPropostaAtribuida = false;
-
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Com Autoproposta: ", "Sim", "Não") == 1)
-                    autoproposta = true;
-
-                if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
-                    comCandidatura = true;
-
-
-                if(PAInput.chooseOption("Com proposta atribuida: ", "Sim", "Não") == 1)
-                    comPropostaAtribuida = true;
-
-                if(PAInput.chooseOption("Sem proposta atribuida: ", "Sim", "Não") == 1)
-                    semPropostaAtribuida = true;
-
-                System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida,
-                        semPropostaAtribuida));
-            }
-            case 2 -> {
-                boolean autopropostasAlunos = false, propostasDocentes = false,
-                        propostasDisponiveis = false, propostasAtribuidas = false;
-
-                System.out.println("Selecione um ou mais filtros: \n");
-
-                if(PAInput.chooseOption("Autopropostas de Alunos: ", "Sim", "Não") == 1)
-                    autopropostasAlunos = true;
-
-                if(PAInput.chooseOption("Propostas de Docentes: ", "Sim", "Não") == 1)
-                    propostasDocentes = true;
-
-                if(PAInput.chooseOption("Propostas disponiveis: ", "Sim", "Não") == 1)
-                    propostasDisponiveis = true;
-
-
-                if(PAInput.chooseOption("Propostas atribuidas: ", "Sim", "Não") == 1)
-                    propostasAtribuidas = true;
-
-                System.out.println(fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
-                        propostasDisponiveis, propostasAtribuidas));
-            }
-            case 3 -> {
-                int opcao = PAInput.chooseOption("Que dados pretende exportar: ", "Alunos", "Docentes",
-                        "Propostas", "Candidaturas", "Propostas Atribuidas");
-
-                String filename = PAInput.readString("Insira o nome do ficheiro: ", false);
-                switch (opcao){
-                    case 1 -> fsm.exportarAlunosFicheiroCsv(filename);
-                    case 2 -> fsm.exportarDocentesFicheiroCsv(filename);
-                    case 3 -> fsm.exportarPropostasFicheiroCsv(filename);
-                    case 4 -> fsm.exportarCandidaturasFicheiroCsv(filename);
-                    case 5 -> fsm.exportarPropostasAtribuidasFicheiroCsv(filename, false);
-                }
-            }
+            case 1 -> listaAlunosFase3();
+            case 2 -> listaPropostasFase3();
+            case 3 -> exportarDados(false);
             case 4 -> fsm.regressarFase();
             case 5 -> fsm.avancarFase(false);
             case 6 -> {
@@ -849,35 +702,8 @@ public class ApoioPoeUI {
 
                 System.out.println(fsm.consultarAlunos(comOrientadorAssociado));
             }
-            case 4 -> {
-                String filtro = PAInput.readString(
-                        "Insira o email do docente a consultar, ou em branco para ver dados de todos.\n",
-                        false, true);
-                String resultado = fsm.consultarDocentes(filtro);
-
-                System.out.println();
-
-                if(resultado == null && filtro.isBlank())
-                    System.out.println("Não existem docentes com orientações atribuidas atualmente no sistema.\n");
-
-                else if(resultado == null && !filtro.isBlank())
-                    System.out.println("Este docente não existe.\n");
-                else
-                    System.out.println(resultado);
-            }
-            case 5 -> {
-                int opcao = PAInput.chooseOption("Que dados pretende exportar: ", "Alunos", "Docentes",
-                        "Propostas", "Candidaturas", "Propostas Atribuidas");
-
-                String filename = PAInput.readString("Insira o nome do ficheiro: ", false);
-                switch (opcao){
-                    case 1 -> fsm.exportarAlunosFicheiroCsv(filename);
-                    case 2 -> fsm.exportarDocentesFicheiroCsv(filename);
-                    case 3 -> fsm.exportarPropostasFicheiroCsv(filename);
-                    case 4 -> fsm.exportarCandidaturasFicheiroCsv(filename);
-                    case 5 -> fsm.exportarPropostasAtribuidasFicheiroCsv(filename, true);
-                }
-            }
+            case 4 -> consultarDadosDocenteFase4_5();
+            case 5 -> exportarDados(true);
             case 6 -> fsm.regressarFase();
             case 7 -> {
                 if(PAInput.chooseOption("Se avançar não poderá voltar atrás e alterar dados!\nDeseja continuar?",
@@ -989,22 +815,7 @@ public class ApoioPoeUI {
 
                 System.out.println(fsm.consultarPropostas(propostasAtribuidas));
             }
-            case 3 -> {
-                String filtro = PAInput.readString(
-                        "Insira o email do docente a consultar, ou em branco para ver dados de todos.\n",
-                        false, true);
-                String resultado = fsm.consultarDocentes(filtro);
-
-                System.out.println();
-
-                if(resultado == null && filtro.isBlank())
-                    System.out.println("Não existem docentes com orientações atribuidas atualmente no sistema.\n");
-
-                else if(resultado == null && !filtro.isBlank())
-                    System.out.println("Este docente não existe.\n");
-                else
-                    System.out.println(resultado);
-            }
+            case 3 -> consultarDadosDocenteFase4_5();
             case 4 ->{
                 //TODO: outros dados
                 break;
@@ -1028,6 +839,37 @@ public class ApoioPoeUI {
                 else
                     fsm.terminarAplicacao("");
             }
+        }
+    }
+
+    private void consultarDadosDocenteFase4_5() {
+        String filtro = PAInput.readString(
+                "Insira o email do docente a consultar, ou em branco para ver dados de todos.\n",
+                false, true);
+        String resultado = fsm.consultarDocentes(filtro);
+
+        System.out.println();
+
+        if(resultado == null && filtro.isBlank())
+            System.out.println("Não existem docentes com orientações atribuidas atualmente no sistema.\n");
+
+        else if(resultado == null && !filtro.isBlank())
+            System.out.println("Este docente não existe.\n");
+        else
+            System.out.println(resultado);
+    }
+
+    private void exportarDados(boolean guardarOrientador) {
+        int opcao = PAInput.chooseOption("Que dados pretende exportar: ", "Alunos", "Docentes",
+                "Propostas", "Candidaturas", "Propostas Atribuidas");
+
+        String filename = PAInput.readString("Insira o nome do ficheiro: ", false);
+        switch (opcao){
+            case 1 -> fsm.exportarAlunosFicheiroCsv(filename);
+            case 2 -> fsm.exportarDocentesFicheiroCsv(filename);
+            case 3 -> fsm.exportarPropostasFicheiroCsv(filename);
+            case 4 -> fsm.exportarCandidaturasFicheiroCsv(filename);
+            case 5 -> fsm.exportarPropostasAtribuidasFicheiroCsv(filename, guardarOrientador);
         }
     }
 }

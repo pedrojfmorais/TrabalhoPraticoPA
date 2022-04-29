@@ -3,7 +3,7 @@ package pt.isec.pa.apoio_poe.model.data.propostas;
 public class PropostaAtribuida extends Proposta{
 
     private String emailDocenteOrientador;
-    private int ordemPreferencia;
+    private final int ordemPreferencia;
 
     public PropostaAtribuida(String id, String titulo, long nAlunoAssociado, int ordemPreferencia) {
         super(id, titulo, nAlunoAssociado);

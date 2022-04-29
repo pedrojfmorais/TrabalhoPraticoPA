@@ -2,8 +2,6 @@ package pt.isec.pa.apoio_poe.model.fsm;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPOE;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
-import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
-import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 
 public class ApoioPoeContext{
 

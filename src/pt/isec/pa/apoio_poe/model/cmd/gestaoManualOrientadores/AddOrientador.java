@@ -5,8 +5,8 @@ import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
 
 public class AddOrientador extends CommandAdapter {
 
-    private long nAluno;
-    private String novoOrientador;
+    private final long nAluno;
+    private final String novoOrientador;
 
 
     public AddOrientador(ApoioPoeManager apoioPoeManager, long nAluno, String novoOrientador) {

@@ -6,7 +6,7 @@ import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
 public class RemoveAtribuicaoAlunoProposta extends CommandAdapter {
 
     private long nAluno;
-    private String idProposta;
+    private final String idProposta;
 
     public RemoveAtribuicaoAlunoProposta(ApoioPoeManager apoioPoeManager, String idProposta) {
         super(apoioPoeManager);

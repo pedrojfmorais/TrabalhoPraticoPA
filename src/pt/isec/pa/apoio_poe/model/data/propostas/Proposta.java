@@ -6,7 +6,7 @@ import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 import java.io.Serializable;
 
 public class Proposta implements Comparable<Proposta>, Cloneable, Serializable {
-    private String id;
+    private final String id;
     private String titulo;
     private long nAlunoAssociado;
 
