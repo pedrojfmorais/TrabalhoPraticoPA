@@ -3,6 +3,8 @@ package pt.isec.pa.apoio_poe.model.data;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.propostas.*;
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 
@@ -137,7 +139,6 @@ public class ApoioPoeManager implements Serializable {
         return apoioPOE.calculaNumeroOrientacoesDocente(email);
     }
 
-    //TODO: tratar exceções, todas funções abaixo
     public boolean adicionaAlunosDeFicheiro(String nomeFicheiro){
 
         try (FileReader fr = new FileReader(nomeFicheiro);
@@ -155,11 +156,13 @@ public class ApoioPoeManager implements Serializable {
 
             }
 
-            return true;
-
+        } catch (FileNotFoundException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            return false;
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
+
+        return true;
     }
 
     public boolean adicionaDocentesDeFicheiro(String nomeFicheiro){
@@ -174,11 +177,13 @@ public class ApoioPoeManager implements Serializable {
                 adicionaDocente(tokens[0], tokens[1]);
             }
 
-            return true;
-
+        } catch (FileNotFoundException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            return false;
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
+
+        return true;
     }
 
     public boolean adicionaPropostasDeFicheiro(String nomeFicheiro){
@@ -201,11 +206,13 @@ public class ApoioPoeManager implements Serializable {
                 }
             }
 
-            return true;
-
+        } catch (FileNotFoundException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            return false;
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
+
+        return true;
     }
 
     public boolean adicionaCandidaturaDeFicheiro(String nomeFicheiro){
@@ -224,8 +231,10 @@ public class ApoioPoeManager implements Serializable {
 
             }
 
-        }catch (IOException e) {
-            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
+        } catch (IOException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
 
         return true;
@@ -235,8 +244,12 @@ public class ApoioPoeManager implements Serializable {
 
             context.retomarSave((ApoioPoeManager) ois.readObject(), (ApoioPoeState) ois.readObject());
 
-        } catch (IOException | ClassNotFoundException e) {
-            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
+        } catch (IOException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+        } catch (ClassNotFoundException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.ClassNotFound);
         }
         return true;
     }
@@ -247,9 +260,12 @@ public class ApoioPoeManager implements Serializable {
             oos.writeObject(this);
             oos.writeObject(state);
 
+        } catch (FileNotFoundException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
+
         return true;
     }
     public boolean exportAlunosCsv(String filename){
@@ -272,9 +288,10 @@ public class ApoioPoeManager implements Serializable {
 
             pw.println(sb.toString().trim()); // remove espaços e linhas que estejam a mais
 
-        }catch(IOException e){
-            e.printStackTrace();
+        }catch (IOException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
+
         return true;
     }
     public boolean exportDocentesCsv(String filename){
@@ -295,8 +312,8 @@ public class ApoioPoeManager implements Serializable {
 
             pw.println(sb.toString().trim());
 
-        }catch(IOException e){
-            e.printStackTrace();
+        } catch (IOException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
         return true;
     }
@@ -337,8 +354,8 @@ public class ApoioPoeManager implements Serializable {
             }
             pw.println(sb.toString().trim());
 
-        }catch(IOException e){
-            e.printStackTrace();
+        }catch (IOException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
         return true;
     }
@@ -364,8 +381,8 @@ public class ApoioPoeManager implements Serializable {
 
             pw.println(sb.toString().trim());
 
-        }catch(IOException e){
-            e.printStackTrace();
+        }catch (IOException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
         return true;
     }
@@ -392,10 +409,17 @@ public class ApoioPoeManager implements Serializable {
 
             pw.println(sb.toString().trim());
 
-        }catch(IOException e){
-            e.printStackTrace();
+        }catch (IOException e) {
+            ExceptionOccurred.setException(ExceptionsTypes.IOException);
         }
         return true;
+    }
+
+    public ExceptionsTypes getExceptionsOccurred() {
+        return apoioPOE.getExceptionsOccurred();
+    }
+    public void setExceptionsOccurred(ExceptionsTypes exceptionsOccurred) {
+        apoioPOE.setExceptionsOccurred(exceptionsOccurred);
     }
 }
 

@@ -1,5 +1,8 @@
 package pt.isec.pa.apoio_poe.model.data.pessoas;
 
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
+
 import java.io.Serializable;
 
 public class Pessoa implements Cloneable, Serializable {
@@ -35,8 +38,10 @@ public class Pessoa implements Cloneable, Serializable {
     public Pessoa clone() {
         try {
             return (Pessoa) super.clone();
+
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
+            ExceptionOccurred.setException(ExceptionsTypes.CloneNotFound);
         }
+        return null;
     }
 }

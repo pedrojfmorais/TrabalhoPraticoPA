@@ -1,5 +1,8 @@
 package pt.isec.pa.apoio_poe.model.data;
 
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.List;
@@ -51,7 +54,8 @@ public class Candidatura implements Comparable<Candidatura>, Cloneable, Serializ
         try {
             return (Candidatura) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
+            ExceptionOccurred.setException(ExceptionsTypes.CloneNotFound);
         }
+        return null;
     }
 }

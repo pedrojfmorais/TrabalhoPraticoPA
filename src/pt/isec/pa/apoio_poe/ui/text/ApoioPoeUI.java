@@ -1,5 +1,7 @@
 package pt.isec.pa.apoio_poe.ui.text;
 
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 import pt.isec.pa.apoio_poe.model.fsm.*;
 import pt.isec.pa.apoio_poe.utils.PAInput;
 
@@ -12,7 +14,8 @@ public class ApoioPoeUI {
 
     public void start(){
         while (!finish){
-            System.out.println(fsm.getState());
+
+            exceptionMessages();
 
             switch (fsm.getState()){
                 case INICIO -> inicioUI();
@@ -34,6 +37,22 @@ public class ApoioPoeUI {
                 case FASE5 -> fase5UI();
             }
         }
+    }
+
+    private void exceptionMessages(){
+        if(ExceptionOccurred.getException() == ExceptionsTypes.NONE)
+            return;
+
+        System.out.println("\n\n\n**************************************************\n");
+        switch (ExceptionOccurred.getException()){
+            case FileNotFound -> System.out.println("Não foi possivel encontrar o ficheiro;");
+            case ClassNotFound -> System.out.println("Erro a carregar o save.");
+            case CloneNotFound -> System.out.println("Não foi possivel clonar o objeto. Operação não suportada!");
+            case IOException -> System.out.println("Não foi possivel realizar uma operação de input/output!");
+        }
+        System.out.println("\n**************************************************\n");
+
+        ExceptionOccurred.setException(ExceptionsTypes.NONE);
     }
 
     private void inicioUI(){

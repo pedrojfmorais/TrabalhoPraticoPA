@@ -16,7 +16,5 @@ public class Main {
 
         ui.start();
 
-    //TODO: tratar exceções do cloneable (Pessoa, Proposta, Candidatura)
-
     }
 }

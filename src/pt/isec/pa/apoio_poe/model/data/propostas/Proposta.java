@@ -1,5 +1,8 @@
 package pt.isec.pa.apoio_poe.model.data.propostas;
 
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
+import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
+
 import java.io.Serializable;
 
 public class Proposta implements Comparable<Proposta>, Cloneable, Serializable {
@@ -73,7 +76,8 @@ public class Proposta implements Comparable<Proposta>, Cloneable, Serializable {
         try {
             return (Proposta) super.clone();
         } catch (CloneNotSupportedException e) {
-            throw new AssertionError();
+            ExceptionOccurred.setException(ExceptionsTypes.CloneNotFound);
         }
+        return null;
     }
 }
