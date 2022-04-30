@@ -3,13 +3,11 @@ package pt.isec.pa.apoio_poe.model.data;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.propostas.*;
-import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
-import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 
 import java.io.*;
 import java.util.*;
 
-public class ApoioPOE implements Serializable {
+public class ApoioPoE implements Serializable {
 
    @Serial
    private static final long serialVersionUID = 1L;
@@ -21,7 +19,7 @@ public class ApoioPOE implements Serializable {
    private HashMap<Long, Candidatura> candidaturas;
    private HashMap<String, PropostaAtribuida> propostasAtribuidas;
 
-   public ApoioPOE(){
+   public ApoioPoE(){
       alunos = new HashMap<>();
       docentes = new HashMap<>();
       propostas = new HashMap<>();

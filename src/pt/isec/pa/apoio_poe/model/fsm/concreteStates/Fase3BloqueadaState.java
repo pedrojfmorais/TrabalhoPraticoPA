@@ -1,11 +1,11 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 
 public class Fase3BloqueadaState extends ApoioPoeAdapter{
-    public Fase3BloqueadaState(ApoioPoeContext context, ApoioPoeManager data) {
+    public Fase3BloqueadaState(ApoioPoeContext context, ApoioPoEManager data) {
         super(context, data);
     }
 

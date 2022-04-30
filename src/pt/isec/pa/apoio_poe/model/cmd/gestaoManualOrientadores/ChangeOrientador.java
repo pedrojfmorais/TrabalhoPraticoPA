@@ -1,7 +1,7 @@
 package pt.isec.pa.apoio_poe.model.cmd.gestaoManualOrientadores;
 
 import pt.isec.pa.apoio_poe.model.cmd.CommandAdapter;
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
 public class ChangeOrientador extends CommandAdapter {
     private final long nAluno;
@@ -9,7 +9,7 @@ public class ChangeOrientador extends CommandAdapter {
     private final String novoOrientador;
 
 
-    public ChangeOrientador(ApoioPoeManager apoioPoeManager,  long nAluno, String novoOrientador) {
+    public ChangeOrientador(ApoioPoEManager apoioPoeManager, long nAluno, String novoOrientador) {
 
         super(apoioPoeManager);
 

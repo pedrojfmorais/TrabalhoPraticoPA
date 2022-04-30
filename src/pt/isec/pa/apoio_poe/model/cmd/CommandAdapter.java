@@ -1,12 +1,12 @@
 package pt.isec.pa.apoio_poe.model.cmd;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
 public abstract class CommandAdapter implements ICommand{
 
-    protected ApoioPoeManager apoioPoeManager;
+    protected ApoioPoEManager apoioPoeManager;
 
-    public CommandAdapter(ApoioPoeManager apoioPoeManager) {
+    public CommandAdapter(ApoioPoEManager apoioPoeManager) {
         this.apoioPoeManager = apoioPoeManager;
     }
 

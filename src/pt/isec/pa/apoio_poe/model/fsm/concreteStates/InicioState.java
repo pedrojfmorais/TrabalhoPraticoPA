@@ -1,12 +1,12 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 
 public class InicioState extends ApoioPoeAdapter{
 
-    public InicioState(ApoioPoeContext context, ApoioPoeManager data) {
+    public InicioState(ApoioPoeContext context, ApoioPoEManager data) {
         super(context, data);
     }
 

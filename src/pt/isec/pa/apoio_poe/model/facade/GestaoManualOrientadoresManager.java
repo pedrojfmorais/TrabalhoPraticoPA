@@ -4,14 +4,14 @@ import pt.isec.pa.apoio_poe.model.cmd.CommandManager;
 import pt.isec.pa.apoio_poe.model.cmd.gestaoManualOrientadores.AddOrientador;
 import pt.isec.pa.apoio_poe.model.cmd.gestaoManualOrientadores.ChangeOrientador;
 import pt.isec.pa.apoio_poe.model.cmd.gestaoManualOrientadores.RemoveOrientador;
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
 public class GestaoManualOrientadoresManager {
 
-    ApoioPoeManager apoioPoeManager;
+    ApoioPoEManager apoioPoeManager;
     CommandManager cm;
 
-    public GestaoManualOrientadoresManager(ApoioPoeManager apoioPoeManager) {
+    public GestaoManualOrientadoresManager(ApoioPoEManager apoioPoeManager) {
         this.apoioPoeManager = apoioPoeManager;
         cm = new CommandManager();
     }

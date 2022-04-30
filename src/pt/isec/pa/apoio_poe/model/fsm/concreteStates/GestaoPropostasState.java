@@ -1,12 +1,12 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 
 public class GestaoPropostasState extends ApoioPoeAdapter{
-    public GestaoPropostasState(ApoioPoeContext context, ApoioPoeManager data) {
+    public GestaoPropostasState(ApoioPoeContext context, ApoioPoEManager data) {
         super(context, data);
     }
 

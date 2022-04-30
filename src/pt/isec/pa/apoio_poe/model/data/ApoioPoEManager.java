@@ -13,13 +13,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ApoioPoeManager implements Serializable {
+public class ApoioPoEManager implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
-    private ApoioPOE apoioPOE;
+    private ApoioPoE apoioPOE;
 
-    public ApoioPoeManager(ApoioPOE apoioPOE) {
+    public ApoioPoEManager(ApoioPoE apoioPOE) {
         this.apoioPOE = apoioPOE;
     }
 
@@ -242,7 +242,7 @@ public class ApoioPoeManager implements Serializable {
     public boolean loadStateInFile(String file, ApoioPoeContext context){
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
 
-            context.retomarSave((ApoioPoeManager) ois.readObject(), (ApoioPoeState) ois.readObject());
+            context.retomarSave((ApoioPoEManager) ois.readObject(), (ApoioPoeState) ois.readObject());
 
         } catch (FileNotFoundException e) {
             ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);

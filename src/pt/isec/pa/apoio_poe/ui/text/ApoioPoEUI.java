@@ -5,10 +5,10 @@ import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 import pt.isec.pa.apoio_poe.model.fsm.*;
 import pt.isec.pa.apoio_poe.utils.PAInput;
 
-public class ApoioPoeUI {
+public class ApoioPoEUI {
     ApoioPoeContext fsm;
 
-    public ApoioPoeUI(ApoioPoeContext fsm){this.fsm = fsm;}
+    public ApoioPoEUI(ApoioPoeContext fsm){this.fsm = fsm;}
 
     private boolean finish = false;
 

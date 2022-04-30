@@ -1,14 +1,14 @@
 package pt.isec.pa.apoio_poe.model.cmd.gestaoManualAtribuicoes;
 
 import pt.isec.pa.apoio_poe.model.cmd.CommandAdapter;
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
 public class RemoveAtribuicaoAlunoProposta extends CommandAdapter {
 
     private long nAluno;
     private final String idProposta;
 
-    public RemoveAtribuicaoAlunoProposta(ApoioPoeManager apoioPoeManager, String idProposta) {
+    public RemoveAtribuicaoAlunoProposta(ApoioPoEManager apoioPoeManager, String idProposta) {
         super(apoioPoeManager);
         this.idProposta = idProposta;
 

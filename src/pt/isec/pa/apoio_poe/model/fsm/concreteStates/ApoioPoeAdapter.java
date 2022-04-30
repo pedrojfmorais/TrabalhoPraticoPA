@@ -1,6 +1,6 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 import pt.isec.pa.apoio_poe.model.fsm.IApoioPoeState;
@@ -9,9 +9,9 @@ import pt.isec.pa.apoio_poe.model.fsm.IApoioPoeState;
 abstract class ApoioPoeAdapter implements IApoioPoeState {
 
     ApoioPoeContext context;
-    ApoioPoeManager data;
+    ApoioPoEManager data;
 
-    public ApoioPoeAdapter(ApoioPoeContext context, ApoioPoeManager data){
+    public ApoioPoeAdapter(ApoioPoeContext context, ApoioPoEManager data){
         this.context = context;
         this.data = data;
     }

@@ -3,14 +3,14 @@ package pt.isec.pa.apoio_poe.model.facade;
 import pt.isec.pa.apoio_poe.model.cmd.CommandManager;
 import pt.isec.pa.apoio_poe.model.cmd.gestaoManualAtribuicoes.AddAtribuicaoAlunoProposta;
 import pt.isec.pa.apoio_poe.model.cmd.gestaoManualAtribuicoes.RemoveAtribuicaoAlunoProposta;
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
 public class GestaoManualAtribuicoesManager {
 
-    ApoioPoeManager apoioPoeManager;
+    ApoioPoEManager apoioPoeManager;
     CommandManager cm;
 
-    public GestaoManualAtribuicoesManager(ApoioPoeManager apoioPoeManager) {
+    public GestaoManualAtribuicoesManager(ApoioPoEManager apoioPoeManager) {
         this.apoioPoeManager = apoioPoeManager;
         cm = new CommandManager();
     }

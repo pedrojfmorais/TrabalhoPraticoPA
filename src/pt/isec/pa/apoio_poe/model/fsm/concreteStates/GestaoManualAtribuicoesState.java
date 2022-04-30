@@ -1,6 +1,6 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.propostas.Autoproposto;
 import pt.isec.pa.apoio_poe.model.data.propostas.Projeto;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
@@ -12,7 +12,7 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 public class GestaoManualAtribuicoesState extends ApoioPoeAdapter{
 
     GestaoManualAtribuicoesManager facade;
-    public GestaoManualAtribuicoesState(ApoioPoeContext context, ApoioPoeManager data) {
+    public GestaoManualAtribuicoesState(ApoioPoeContext context, ApoioPoEManager data) {
         super(context, data);
         this.facade = new GestaoManualAtribuicoesManager(data);
     }

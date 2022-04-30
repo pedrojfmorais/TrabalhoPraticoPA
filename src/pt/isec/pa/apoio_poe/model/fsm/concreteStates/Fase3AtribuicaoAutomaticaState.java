@@ -1,6 +1,6 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.AlunoClassificacaoComparator;
 import pt.isec.pa.apoio_poe.model.data.propostas.Estagio;
@@ -11,14 +11,14 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Fase3AtribuicaoAutomatica extends ApoioPoeAdapter{
+public class Fase3AtribuicaoAutomaticaState extends ApoioPoeAdapter{
 
     private Aluno aluno1Conflito;
     private Aluno aluno2Conflito;
     private ArrayList<Proposta> propostaDisponiveisAluno1;
     private ArrayList<Proposta> propostaDisponiveisAluno2;
 
-    public Fase3AtribuicaoAutomatica(ApoioPoeContext context, ApoioPoeManager data) {
+    public Fase3AtribuicaoAutomaticaState(ApoioPoeContext context, ApoioPoEManager data) {
         super(context, data);
         removeConflito();
     }

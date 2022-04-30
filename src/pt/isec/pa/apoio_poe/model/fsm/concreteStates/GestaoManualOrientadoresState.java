@@ -1,6 +1,6 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.propostas.PropostaAtribuida;
 import pt.isec.pa.apoio_poe.model.facade.GestaoManualOrientadoresManager;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class GestaoManualOrientadoresState extends ApoioPoeAdapter{
 
     GestaoManualOrientadoresManager facade;
-    public GestaoManualOrientadoresState(ApoioPoeContext context, ApoioPoeManager data) {
+    public GestaoManualOrientadoresState(ApoioPoeContext context, ApoioPoEManager data) {
         super(context, data);
         facade = new GestaoManualOrientadoresManager(data);
     }

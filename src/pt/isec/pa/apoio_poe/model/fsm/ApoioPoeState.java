@@ -1,6 +1,6 @@
 package pt.isec.pa.apoio_poe.model.fsm;
 
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.fsm.concreteStates.*;
 
 public enum ApoioPoeState {
@@ -12,7 +12,7 @@ public enum ApoioPoeState {
     FASE4, GESTAO_MANUAL_ORIENTADORES,
     FASE5;
 
-    public IApoioPoeState createState(ApoioPoeContext context, ApoioPoeManager data){
+    public IApoioPoeState createState(ApoioPoeContext context, ApoioPoEManager data){
         return switch (this){
             case INICIO -> new InicioState(context, data);
             case FASE1 -> new Fase1State(context, data);
@@ -27,7 +27,7 @@ public enum ApoioPoeState {
             case Fase3MasFase2AbertaState -> new Fase3MasFase2AbertaState(context, data);
             case FASE3_BLOQUEADA -> new Fase3BloqueadaState(context, data);
             case GESTAO_MANUAL_ATRIBUICOES -> new GestaoManualAtribuicoesState(context, data);
-            case Fase3AtribuicaoAutomatica -> new Fase3AtribuicaoAutomatica(context, data);
+            case Fase3AtribuicaoAutomatica -> new Fase3AtribuicaoAutomaticaState(context, data);
             case FASE4 -> new Fase4State(context, data);
             case GESTAO_MANUAL_ORIENTADORES -> new GestaoManualOrientadoresState(context, data);
             case FASE5 -> new Fase5State(context, data);

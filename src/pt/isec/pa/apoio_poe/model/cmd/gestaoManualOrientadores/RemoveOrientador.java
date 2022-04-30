@@ -1,7 +1,7 @@
 package pt.isec.pa.apoio_poe.model.cmd.gestaoManualOrientadores;
 
 import pt.isec.pa.apoio_poe.model.cmd.CommandAdapter;
-import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
 public class RemoveOrientador extends CommandAdapter {
 
@@ -9,7 +9,7 @@ public class RemoveOrientador extends CommandAdapter {
     private String antigoOrientador;
 
 
-    public RemoveOrientador(ApoioPoeManager apoioPoeManager, long nAluno) {
+    public RemoveOrientador(ApoioPoEManager apoioPoeManager, long nAluno) {
 
         super(apoioPoeManager);
         this.nAluno = nAluno;
