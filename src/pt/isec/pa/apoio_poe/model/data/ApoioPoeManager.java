@@ -414,12 +414,5 @@ public class ApoioPoeManager implements Serializable {
         }
         return true;
     }
-
-    public ExceptionsTypes getExceptionsOccurred() {
-        return apoioPOE.getExceptionsOccurred();
-    }
-    public void setExceptionsOccurred(ExceptionsTypes exceptionsOccurred) {
-        apoioPOE.setExceptionsOccurred(exceptionsOccurred);
-    }
 }
 

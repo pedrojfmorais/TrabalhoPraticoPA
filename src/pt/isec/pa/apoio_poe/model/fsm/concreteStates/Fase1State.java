@@ -1,6 +1,7 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoeManager;
+import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 
@@ -31,19 +32,17 @@ public class Fase1State extends ApoioPoeAdapter{
     @Override
     public boolean avancarFase(boolean bloquearFase) {
 
-        //TODO: debug
-        data.setFaseBloqueada(1);
-//        if(bloquearFase) {
-//            int contador = 0;
-//            for(var ramo : Aluno.ramos)
-//                if(data.propostasSufecienteParaRamo(ramo))
-//                    contador++;
-//
-//            if(contador == Aluno.ramos.size())
-//                data.setFaseBloqueada(1);
-//            else
-//                return false;
-//        }
+        if(bloquearFase) {
+            int contador = 0;
+            for(var ramo : Aluno.ramos)
+                if(data.propostasSufecienteParaRamo(ramo))
+                    contador++;
+
+            if(contador == Aluno.ramos.size())
+                data.setFaseBloqueada(1);
+            else
+                return false;
+        }
 
         changeState(ApoioPoeState.FASE2);
         return true;

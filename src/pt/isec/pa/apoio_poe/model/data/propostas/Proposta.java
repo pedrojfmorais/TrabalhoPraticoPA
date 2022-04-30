@@ -41,9 +41,7 @@ public class Proposta implements Comparable<Proposta>, Cloneable, Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Proposta)) return false;
-
-        Proposta proposta = (Proposta) o;
+        if (!(o instanceof Proposta proposta)) return false;
 
         return id.equals(proposta.id);
     }

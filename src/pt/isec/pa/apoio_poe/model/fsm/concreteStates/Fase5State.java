@@ -79,14 +79,14 @@ public class Fase5State extends ApoioPoeAdapter{
 
         boolean propostasAtribuidas = filtros[0];
 
-        HashSet<Proposta> resultado = new HashSet<>();
+        HashSet<String> resultado = new HashSet<>();
         StringBuilder sb = new StringBuilder();
 
         if(propostasAtribuidas){
             for(var proposta : data.getPropostas())
                 for(var propostasAtribuida : data.getPropostasAtribuidas())
                     if(propostasAtribuida.getId().equals(proposta.getId())) {
-                        resultado.add(proposta);
+                        resultado.add(proposta.getId());
                         break;
                     }
         }else {
@@ -102,15 +102,20 @@ public class Fase5State extends ApoioPoeAdapter{
 
             for(var proposta : data.getPropostas())
                 if(!propostasAtribuidaHS.contains(proposta))
-                    resultado.add(proposta);
+                    resultado.add(proposta.getId());
 
         }
 
-        ArrayList<Proposta> resultadoOrdenado = new ArrayList<>(resultado);
+        ArrayList<String> resultadoOrdenado = new ArrayList<>(resultado);
         Collections.sort(resultadoOrdenado);
 
-        for(var proposta : resultadoOrdenado)
-            sb.append(proposta).append(System.lineSeparator());
+        for(var proposta : resultadoOrdenado) {
+            if (propostasAtribuidas)
+                sb.append(data.getPropostaAtribuida(proposta));
+            else
+                sb.append(data.getProposta(proposta));
+            sb.append(System.lineSeparator());
+        }
 
         return sb.toString();
     }

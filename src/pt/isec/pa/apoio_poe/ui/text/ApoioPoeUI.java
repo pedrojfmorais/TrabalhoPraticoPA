@@ -180,6 +180,7 @@ public class ApoioPoeUI {
                 "Consultar Aluno(s)",
                 "Importar alunos de ficheiro CSV",
                 "Exportar alunos para ficheiro CSV",
+                "Remover todos Alunos",
                 "Regressar a Fase 1"
         )){
             case 1 -> {
@@ -213,7 +214,8 @@ public class ApoioPoeUI {
             case 6 -> fsm.exportarDadosFicheiroCsv(
                             PAInput.readString("Insira o nome do ficheiro: ", false)
                         );
-            case 7 -> fsm.regressarFase();
+            case 7 -> fsm.removerTodosDados();
+            case 8 -> fsm.regressarFase();
         }
     }
 
@@ -226,6 +228,7 @@ public class ApoioPoeUI {
                 "Consultar Docente(s)",
                 "Importar Docentes de ficheiro CSV",
                 "Exportar Docentes para ficheiro CSV",
+                "Remover todos Docentes",
                 "Regressar a Fase 1"
         )){
             case 1 -> {
@@ -259,7 +262,8 @@ public class ApoioPoeUI {
             case 6 -> fsm.exportarDadosFicheiroCsv(
                     PAInput.readString("Insira o nome do ficheiro: ", false)
             );
-            case 7 -> fsm.regressarFase();
+            case 7 -> fsm.removerTodosDados();
+            case 8 -> fsm.regressarFase();
         }
     }
 
@@ -272,6 +276,7 @@ public class ApoioPoeUI {
                 "Consultar Proposta(s)",
                 "Importar Propostas de ficheiro CSV",
                 "Exportar Propostas para ficheiro CSV",
+                "Remover todas Propostas",
                 "Regressar a Fase 1"
         )){
             case 1 -> {
@@ -305,7 +310,8 @@ public class ApoioPoeUI {
             case 6 -> fsm.exportarDadosFicheiroCsv(
                     PAInput.readString("Insira o nome do ficheiro: ", false)
             );
-            case 7 -> fsm.regressarFase();
+            case 7 -> fsm.removerTodosDados();
+            case 8 -> fsm.regressarFase();
         }
     }
 
@@ -392,6 +398,7 @@ public class ApoioPoeUI {
                 "Consultar Candidatura(s)",
                 "Importar Candidaturas de ficheiro CSV",
                 "Exportar Candidaturas para ficheiro CSV",
+                "Remover todas Candidaturas",
                 "Regressar a Fase 2"
         )){
             case 1 -> {
@@ -425,7 +432,8 @@ public class ApoioPoeUI {
             case 6 -> fsm.exportarDadosFicheiroCsv(
                     PAInput.readString("Insira o nome do ficheiro: ", false)
             );
-            case 7 -> fsm.regressarFase();
+            case 7 -> fsm.removerTodosDados();
+            case 8 -> fsm.regressarFase();
         }
     }
 
@@ -521,6 +529,7 @@ public class ApoioPoeUI {
                 "Gestão Manual de Atribuição de Propostas a Alunos",
                 "Atribuir Proposta a Aluno",
                 "Remover Atribuição",
+                "Remover Todas Atribuições",
                 "Consultar Proposta(s) Atribuída(s)",
                 "Undo",
                 "Redo",
@@ -540,8 +549,8 @@ public class ApoioPoeUI {
                                 false)
                 ))
                     System.out.println("Não foi possivel remover a proposta atribuida!");
-            }
-            case 3 -> {
+            }case 3 -> fsm.removerTodosDados();
+            case 4 -> {
                 String filtro = PAInput.readString(
                         "Insira o identificador da proposta atribuida a consultar, " +
                                 "ou em branco para ver todas as propostas atribuídas.\n",
@@ -558,7 +567,7 @@ public class ApoioPoeUI {
                 else
                     System.out.println(resultado);
             }
-            case 4 -> {
+            case 5 -> {
                 if(!fsm.undo()) {
                     if (!fsm.hasUndo())
                         System.out.println("Terminaram as operações para undo!" + System.lineSeparator());
@@ -566,7 +575,7 @@ public class ApoioPoeUI {
                         System.out.println("Não foi possivel fazer undo!" + System.lineSeparator());
                 }
             }
-            case 5 -> {
+            case 6 -> {
                 if(!fsm.redo()) {
                     if (!fsm.hasRedo())
                         System.out.println("Terminaram as operações para redo!" + System.lineSeparator());
@@ -574,7 +583,7 @@ public class ApoioPoeUI {
                         System.out.println("Não foi possivel fazer redo!" + System.lineSeparator());
                 }
             }
-            case 6 -> fsm.regressarFase();
+            case 7 -> fsm.regressarFase();
         }
     }
 
@@ -707,7 +716,6 @@ public class ApoioPoeUI {
                 "Lista Alunos",
                 "Lista Propostas",
                 "Dados Docente(s)",
-                "Outros dados",
                 "Exportar dados",
                 "Sair"
         )){
@@ -729,11 +737,7 @@ public class ApoioPoeUI {
                 System.out.println(fsm.consultarPropostas(propostasAtribuidas));
             }
             case 3 -> consultarDadosDocenteFase4_5();
-            case 4 ->{
-                //TODO: outros dados
-                break;
-            }
-            case 5 -> {
+            case 4 -> {
                 int opcao = PAInput.chooseOption("Que dados pretende exportar: ", "Alunos", "Docentes",
                         "Propostas", "Candidaturas", "Propostas Atribuidas");
 
@@ -746,7 +750,7 @@ public class ApoioPoeUI {
                     case 5 -> fsm.exportarPropostasAtribuidasFicheiroCsv(filename, true);
                 }
             }
-            case 6 -> {
+            case 5 -> {
                 if(PAInput.chooseOption("Pretende guardar o estado atual?", "Sim", "Não") == 1)
                     fsm.terminarAplicacao(PAInput.readString("Insira o nome do save: ", false));
                 else
@@ -795,17 +799,13 @@ public class ApoioPoeUI {
     private void listaAlunosFase2() {
         boolean autoproposta = false, comCandidatura = false, semCandidatura = false;
 
-        System.out.println("Selecione um ou mais filtros: \n");
+        switch (PAInput.chooseOption("Selecione um opção:", "Com Autoproposta",
+                "Com Candidatura registada", "Sem Candidatura registada")){
 
-        if(PAInput.chooseOption("Com Autoproposta: ", "Sim", "Não") == 1)
-            autoproposta = true;
-
-        if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
-            comCandidatura = true;
-
-
-        if(PAInput.chooseOption("Sem Candidatura registada: ", "Sim", "Não") == 1)
-            semCandidatura = true;
+            case 1 -> autoproposta = true;
+            case 2 -> comCandidatura = true;
+            case 3 -> semCandidatura = true;
+        }
 
         System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, semCandidatura));
     }
@@ -837,20 +837,14 @@ public class ApoioPoeUI {
         boolean autoproposta = false, comCandidatura = false, comPropostaAtribuida = false,
                 semPropostaAtribuida = false;
 
-        System.out.println("Selecione um ou mais filtros: \n");
+        switch (PAInput.chooseOption("Selecione um opção:", "Com Autoproposta",
+                "Com Candidatura registada", "Com proposta atribuida", "Sem proposta atribuida")){
 
-        if(PAInput.chooseOption("Com Autoproposta: ", "Sim", "Não") == 1)
-            autoproposta = true;
-
-        if(PAInput.chooseOption("Com Candidatura registada: ", "Sim", "Não") == 1)
-            comCandidatura = true;
-
-
-        if(PAInput.chooseOption("Com proposta atribuida: ", "Sim", "Não") == 1)
-            comPropostaAtribuida = true;
-
-        if(PAInput.chooseOption("Sem proposta atribuida: ", "Sim", "Não") == 1)
-            semPropostaAtribuida = true;
+            case 1 -> autoproposta = true;
+            case 2 -> comCandidatura = true;
+            case 3 -> comPropostaAtribuida = true;
+            case 4 -> semPropostaAtribuida = true;
+        }
 
         System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida,
                 semPropostaAtribuida));

@@ -14,13 +14,6 @@ public class ApoioPoeContext{
 
     public void init(ApoioPoeState state){
         this.data = new ApoioPoeManager(new ApoioPOE());
-
-        //TODO: apenas para testar
-        data.adicionaAlunosDeFicheiro("files/alunos.csv");
-        data.adicionaDocentesDeFicheiro("files/docentes.csv");
-        data.adicionaPropostasDeFicheiro("files/propostas.csv");
-        data.adicionaCandidaturaDeFicheiro("files/candidaturas.csv");
-
         this.state = state.createState(this, data);
     }
 
@@ -112,6 +105,8 @@ public class ApoioPoeContext{
     public boolean exportarPropostasAtribuidasFicheiroCsv(String filename, boolean guardarOrientador){
         return state.exportarPropostasAtribuidasFicheiroCsv(filename, guardarOrientador);
     }
+
+    public boolean removerTodosDados(){return state.removerTodosDados();}
 
     public boolean undo(){return state.undo();}
     public boolean hasUndo(){return state.hasUndo();}

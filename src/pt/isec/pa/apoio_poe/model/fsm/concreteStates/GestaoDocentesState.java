@@ -58,6 +58,15 @@ public class GestaoDocentesState extends ApoioPoeAdapter{
     }
 
     @Override
+    public boolean removerTodosDados() {
+
+        while(data.getDocentes().size() > 0)
+            data.removeDocente(data.getDocentes().get(0).getEmail());
+
+        return data.getDocentes().size() == 0;
+    }
+
+    @Override
     public ApoioPoeState getState() {
         return ApoioPoeState.GESTAO_DOCENTES;
     }

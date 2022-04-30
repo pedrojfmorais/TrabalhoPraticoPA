@@ -26,15 +26,12 @@ public class Fase3State extends ApoioPoeAdapter{
     @Override
     public boolean avancarFase(boolean bloquearFase) {
 
-        data.setFaseBloqueada(3);
-        //TODO: debug
-//
-//        if(bloquearFase) {
-//            if(data.todasCandidaturasComPropostaAtribuida())
-//                data.setFaseBloqueada(3);
-//            else
-//                return false;
-//        }
+        if(bloquearFase) {
+            if(data.todasCandidaturasComPropostaAtribuida())
+                data.setFaseBloqueada(3);
+            else
+                return false;
+        }
 
         changeState(ApoioPoeState.FASE4);
         return true;

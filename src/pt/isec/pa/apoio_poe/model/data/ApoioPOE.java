@@ -31,14 +31,6 @@ public class ApoioPOE implements Serializable {
       faseBloqueada = 0;
    }
 
-   public ExceptionsTypes getExceptionsOccurred() {
-      return ExceptionOccurred.getException();
-   }
-
-   public void setExceptionsOccurred(ExceptionsTypes exceptionsOccurred) {
-      ExceptionOccurred.setException(exceptionsOccurred);
-   }
-
    public int getFaseBloqueada() {
       return faseBloqueada;
    }
@@ -347,8 +339,12 @@ public class ApoioPOE implements Serializable {
    public boolean removeProposta(String id){
       removePropostaAtribuida(id);
 
-      for(var candidatura : getCandidaturas())
+      for(var candidatura : getCandidaturas()) {
          candidatura.removeProposta(id);
+
+         if(candidatura.getIdPropostas().isEmpty())
+            removeCandidatura(candidatura.getnAluno());
+      }
 
       return propostas.remove(id) != null;
    }

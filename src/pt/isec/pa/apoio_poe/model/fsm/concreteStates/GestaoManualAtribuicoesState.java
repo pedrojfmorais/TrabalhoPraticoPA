@@ -88,6 +88,15 @@ public class GestaoManualAtribuicoesState extends ApoioPoeAdapter{
     }
 
     @Override
+    public boolean removerTodosDados() {
+
+        while(data.getPropostasAtribuidas().size() > 0)
+            data.removePropostaAtribuida(data.getPropostasAtribuidas().get(0).getId());
+
+        return data.getPropostasAtribuidas().size() == 0;
+    }
+
+    @Override
     public ApoioPoeState getState() {
         return ApoioPoeState.GESTAO_MANUAL_ATRIBUICOES;
     }

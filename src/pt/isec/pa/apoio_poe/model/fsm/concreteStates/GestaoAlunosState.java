@@ -58,6 +58,15 @@ public class GestaoAlunosState extends ApoioPoeAdapter{
     }
 
     @Override
+    public boolean removerTodosDados() {
+
+        while(data.getAlunos().size() > 0)
+            data.removeAluno(data.getAlunos().get(0).getnAluno());
+
+        return data.getAlunos().size() == 0;
+    }
+
+    @Override
     public ApoioPoeState getState() {
         return ApoioPoeState.GESTAO_ALUNOS;
     }

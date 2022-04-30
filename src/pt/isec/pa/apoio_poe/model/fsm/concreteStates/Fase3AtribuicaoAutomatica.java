@@ -9,16 +9,18 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Fase3AtribuicaoAutomatica extends ApoioPoeAdapter{
 
-    private Aluno aluno1Conflito = null;
-    private Aluno aluno2Conflito = null;
-    private ArrayList<Proposta> propostaDisponiveisAluno1 = null;
-    private ArrayList<Proposta> propostaDisponiveisAluno2 = null;
+    private Aluno aluno1Conflito;
+    private Aluno aluno2Conflito;
+    private ArrayList<Proposta> propostaDisponiveisAluno1;
+    private ArrayList<Proposta> propostaDisponiveisAluno2;
 
     public Fase3AtribuicaoAutomatica(ApoioPoeContext context, ApoioPoeManager data) {
         super(context, data);
+        removeConflito();
     }
 
     @Override
@@ -37,22 +39,14 @@ public class Fase3AtribuicaoAutomatica extends ApoioPoeAdapter{
 
         if(!alunosSemProposta.isEmpty()) {
 
-            alunosSemProposta.sort(new AlunoClassificacaoComparator());
+            alunosSemProposta.sort(Collections.reverseOrder(new AlunoClassificacaoComparator()));
 
             for (int i = 0; i < alunosSemProposta.size(); i++) {
 
                 if(i < alunosSemProposta.size()-1){
 
-                    if (alunosSemProposta.get(i).getClassificacao() == alunosSemProposta.get(i+1).getClassificacao()) {
-
-                        if(data.getCandidatura(alunosSemProposta.get(i).getnAluno()) != null &&
-                                data.getCandidatura(alunosSemProposta.get(i+1).getnAluno()) != null) {
-
-                            setConflito(alunosSemProposta.get(i), alunosSemProposta.get(i + 1));
-
-                            return false;
-                        }
-                    }
+                    if(verificaConflito(alunosSemProposta.get(i), alunosSemProposta.get(i+1)))
+                        return false;
                 }
 
                 if(data.getCandidatura(alunosSemProposta.get(i).getnAluno()) == null)
@@ -71,34 +65,43 @@ public class Fase3AtribuicaoAutomatica extends ApoioPoeAdapter{
 
         //atribuição das propostas a todos os alunos
         alunosSemProposta = getAlunosDisponiveis(false);
+        if(!alunosSemProposta.isEmpty()) {
 
-        for (int i = 0; i < alunosSemProposta.size(); i++) {
+            alunosSemProposta.sort(Collections.reverseOrder(new AlunoClassificacaoComparator()));
 
-            if(i < alunosSemProposta.size()-1){
+            for (int i = 0; i < alunosSemProposta.size(); i++) {
 
-                if (alunosSemProposta.get(i).getClassificacao() == alunosSemProposta.get(i+1).getClassificacao()) {
+                if (i < alunosSemProposta.size() - 1) {
 
-                    if(data.getCandidatura(alunosSemProposta.get(i).getnAluno()) != null &&
-                            data.getCandidatura(alunosSemProposta.get(i+1).getnAluno()) != null) {
-
-                        setConflito(alunosSemProposta.get(i), alunosSemProposta.get(i + 1));
-
+                    if (verificaConflito(alunosSemProposta.get(i), alunosSemProposta.get(i + 1)))
                         return false;
-                    }
-
                 }
+
+                if (data.getCandidatura(alunosSemProposta.get(i).getnAluno()) == null)
+                    continue;
+
+                for (var proposta : data.getCandidatura(alunosSemProposta.get(i).getnAluno()).getIdPropostas())
+                    if (data.getPropostaAtribuida(proposta) == null)
+                        data.atribuirPropostaAluno(proposta, alunosSemProposta.get(i).getnAluno());
+
             }
-
-            if(data.getCandidatura(alunosSemProposta.get(i).getnAluno()) == null)
-                continue;
-
-            for(var proposta : data.getCandidatura(alunosSemProposta.get(i).getnAluno()).getIdPropostas())
-                if(data.getPropostaAtribuida(proposta) == null)
-                    data.atribuirPropostaAluno(proposta, alunosSemProposta.get(i).getnAluno());
-
         }
 
         return true;
+    }
+
+    private boolean verificaConflito(Aluno aluno1, Aluno aluno2){
+        if (aluno1.getClassificacao() == aluno2.getClassificacao()) {
+
+            if(data.getCandidatura(aluno1.getnAluno()) != null &&
+                    data.getCandidatura(aluno2.getnAluno()) != null) {
+
+                setConflito(aluno1, aluno2);
+
+                return true;
+            }
+        }
+        return false;
     }
 
     private void setConflito(Aluno aluno1Conflito, Aluno aluno2Conflito){
@@ -118,8 +121,8 @@ public class Fase3AtribuicaoAutomatica extends ApoioPoeAdapter{
     private void removeConflito(){
         this.aluno1Conflito = null;
         this.aluno2Conflito = null;
-        this.propostaDisponiveisAluno1 = null;
-        this.propostaDisponiveisAluno2 = null;
+        this.propostaDisponiveisAluno1.clear();
+        this.propostaDisponiveisAluno2.clear();
     }
 
     private ArrayList<Aluno> getAlunosDisponiveis(boolean soEstagio){
@@ -161,8 +164,8 @@ public class Fase3AtribuicaoAutomatica extends ApoioPoeAdapter{
     public String consultarAlunos(boolean... filtros) {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Aluno 1:").append(aluno1Conflito).append(System.lineSeparator());
-        sb.append("Aluno 2:").append(aluno2Conflito).append(System.lineSeparator());
+        sb.append("Aluno 1:").append(System.lineSeparator()).append(aluno1Conflito).append(System.lineSeparator());
+        sb.append("Aluno 2:").append(System.lineSeparator()).append(aluno2Conflito).append(System.lineSeparator());
 
         return sb.toString();
     }
@@ -192,6 +195,16 @@ public class Fase3AtribuicaoAutomatica extends ApoioPoeAdapter{
     public boolean adicionarDados(String... dados) {
 
         if(dados.length != 2)
+            return false;
+
+        if(Long.parseLong(dados[0]) == aluno1Conflito.getnAluno()) {
+            if (!propostaDisponiveisAluno1.contains(data.getProposta(dados[1])))
+                return false;
+
+        }else if(Long.parseLong(dados[0]) == aluno2Conflito.getnAluno()) {
+                if (!propostaDisponiveisAluno2.contains(data.getProposta(dados[1])))
+                    return false;
+        }else
             return false;
 
         return data.atribuirPropostaAluno(dados[1], Long.parseLong(dados[0]));

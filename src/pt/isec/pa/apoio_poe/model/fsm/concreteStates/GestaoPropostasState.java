@@ -58,6 +58,15 @@ public class GestaoPropostasState extends ApoioPoeAdapter{
     }
 
     @Override
+    public boolean removerTodosDados() {
+
+        while(data.getPropostas().size() > 0)
+            data.removeProposta(data.getPropostas().get(0).getId());
+
+        return data.getPropostas().size() == 0;
+    }
+
+    @Override
     public ApoioPoeState getState() {
         return ApoioPoeState.GESTAO_PROPOSTAS;
     }

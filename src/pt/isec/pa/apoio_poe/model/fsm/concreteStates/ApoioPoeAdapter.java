@@ -168,4 +168,9 @@ abstract class ApoioPoeAdapter implements IApoioPoeState {
     public boolean associacaoAutomaticaDocentesProponentes() {
         return false;
     }
+
+    @Override
+    public boolean removerTodosDados() {
+        return false;
+    }
 }

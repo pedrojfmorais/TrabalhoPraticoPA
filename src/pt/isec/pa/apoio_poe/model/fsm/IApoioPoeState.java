@@ -14,7 +14,7 @@ public interface IApoioPoeState {
     //Fase 2, 3, 4
     boolean gerirDados();
 
-    //Fase 2, 3, 4, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta, Todas as Gestões
+    //Fase 2, 3, 4, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta, 3 Atribuição Automática, Todas as Gestões
     boolean regressarFase();
 
     //Fase 1, 2, 3, 4, 1 Bloqueada, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta
@@ -23,10 +23,10 @@ public interface IApoioPoeState {
     //Fase 1, 2, 3, 4, 5, 1 Bloqueada, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta
     boolean terminarAplicacao(String file);
 
-    //Fase 2, 3, 4, 5, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta
+    //Fase 2, 3, 4, 5, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta, 3 Atribuição Automática
     String consultarAlunos(boolean ... filtros);
 
-    //Fase 2, 3, 5, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta
+    //Fase 2, 3, 5, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta, 3 Atribuição Automática
     String consultarPropostas(boolean ... filtros);
 
     //Os 6 estados de Gestão
@@ -35,13 +35,13 @@ public interface IApoioPoeState {
     boolean removerDados(String ... dados);
     String consultarDados(String filtro);
 
-    // Todas as Gerstões
+    // Todas as Gestões
     boolean undo();
     boolean hasUndo();
     boolean redo();
     boolean hasRedo();
 
-    //TODO comentario
+    //Gestões
     boolean importarDadosFicheiroCsv(String filename);
     boolean exportarDadosFicheiroCsv(String filename);
 
@@ -68,6 +68,9 @@ public interface IApoioPoeState {
 
     //Fase 4
     boolean associacaoAutomaticaDocentesProponentes();
+
+    //Gestão Alunos, Docentes, Propostas, Candidaturas
+    boolean removerTodosDados();
 
     //Todos
     ApoioPoeState getState();

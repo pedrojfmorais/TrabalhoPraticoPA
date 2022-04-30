@@ -58,6 +58,15 @@ public class GestaoCandidaturasState extends ApoioPoeAdapter{
     }
 
     @Override
+    public boolean removerTodosDados() {
+
+        while(data.getCandidaturas().size() > 0)
+            data.removeCandidatura(data.getCandidaturas().get(0).getnAluno());
+
+        return data.getCandidaturas().size() == 0;
+    }
+
+    @Override
     public ApoioPoeState getState() {
         return ApoioPoeState.GESTAO_CANDIDATURAS;
     }
