@@ -53,7 +53,7 @@ public class Candidatura implements Comparable<Candidatura>, Cloneable, Serializ
         try {
             return (Candidatura) super.clone();
         } catch (CloneNotSupportedException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.CloneNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.CloneNotFound);
         }
         return null;
     }

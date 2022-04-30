@@ -157,9 +157,9 @@ public class ApoioPoEManager implements Serializable {
             }
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
 
         return true;
@@ -178,9 +178,9 @@ public class ApoioPoEManager implements Serializable {
             }
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
 
         return true;
@@ -207,9 +207,9 @@ public class ApoioPoEManager implements Serializable {
             }
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
 
         return true;
@@ -232,9 +232,9 @@ public class ApoioPoEManager implements Serializable {
             }
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
 
         return true;
@@ -245,11 +245,11 @@ public class ApoioPoEManager implements Serializable {
             context.retomarSave((ApoioPoEManager) ois.readObject(), (ApoioPoeState) ois.readObject());
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         } catch (ClassNotFoundException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.ClassNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.ClassNotFound);
         }
         return true;
     }
@@ -261,9 +261,9 @@ public class ApoioPoEManager implements Serializable {
             oos.writeObject(state);
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.FileNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
         } catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
 
         return true;
@@ -289,7 +289,7 @@ public class ApoioPoEManager implements Serializable {
             pw.print(sb);
 
         }catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
 
         return true;
@@ -313,7 +313,7 @@ public class ApoioPoEManager implements Serializable {
             pw.print(sb);
 
         } catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
         return true;
     }
@@ -355,7 +355,7 @@ public class ApoioPoEManager implements Serializable {
             pw.print(sb);
 
         }catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
         return true;
     }
@@ -382,7 +382,7 @@ public class ApoioPoEManager implements Serializable {
             pw.print(sb);
 
         }catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
         return true;
     }
@@ -410,7 +410,7 @@ public class ApoioPoEManager implements Serializable {
             pw.print(sb);
 
         }catch (IOException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.IOException);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
         return true;
     }

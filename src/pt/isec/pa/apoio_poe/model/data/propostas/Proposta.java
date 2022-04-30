@@ -5,7 +5,7 @@ import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 
 import java.io.Serializable;
 
-public class Proposta implements Comparable<Proposta>, Cloneable, Serializable {
+public abstract class Proposta implements Comparable<Proposta>, Cloneable, Serializable {
     private final String id;
     private String titulo;
     private long nAlunoAssociado;
@@ -74,7 +74,7 @@ public class Proposta implements Comparable<Proposta>, Cloneable, Serializable {
         try {
             return (Proposta) super.clone();
         } catch (CloneNotSupportedException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.CloneNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.CloneNotFound);
         }
         return null;
     }

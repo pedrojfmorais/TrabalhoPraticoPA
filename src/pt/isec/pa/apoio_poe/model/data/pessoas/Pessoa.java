@@ -5,7 +5,7 @@ import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 
 import java.io.Serializable;
 
-public class Pessoa implements Cloneable, Serializable {
+public abstract class Pessoa implements Cloneable, Serializable {
     private String nome;
     private final String email;
 
@@ -40,7 +40,7 @@ public class Pessoa implements Cloneable, Serializable {
             return (Pessoa) super.clone();
 
         } catch (CloneNotSupportedException e) {
-            ExceptionOccurred.setException(ExceptionsTypes.CloneNotFound);
+            ExceptionOccurred.getInstance().setException(ExceptionsTypes.CloneNotFound);
         }
         return null;
     }

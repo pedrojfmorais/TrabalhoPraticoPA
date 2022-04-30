@@ -1,17 +1,24 @@
 package pt.isec.pa.apoio_poe.model.exceptionsHandling;
 
 public class ExceptionOccurred {
-    private static ExceptionsTypes exception;
+    private ExceptionsTypes exception;
+    private static ExceptionOccurred instance = null;
 
-    static {
+    public static ExceptionOccurred getInstance(){
+        if(instance == null)
+            instance = new ExceptionOccurred();
+        return instance;
+    }
+
+    private ExceptionOccurred(){
         exception = ExceptionsTypes.NONE;
     }
 
-    public static ExceptionsTypes getException() {
+    public ExceptionsTypes getException() {
         return exception;
     }
 
-    public static void setException(ExceptionsTypes exception) {
-        ExceptionOccurred.exception = exception;
+    public void setException(ExceptionsTypes exception) {
+        this.exception = exception;
     }
 }

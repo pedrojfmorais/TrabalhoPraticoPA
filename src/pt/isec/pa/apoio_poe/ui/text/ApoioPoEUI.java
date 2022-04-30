@@ -40,11 +40,11 @@ public class ApoioPoEUI {
     }
 
     private void exceptionMessages(){
-        if(ExceptionOccurred.getException() == ExceptionsTypes.NONE)
+        if(ExceptionOccurred.getInstance().getException() == ExceptionsTypes.NONE)
             return;
 
         System.out.println("\n\n\n**************************************************\n");
-        switch (ExceptionOccurred.getException()){
+        switch (ExceptionOccurred.getInstance().getException()){
             case FileNotFound -> System.out.println("Não foi possivel encontrar o ficheiro;");
             case ClassNotFound -> System.out.println("Erro a carregar o save.");
             case CloneNotFound -> System.out.println("Não foi possivel clonar o objeto. Operação não suportada!");
@@ -52,7 +52,7 @@ public class ApoioPoEUI {
         }
         System.out.println("\n**************************************************\n");
 
-        ExceptionOccurred.setException(ExceptionsTypes.NONE);
+        ExceptionOccurred.getInstance().setException(ExceptionsTypes.NONE);
     }
 
     private void inicioUI(){
