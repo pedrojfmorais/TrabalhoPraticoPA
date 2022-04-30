@@ -3,7 +3,7 @@ package pt.isec.pa.apoio_poe.model.fsm;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.fsm.concreteStates.*;
 
-public enum ApoioPoeState {
+public enum ApoioPoEState {
 
     INICIO,
     FASE1, FASE1_BLOQUEADA, GESTAO_ALUNOS, GESTAO_DOCENTES, GESTAO_PROPOSTAS,
@@ -12,7 +12,7 @@ public enum ApoioPoeState {
     FASE4, GESTAO_MANUAL_ORIENTADORES,
     FASE5;
 
-    public IApoioPoeState createState(ApoioPoeContext context, ApoioPoEManager data){
+    public IApoioPoEState createState(ApoioPoEContext context, ApoioPoEManager data){
         return switch (this){
             case INICIO -> new InicioState(context, data);
             case FASE1 -> new Fase1State(context, data);

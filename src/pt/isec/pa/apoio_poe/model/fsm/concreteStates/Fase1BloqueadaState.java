@@ -1,21 +1,21 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
-public class Fase1BloqueadaState extends ApoioPoeAdapter{
+public class Fase1BloqueadaState extends ApoioPoEAdapter {
 
-    public Fase1BloqueadaState(ApoioPoeContext context, ApoioPoEManager data) {
+    public Fase1BloqueadaState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
     }
 
     @Override
     public boolean avancarFase(boolean bloquearFase) {
         if(data.getFaseBloqueada() < 2)
-            changeState(ApoioPoeState.FASE2);
+            changeState(ApoioPoEState.FASE2);
         else
-            changeState(ApoioPoeState.FASE2_BLOQUEADA);
+            changeState(ApoioPoEState.FASE2_BLOQUEADA);
         return true;
     }
 
@@ -24,38 +24,38 @@ public class Fase1BloqueadaState extends ApoioPoeAdapter{
         if(!file.isBlank())
             data.saveStateInFile(file, context.getState());
 
-        changeState(ApoioPoeState.INICIO);
+        changeState(ApoioPoEState.INICIO);
         return true;
     }
 
     @Override
     public String consultarAlunos(String filtro) {
-        return ApoioPoeState.GESTAO_ALUNOS.createState(context, data).consultarDados(filtro);
+        return ApoioPoEState.GESTAO_ALUNOS.createState(context, data).consultarDados(filtro);
     }
     @Override
     public String consultarDocentes(String filtro) {
-        return ApoioPoeState.GESTAO_DOCENTES.createState(context, data).consultarDados(filtro);
+        return ApoioPoEState.GESTAO_DOCENTES.createState(context, data).consultarDados(filtro);
     }
     @Override
     public String consultarPropostas(String filtro) {
-        return ApoioPoeState.GESTAO_PROPOSTAS.createState(context, data).consultarDados(filtro);
+        return ApoioPoEState.GESTAO_PROPOSTAS.createState(context, data).consultarDados(filtro);
     }
 
     @Override
     public boolean exportarAlunosFicheiroCsv(String filename) {
-        return ApoioPoeState.GESTAO_ALUNOS.createState(context, data).exportarDadosFicheiroCsv(filename);
+        return ApoioPoEState.GESTAO_ALUNOS.createState(context, data).exportarDadosFicheiroCsv(filename);
     }
     @Override
     public boolean exportarDocentesFicheiroCsv(String filename) {
-        return ApoioPoeState.GESTAO_DOCENTES.createState(context, data).exportarDadosFicheiroCsv(filename);
+        return ApoioPoEState.GESTAO_DOCENTES.createState(context, data).exportarDadosFicheiroCsv(filename);
     }
     @Override
     public boolean exportarPropostasFicheiroCsv(String filename) {
-        return ApoioPoeState.GESTAO_PROPOSTAS.createState(context, data).exportarDadosFicheiroCsv(filename);
+        return ApoioPoEState.GESTAO_PROPOSTAS.createState(context, data).exportarDadosFicheiroCsv(filename);
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.FASE1_BLOQUEADA;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.FASE1_BLOQUEADA;
     }
 }

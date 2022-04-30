@@ -1,6 +1,6 @@
 package pt.isec.pa.apoio_poe.model.fsm;
 
-public interface IApoioPoeState {
+public interface IApoioPoEState {
 
     //Inicio
     boolean comecarNovo();
@@ -73,5 +73,5 @@ public interface IApoioPoeState {
     boolean removerTodosDados();
 
     //Todos
-    ApoioPoeState getState();
+    ApoioPoEState getState();
 }

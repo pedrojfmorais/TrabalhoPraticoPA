@@ -3,22 +3,22 @@ package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.propostas.PropostaAtribuida;
 import pt.isec.pa.apoio_poe.model.facade.GestaoManualOrientadoresManager;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
 import java.util.ArrayList;
 
-public class GestaoManualOrientadoresState extends ApoioPoeAdapter{
+public class GestaoManualOrientadoresState extends ApoioPoEAdapter {
 
     GestaoManualOrientadoresManager facade;
-    public GestaoManualOrientadoresState(ApoioPoeContext context, ApoioPoEManager data) {
+    public GestaoManualOrientadoresState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
         facade = new GestaoManualOrientadoresManager(data);
     }
 
     @Override
     public boolean regressarFase() {
-        changeState(ApoioPoeState.FASE4);
+        changeState(ApoioPoEState.FASE4);
         return true;
     }
 
@@ -117,7 +117,7 @@ public class GestaoManualOrientadoresState extends ApoioPoeAdapter{
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.GESTAO_MANUAL_ORIENTADORES;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.GESTAO_MANUAL_ORIENTADORES;
     }
 }

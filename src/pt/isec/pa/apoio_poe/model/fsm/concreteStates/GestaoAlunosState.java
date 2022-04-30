@@ -2,17 +2,17 @@ package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
-public class GestaoAlunosState extends ApoioPoeAdapter{
-    public GestaoAlunosState(ApoioPoeContext context, ApoioPoEManager data) {
+public class GestaoAlunosState extends ApoioPoEAdapter {
+    public GestaoAlunosState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
     }
 
     @Override
     public boolean regressarFase() {
-        changeState(ApoioPoeState.FASE1);
+        changeState(ApoioPoEState.FASE1);
         return true;
     }
 
@@ -67,7 +67,7 @@ public class GestaoAlunosState extends ApoioPoeAdapter{
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.GESTAO_ALUNOS;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.GESTAO_ALUNOS;
     }
 }

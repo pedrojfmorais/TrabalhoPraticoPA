@@ -3,28 +3,28 @@ package pt.isec.pa.apoio_poe.model.fsm;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoE;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
-public class ApoioPoeContext{
+public class ApoioPoEContext {
 
     private ApoioPoEManager data;
-    private IApoioPoeState state;
+    private IApoioPoEState state;
 
-    public ApoioPoeContext(){
-        init(ApoioPoeState.INICIO);
+    public ApoioPoEContext(){
+        init(ApoioPoEState.INICIO);
     }
 
-    public void init(ApoioPoeState state){
+    public void init(ApoioPoEState state){
         this.data = new ApoioPoEManager(new ApoioPoE());
         this.state = state.createState(this, data);
     }
 
-    public void retomarSave(ApoioPoEManager data, ApoioPoeState state){
+    public void retomarSave(ApoioPoEManager data, ApoioPoEState state){
         this.data = data;
         this.state = state.createState(this, data);
     }
 
-    public void changeState(IApoioPoeState state){this.state = state;}
+    public void changeState(IApoioPoEState state){this.state = state;}
 
-    public ApoioPoeState getState(){
+    public ApoioPoEState getState(){
         return state.getState() == null ? null : state.getState();
     }
 

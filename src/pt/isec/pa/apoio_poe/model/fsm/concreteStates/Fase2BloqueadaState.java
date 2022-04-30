@@ -1,12 +1,12 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
-public class Fase2BloqueadaState extends ApoioPoeAdapter{
+public class Fase2BloqueadaState extends ApoioPoEAdapter {
 
-    public Fase2BloqueadaState(ApoioPoeContext context, ApoioPoEManager data) {
+    public Fase2BloqueadaState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
     }
 
@@ -14,16 +14,16 @@ public class Fase2BloqueadaState extends ApoioPoeAdapter{
     public boolean avancarFase(boolean bloquearFase) {
 
         if(data.getFaseBloqueada() < 3)
-            changeState(ApoioPoeState.FASE3);
+            changeState(ApoioPoEState.FASE3);
         else
-            changeState(ApoioPoeState.FASE3_BLOQUEADA);
+            changeState(ApoioPoEState.FASE3_BLOQUEADA);
 
         return true;
     }
 
     @Override
     public boolean regressarFase() {
-        changeState(ApoioPoeState.FASE1_BLOQUEADA);
+        changeState(ApoioPoEState.FASE1_BLOQUEADA);
         return true;
     }
 
@@ -32,23 +32,23 @@ public class Fase2BloqueadaState extends ApoioPoeAdapter{
         if(!file.isBlank())
             data.saveStateInFile(file, context.getState());
 
-        changeState(ApoioPoeState.INICIO);
+        changeState(ApoioPoEState.INICIO);
         return true;
     }
 
     @Override
     public String consultarCandidaturas(String filtro) {
-        return ApoioPoeState.GESTAO_CANDIDATURAS.createState(context, data).consultarDados(filtro);
+        return ApoioPoEState.GESTAO_CANDIDATURAS.createState(context, data).consultarDados(filtro);
     }
 
     @Override
     public String consultarAlunos(boolean... filtros) {
-        return ApoioPoeState.FASE2.createState(context, data).consultarAlunos(filtros);
+        return ApoioPoEState.FASE2.createState(context, data).consultarAlunos(filtros);
     }
 
     @Override
     public String consultarPropostas(boolean... filtros) {
-        return ApoioPoeState.FASE2.createState(context, data).consultarPropostas(filtros);
+        return ApoioPoEState.FASE2.createState(context, data).consultarPropostas(filtros);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Fase2BloqueadaState extends ApoioPoeAdapter{
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.FASE2_BLOQUEADA;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.FASE2_BLOQUEADA;
     }
 }

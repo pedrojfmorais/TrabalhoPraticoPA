@@ -1,18 +1,18 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
-public class InicioState extends ApoioPoeAdapter{
+public class InicioState extends ApoioPoEAdapter {
 
-    public InicioState(ApoioPoeContext context, ApoioPoEManager data) {
+    public InicioState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
     }
 
     @Override
     public boolean comecarNovo() {
-        context.init(ApoioPoeState.FASE1);
+        context.init(ApoioPoEState.FASE1);
         return true;
     }
 
@@ -26,7 +26,7 @@ public class InicioState extends ApoioPoeAdapter{
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.INICIO;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.INICIO;
     }
 }

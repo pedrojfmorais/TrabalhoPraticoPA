@@ -2,17 +2,17 @@ package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
-public class GestaoPropostasState extends ApoioPoeAdapter{
-    public GestaoPropostasState(ApoioPoeContext context, ApoioPoEManager data) {
+public class GestaoPropostasState extends ApoioPoEAdapter {
+    public GestaoPropostasState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
     }
 
     @Override
     public boolean regressarFase() {
-        changeState(ApoioPoeState.FASE1);
+        changeState(ApoioPoEState.FASE1);
         return true;
     }
 
@@ -67,7 +67,7 @@ public class GestaoPropostasState extends ApoioPoeAdapter{
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.GESTAO_PROPOSTAS;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.GESTAO_PROPOSTAS;
     }
 }

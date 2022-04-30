@@ -2,30 +2,30 @@ package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
-public class Fase1State extends ApoioPoeAdapter{
+public class Fase1State extends ApoioPoEAdapter {
 
-    public Fase1State(ApoioPoeContext context, ApoioPoEManager data) {
+    public Fase1State(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
     }
 
     @Override
     public boolean gerirAlunos() {
-        changeState(ApoioPoeState.GESTAO_ALUNOS);
+        changeState(ApoioPoEState.GESTAO_ALUNOS);
         return true;
     }
 
     @Override
     public boolean gerirDocentes() {
-        changeState(ApoioPoeState.GESTAO_DOCENTES);
+        changeState(ApoioPoEState.GESTAO_DOCENTES);
         return true;
     }
 
     @Override
     public boolean gerirPropostas() {
-        changeState(ApoioPoeState.GESTAO_PROPOSTAS);
+        changeState(ApoioPoEState.GESTAO_PROPOSTAS);
         return true;
     }
 
@@ -44,7 +44,7 @@ public class Fase1State extends ApoioPoeAdapter{
                 return false;
         }
 
-        changeState(ApoioPoeState.FASE2);
+        changeState(ApoioPoEState.FASE2);
         return true;
     }
 
@@ -53,12 +53,12 @@ public class Fase1State extends ApoioPoeAdapter{
         if(!file.isBlank())
             data.saveStateInFile(file, context.getState());
 
-        changeState(ApoioPoeState.INICIO);
+        changeState(ApoioPoEState.INICIO);
         return true;
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.FASE1;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.FASE1;
     }
 }

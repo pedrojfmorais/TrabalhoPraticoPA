@@ -5,21 +5,21 @@ import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.propostas.Autoproposto;
 import pt.isec.pa.apoio_poe.model.data.propostas.Projeto;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-public class Fase2State extends ApoioPoeAdapter{
-    public Fase2State(ApoioPoeContext context, ApoioPoEManager data) {
+public class Fase2State extends ApoioPoEAdapter {
+    public Fase2State(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
     }
 
     @Override
     public boolean gerirDados() {
-        changeState(ApoioPoeState.GESTAO_CANDIDATURAS);
+        changeState(ApoioPoEState.GESTAO_CANDIDATURAS);
         return true;
     }
 
@@ -34,18 +34,18 @@ public class Fase2State extends ApoioPoeAdapter{
         }
 
         if(data.getFaseBloqueada() == 2)
-            changeState(ApoioPoeState.FASE3);
+            changeState(ApoioPoEState.FASE3);
         else if(data.getFaseBloqueada() < 2)
-            changeState(ApoioPoeState.Fase3MasFase2AbertaState);
+            changeState(ApoioPoEState.Fase3MasFase2AbertaState);
         return true;
     }
 
     @Override
     public boolean regressarFase() {
         if(data.getFaseBloqueada() == 1)
-            changeState(ApoioPoeState.FASE1_BLOQUEADA);
+            changeState(ApoioPoEState.FASE1_BLOQUEADA);
         else
-            changeState(ApoioPoeState.FASE1);
+            changeState(ApoioPoEState.FASE1);
         return true;
     }
 
@@ -54,7 +54,7 @@ public class Fase2State extends ApoioPoeAdapter{
         if(!file.isBlank())
             data.saveStateInFile(file, context.getState());
 
-        changeState(ApoioPoeState.INICIO);
+        changeState(ApoioPoEState.INICIO);
         return true;
     }
 
@@ -168,7 +168,7 @@ public class Fase2State extends ApoioPoeAdapter{
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.FASE2;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.FASE2;
     }
 }

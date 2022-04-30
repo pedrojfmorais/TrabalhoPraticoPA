@@ -5,8 +5,8 @@ import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.propostas.*;
 import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
 import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -239,10 +239,10 @@ public class ApoioPoEManager implements Serializable {
 
         return true;
     }
-    public boolean loadStateInFile(String file, ApoioPoeContext context){
+    public boolean loadStateInFile(String file, ApoioPoEContext context){
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
 
-            context.retomarSave((ApoioPoEManager) ois.readObject(), (ApoioPoeState) ois.readObject());
+            context.retomarSave((ApoioPoEManager) ois.readObject(), (ApoioPoEState) ois.readObject());
 
         } catch (FileNotFoundException e) {
             ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
@@ -254,7 +254,7 @@ public class ApoioPoEManager implements Serializable {
         return true;
     }
 
-    public boolean saveStateInFile(String file, ApoioPoeState state){
+    public boolean saveStateInFile(String file, ApoioPoEState state){
         try(ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream(file))){
 
             oos.writeObject(this);

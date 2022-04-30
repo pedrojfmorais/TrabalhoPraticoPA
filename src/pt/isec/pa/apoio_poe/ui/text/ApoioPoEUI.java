@@ -6,9 +6,9 @@ import pt.isec.pa.apoio_poe.model.fsm.*;
 import pt.isec.pa.apoio_poe.utils.PAInput;
 
 public class ApoioPoEUI {
-    ApoioPoeContext fsm;
+    ApoioPoEContext fsm;
 
-    public ApoioPoEUI(ApoioPoeContext fsm){this.fsm = fsm;}
+    public ApoioPoEUI(ApoioPoEContext fsm){this.fsm = fsm;}
 
     private boolean finish = false;
 

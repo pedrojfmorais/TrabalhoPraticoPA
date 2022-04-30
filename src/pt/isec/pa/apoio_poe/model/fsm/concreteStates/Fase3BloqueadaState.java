@@ -1,23 +1,23 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
-public class Fase3BloqueadaState extends ApoioPoeAdapter{
-    public Fase3BloqueadaState(ApoioPoeContext context, ApoioPoEManager data) {
+public class Fase3BloqueadaState extends ApoioPoEAdapter {
+    public Fase3BloqueadaState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
     }
 
     @Override
     public boolean avancarFase(boolean bloquearFase) {
-        changeState(ApoioPoeState.FASE4);
+        changeState(ApoioPoEState.FASE4);
         return true;
     }
 
     @Override
     public boolean regressarFase() {
-        changeState(ApoioPoeState.FASE2_BLOQUEADA);
+        changeState(ApoioPoEState.FASE2_BLOQUEADA);
         return true;
     }
 
@@ -26,18 +26,18 @@ public class Fase3BloqueadaState extends ApoioPoeAdapter{
         if(!file.isBlank())
             data.saveStateInFile(file, context.getState());
 
-        changeState(ApoioPoeState.INICIO);
+        changeState(ApoioPoEState.INICIO);
         return true;
     }
 
     @Override
     public String consultarAlunos(boolean... filtros) {
-        return ApoioPoeState.FASE3.createState(context, data).consultarAlunos(filtros);
+        return ApoioPoEState.FASE3.createState(context, data).consultarAlunos(filtros);
     }
 
     @Override
     public String consultarPropostas(boolean... filtros) {
-        return ApoioPoeState.FASE3.createState(context, data).consultarPropostas(filtros);
+        return ApoioPoEState.FASE3.createState(context, data).consultarPropostas(filtros);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class Fase3BloqueadaState extends ApoioPoeAdapter{
 
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.FASE3_BLOQUEADA;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.FASE3_BLOQUEADA;
     }
 }

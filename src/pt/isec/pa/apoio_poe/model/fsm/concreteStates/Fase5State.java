@@ -3,15 +3,15 @@ package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 
-public class Fase5State extends ApoioPoeAdapter{
-    public Fase5State(ApoioPoeContext context, ApoioPoEManager data) {
+public class Fase5State extends ApoioPoEAdapter {
+    public Fase5State(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
     }
 
@@ -20,7 +20,7 @@ public class Fase5State extends ApoioPoeAdapter{
         if(!file.isBlank())
             data.saveStateInFile(file, context.getState());
 
-        changeState(ApoioPoeState.INICIO);
+        changeState(ApoioPoEState.INICIO);
         return true;
     }
 
@@ -122,7 +122,7 @@ public class Fase5State extends ApoioPoeAdapter{
 
     @Override
     public String consultarDocentes(String filtro) {
-        return ApoioPoeState.FASE4.createState(context, data).consultarDocentes(filtro);
+        return ApoioPoEState.FASE4.createState(context, data).consultarDocentes(filtro);
     }
 
     @Override
@@ -148,7 +148,7 @@ public class Fase5State extends ApoioPoeAdapter{
 
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.FASE5;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.FASE5;
     }
 }

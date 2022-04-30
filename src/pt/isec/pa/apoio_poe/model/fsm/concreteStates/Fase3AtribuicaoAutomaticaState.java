@@ -5,27 +5,27 @@ import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.AlunoClassificacaoComparator;
 import pt.isec.pa.apoio_poe.model.data.propostas.Estagio;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Fase3AtribuicaoAutomaticaState extends ApoioPoeAdapter{
+public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
 
     private Aluno aluno1Conflito;
     private Aluno aluno2Conflito;
     private ArrayList<Proposta> propostaDisponiveisAluno1;
     private ArrayList<Proposta> propostaDisponiveisAluno2;
 
-    public Fase3AtribuicaoAutomaticaState(ApoioPoeContext context, ApoioPoEManager data) {
+    public Fase3AtribuicaoAutomaticaState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
         removeConflito();
     }
 
     @Override
     public boolean regressarFase() {
-        changeState(ApoioPoeState.FASE3);
+        changeState(ApoioPoEState.FASE3);
         return true;
     }
 
@@ -211,7 +211,7 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoeAdapter{
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.Fase3AtribuicaoAutomatica;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.Fase3AtribuicaoAutomatica;
     }
 }

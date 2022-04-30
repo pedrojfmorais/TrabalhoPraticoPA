@@ -6,20 +6,20 @@ import pt.isec.pa.apoio_poe.model.data.propostas.Projeto;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.data.propostas.PropostaAtribuida;
 import pt.isec.pa.apoio_poe.model.facade.GestaoManualAtribuicoesManager;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
-public class GestaoManualAtribuicoesState extends ApoioPoeAdapter{
+public class GestaoManualAtribuicoesState extends ApoioPoEAdapter {
 
     GestaoManualAtribuicoesManager facade;
-    public GestaoManualAtribuicoesState(ApoioPoeContext context, ApoioPoEManager data) {
+    public GestaoManualAtribuicoesState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
         this.facade = new GestaoManualAtribuicoesManager(data);
     }
 
     @Override
     public boolean regressarFase() {
-        changeState(ApoioPoeState.FASE3);
+        changeState(ApoioPoEState.FASE3);
         return true;
     }
 
@@ -97,7 +97,7 @@ public class GestaoManualAtribuicoesState extends ApoioPoeAdapter{
     }
 
     @Override
-    public ApoioPoeState getState() {
-        return ApoioPoeState.GESTAO_MANUAL_ATRIBUICOES;
+    public ApoioPoEState getState() {
+        return ApoioPoEState.GESTAO_MANUAL_ATRIBUICOES;
     }
 }

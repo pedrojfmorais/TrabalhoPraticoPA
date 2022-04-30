@@ -1,22 +1,22 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoeState;
-import pt.isec.pa.apoio_poe.model.fsm.IApoioPoeState;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+import pt.isec.pa.apoio_poe.model.fsm.IApoioPoEState;
 
 
-abstract class ApoioPoeAdapter implements IApoioPoeState {
+abstract class ApoioPoEAdapter implements IApoioPoEState {
 
-    ApoioPoeContext context;
+    ApoioPoEContext context;
     ApoioPoEManager data;
 
-    public ApoioPoeAdapter(ApoioPoeContext context, ApoioPoEManager data){
+    public ApoioPoEAdapter(ApoioPoEContext context, ApoioPoEManager data){
         this.context = context;
         this.data = data;
     }
 
-    public void changeState(ApoioPoeState state){context.changeState(state.createState(context, data));}
+    public void changeState(ApoioPoEState state){context.changeState(state.createState(context, data));}
 
     @Override
     public boolean comecarNovo(){
