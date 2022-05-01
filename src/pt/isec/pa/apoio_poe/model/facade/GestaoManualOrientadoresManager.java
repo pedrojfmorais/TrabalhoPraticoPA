@@ -8,23 +8,23 @@ import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
 public class GestaoManualOrientadoresManager {
 
-    ApoioPoEManager apoioPoeManager;
-    CommandManager cm;
+    private ApoioPoEManager apoioPoeManager;
+    private CommandManager cm;
 
     public GestaoManualOrientadoresManager(ApoioPoEManager apoioPoeManager) {
         this.apoioPoeManager = apoioPoeManager;
         cm = new CommandManager();
     }
 
-    public boolean addOrientador(Long nAluno, String novoOrientador){
+    public boolean addOrientador(long nAluno, String novoOrientador){
         return cm.invokeCommand(new AddOrientador(apoioPoeManager, nAluno, novoOrientador));
     }
 
-    public boolean changeOrientador(Long nAluno, String novoOrientador){
+    public boolean changeOrientador(long nAluno, String novoOrientador){
         return cm.invokeCommand(new ChangeOrientador(apoioPoeManager, nAluno, novoOrientador));
     }
 
-    public boolean removeOrientador(Long nAluno){
+    public boolean removeOrientador(long nAluno){
         return cm.invokeCommand(new RemoveOrientador(apoioPoeManager, nAluno));
     }
 
