@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class GestaoManualOrientadoresState extends ApoioPoEAdapter {
 
-    GestaoManualOrientadoresManager facade;
+    private GestaoManualOrientadoresManager facade;
     public GestaoManualOrientadoresState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
         facade = new GestaoManualOrientadoresManager(data);

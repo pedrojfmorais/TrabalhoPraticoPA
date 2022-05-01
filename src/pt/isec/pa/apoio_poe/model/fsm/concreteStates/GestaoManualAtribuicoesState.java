@@ -11,7 +11,7 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
 public class GestaoManualAtribuicoesState extends ApoioPoEAdapter {
 
-    GestaoManualAtribuicoesManager facade;
+    private GestaoManualAtribuicoesManager facade;
     public GestaoManualAtribuicoesState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
         this.facade = new GestaoManualAtribuicoesManager(data);
