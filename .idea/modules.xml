@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/TrabalhoPratico.iml" filepath="$PROJECT_DIR$/TrabalhoPratico.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Meta1/Meta1.iml" filepath="$PROJECT_DIR$/Meta1/Meta1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Trabalho Prático.iml" filepath="$PROJECT_DIR$/.idea/Trabalho Prático.iml" />
+      <module fileurl="file://$PROJECT_DIR$/TrabalhoPratico/TrabalhoPratico.iml" filepath="$PROJECT_DIR$/TrabalhoPratico/TrabalhoPratico.iml" />
     </modules>
   </component>
 </project>
