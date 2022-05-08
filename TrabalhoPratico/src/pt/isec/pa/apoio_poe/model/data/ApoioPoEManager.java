@@ -7,13 +7,16 @@ import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
 import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+import pt.isec.pa.apoio_poe.model.memento.IMemento;
+import pt.isec.pa.apoio_poe.model.memento.IOriginator;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
-public class ApoioPoEManager implements Serializable {
+public class ApoioPoEManager implements Serializable, IOriginator {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -413,6 +416,32 @@ public class ApoioPoEManager implements Serializable {
             ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
         }
         return true;
+    }
+
+    private ApoioPoE getApoioPOE(){return apoioPOE.clone();}
+
+    private static class ApoioPoEManagerMemento implements IMemento{
+
+        private final ApoioPoE apoioPOE;;
+
+        ApoioPoEManagerMemento(ApoioPoEManager base) {
+            this.apoioPOE = base.getApoioPOE();
+        }
+
+    }
+
+    @Override
+    public IMemento save() {
+        return new ApoioPoEManagerMemento(this);
+    }
+
+    @Override
+    public void restore(IMemento memento) {
+
+        if(memento instanceof ApoioPoEManagerMemento apoioPoEManagerMemento){
+            this.apoioPOE = apoioPoEManagerMemento.apoioPOE;
+
+        }
     }
 }
 

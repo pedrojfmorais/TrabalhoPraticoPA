@@ -4,10 +4,13 @@ import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+import pt.isec.pa.apoio_poe.model.memento.CareTaker;
 
 public class GestaoAlunosState extends ApoioPoEAdapter {
+    CareTaker careTaker;
     public GestaoAlunosState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
+        careTaker = new CareTaker(data);
     }
 
     @Override
@@ -16,18 +19,41 @@ public class GestaoAlunosState extends ApoioPoEAdapter {
         return true;
     }
 
-    //TODO: A implemetar com o memento
     @Override
     public boolean adicionarDados(String... dados) {
-        return super.adicionarDados(dados);
+
+        if(dados.length != 7)
+            return false;
+
+        careTaker.save();
+
+        if(data.adicionaAluno(Long.parseLong(dados[0]), dados[1], dados[2], dados[3], dados[4],
+                Double.parseDouble(dados[5]), Boolean.parseBoolean(dados[6])))
+            return true;
+
+        careTaker.removeLastSave();
+
+        return false;
     }
     @Override
     public boolean editarDados(String... dados) {
+
+        //TODO: A implemetar com o memento
         return super.editarDados(dados);
     }
     @Override
     public boolean removerDados(String... dados) {
-        return super.removerDados(dados);
+        if(dados.length != 1)
+            return false;
+
+        careTaker.save();
+
+        if(data.removeAluno(Long.parseLong(dados[0])))
+            return true;
+
+        careTaker.removeLastSave();
+        return false;
+
     }
 
     @Override
@@ -48,7 +74,37 @@ public class GestaoAlunosState extends ApoioPoEAdapter {
     }
 
     @Override
+    public boolean undo() {
+
+        if(!careTaker.hasUndo())
+            return false;
+
+        careTaker.undo();
+        return true;
+    }
+
+    @Override
+    public boolean redo() {
+        if(!careTaker.hasRedo())
+            return false;
+
+        careTaker.redo();
+        return true;
+    }
+
+    @Override
+    public boolean hasUndo() {
+        return careTaker.hasUndo();
+    }
+
+    @Override
+    public boolean hasRedo() {
+        return careTaker.hasRedo();
+    }
+
+    @Override
     public boolean importarDadosFicheiroCsv(String filename) {
+        careTaker.save();
         return data.adicionaAlunosDeFicheiro(filename);
     }
 
@@ -59,6 +115,7 @@ public class GestaoAlunosState extends ApoioPoEAdapter {
 
     @Override
     public boolean removerTodosDados() {
+        careTaker.save();
 
         while(data.getAlunos().size() > 0)
             data.removeAluno(data.getAlunos().get(0).getnAluno());

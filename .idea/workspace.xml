@@ -1,244 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2239089f-0a11-4168-b998-ec0f481ff2a7" name="Changes" comment="alteração de organização de pastas">
-      <change afterPath="$PROJECT_DIR$/.idea/Trabalho Prático.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maria_Abreu_2020130937_Pedro_Morais_2018020733.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Maria-Abreu-2020130937_Pedro-Morais-2018020733.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/Projeto_IntelliJ.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/files/alunos.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/files/candidaturas.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/files/docentes.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/files/propostas.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/cmd/CommandAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/cmd/CommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/cmd/ICommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualAtribuicoes/AddAtribuicaoAlunoProposta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualAtribuicoes/RemoveAtribuicaoAlunoProposta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/AddOrientador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/ChangeOrientador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/RemoveOrientador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/ApoioPoE.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/ApoioPoEManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/Candidatura.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/pessoas/Docente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/pessoas/Pessoa.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/pessoas/alunos/Aluno.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/pessoas/alunos/AlunoClassificacaoComparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/propostas/Autoproposto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/propostas/Estagio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/propostas/Projeto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/propostas/Proposta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/data/propostas/PropostaAtribuida.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/exceptionsHandling/ExceptionOccurred.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/exceptionsHandling/ExceptionsTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/facade/GestaoManualAtribuicoesManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/facade/GestaoManualOrientadoresManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/ApoioPoEContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/ApoioPoEState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/IApoioPoEState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/ApoioPoEAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase1BloqueadaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase1State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase2BloqueadaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase2State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3AtribuicaoAutomaticaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3BloqueadaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3MasFase2AbertaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase4State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase5State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoAlunosState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoCandidaturasState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoDocentesState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoManualAtribuicoesState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoManualOrientadoresState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoPropostasState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/InicioState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/ui/text/ApoioPoEUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Projeto_IntelliJ/src/pt/isec/pa/apoio_poe/utils/PAInput.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Meta1/Relatório.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/Diagrama Máquina Estados.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/Meta1/Projeto_IntelliJ/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/Relatório.docx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/Relatório.pdf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/diagramaMáquinaEstados.mdj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/diagramas padrões implementados.mdj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/feito.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/files/alunos.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/files/candidaturas.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/files/docentes.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/files/propostas.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/cmd/CommandAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/cmd/CommandManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/cmd/ICommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualAtribuicoes/AddAtribuicaoAlunoProposta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualAtribuicoes/RemoveAtribuicaoAlunoProposta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/AddOrientador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/ChangeOrientador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/RemoveOrientador.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/ApoioPoE.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/ApoioPoEManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/Candidatura.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/pessoas/Docente.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/pessoas/Pessoa.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/pessoas/alunos/Aluno.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/pessoas/alunos/AlunoClassificacaoComparator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/propostas/Autoproposto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/propostas/Estagio.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/propostas/Projeto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/propostas/Proposta.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/data/propostas/PropostaAtribuida.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/exceptionsHandling/ExceptionOccurred.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/exceptionsHandling/ExceptionsTypes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/facade/GestaoManualAtribuicoesManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/facade/GestaoManualOrientadoresManager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/ApoioPoEContext.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/ApoioPoEState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/IApoioPoEState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/ApoioPoEAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase1BloqueadaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase1State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase2BloqueadaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase2State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3AtribuicaoAutomaticaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3BloqueadaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3MasFase2AbertaState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase4State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase5State.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoAlunosState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoCandidaturasState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoDocentesState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoManualAtribuicoesState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoManualOrientadoresState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoPropostasState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/InicioState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/ui/text/ApoioPoEUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/src/pt/isec/pa/apoio_poe/utils/PAInput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Diagrama Máquina Estados.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Relatório.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Relatório.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrabalhoPratico.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagramaMáquinaEstados.mdj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/diagramas padrões implementados.mdj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/feito.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/alunos.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/candidaturas.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/docentes.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/files/propostas.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/cmd/CommandAdapter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/cmd/CommandManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/cmd/ICommand.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/AddOrientador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/ChangeOrientador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/RemoveOrientador.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/ApoioPOE.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/ApoioPoeManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/Candidatura.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/pessoas/Docente.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/pessoas/Pessoa.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/pessoas/alunos/Aluno.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/pessoas/alunos/AlunoClassificacaoComparator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/propostas/Autoproposto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/propostas/Estagio.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/propostas/Projeto.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/propostas/Proposta.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/data/propostas/PropostaAtribuida.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/exceptionsHandling/ExceptionsTypes.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/facade/GestaoManualAtribuicoesManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/facade/GestaoManualOrientadoresManager.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/ApoioPoeContext.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/ApoioPoeState$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/ApoioPoeState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/IApoioPoeState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/ApoioPoeAdapter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase1BloqueadaState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase1State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase2BloqueadaState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase2State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3BloqueadaState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3MasFase2AbertaState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase4State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase5State.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoAlunosState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoCandidaturasState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoDocentesState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoManualAtribuicoesState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoManualOrientadoresState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoPropostasState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/model/fsm/concreteStates/InicioState.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/ui/text/ApoioPoeUI$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/ui/text/ApoioPoeUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TrabalhoPratico/pt/isec/pa/apoio_poe/utils/PAInput.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/Main.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/cmd/CommandAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/cmd/CommandManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/cmd/ICommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualAtribuicoes/AddAtribuicaoAlunoProposta.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualAtribuicoes/RemoveAtribuicaoAlunoProposta.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/AddOrientador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/ChangeOrientador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/cmd/gestaoManualOrientadores/RemoveOrientador.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/ApoioPoE.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/ApoioPoEManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/Candidatura.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/pessoas/Docente.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/pessoas/Pessoa.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/pessoas/alunos/Aluno.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/pessoas/alunos/AlunoClassificacaoComparator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/propostas/Autoproposto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/propostas/Estagio.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/propostas/Projeto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/propostas/Proposta.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/data/propostas/PropostaAtribuida.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/exceptionsHandling/ExceptionOccurred.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/exceptionsHandling/ExceptionsTypes.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/facade/GestaoManualAtribuicoesManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/facade/GestaoManualOrientadoresManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/ApoioPoEContext.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/ApoioPoEState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/IApoioPoEState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/ApoioPoEAdapter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase1BloqueadaState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase1State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase2BloqueadaState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase2State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3AtribuicaoAutomaticaState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3BloqueadaState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3MasFase2AbertaState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase3State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase4State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/Fase5State.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoAlunosState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoCandidaturasState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoDocentesState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoManualAtribuicoesState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoManualOrientadoresState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/GestaoPropostasState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/model/fsm/concreteStates/InicioState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/ui/text/ApoioPoEUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pt/isec/pa/apoio_poe/utils/PAInput.java" beforeDir="false" />
-    </list>
+    <list default="true" id="2239089f-0a11-4168-b998-ec0f481ff2a7" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -258,14 +21,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -275,6 +38,7 @@
       <option name="presentableId" value="Default" />
       <updated>1651445284307</updated>
       <workItem from="1651445286868" duration="102000" />
+      <workItem from="1651445549961" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="alteração de organização de pastas">
       <created>1651445362104</created>

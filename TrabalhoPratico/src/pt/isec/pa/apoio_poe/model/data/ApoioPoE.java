@@ -3,17 +3,19 @@ package pt.isec.pa.apoio_poe.model.data;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.propostas.*;
+import pt.isec.pa.apoio_poe.model.memento.IMemento;
+import pt.isec.pa.apoio_poe.model.memento.IOriginator;
 
 import java.io.*;
 import java.util.*;
 
-public class ApoioPoE implements Serializable {
+public class ApoioPoE implements Serializable, Cloneable {
 
    @Serial
    private static final long serialVersionUID = 1L;
    private int faseBloqueada;
 
-   private HashMap<Long, Aluno> alunos;            //fizemos o equal para cada um para não inserir repetidos
+   private HashMap<Long, Aluno> alunos;
    private HashMap<String, Docente> docentes;
    private HashMap<String, Proposta> propostas;
    private HashMap<Long, Candidatura> candidaturas;
@@ -76,9 +78,13 @@ public class ApoioPoE implements Serializable {
       if(!alunos.containsKey(nAlunoAssociado))
          return false;
 
-      String[] areas = areasDestino.split("\\|");
+      String[] areas = areasDestino.trim().split("\\|");
       if(!Aluno.ramos.containsAll(List.of(areas)))
          return false;
+
+      for (var proposta : this.propostas.values())
+         if(proposta.getnAlunoAssociado() == nAlunoAssociado)
+            return false;
 
       switch (tipo){
          case "T1" -> propostas.put(id, new Estagio(id, titulo, nAlunoAssociado, areasDestino, entidadeOuDocente));
@@ -100,7 +106,8 @@ public class ApoioPoE implements Serializable {
       if(propostas.containsKey(id))
          return false;
 
-      String[] areas = areasDestino.split("\\|");
+      String[] areas = areasDestino.trim().split("\\|");
+
       if(!Aluno.ramos.containsAll(List.of(areas)))
          return false;
 
@@ -160,6 +167,10 @@ public class ApoioPoE implements Serializable {
       for (var proposta : this.propostas.values())
          if(proposta.getnAlunoAssociado() == nAluno)
             return false;
+
+      HashSet<String> testeDuplicados = new HashSet<>(propostas);
+      if(testeDuplicados.size() != propostas.size())
+         return false;
 
       candidaturas.put(nAluno, new Candidatura(nAluno, propostas));
 
@@ -413,5 +424,28 @@ public class ApoioPoE implements Serializable {
             contador++;
 
       return contador;
+   }
+
+   private ApoioPoE(int faseBloqueada, HashMap<Long, Aluno> alunos, HashMap<String, Docente> docentes,
+                    HashMap<String, Proposta> propostas, HashMap<Long, Candidatura> candidaturas,
+                    HashMap<String, PropostaAtribuida> propostasAtribuidas) {
+      this.faseBloqueada = faseBloqueada;
+      this.alunos = alunos;
+      this.docentes = docentes;
+      this.propostas = propostas;
+      this.candidaturas = candidaturas;
+      this.propostasAtribuidas = propostasAtribuidas;
+   }
+
+   @Override
+   protected ApoioPoE clone(){
+      return new ApoioPoE(
+              faseBloqueada,
+              (HashMap<Long, Aluno>) alunos.clone(),
+              (HashMap<String, Docente>) docentes.clone(),
+              (HashMap<String, Proposta>) propostas.clone(),
+              (HashMap<Long, Candidatura>) candidaturas.clone(),
+              (HashMap<String, PropostaAtribuida>) propostasAtribuidas.clone()
+      );
    }
 }

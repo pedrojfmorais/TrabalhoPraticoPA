@@ -18,7 +18,7 @@ public abstract class Pessoa implements Cloneable, Serializable {
         return nome;
     }
 
-    public void setNome(String nome) {    //pode ser alterado o nome, not o email
+    public void setNome(String nome) {    //pode ser alterado o nome, não o email
         this.nome = nome;
     }
 

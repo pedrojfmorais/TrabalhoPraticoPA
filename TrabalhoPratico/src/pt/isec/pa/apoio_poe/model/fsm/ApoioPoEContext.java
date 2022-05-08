@@ -15,6 +15,12 @@ public class ApoioPoEContext {
     public void init(ApoioPoEState state){
         this.data = new ApoioPoEManager(new ApoioPoE());
         this.state = state.createState(this, data);
+
+        //debug
+        data.adicionaAlunosDeFicheiro("files/alunos.csv");
+        data.adicionaDocentesDeFicheiro("files/docentes.csv");
+        data.adicionaPropostasDeFicheiro("files/propostas.csv");
+        //data.adicionaCandidaturaDeFicheiro("files/candidaturas.csv");
     }
 
     public void retomarSave(ApoioPoEManager data, ApoioPoEState state){

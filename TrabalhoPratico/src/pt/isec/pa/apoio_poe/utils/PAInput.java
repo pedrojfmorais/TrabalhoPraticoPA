@@ -48,7 +48,7 @@ public final class PAInput {
         return value;
     }
 
-    public static int chooseOption(String title, String ... options) {
+    public static Integer chooseOption(String title, String ... options) {
         int option = -1;
         do {
             if (title != null)
@@ -63,6 +63,36 @@ public final class PAInput {
             sc.nextLine();
         } while (option < 1 || option > options.length);
         return option;
+    }
+
+    public static Long readLong(String title) {
+        while (true) {
+            if (title != null)
+                System.out.print(title);
+            else
+                System.out.print("> ");
+            if (sc.hasNextLong()) {
+                long longValue = sc.nextLong();
+                sc.nextLine();
+                return longValue;
+            } else
+                sc.nextLine();
+        }
+    }
+
+    public static Double readDouble(String title) {
+        while (true) {
+            if (title != null)
+                System.out.print(title);
+            else
+                System.out.print("> ");
+            if (sc.hasNextDouble()) {
+                double doubleValue = sc.nextDouble();
+                sc.nextLine();
+                return doubleValue;
+            } else
+                sc.nextLine();
+        }
     }
 
 }

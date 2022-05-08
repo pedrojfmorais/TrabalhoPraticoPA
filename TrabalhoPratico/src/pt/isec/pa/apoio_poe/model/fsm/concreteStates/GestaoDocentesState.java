@@ -4,10 +4,14 @@ import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+import pt.isec.pa.apoio_poe.model.memento.CareTaker;
 
 public class GestaoDocentesState extends ApoioPoEAdapter {
+
+    CareTaker careTaker;
     public GestaoDocentesState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
+        careTaker = new CareTaker(data);
     }
 
     @Override
@@ -16,18 +20,38 @@ public class GestaoDocentesState extends ApoioPoEAdapter {
         return true;
     }
 
-    //TODO: A implemetar com o memento
     @Override
     public boolean adicionarDados(String... dados) {
-        return super.adicionarDados(dados);
+
+        if(dados.length != 2)
+            return false;
+
+        careTaker.save();
+
+        if(data.adicionaDocente(dados[0], dados[1]))
+            return true;
+
+        careTaker.removeLastSave();
+        return false;
     }
     @Override
     public boolean editarDados(String... dados) {
+
+        //TODO: A implemetar com o memento
         return super.editarDados(dados);
     }
     @Override
     public boolean removerDados(String... dados) {
-        return super.removerDados(dados);
+        if(dados.length != 1)
+            return false;
+
+        careTaker.save();
+
+        if(data.removeDocente(dados[0]))
+            return true;
+
+        careTaker.removeLastSave();
+        return false;
     }
 
     @Override
@@ -46,9 +70,39 @@ public class GestaoDocentesState extends ApoioPoEAdapter {
 
         return sb.toString().isBlank() ? null : sb.toString();
     }
+    @Override
+    public boolean undo() {
+
+        if(!careTaker.hasUndo())
+            return false;
+
+        careTaker.undo();
+        return true;
+    }
+
+    @Override
+    public boolean redo() {
+        if(!careTaker.hasRedo())
+            return false;
+
+        careTaker.redo();
+        return true;
+    }
+
+    @Override
+    public boolean hasUndo() {
+        return careTaker.hasUndo();
+    }
+
+    @Override
+    public boolean hasRedo() {
+        return careTaker.hasRedo();
+    }
 
     @Override
     public boolean importarDadosFicheiroCsv(String filename) {
+        careTaker.save();
+
         return data.adicionaDocentesDeFicheiro(filename);
     }
 
@@ -59,6 +113,8 @@ public class GestaoDocentesState extends ApoioPoEAdapter {
 
     @Override
     public boolean removerTodosDados() {
+
+        careTaker.save();
 
         while(data.getDocentes().size() > 0)
             data.removeDocente(data.getDocentes().get(0).getEmail());

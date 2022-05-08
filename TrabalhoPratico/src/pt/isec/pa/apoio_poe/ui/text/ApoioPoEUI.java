@@ -1,9 +1,14 @@
 package pt.isec.pa.apoio_poe.ui.text;
 
+import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
 import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
 import pt.isec.pa.apoio_poe.model.fsm.*;
 import pt.isec.pa.apoio_poe.utils.PAInput;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 
 public class ApoioPoEUI {
     ApoioPoEContext fsm;
@@ -181,17 +186,27 @@ public class ApoioPoEUI {
                 "Importar alunos de ficheiro CSV",
                 "Exportar alunos para ficheiro CSV",
                 "Remover todos Alunos",
+                "Undo",
+                "Redo",
                 "Regressar a Fase 1"
         )){
-            case 1 -> {
-                //TODO: Meta 2
-            }
+            case 1 ->
+                fsm.adicionarDados(
+                        PAInput.readLong("Insira o número de estudante: ").toString(),
+                        PAInput.readString("Insira o nome do aluno: ", false),
+                        PAInput.readString("Insira o email do aluno: ", false),
+                        PAInput.chooseOption("Escolha o curso do aluno: ", "LEI", "LEI-PL") == 1 ? "LEI" : "LEI-PL",
+                        Aluno.ramos.get(PAInput.chooseOption("Escolha o ramo do aluno: ", "DA", "RAS", "SI") - 1),
+                        PAInput.readDouble("Insira a classificação do aluno: ").toString(),
+                        PAInput.chooseOption("O aluno tem acesso a estágio? ", "Sim", "Não") == 1 ? "true" : "false"
+                );
             case 2 -> {
                 //TODO: Meta 2
             }
-            case 3 -> {
-                //TODO: Meta 2
-            }
+            case 3 ->
+                fsm.removerDados(
+                        PAInput.readLong("Insira o número do aluno a remover: ").toString()
+                );
             case 4 -> {
                 String filtro = PAInput.readString(
                         "Insira o número do aluno a consultar, ou em branco para ver todos.\n",
@@ -215,7 +230,9 @@ public class ApoioPoEUI {
                             PAInput.readString("Insira o nome do ficheiro: ", false)
                         );
             case 7 -> fsm.removerTodosDados();
-            case 8 -> fsm.regressarFase();
+            case 8 -> fsm.undo();
+            case 9 -> fsm.redo();
+            case 10 -> fsm.regressarFase();
         }
     }
 
@@ -229,17 +246,22 @@ public class ApoioPoEUI {
                 "Importar Docentes de ficheiro CSV",
                 "Exportar Docentes para ficheiro CSV",
                 "Remover todos Docentes",
+                "Undo",
+                "Redo",
                 "Regressar a Fase 1"
         )){
-            case 1 -> {
-                //TODO: Meta 2
-            }
+            case 1 ->
+                fsm.adicionarDados(
+                        PAInput.readString("Insira o nome do docente: ", false),
+                        PAInput.readString("Insira o email do docente: ", false)
+                );
             case 2 -> {
                 //TODO: Meta 2
             }
-            case 3 -> {
-                //TODO: Meta 2
-            }
+            case 3 ->
+                fsm.removerDados(
+                        PAInput.readString("Insira o email do docente a remover: ", false)
+                );
             case 4 -> {
                 String filtro = PAInput.readString(
                         "Insira o email do docente a consultar, ou em branco para ver todos.\n",
@@ -263,7 +285,9 @@ public class ApoioPoEUI {
                     PAInput.readString("Insira o nome do ficheiro: ", false)
             );
             case 7 -> fsm.removerTodosDados();
-            case 8 -> fsm.regressarFase();
+            case 8 -> fsm.undo();
+            case 9 -> fsm.redo();
+            case 10 -> fsm.regressarFase();
         }
     }
 
@@ -277,17 +301,47 @@ public class ApoioPoEUI {
                 "Importar Propostas de ficheiro CSV",
                 "Exportar Propostas para ficheiro CSV",
                 "Remover todas Propostas",
+                "Undo",
+                "Redo",
                 "Regressar a Fase 1"
         )){
             case 1 -> {
-                //TODO: Meta 2
+                switch (PAInput.chooseOption("Insira o tipo de proposta:",
+                        "Estágio", "Projeto", "Estágio/Projeto autoproposto")){
+                    case 1 ->
+                        fsm.adicionarDados(
+                                "T1",
+                                PAInput.readString("Insira o identificador da proposta: ", false),
+                                PAInput.readString("Insira o titulo da proposta: ", false),
+                                PAInput.readString("Insira os ramo da proposta (vários ramos separados por '|'): ", false),
+                                PAInput.readString("Insira a identificação da entidade de acolhimento: ", false),
+                                PAInput.readLong("Insira o número do aluno associado à proposta ou 0 para não associar nenhum aluno: ").toString()
+                        );
+                    case 2 ->
+                            fsm.adicionarDados(
+                                    "T2",
+                                    PAInput.readString("Insira o identificador da proposta: ", false),
+                                    PAInput.readString("Insira o titulo da proposta: ", false),
+                                    PAInput.readString("Insira os ramo da proposta (vários ramos separados por '|'): ", false),
+                                    PAInput.readString("Insira o email do docente proponente da proposta: ", false),
+                                    PAInput.readLong("Insira o número do aluno associado à proposta ou 0 para não associar nenhum aluno: ").toString()
+                            );
+                    case 3 ->
+                            fsm.adicionarDados(
+                                    "T3",
+                                    PAInput.readString("Insira o identificador da proposta: ", false),
+                                    PAInput.readString("Insira o titulo da proposta: ", false),
+                                    PAInput.readLong("Insira o número do aluno associado à proposta: ").toString()
+                            );
+                }
             }
             case 2 -> {
                 //TODO: Meta 2
             }
-            case 3 -> {
-                //TODO: Meta 2
-            }
+            case 3 ->
+                    fsm.removerDados(
+                            PAInput.readString("Insira o identificador da proposta a remover: ", false)
+                    );
             case 4 -> {
                 String filtro = PAInput.readString(
                         "Insira o identificador da proposta a consultar, ou em branco para ver todos.\n",
@@ -311,7 +365,9 @@ public class ApoioPoEUI {
                     PAInput.readString("Insira o nome do ficheiro: ", false)
             );
             case 7 -> fsm.removerTodosDados();
-            case 8 -> fsm.regressarFase();
+            case 8 -> fsm.undo();
+            case 9 -> fsm.redo();
+            case 10 -> fsm.regressarFase();
         }
     }
 
@@ -399,17 +455,43 @@ public class ApoioPoEUI {
                 "Importar Candidaturas de ficheiro CSV",
                 "Exportar Candidaturas para ficheiro CSV",
                 "Remover todas Candidaturas",
+                "Undo",
+                "Redo",
                 "Regressar a Fase 2"
         )){
             case 1 -> {
-                //TODO: Meta 2
+                String nAluno = PAInput.readLong("Insira o número de aluno a associar à candidatura: ").toString();
+
+                ArrayList<String> propostas = new ArrayList<>();
+
+                while (true){
+                    String proposta = PAInput.readString(
+                            "Insira o identificador da proposta, ou vazio para terminar de inserir propostas: ",
+                            false, true);
+
+                    if(proposta.isBlank())
+                        break;
+
+                    propostas.add(proposta);
+                }
+
+                String [] arrayPropostas = new String[propostas.size() + 1];
+
+                arrayPropostas[0] = nAluno;
+
+                for (int i = 1; i <= propostas.size(); i++) {
+                    arrayPropostas[i] = propostas.get(i-1);
+                }
+
+                fsm.adicionarDados(arrayPropostas);
             }
             case 2 -> {
                 //TODO: Meta 2
             }
-            case 3 -> {
-                //TODO: Meta 2
-            }
+            case 3 ->
+                fsm.removerDados(
+                        PAInput.readLong("Insira o número do aluno associado à candidatura a remover: ").toString()
+                );
             case 4 -> {
                 String filtro = PAInput.readString(
                         "Insira o número do aluno candidato a consultar, ou em branco para ver todos.\n",
@@ -433,7 +515,9 @@ public class ApoioPoEUI {
                     PAInput.readString("Insira o nome do ficheiro: ", false)
             );
             case 7 -> fsm.removerTodosDados();
-            case 8 -> fsm.regressarFase();
+            case 8 -> fsm.undo();
+            case 9 -> fsm.redo();
+            case 10 -> fsm.regressarFase();
         }
     }
 
