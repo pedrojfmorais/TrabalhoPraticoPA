@@ -25,7 +25,7 @@ public class Fase3MasFase2AbertaState extends ApoioPoEAdapter {
     @Override
     public boolean terminarAplicacao(String file) {
         if(!file.isBlank())
-            data.saveStateInFile(file, context.getState());
+            context.saveStateInFile(file, context.getState());
 
         changeState(ApoioPoEState.INICIO);
         return true;

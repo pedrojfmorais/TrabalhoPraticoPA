@@ -37,9 +37,18 @@ public class GestaoAlunosState extends ApoioPoEAdapter {
     }
     @Override
     public boolean editarDados(String... dados) {
+        if(dados.length != 6)
+            return false;
 
-        //TODO: A implemetar com o memento
-        return super.editarDados(dados);
+        careTaker.save();
+
+        if(data.editaAluno(Long.parseLong(dados[0]), dados[1], dados[2], dados[3], dados[4],
+                dados[5]))
+            return true;
+
+        careTaker.removeLastSave();
+
+        return false;
     }
     @Override
     public boolean removerDados(String... dados) {

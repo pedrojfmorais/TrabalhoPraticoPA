@@ -18,7 +18,7 @@ public class Fase5State extends ApoioPoEAdapter {
     @Override
     public boolean terminarAplicacao(String file) {
         if(!file.isBlank())
-            data.saveStateInFile(file, context.getState());
+            context.saveStateInFile(file, context.getState());
 
         changeState(ApoioPoEState.INICIO);
         return true;

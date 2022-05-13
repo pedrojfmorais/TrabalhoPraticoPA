@@ -2,6 +2,10 @@ package pt.isec.pa.apoio_poe.model.fsm;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoE;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+
+import java.io.*;
 
 public class ApoioPoEContext {
 
@@ -119,4 +123,34 @@ public class ApoioPoEContext {
 
     public boolean redo(){return state.redo();}
     public boolean hasRedo(){return state.hasRedo();}
+
+    public boolean loadStateInFile(String file, ApoioPoEContext context){
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
+
+            retomarSave((ApoioPoEManager) ois.readObject(), (ApoioPoEState) ois.readObject());
+
+        } catch (FileNotFoundException e) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.FILE_NOT_FOUND);
+        } catch (IOException e) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
+        } catch (ClassNotFoundException e) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.CLASS_NOT_FOUND);
+        }
+        return true;
+    }
+
+    public boolean saveStateInFile(String file, ApoioPoEState state){
+        try(ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream(file))){
+
+            oos.writeObject(data);
+            oos.writeObject(state);
+
+        } catch (FileNotFoundException e) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.FILE_NOT_FOUND);
+        } catch (IOException e) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
+        }
+
+        return true;
+    }
 }

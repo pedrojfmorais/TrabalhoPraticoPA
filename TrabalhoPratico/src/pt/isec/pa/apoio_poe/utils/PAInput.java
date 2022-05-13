@@ -95,4 +95,27 @@ public final class PAInput {
         }
     }
 
+    public static String readDouble(String title,boolean blankString) {
+
+        String value;
+        Scanner scanner;
+
+        while (true){
+
+            if (title != null)
+                System.out.print(title);
+            else
+                System.out.print("> ");
+
+            value = sc.nextLine();
+            scanner = new Scanner(value);
+
+            if (scanner.hasNextDouble()) {
+                double doubleValue = scanner.nextDouble();
+                return Double.toString(doubleValue);
+            } else if(value.trim().isBlank() && blankString)
+                return "";
+        }
+    }
+
 }

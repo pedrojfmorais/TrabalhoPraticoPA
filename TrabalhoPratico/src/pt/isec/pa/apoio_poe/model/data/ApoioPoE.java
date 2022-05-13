@@ -44,6 +44,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       if(alunos.containsKey(nAluno) || docentes.containsKey(email))
          return false;
 
+      for(var aluno : alunos.values())
+         if(aluno.getEmail().equals(email))
+            return false;
+
       if(!Aluno.cursos.contains(siglaCurso) || !Aluno.ramos.contains(siglaRamo))
          return false;
 
@@ -447,5 +451,49 @@ public class ApoioPoE implements Serializable, Cloneable {
               (HashMap<Long, Candidatura>) candidaturas.clone(),
               (HashMap<String, PropostaAtribuida>) propostasAtribuidas.clone()
       );
+   }
+
+   public boolean editaAluno(long nAluno, String nome, String siglaCurso, String siglaRamo,
+                             String classificacao, String acessoEstagio){
+
+      double dClassificacao = 0.0;
+
+      if(!alunos.containsKey(nAluno))
+         return false;
+
+      if(!siglaCurso.isBlank())
+         if(!Aluno.cursos.contains(siglaCurso))
+            return false;
+
+      if(!siglaRamo.isBlank())
+         if(!Aluno.ramos.contains(siglaRamo))
+            return false;
+
+      if(!classificacao.isBlank()) {
+         dClassificacao = Double.parseDouble(classificacao);
+
+         if (dClassificacao > 1.0 || dClassificacao < 0.0)
+            return false;
+      }
+
+      Aluno aluno = alunos.get(nAluno);
+
+      if(!nome.isBlank())
+         aluno.setNome(nome);
+
+      if(!siglaCurso.isBlank())
+         aluno.setSiglaCurso(siglaCurso);
+
+      if(!siglaRamo.isBlank())
+         aluno.setSiglaRamo(siglaRamo);
+
+      if(!classificacao.isBlank())
+         aluno.setClassificacao(dClassificacao);
+
+      if(!acessoEstagio.isBlank())
+         aluno.setAcessoEstagio(Boolean.parseBoolean(acessoEstagio));
+
+      return true;
+
    }
 }

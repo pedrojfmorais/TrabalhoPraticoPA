@@ -22,7 +22,7 @@ public class InicioState extends ApoioPoEAdapter {
         if(file.isBlank())
             return false;
 
-        return data.loadStateInFile(file, context);
+        return context.loadStateInFile(file, context);
     }
 
     @Override

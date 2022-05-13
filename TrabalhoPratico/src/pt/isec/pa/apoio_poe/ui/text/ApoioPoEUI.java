@@ -1,14 +1,12 @@
 package pt.isec.pa.apoio_poe.ui.text;
 
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
-import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
-import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 import pt.isec.pa.apoio_poe.model.fsm.*;
 import pt.isec.pa.apoio_poe.utils.PAInput;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 
 public class ApoioPoEUI {
     ApoioPoEContext fsm;
@@ -45,19 +43,19 @@ public class ApoioPoEUI {
     }
 
     private void exceptionMessages(){
-        if(ExceptionOccurred.getInstance().getException() == ExceptionsTypes.NONE)
+        if(ErrorOccurred.getInstance().getError() == ErrorsTypes.NONE)
             return;
 
         System.out.println("\n\n\n**************************************************\n");
-        switch (ExceptionOccurred.getInstance().getException()){
-            case FileNotFound -> System.out.println("Não foi possivel encontrar o ficheiro;");
-            case ClassNotFound -> System.out.println("Erro a carregar o save.");
-            case CloneNotFound -> System.out.println("Não foi possivel clonar o objeto. Operação não suportada!");
-            case IOException -> System.out.println("Não foi possivel realizar uma operação de input/output!");
+        switch (ErrorOccurred.getInstance().getError()){
+            case FILE_NOT_FOUND -> System.out.println("Não foi possivel encontrar o ficheiro;");
+            case CLASS_NOT_FOUND -> System.out.println("Erro a carregar o save.");
+            case CLONE_NOT_FOUND -> System.out.println("Não foi possivel clonar o objeto. Operação não suportada!");
+            case IO_EXCEPTION -> System.out.println("Não foi possivel realizar uma operação de input/output!");
         }
         System.out.println("\n**************************************************\n");
 
-        ExceptionOccurred.getInstance().setException(ExceptionsTypes.NONE);
+        ErrorOccurred.getInstance().setError(ErrorsTypes.NONE);
     }
 
     private void inicioUI(){
@@ -201,7 +199,43 @@ public class ApoioPoEUI {
                         PAInput.chooseOption("O aluno tem acesso a estágio? ", "Sim", "Não") == 1 ? "true" : "false"
                 );
             case 2 -> {
-                //TODO: Meta 2
+                Long nAluno = PAInput.readLong("Insira o número de estudante: ");
+                System.out.println(fsm.consultarDados(nAluno.toString()));
+                int op;
+
+                String nome = PAInput.readString("Edite o nome ou deixe em branco: ", false, true);
+
+                op = PAInput.chooseOption("Edite o curso do aluno: ", "LEI", "LEI-PL", "Não alterar");
+                String curso;
+                if(op == 3)
+                    curso = "";
+                else
+                    curso = Aluno.cursos.get(op-1);
+
+                op = PAInput.chooseOption("Edite o ramo do aluno: ", "DA", "RAS", "SI", "Não alterar");
+                String ramo;
+                if(op == 4)
+                    ramo = "";
+                else
+                    ramo = Aluno.ramos.get(op-1);
+
+                String classif = PAInput.readDouble("Edite a classificação do aluno ou deixe em branco: ", true);
+
+                op = PAInput.chooseOption("O aluno tem acesso a estágio? ", "Sim", "Não", "Não alterar");
+                String estagio;
+                if(op == 3)
+                    estagio = "";
+                else
+                    estagio = op == 1 ? "true" : "false";
+
+                fsm.editarDados(
+                        nAluno.toString(),
+                        nome,
+                        curso,
+                        ramo,
+                        classif,
+                        estagio
+                );
             }
             case 3 ->
                 fsm.removerDados(

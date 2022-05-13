@@ -3,17 +3,14 @@ package pt.isec.pa.apoio_poe.model.data;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.propostas.*;
-import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionOccurred;
-import pt.isec.pa.apoio_poe.model.exceptionsHandling.ExceptionsTypes;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
-import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 import pt.isec.pa.apoio_poe.model.memento.IMemento;
 import pt.isec.pa.apoio_poe.model.memento.IOriginator;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class ApoioPoEManager implements Serializable, IOriginator {
@@ -160,9 +157,9 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             }
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.FILE_NOT_FOUND);
         } catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
 
         return true;
@@ -181,9 +178,9 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             }
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.FILE_NOT_FOUND);
         } catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
 
         return true;
@@ -210,9 +207,9 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             }
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.FILE_NOT_FOUND);
         } catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
 
         return true;
@@ -235,42 +232,14 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             }
 
         } catch (FileNotFoundException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.FILE_NOT_FOUND);
         } catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
 
         return true;
     }
-    public boolean loadStateInFile(String file, ApoioPoEContext context){
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
 
-            context.retomarSave((ApoioPoEManager) ois.readObject(), (ApoioPoEState) ois.readObject());
-
-        } catch (FileNotFoundException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
-        } catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
-        } catch (ClassNotFoundException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.ClassNotFound);
-        }
-        return true;
-    }
-
-    public boolean saveStateInFile(String file, ApoioPoEState state){
-        try(ObjectOutputStream oos = new ObjectOutputStream( new FileOutputStream(file))){
-
-            oos.writeObject(this);
-            oos.writeObject(state);
-
-        } catch (FileNotFoundException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.FileNotFound);
-        } catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
-        }
-
-        return true;
-    }
     public boolean exportAlunosCsv(String filename){
         try(PrintWriter pw = new PrintWriter(
                 new BufferedWriter(
@@ -292,7 +261,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             pw.print(sb);
 
         }catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
 
         return true;
@@ -316,7 +285,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             pw.print(sb);
 
         } catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
         return true;
     }
@@ -358,7 +327,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             pw.print(sb);
 
         }catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
         return true;
     }
@@ -385,7 +354,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             pw.print(sb);
 
         }catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
         return true;
     }
@@ -413,7 +382,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             pw.print(sb);
 
         }catch (IOException e) {
-            ExceptionOccurred.getInstance().setException(ExceptionsTypes.IOException);
+            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
         return true;
     }
@@ -422,7 +391,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
 
     private static class ApoioPoEManagerMemento implements IMemento{
 
-        private final ApoioPoE apoioPOE;;
+        private final ApoioPoE apoioPOE;
 
         ApoioPoEManagerMemento(ApoioPoEManager base) {
             this.apoioPOE = base.getApoioPOE();
@@ -442,6 +411,11 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             this.apoioPOE = apoioPoEManagerMemento.apoioPOE;
 
         }
+    }
+
+    public boolean editaAluno(long nAluno, String nome, String siglaCurso, String siglaRamo,
+                              String classificacao, String acessoEstagio) {
+        return apoioPOE.editaAluno(nAluno, nome, siglaCurso, siglaRamo, classificacao, acessoEstagio);
     }
 }
 

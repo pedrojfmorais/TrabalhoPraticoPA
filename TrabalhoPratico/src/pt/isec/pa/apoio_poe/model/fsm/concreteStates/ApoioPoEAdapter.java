@@ -16,7 +16,7 @@ abstract class ApoioPoEAdapter implements IApoioPoEState {
         this.data = data;
     }
 
-    public void changeState(ApoioPoEState state){context.changeState(state.createState(context, data));}
+    void changeState(ApoioPoEState state){context.changeState(state.createState(context, data));}
 
     @Override
     public boolean comecarNovo(){
