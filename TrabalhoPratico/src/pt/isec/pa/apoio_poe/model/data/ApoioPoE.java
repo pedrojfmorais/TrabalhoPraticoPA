@@ -476,13 +476,13 @@ public class ApoioPoE implements Serializable, Cloneable {
 
    public boolean removeOrientadorPropostaAtribuida(String id) {
 
-      if (propostasAtribuidas.get(id) == null && propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_AINDA_NAO_ATRIBUIDA);
+      if (!propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
          return false;
       }
 
-      if (!propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+      if (propostasAtribuidas.get(id) == null) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_AINDA_NAO_ATRIBUIDA);
          return false;
       }
 
@@ -584,22 +584,30 @@ public class ApoioPoE implements Serializable, Cloneable {
 
       double dClassificacao = 0.0;
 
-      if (!alunos.containsKey(nAluno))
+      if (!alunos.containsKey(nAluno)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
          return false;
+      }
 
       if (!siglaCurso.isBlank())
-         if (!Aluno.cursos.contains(siglaCurso))
+         if (!Aluno.cursos.contains(siglaCurso)) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_CURSO);
             return false;
+         }
 
       if (!siglaRamo.isBlank())
-         if (!Aluno.ramos.contains(siglaRamo))
+         if (!Aluno.ramos.contains(siglaRamo)) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
             return false;
+         }
 
       if (!classificacao.isBlank()) {
          dClassificacao = Double.parseDouble(classificacao);
 
-         if (dClassificacao > 1.0 || dClassificacao < 0.0)
+         if (dClassificacao > 1.0 || dClassificacao < 0.0) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_CLASSIFICACAO);
             return false;
+         }
       }
 
       Aluno aluno = alunos.get(nAluno);
@@ -625,8 +633,10 @@ public class ApoioPoE implements Serializable, Cloneable {
 
    public boolean editaDocente(String email, String nome) {
 
-      if (!docentes.containsKey(email))
+      if (!docentes.containsKey(email)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
          return false;
+      }
 
       if (nome.isBlank())
          return false;
@@ -638,8 +648,10 @@ public class ApoioPoE implements Serializable, Cloneable {
 
    public boolean editaProposta(String id, String titulo, String ramos, String entidade_docente, String nAluno) {
 
-      if (!propostas.containsKey(id))
+      if (!propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
          return false;
+      }
 
       String[] array_ramos = ramos.trim().split("\\|");
       if (!ramos.isBlank() && !Aluno.ramos.containsAll(List.of(array_ramos))) {
@@ -648,8 +660,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       }
 
       if (!nAluno.isBlank()) {
-         if (!alunos.containsKey(Long.parseLong(nAluno)))
+         if (!alunos.containsKey(Long.parseLong(nAluno))) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
             return false;
+         }
 
          for (var proposta : this.propostas.values())
             if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno)) {
@@ -688,12 +702,16 @@ public class ApoioPoE implements Serializable, Cloneable {
 
    public boolean editaProposta(String id, String titulo, String nAluno) {
 
-      if (!propostas.containsKey(id))
+      if (!propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
          return false;
+      }
 
       if (!nAluno.isBlank()) {
-         if (!alunos.containsKey(Long.parseLong(nAluno)))
+         if (!alunos.containsKey(Long.parseLong(nAluno))) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
             return false;
+         }
 
          for (var proposta : this.propostas.values())
             if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno)) {
@@ -716,7 +734,7 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean editaCandidatura(long nAluno, ArrayList<String> propostas) {
 
       if (propostas.isEmpty()) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorsTypes.SEM_PROPOSTAS_ESPECIFICADAS);
          return false;
       }
 

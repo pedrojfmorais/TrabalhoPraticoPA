@@ -162,6 +162,9 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
 
+        if(ErrorOccurred.getInstance().getLastError() != ErrorsTypes.NONE)
+            ErrorOccurred.getInstance().setError(ErrorsTypes.PROBLEMS_READING_ALUNOS_FILE);
+
         return true;
     }
 
@@ -182,6 +185,9 @@ public class ApoioPoEManager implements Serializable, IOriginator {
         } catch (IOException e) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
+
+        if(ErrorOccurred.getInstance().getLastError() != ErrorsTypes.NONE)
+            ErrorOccurred.getInstance().setError(ErrorsTypes.PROBLEMS_READING_DOCENTES_FILE);
 
         return true;
     }
@@ -212,6 +218,9 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
 
+        if(ErrorOccurred.getInstance().getLastError() != ErrorsTypes.NONE)
+            ErrorOccurred.getInstance().setError(ErrorsTypes.PROBLEMS_READING_PROPOSTAS_FILE);
+
         return true;
     }
 
@@ -236,6 +245,9 @@ public class ApoioPoEManager implements Serializable, IOriginator {
         } catch (IOException e) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
         }
+
+        if(ErrorOccurred.getInstance().getLastError() != ErrorsTypes.NONE)
+            ErrorOccurred.getInstance().setError(ErrorsTypes.PROBLEMS_READING_CANDIDATURAS_FILE);
 
         return true;
     }

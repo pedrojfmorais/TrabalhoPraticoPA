@@ -3,16 +3,31 @@ package pt.isec.pa.apoio_poe.model.errorHandling;
 public enum ErrorsTypes {
 
     //Exceptions
-    FILE_NOT_FOUND("FileNotFound"), CLONE_NOT_FOUND("CloneNotFound"), IO_EXCEPTION("IOException"), CLASS_NOT_FOUND("ClassNotFound"),
+    FILE_NOT_FOUND("FileNotFound"), CLONE_NOT_FOUND("CloneNotFound"), IO_EXCEPTION("IOException"),
+    CLASS_NOT_FOUND("ClassNotFound"),
 
     //Erros input utilizador
-    DUPLICATED_NUMERO_ALUNO("ASD"), DUPLICATED_EMAIL(""), DUPLICATED_ID_PROPOSTA(""), DUPLICATED_ID_CANDIDATURA(""),
-    INVALID_CLASSIFICACAO(""), INVALID_NUMERO_ALUNO(""), INVALID_CURSO(""), INVALID_RAMO(""),
-    ALUNO_JA_TEM_PROPOSTA(""), INVALID_DOCENTE(""), PROPOSTA_JA_TEM_ALUNO_ASSOCIADO(""),
-    PROPOSTA_JA_FOI_ATRIBUIDA(""), INVALID_ID_PROPOSTA(""), ALUNO_JA_TEM_CANDIDATURA(""),
-    PROPOSTA_AINDA_NAO_ATRIBUIDA(""), INVALID_ID_CANDIDATURA(""), ALUNO_NAO_TEM_CANDIDATURA(""),
+    DUPLICATED_NUMERO_ALUNO("NumeroAlunoDuplicado"), DUPLICATED_EMAIL("EmailDuplicado"),
+    DUPLICATED_ID_PROPOSTA("IDPropostaDuplicado"), DUPLICATED_ID_CANDIDATURA("IDCandidaturaDuplicado"),
 
+    INVALID_NUMERO_ALUNO("NumeroAlunoInvalido"), INVALID_CURSO("CursoInvalido"),
+    INVALID_RAMO("RamoInvalido"), INVALID_CLASSIFICACAO("ClassificacaoInvalido"),
+    INVALID_DOCENTE("EmailDocenteInvalido"), INVALID_ID_PROPOSTA("IDPropostaInvalido"),
+    INVALID_ID_CANDIDATURA("IDCandidaturaInvalido"),
 
+    ALUNO_JA_TEM_CANDIDATURA("AlunoJaEstaAssociadoAUmaCandidatura"),
+    ALUNO_NAO_TEM_CANDIDATURA("AlunoAindaNaoEstaAssociadoAUmaCandidatura"),
+    ALUNO_JA_TEM_PROPOSTA("AlunoJaTemPropostaAssociada"),
+
+    PROPOSTA_JA_FOI_ATRIBUIDA("PropostaJaAtribuidaAUmAluno"),
+    PROPOSTA_AINDA_NAO_ATRIBUIDA("PropostaAindaNaoAtribuidaAUmAluno"),
+    PROPOSTA_JA_TEM_ALUNO_ASSOCIADO("PropostaComAlunoJaAssociado"),
+    SEM_PROPOSTAS_ESPECIFICADAS("NaoForamIndicadasPropostasParaACandidatura"),
+
+    PROBLEMS_READING_ALUNOS_FILE("NemTodosAlunosInseridosDoFicheiro"),
+    PROBLEMS_READING_DOCENTES_FILE("NemTodosDocentesInseridosDoFicheiro"),
+    PROBLEMS_READING_PROPOSTAS_FILE("NemTodasPropostasInseridasDoFicheiro"),
+    PROBLEMS_READING_CANDIDATURAS_FILE("NemTodasCandidaturasInseridasDoFicheiro"),
 
     NONE("NaN");
 

@@ -51,34 +51,32 @@ public class ApoioPoEUI {
         System.out.println("\n\n\n**************************************************\n");
         switch (ErrorOccurred.getInstance().getLastError()){
             case FILE_NOT_FOUND -> System.out.println("Não foi possivel encontrar o ficheiro;");
-            case CLASS_NOT_FOUND -> System.out.println("Erro a carregar o save.");
             case CLONE_NOT_FOUND -> System.out.println("Não foi possivel clonar o objeto. Operação não suportada!");
             case IO_EXCEPTION -> System.out.println("Não foi possivel realizar uma operação de input/output!");
-            case DUPLICATED_NUMERO_ALUNO -> {
-            }
-            case DUPLICATED_EMAIL -> {
-            }
-            case DUPLICATED_ID_PROPOSTA -> {
-            }
-            case DUPLICATED_ID_CANDIDATURA -> {
-            }
-            case INVALID_CLASSIFICACAO -> {
-            }
-            case INVALID_NUMERO_ALUNO -> {
-            }
-            case INVALID_CURSO -> {
-            }
-            case INVALID_RAMO -> {
-            }
-            case ALUNO_JA_TEM_PROPOSTA -> {
-            }
-            case INVALID_DOCENTE -> {
-            }
-            case PROPOSTA_JA_TEM_ALUNO_ASSOCIADO -> {
-            }
-            case PROPOSTA_JA_FOI_ATRIBUIDA -> {
-            }
-            case INVALID_ID_PROPOSTA -> {
+            case CLASS_NOT_FOUND -> System.out.println("Erro a carregar o save.");
+            case DUPLICATED_NUMERO_ALUNO -> System.out.println("Já existe um aluno com este número de estudante!");
+            case DUPLICATED_EMAIL -> System.out.println("Já existe um aluno/docente com este email!");
+            case DUPLICATED_ID_PROPOSTA -> System.out.println("Já existe uma proposta com este ID!");
+            case DUPLICATED_ID_CANDIDATURA -> System.out.println("Já existe uma candidatura para este aluno!");
+            case INVALID_NUMERO_ALUNO -> System.out.println("Não existe um aluno com este número de estudante!");
+            case INVALID_CURSO -> System.out.println("O curso especificado não existe!");
+            case INVALID_RAMO -> System.out.println("O ramo especificado não existe!");
+            case INVALID_CLASSIFICACAO -> System.out.println("A classificação deverá ser entre 0,0 e 1,0!");
+            case INVALID_DOCENTE -> System.out.println("Não existe um docente com este email!");
+            case INVALID_ID_PROPOSTA -> System.out.println("Não existe uma proposta com este identificador!");
+            case INVALID_ID_CANDIDATURA -> System.out.println("Não existe uma candidatura para este aluno!");
+            case ALUNO_JA_TEM_CANDIDATURA -> System.out.println("Este aluno já tem uma candidatura!");
+            case ALUNO_NAO_TEM_CANDIDATURA -> System.out.println("Este aluno ainda não tem candidatura!");
+            case ALUNO_JA_TEM_PROPOSTA -> System.out.println("Este aluno já tem uma proposta associada!");
+            case PROPOSTA_JA_FOI_ATRIBUIDA -> System.out.println("Esta proposta já se encontra atribuída a um aluno!");
+            case PROPOSTA_AINDA_NAO_ATRIBUIDA -> System.out.println("Esta proposta não se encontra atribuída a nenhum aluno!");
+            case PROPOSTA_JA_TEM_ALUNO_ASSOCIADO -> System.out.println("Esta proposta já tem uma aluno associado!");
+            case SEM_PROPOSTAS_ESPECIFICADAS -> System.out.println("Não foram especificadas propostas para a candidatura!");
+            case PROBLEMS_READING_ALUNOS_FILE -> System.out.println("Não foram inseridos todos os alunos presentes no ficheiro!");
+            case PROBLEMS_READING_DOCENTES_FILE -> System.out.println("Não foram inseridos todos os docentes presentes no ficheiro!");
+            case PROBLEMS_READING_PROPOSTAS_FILE -> System.out.println("Não foram inseridas todas as propostas presentes no ficheiro!");
+            case PROBLEMS_READING_CANDIDATURAS_FILE -> System.out.println("Não foram inseridas todas as candidaturas presentes no ficheiro!");
+            case NONE -> {
             }
         }
         System.out.println("\n**************************************************\n");
