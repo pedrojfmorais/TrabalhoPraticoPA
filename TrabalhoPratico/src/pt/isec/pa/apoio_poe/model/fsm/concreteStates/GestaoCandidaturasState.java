@@ -41,8 +41,17 @@ public class GestaoCandidaturasState extends ApoioPoEAdapter {
     @Override
     public boolean editarDados(String... dados) {
 
-        //TODO: A implemetar com o memento
-        return super.editarDados(dados);
+        if(dados.length <= 1)
+            return false;
+
+        careTaker.save();
+
+        if(data.editaCandidatura(Long.parseLong(dados[0]), new ArrayList<>(List.of(Arrays.copyOfRange(dados, 1, dados.length)))))
+            return true;
+
+        careTaker.removeLastSave();
+
+        return false;
     }
     @Override
     public boolean removerDados(String... dados) {

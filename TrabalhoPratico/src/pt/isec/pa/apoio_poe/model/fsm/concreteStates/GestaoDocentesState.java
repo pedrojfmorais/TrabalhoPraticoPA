@@ -37,8 +37,18 @@ public class GestaoDocentesState extends ApoioPoEAdapter {
     @Override
     public boolean editarDados(String... dados) {
 
-        //TODO: A implemetar com o memento
-        return super.editarDados(dados);
+        if(dados.length != 2)
+            return false;
+
+        careTaker.save();
+
+        if(data.editaDocente(dados[0], dados[1]))
+            return true;
+
+        careTaker.removeLastSave();
+
+        return false;
+
     }
     @Override
     public boolean removerDados(String... dados) {

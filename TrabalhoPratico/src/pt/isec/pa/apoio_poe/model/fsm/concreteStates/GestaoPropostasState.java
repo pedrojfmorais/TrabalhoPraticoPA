@@ -46,9 +46,22 @@ public class GestaoPropostasState extends ApoioPoEAdapter {
     }
     @Override
     public boolean editarDados(String... dados) {
+        if(dados.length != 5 && dados.length != 3)
+            return false;
 
-        //TODO: A implemetar com o memento
-        return super.editarDados(dados);
+        careTaker.save();
+
+        if(dados.length == 3)
+            if(data.editaProposta(dados[0], dados[1], dados[2]))
+                return true;
+
+        if(dados.length == 5)
+            if(data.editaProposta(dados[0], dados[1], dados[2], dados[3], dados[4]))
+                return true;
+
+        careTaker.removeLastSave();
+
+        return false;
     }
     @Override
     public boolean removerDados(String... dados) {

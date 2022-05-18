@@ -1,5 +1,6 @@
 package pt.isec.pa.apoio_poe.ui.text;
 
+import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
@@ -417,7 +418,46 @@ public class ApoioPoEUI {
                 }
             }
             case 2 -> {
-                //TODO: Meta 2
+                String id = PAInput.readString("Insira o ID da proposta a editar: ", false);
+                String proposta = fsm.consultarDados(id);
+
+                if(proposta == null) {
+                   ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+                   return;
+                }
+
+                System.out.println(proposta);
+
+                switch (fsm.getTipoProposta(id)){
+                    case "T1" ->
+                        fsm.editarDados(
+                                id,
+                                PAInput.readString("Insira o titulo da proposta ou deixe em branco para não alterar: ", false, true),
+                                PAInput.readString("Insira os ramo da proposta (vários ramos separados por '|') ou deixe em branco para não alterar: ", false, true),
+                                PAInput.readString("Insira a identificação da entidade de acolhimento ou deixe em branco para não alterar: ", false, true),
+                                PAInput.readLong("Edite o número do aluno associado à proposta ( ou 0 para remover o aluno ) ou deixe em branco para não alterar: ", true)
+                        );
+
+                    case "T2" ->
+                        fsm.editarDados(
+                                id,
+                                PAInput.readString("Insira o titulo da proposta ou deixe em branco para não alterar: ", false, true),
+                                PAInput.readString("Insira os ramo da proposta (vários ramos separados por '|') ou deixe em branco para não alterar: ", false, true),
+                                PAInput.readString("Insira o email do docente proponente da proposta ou deixe em branco para não alterar: ", false, true),
+                                PAInput.readLong("Edite o número do aluno associado à proposta ( ou 0 para remover o aluno ) ou deixe em branco para não alterar: ", true)
+                        );
+
+                    case "T3" ->
+                        fsm.editarDados(
+                                id,
+                                PAInput.readString("Insira o titulo da proposta ou deixe em branco para não alterar: ", false, true),
+                                PAInput.readLong("Edite o número do aluno associado à proposta ou deixe em branco para não alterar: ", true)
+                        );
+
+                    default -> {
+                        //erro
+                    }
+                }
             }
             case 3 ->
                     fsm.removerDados(
@@ -567,7 +607,37 @@ public class ApoioPoEUI {
                 fsm.adicionarDados(arrayPropostas);
             }
             case 2 -> {
-                //TODO: Meta 2
+                String nAluno = PAInput.readLong("Insira o número de aluno da candidatura a editar: ").toString();
+
+                String candidatura = fsm.consultarDados(nAluno);
+                if(candidatura == null) {
+                    ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_CANDIDATURA);
+                    return;
+                }
+                System.out.println(candidatura);
+
+                ArrayList<String> propostas = new ArrayList<>();
+
+                while (true){
+                    String proposta = PAInput.readString(
+                            "Insira o identificador da proposta, ou vazio para terminar de inserir propostas: ",
+                            false, true);
+
+                    if(proposta.isBlank())
+                        break;
+
+                    propostas.add(proposta);
+                }
+
+                String [] arrayPropostas = new String[propostas.size() + 1];
+
+                arrayPropostas[0] = nAluno;
+
+                for (int i = 1; i <= propostas.size(); i++) {
+                    arrayPropostas[i] = propostas.get(i-1);
+                }
+
+                fsm.editarDados(arrayPropostas);
             }
             case 3 ->
                 fsm.removerDados(
