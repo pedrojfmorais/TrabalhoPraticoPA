@@ -413,9 +413,69 @@ public class ApoioPoEManager implements Serializable, IOriginator {
         }
     }
 
+    public String getTipoProposta(String id) {
+        return apoioPOE.getTipoProposta(id);
+    }
+
     public boolean editaAluno(long nAluno, String nome, String siglaCurso, String siglaRamo,
                               String classificacao, String acessoEstagio) {
         return apoioPOE.editaAluno(nAluno, nome, siglaCurso, siglaRamo, classificacao, acessoEstagio);
+    }
+
+    public boolean editaDocente(String email, String nome) {
+        return apoioPOE.editaDocente(email, nome);
+    }
+
+    public boolean editaProposta(String id, String titulo, String ramos, String entidade_docente, String nAluno) {
+        return apoioPOE.editaProposta(id, titulo, ramos, entidade_docente, nAluno);
+    }
+
+    public boolean editaProposta(String id, String titulo, String nAluno) {
+        return apoioPOE.editaProposta(id, titulo, nAluno);
+    }
+
+    public boolean editaCandidatura(long nAluno, ArrayList<String> propostas) {
+        return apoioPOE.editaCandidatura(nAluno, propostas);
+    }
+
+    public String consultarAlunosFase5(boolean comPropostaAtribuida) {
+        return apoioPOE.consultarAlunosFase5(comPropostaAtribuida);
+    }
+
+    public String consultarAlunos(boolean comOrientadorAssociado) {
+        return apoioPOE.consultarAlunos(comOrientadorAssociado);
+    }
+
+    public String consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean semCandidatura) {
+        return apoioPOE.consultarAlunos(autoproposta, comCandidatura, semCandidatura);
+    }
+
+    public String consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean comPropostaAtribuida, boolean semPropostaAtribuida) {
+        return apoioPOE.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida, semPropostaAtribuida);
+    }
+
+    public String consultarDocentes(String filtro) {
+        return apoioPOE.consultarDocentes(filtro);
+    }
+
+    public String consultarPropostas(boolean propostasAtribuidas) {
+        return apoioPOE.consultarPropostas(propostasAtribuidas);
+    }
+
+    public String consultarPropostas(boolean autopropostasAlunos, boolean propostasDocentes, boolean comCandidatura, boolean semCandidatura) {
+        return apoioPOE.consultarPropostas(autopropostasAlunos, propostasDocentes, comCandidatura, semCandidatura);
+    }
+
+    public String consultarPropostasFase3(boolean autopropostasAlunos, boolean propostasDocentes, boolean propostasDisponiveis, boolean propostasAtribuidas) {
+        return apoioPOE.consultarPropostasFase3(autopropostasAlunos, propostasDocentes, propostasDisponiveis, propostasAtribuidas);
+    }
+
+    public ArrayList<PropostaAtribuida> consultarPropostasAtribuidasDocente(String email) {
+        return apoioPOE.consultarPropostasAtribuidasDocente(email);
+    }
+
+    public ArrayList<Aluno> getAlunosSemPropostaAtribuida(boolean soEstagio) {
+        return apoioPOE.getAlunosSemPropostaAtribuida(soEstagio);
     }
 }
 

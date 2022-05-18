@@ -6,6 +6,11 @@ public class Autoproposto extends Proposta{
     }
 
     @Override
+    public String tipoProposta() {
+        return "T3";
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 

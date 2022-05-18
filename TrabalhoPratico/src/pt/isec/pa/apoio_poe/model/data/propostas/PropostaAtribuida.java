@@ -22,6 +22,11 @@ public class PropostaAtribuida extends Proposta{
     }
 
     @Override
+    public String tipoProposta() {
+        return null;
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 

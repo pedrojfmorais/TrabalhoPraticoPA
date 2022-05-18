@@ -64,72 +64,12 @@ public class Fase4State extends ApoioPoEAdapter {
         if(filtros.length != 1)
             return null;
 
-        boolean comOrientadorAssociado = filtros[0];
-
-        HashSet<Aluno> resultado = new HashSet<>();
-        StringBuilder sb = new StringBuilder();
-
-        if(comOrientadorAssociado){
-            for(var propostasAtribuidas : data.getPropostasAtribuidas())
-                if(propostasAtribuidas.getEmailDocenteOrientador() != null)
-                    resultado.add(data.getAluno(propostasAtribuidas.getnAlunoAssociado()));
-        } else
-            for(var propostasAtribuidas : data.getPropostasAtribuidas())
-                if(propostasAtribuidas.getEmailDocenteOrientador() == null)
-                    resultado.add(data.getAluno(propostasAtribuidas.getnAlunoAssociado()));
-
-        ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
-        Collections.sort(resultadoOrdenado);
-
-        for(var aluno : resultadoOrdenado)
-            sb.append(aluno).append(System.lineSeparator());
-
-        return sb.toString();
+        return data.consultarAlunos(filtros[0]);
     }
 
     @Override
     public String consultarDocentes(String filtro) {
-
-        StringBuilder sb = new StringBuilder();
-
-        if(!filtro.isBlank()) {
-
-            if(data.getDocente(filtro) == null)
-                return null;
-
-            sb.append("Docente: ").append(data.getDocente(filtro).getNome()).append(System.lineSeparator());
-            sb.append("Número de orientações: ").append(data.calculaNumeroOrientacoesDocente(filtro));
-
-        } else{
-
-            int max = 0, min = 0;
-            double media = 0;
-
-            for(var docente : data.getDocentes()){
-                int nOrientacoes = data.calculaNumeroOrientacoesDocente(docente.getEmail());
-
-                if(nOrientacoes < min)
-                    min = nOrientacoes;
-
-                if(nOrientacoes > max)
-                    max = nOrientacoes;
-
-                media += nOrientacoes;
-            }
-
-            media /= data.getDocentes().size();
-
-            if(media == 0.0)
-                return null;
-
-            sb.append("Máximo de orientações de um docente: ").append(max).append(System.lineSeparator());
-            sb.append("Minimo de orientações de um docente: ").append(min).append(System.lineSeparator());
-            sb.append("Média de orientações de um docente: ").append(media);
-        }
-
-        sb.append(System.lineSeparator());
-
-        return sb.toString();
+        return data.consultarDocentes(filtro);
     }
 
     @Override
@@ -152,7 +92,6 @@ public class Fase4State extends ApoioPoEAdapter {
     public boolean exportarPropostasAtribuidasFicheiroCsv(String filename, boolean guardarOrientador) {
         return data.exportPropostasAtribuidasCsv(filename, guardarOrientador);
     }
-
 
     @Override
     public ApoioPoEState getState() {

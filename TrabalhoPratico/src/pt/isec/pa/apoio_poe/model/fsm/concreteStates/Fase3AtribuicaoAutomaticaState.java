@@ -35,7 +35,7 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
         removeConflito();
 
         //primeiro verificamos os alunos que tem acesso a estágio, dando-lhe apenas estágios
-        ArrayList<Aluno> alunosSemProposta = getAlunosDisponiveis(true);
+        ArrayList<Aluno> alunosSemProposta = data.getAlunosSemPropostaAtribuida(true);
 
         if(!alunosSemProposta.isEmpty()) {
 
@@ -64,7 +64,7 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
         }
 
         //atribuição das propostas a todos os alunos
-        alunosSemProposta = getAlunosDisponiveis(false);
+        alunosSemProposta = data.getAlunosSemPropostaAtribuida(false);
         if(!alunosSemProposta.isEmpty()) {
 
             alunosSemProposta.sort(Collections.reverseOrder(new AlunoClassificacaoComparator()));
@@ -123,41 +123,6 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
         this.aluno2Conflito = null;
         this.propostaDisponiveisAluno1.clear();
         this.propostaDisponiveisAluno2.clear();
-    }
-
-    private ArrayList<Aluno> getAlunosDisponiveis(boolean soEstagio){
-
-        ArrayList<Aluno> alunosSemProposta = new ArrayList<>();
-
-        for(var aluno : data.getAlunos()) {
-
-            boolean insereAluno = true;
-
-            for (var proposta : data.getPropostas())
-                if (proposta.getnAlunoAssociado() == aluno.getnAluno()) {
-                    insereAluno = false;
-                    break;
-                }
-
-            for (var propostaAtribuida : data.getPropostasAtribuidas())
-                if (propostaAtribuida.getnAlunoAssociado() == aluno.getnAluno()) {
-                    insereAluno = false;
-                    break;
-                }
-
-            if (insereAluno) {
-
-                if(soEstagio && aluno.isAcessoEstagio())
-                    alunosSemProposta.add(aluno);
-
-                else if (!soEstagio) {
-                    alunosSemProposta.add(aluno);
-
-                }
-            }
-
-        }
-        return alunosSemProposta;
     }
 
     @Override

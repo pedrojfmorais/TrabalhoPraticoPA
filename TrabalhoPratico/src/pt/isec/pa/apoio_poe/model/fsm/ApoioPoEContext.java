@@ -24,7 +24,7 @@ public class ApoioPoEContext {
         data.adicionaAlunosDeFicheiro("files/alunos.csv");
         data.adicionaDocentesDeFicheiro("files/docentes.csv");
         data.adicionaPropostasDeFicheiro("files/propostas.csv");
-        //data.adicionaCandidaturaDeFicheiro("files/candidaturas.csv");
+        data.adicionaCandidaturaDeFicheiro("files/candidaturas.csv");
     }
 
     public void retomarSave(ApoioPoEManager data, ApoioPoEState state){
@@ -123,6 +123,10 @@ public class ApoioPoEContext {
 
     public boolean redo(){return state.redo();}
     public boolean hasRedo(){return state.hasRedo();}
+
+    //TODO: perguntar professor
+    //Pode ir logo aos dados????
+    public String getTipoProposta(String id){return data.getTipoProposta(id);}
 
     public boolean loadStateInFile(String file, ApoioPoEContext context){
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){

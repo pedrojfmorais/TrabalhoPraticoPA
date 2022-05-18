@@ -30,6 +30,11 @@ public class Projeto extends Proposta{
     }
 
     @Override
+    public String tipoProposta() {
+        return "T2";
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 

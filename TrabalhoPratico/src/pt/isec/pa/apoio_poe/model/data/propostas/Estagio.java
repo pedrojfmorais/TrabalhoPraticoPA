@@ -33,6 +33,11 @@ public class Estagio extends Proposta{
     }
 
     @Override
+    public String tipoProposta() {
+        return "T1";
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 

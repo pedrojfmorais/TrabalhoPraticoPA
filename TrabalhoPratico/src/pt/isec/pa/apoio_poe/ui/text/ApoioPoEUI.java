@@ -43,15 +43,42 @@ public class ApoioPoEUI {
     }
 
     private void exceptionMessages(){
-        if(ErrorOccurred.getInstance().getError() == ErrorsTypes.NONE)
+
+        if(ErrorOccurred.getInstance().getLastError() == ErrorsTypes.NONE)
             return;
 
         System.out.println("\n\n\n**************************************************\n");
-        switch (ErrorOccurred.getInstance().getError()){
+        switch (ErrorOccurred.getInstance().getLastError()){
             case FILE_NOT_FOUND -> System.out.println("Não foi possivel encontrar o ficheiro;");
             case CLASS_NOT_FOUND -> System.out.println("Erro a carregar o save.");
             case CLONE_NOT_FOUND -> System.out.println("Não foi possivel clonar o objeto. Operação não suportada!");
             case IO_EXCEPTION -> System.out.println("Não foi possivel realizar uma operação de input/output!");
+            case DUPLICATED_NUMERO_ALUNO -> {
+            }
+            case DUPLICATED_EMAIL -> {
+            }
+            case DUPLICATED_ID_PROPOSTA -> {
+            }
+            case DUPLICATED_ID_CANDIDATURA -> {
+            }
+            case INVALID_CLASSIFICACAO -> {
+            }
+            case INVALID_NUMERO_ALUNO -> {
+            }
+            case INVALID_CURSO -> {
+            }
+            case INVALID_RAMO -> {
+            }
+            case ALUNO_JA_TEM_PROPOSTA -> {
+            }
+            case INVALID_DOCENTE -> {
+            }
+            case PROPOSTA_JA_TEM_ALUNO_ASSOCIADO -> {
+            }
+            case PROPOSTA_JA_FOI_ATRIBUIDA -> {
+            }
+            case INVALID_ID_PROPOSTA -> {
+            }
         }
         System.out.println("\n**************************************************\n");
 
@@ -200,7 +227,14 @@ public class ApoioPoEUI {
                 );
             case 2 -> {
                 Long nAluno = PAInput.readLong("Insira o número de estudante: ");
-                System.out.println(fsm.consultarDados(nAluno.toString()));
+                String aluno = fsm.consultarDados(nAluno.toString());
+
+                if(aluno == null){
+                    ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+                    return;
+                }
+
+                System.out.println(aluno);
                 int op;
 
                 String nome = PAInput.readString("Edite o nome ou deixe em branco: ", false, true);
@@ -290,7 +324,20 @@ public class ApoioPoEUI {
                         PAInput.readString("Insira o email do docente: ", false)
                 );
             case 2 -> {
-                //TODO: Meta 2
+                String email = PAInput.readString("Insira o email do docente a editar: ", false);
+                String docente = fsm.consultarDados(email);
+
+                if(docente == null) {
+                    ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
+                    return;
+                }
+
+                System.out.println(docente);
+
+                fsm.editarDados(
+                        email,
+                        PAInput.readString("Insira o nome ou deixe em branco para não alterar: ",false, true)
+                );
             }
             case 3 ->
                 fsm.removerDados(

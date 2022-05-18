@@ -94,14 +94,7 @@ public class GestaoManualOrientadoresState extends ApoioPoEAdapter {
 
         if(!filtro.isBlank()) {
 
-            for(var propostasAtribuidas : data.getPropostasAtribuidas()) {
-
-                if(propostasAtribuidas.getEmailDocenteOrientador() == null)
-                    continue;
-
-                if (propostasAtribuidas.getEmailDocenteOrientador().equalsIgnoreCase(filtro))
-                    propostaAtribuidasFinal.add(propostasAtribuidas);
-            }
+            propostaAtribuidasFinal = data.consultarPropostasAtribuidasDocente(filtro);
 
             if(propostaAtribuidasFinal.isEmpty())
                 return null;

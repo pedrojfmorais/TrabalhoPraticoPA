@@ -14,7 +14,7 @@ public class ErrorOccurred {
         error = ErrorsTypes.NONE;
     }
 
-    public ErrorsTypes getError() {
+    public ErrorsTypes getLastError() {
         return error;
     }
 

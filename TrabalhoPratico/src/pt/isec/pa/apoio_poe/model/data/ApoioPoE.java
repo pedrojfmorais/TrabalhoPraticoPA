@@ -3,11 +3,14 @@ package pt.isec.pa.apoio_poe.model.data;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.propostas.*;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 import pt.isec.pa.apoio_poe.model.memento.IMemento;
 import pt.isec.pa.apoio_poe.model.memento.IOriginator;
 
 import java.io.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class ApoioPoE implements Serializable, Cloneable {
 
@@ -21,7 +24,7 @@ public class ApoioPoE implements Serializable, Cloneable {
    private HashMap<Long, Candidatura> candidaturas;
    private HashMap<String, PropostaAtribuida> propostasAtribuidas;
 
-   public ApoioPoE(){
+   public ApoioPoE() {
       alunos = new HashMap<>();
       docentes = new HashMap<>();
       propostas = new HashMap<>();
@@ -34,39 +37,62 @@ public class ApoioPoE implements Serializable, Cloneable {
    public int getFaseBloqueada() {
       return faseBloqueada;
    }
+
    public void setFaseBloqueada(int faseBloqueada) {
       this.faseBloqueada = faseBloqueada;
    }
 
    public boolean adicionaAluno(long nAluno, String nome, String email, String siglaCurso, String siglaRamo,
-                                double classificacao, boolean acessoEstagio){
+                                double classificacao, boolean acessoEstagio) {
 
-      if(alunos.containsKey(nAluno) || docentes.containsKey(email))
+      if (alunos.containsKey(nAluno)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_NUMERO_ALUNO);
          return false;
+      }
 
-      for(var aluno : alunos.values())
-         if(aluno.getEmail().equals(email))
+      if (docentes.containsKey(email)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_EMAIL);
+         return false;
+      }
+
+      for (var aluno : alunos.values())
+         if (aluno.getEmail().equals(email)) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_EMAIL);
             return false;
+         }
 
-      if(!Aluno.cursos.contains(siglaCurso) || !Aluno.ramos.contains(siglaRamo))
+      if (!Aluno.cursos.contains(siglaCurso)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_CURSO);
          return false;
+      }
 
-      if(classificacao > 1.0 || classificacao < 0.0)
+      if (!Aluno.ramos.contains(siglaRamo)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
          return false;
+      }
+
+      if (classificacao > 1.0 || classificacao < 0.0) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_CLASSIFICACAO);
+         return false;
+      }
 
       alunos.put(nAluno, new Aluno(nAluno, nome, email, siglaCurso, siglaRamo, classificacao, acessoEstagio));
 
       return true;
    }
 
-   public boolean adicionaDocente(String nome, String email){
+   public boolean adicionaDocente(String nome, String email) {
 
-      if(docentes.containsKey(email))
+      if (docentes.containsKey(email)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_EMAIL);
          return false;
+      }
 
-      for (var aluno: alunos.values())
-         if(aluno.getEmail().equals(email))
+      for (var aluno : alunos.values())
+         if (aluno.getEmail().equals(email)) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_EMAIL);
             return false;
+         }
 
       docentes.put(email, new Docente(nome, email));
 
@@ -74,72 +100,100 @@ public class ApoioPoE implements Serializable, Cloneable {
    }
 
    public boolean adicionaProposta(String tipo, String id, String titulo, long nAlunoAssociado,
-                                   String areasDestino, String entidadeOuDocente){
+                                   String areasDestino, String entidadeOuDocente) {
 
-      if(propostas.containsKey(id))
+      if (propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
          return false;
+      }
 
-      if(!alunos.containsKey(nAlunoAssociado))
+      if (!alunos.containsKey(nAlunoAssociado)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
          return false;
+      }
 
       String[] areas = areasDestino.trim().split("\\|");
-      if(!Aluno.ramos.containsAll(List.of(areas)))
+      if (!Aluno.ramos.containsAll(List.of(areas))) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
          return false;
+      }
 
       for (var proposta : this.propostas.values())
-         if(proposta.getnAlunoAssociado() == nAlunoAssociado)
+         if (proposta.getnAlunoAssociado() == nAlunoAssociado) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
+         }
 
-      switch (tipo){
+      switch (tipo) {
          case "T1" -> propostas.put(id, new Estagio(id, titulo, nAlunoAssociado, areasDestino, entidadeOuDocente));
          case "T2" -> {
 
-            if(!docentes.containsKey(entidadeOuDocente))
+            if (!docentes.containsKey(entidadeOuDocente)) {
+               ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
                return false;
+            }
 
             propostas.put(id, new Projeto(id, titulo, nAlunoAssociado, areasDestino, entidadeOuDocente));
          }
-         default -> {return false;}
+         default -> {
+            return false;
+         }
       }
 
       return true;
    }
-   public boolean adicionaProposta(String tipo, String id, String titulo,
-                                   String areasDestino, String entidadeOuDocente){
 
-      if(propostas.containsKey(id))
+   public boolean adicionaProposta(String tipo, String id, String titulo,
+                                   String areasDestino, String entidadeOuDocente) {
+
+      if (propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
          return false;
+      }
 
       String[] areas = areasDestino.trim().split("\\|");
 
-      if(!Aluno.ramos.containsAll(List.of(areas)))
+      if (!Aluno.ramos.containsAll(List.of(areas))) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
          return false;
+      }
 
-      switch (tipo){
+      switch (tipo) {
          case "T1" -> propostas.put(id, new Estagio(id, titulo, areasDestino, entidadeOuDocente));
          case "T2" -> {
 
-            if(!docentes.containsKey(entidadeOuDocente))
+            if (!docentes.containsKey(entidadeOuDocente)) {
+               ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
                return false;
+            }
 
             propostas.put(id, new Projeto(id, titulo, areasDestino, entidadeOuDocente));
          }
-         default -> {return false;}
+         default -> {
+            return false;
+         }
       }
 
       return true;
    }
-   public boolean adicionaProposta(String tipo, String id, String titulo, long nAlunoAssociado){
 
-      if(propostas.containsKey(id))
-         return false;
+   public boolean adicionaProposta(String tipo, String id, String titulo, long nAlunoAssociado) {
 
-      if(!alunos.containsKey(nAlunoAssociado))
+      if (propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
          return false;
+      }
+
+      if (!alunos.containsKey(nAlunoAssociado)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         return false;
+      }
 
       for (var proposta : propostas.values())
-         if(proposta.getnAlunoAssociado() == nAlunoAssociado)
+         if (proposta.getnAlunoAssociado() == nAlunoAssociado) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
+         }
 
       if ("T3".equals(tipo)) {
          propostas.put(id, new Autoproposto(id, titulo, nAlunoAssociado));
@@ -149,110 +203,142 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
-   public boolean adicionaCandidatura(long nAluno, ArrayList<String> propostas){
+   public boolean adicionaCandidatura(long nAluno, ArrayList<String> propostas) {
 
-      if(propostas.isEmpty())
+      if (propostas.isEmpty()) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
          return false;
+      }
 
-      if(candidaturas.containsKey(nAluno))
+      if (candidaturas.containsKey(nAluno)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_CANDIDATURA);
          return false;
+      }
 
-      if(!alunos.containsKey(nAluno))
+      if (!alunos.containsKey(nAluno)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
          return false;
+      }
 
       for (var proposta : propostas) {
-         if (!this.propostas.containsKey(proposta))
+         if (!this.propostas.containsKey(proposta)) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
             return false;
+         }
 
-         if(this.propostas.get(proposta).getnAlunoAssociado() != 0)
+         if (this.propostas.get(proposta).getnAlunoAssociado() != 0) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_JA_TEM_ALUNO_ASSOCIADO);
             return false;
+         }
       }
 
       for (var proposta : this.propostas.values())
-         if(proposta.getnAlunoAssociado() == nAluno)
+         if (proposta.getnAlunoAssociado() == nAluno) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
+         }
 
       HashSet<String> testeDuplicados = new HashSet<>(propostas);
-      if(testeDuplicados.size() != propostas.size())
+      if (testeDuplicados.size() != propostas.size()) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
          return false;
-
+      }
       candidaturas.put(nAluno, new Candidatura(nAluno, propostas));
 
       return true;
    }
 
-   public boolean atribuirPropostaAluno(String idProposta, long nAluno){
+   public boolean atribuirPropostaAluno(String idProposta, long nAluno) {
 
       int ordemPreferencia = 1;
 
-      if(propostasAtribuidas.containsKey(idProposta))
+      if (propostasAtribuidas.containsKey(idProposta)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_JA_FOI_ATRIBUIDA);
          return false;
+      }
 
       Proposta propostaAtual = propostas.get(idProposta);
 
-      if(propostaAtual == null)
+      if (propostaAtual == null) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
          return false;
+      }
 
-      if(!alunos.containsKey(nAluno))
+      if (!alunos.containsKey(nAluno)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
          return false;
+      }
 
-      for(var propostaAtribuida : propostasAtribuidas.values())
-         if(propostaAtribuida.getnAlunoAssociado() == nAluno)
+      for (var propostaAtribuida : propostasAtribuidas.values())
+         if (propostaAtribuida.getnAlunoAssociado() == nAluno) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
+         }
 
       Candidatura candidaturaAluno = getCandidatura(nAluno);
-      if(candidaturaAluno != null){
-         for(var idProp : candidaturaAluno.getIdPropostas()){
+      if (candidaturaAluno != null) {
+         for (var idProp : candidaturaAluno.getIdPropostas()) {
 
-            if(idProp.equals(idProposta)) {
-               ordemPreferencia = candidaturaAluno.getIdPropostas().indexOf(idProp)+1;
+            if (idProp.equals(idProposta)) {
+               ordemPreferencia = candidaturaAluno.getIdPropostas().indexOf(idProp) + 1;
                break;
             }
          }
       }
 
       propostasAtribuidas.put(idProposta, new PropostaAtribuida(idProposta, propostaAtual.getTitulo(),
-                                                                  nAluno, ordemPreferencia));
+              nAluno, ordemPreferencia));
 
       return true;
    }
-   public boolean atribuicaoAutomaticaPropostasComAluno(){
+
+   public boolean atribuicaoAutomaticaPropostasComAluno() {
 
       HashSet<Proposta> propostasAtribuir = new HashSet<>();
 
-      for(var proposta : propostas.values())
+      for (var proposta : propostas.values())
 
-         if(proposta instanceof Autoproposto || (proposta instanceof Projeto && proposta.getnAlunoAssociado() != 0))
+         if (proposta instanceof Autoproposto || (proposta instanceof Projeto && proposta.getnAlunoAssociado() != 0))
             propostasAtribuir.add(proposta);
 
-      if(propostasAtribuir.isEmpty())
+      if (propostasAtribuir.isEmpty())
          return false;
 
-      for(var p : propostasAtribuir)
+      for (var p : propostasAtribuir)
          atribuirPropostaAluno(p.getId(), p.getnAlunoAssociado());
 
       return true;
    }
 
-   public boolean atribuirPropostaDocenteOrientador(String idProposta, String email){
+   public boolean atribuirPropostaDocenteOrientador(String idProposta, String email) {
 
-      if(!propostasAtribuidas.containsKey(idProposta))
+      if (!propostasAtribuidas.containsKey(idProposta) && propostas.containsKey(idProposta)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_AINDA_NAO_ATRIBUIDA);
          return false;
+      }
 
-      if(!docentes.containsKey(email))
+      if (!propostas.containsKey(idProposta)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
          return false;
+      }
+
+      if (!docentes.containsKey(email)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
+         return false;
+      }
 
       propostasAtribuidas.get(idProposta).setEmailDocenteOrientador(email);
 
       return true;
    }
-   public boolean associacaoAutomaticaDocentesProponentes(){
+
+   public boolean associacaoAutomaticaDocentesProponentes() {
 
       boolean associadoAlgum = false;
 
-      for(var propostaAtribuida : getPropostasAtribuidas()){
+      for (var propostaAtribuida : getPropostasAtribuidas()) {
 
-         if(getProposta(propostaAtribuida.getId()) instanceof Projeto p) {
+         if (getProposta(propostaAtribuida.getId()) instanceof Projeto p) {
             propostaAtribuida.setEmailDocenteOrientador(p.getEmailDocente());
             associadoAlgum = true;
          }
@@ -265,19 +351,23 @@ public class ApoioPoE implements Serializable, Cloneable {
       Aluno aux = alunos.get(nAluno);
       return aux != null ? aux.clone() : null;
    }
+
    public Docente getDocente(String email) {
       Docente aux = docentes.get(email);
       return aux != null ? aux.clone() : null;
    }
+
    public Proposta getProposta(String id) {
       Proposta aux = propostas.get(id);
       return aux != null ? aux.clone() : null;
    }
+
    public Candidatura getCandidatura(long nAluno) {
       Candidatura aux = candidaturas.get(nAluno);
       return aux != null ? aux.clone() : null;
    }
-   public PropostaAtribuida getPropostaAtribuida(String id){
+
+   public PropostaAtribuida getPropostaAtribuida(String id) {
       PropostaAtribuida aux = propostasAtribuidas.get(id);
       return aux != null ? aux.clone() : null;
    }
@@ -288,29 +378,33 @@ public class ApoioPoE implements Serializable, Cloneable {
       Collections.sort(alunosOrdenados);
       return (ArrayList<Aluno>) alunosOrdenados.clone();
    }
+
    public ArrayList<Docente> getDocentes() {
       ArrayList<Docente> docentesOrdenados = new ArrayList<>(docentes.values());
 
       Collections.sort(docentesOrdenados);
       return (ArrayList<Docente>) docentesOrdenados.clone();
    }
+
    public ArrayList<Proposta> getPropostas() {
       ArrayList<Proposta> propostasOrdenadas = new ArrayList<>(propostas.values());
       Collections.sort(propostasOrdenadas);
       return (ArrayList<Proposta>) propostasOrdenadas.clone();
    }
+
    public ArrayList<Candidatura> getCandidaturas() {
       ArrayList<Candidatura> candidaturasOrdenadas = new ArrayList<>(candidaturas.values());
       Collections.sort(candidaturasOrdenadas);
       return (ArrayList<Candidatura>) candidaturasOrdenadas.clone();
    }
+
    public ArrayList<PropostaAtribuida> getPropostasAtribuidas() {
       ArrayList<PropostaAtribuida> propostaAtribuidaOrdenadas = new ArrayList<>(propostasAtribuidas.values());
       Collections.sort(propostaAtribuidaOrdenadas);
       return (ArrayList<PropostaAtribuida>) propostaAtribuidaOrdenadas.clone();
    }
 
-   public boolean removeAluno(long nAluno){
+   public boolean removeAluno(long nAluno) {
 
       removeCandidatura(nAluno);
 
@@ -320,83 +414,97 @@ public class ApoioPoE implements Serializable, Cloneable {
          if (proposta instanceof Autoproposto && proposta.getnAlunoAssociado() == nAluno)
             propostasRemover.add(proposta.getId());
 
-         if(proposta.getnAlunoAssociado() == nAluno)
+         if (proposta.getnAlunoAssociado() == nAluno)
             proposta.setnAlunoAssociado(0);
       }
 
-      for(var p : propostasRemover)
+      for (var p : propostasRemover)
          removeProposta(p);
 
       //já é removida a proposta atribuida ou no removeCandidatura() ou no removeProposta()
 
       return alunos.remove(nAluno) != null;
    }
-   public boolean removeDocente(String email){
+
+   public boolean removeDocente(String email) {
 
       ArrayList<String> propostasRemover = new ArrayList<>();
 
-      for(var proposta : getPropostas())
-         if(proposta instanceof Projeto p)
-            if(p.getEmailDocente().equals(email))
+      for (var proposta : getPropostas())
+         if (proposta instanceof Projeto p)
+            if (p.getEmailDocente().equals(email))
                propostasRemover.add(proposta.getId());
 
-      for(var idPropostaRemover : propostasRemover)
+      for (var idPropostaRemover : propostasRemover)
          removeProposta(idPropostaRemover);
 
-      for(var propostaAtribuida : getPropostasAtribuidas())
-         if(propostaAtribuida.getEmailDocenteOrientador().equals(email))
+      for (var propostaAtribuida : getPropostasAtribuidas())
+         if (propostaAtribuida.getEmailDocenteOrientador().equals(email))
             removeOrientadorPropostaAtribuida(propostaAtribuida.getId());
 
       return docentes.remove(email) != null;
    }
-   public boolean removeProposta(String id){
+
+   public boolean removeProposta(String id) {
       removePropostaAtribuida(id);
 
-      for(var candidatura : getCandidaturas()) {
+      for (var candidatura : getCandidaturas()) {
          candidatura.removeProposta(id);
 
-         if(candidatura.getIdPropostas().isEmpty())
+         if (candidatura.getIdPropostas().isEmpty())
             removeCandidatura(candidatura.getnAluno());
       }
 
       return propostas.remove(id) != null;
    }
-   public boolean removeCandidatura(long nAluno){
 
-      if(getCandidatura(nAluno)==null)
+   public boolean removeCandidatura(long nAluno) {
+
+      if (getCandidatura(nAluno) == null)
          return false;
 
-      for(var propostaAtribuida : getPropostasAtribuidas())
-         if(propostaAtribuida.getnAlunoAssociado() == nAluno)
+      for (var propostaAtribuida : getPropostasAtribuidas())
+         if (propostaAtribuida.getnAlunoAssociado() == nAluno)
             removePropostaAtribuida(propostaAtribuida.getId());
 
       return candidaturas.remove(nAluno) != null;
    }
-   public boolean removePropostaAtribuida(String id){return propostasAtribuidas.remove(id) != null;}
-   public boolean removeOrientadorPropostaAtribuida(String id){
 
-      if(propostasAtribuidas.get(id) == null)
+   public boolean removePropostaAtribuida(String id) {
+      return propostasAtribuidas.remove(id) != null;
+   }
+
+   public boolean removeOrientadorPropostaAtribuida(String id) {
+
+      if (propostasAtribuidas.get(id) == null && propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_AINDA_NAO_ATRIBUIDA);
          return false;
+      }
+
+      if (!propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         return false;
+      }
 
       propostasAtribuidas.get(id).setEmailDocenteOrientador(null);
 
       return propostasAtribuidas.get(id).getEmailDocenteOrientador() == null;
    }
 
-   public boolean propostasSufecienteParaRamo(String ramo){
+   public boolean propostasSufecienteParaRamo(String ramo) {
 
       int contadorPropostaRamo = 0;
 
       for (var proposta : propostas.values()) {
 
-         if(proposta instanceof Projeto p){
+         if (proposta instanceof Projeto p) {
 
-            if(List.of(p.getRamosDestino().split("\\|")).contains(ramo))
+            if (List.of(p.getRamosDestino().split("\\|")).contains(ramo))
                contadorPropostaRamo++;
 
-         } else if(proposta instanceof Estagio e){
+         } else if (proposta instanceof Estagio e) {
 
-            if(List.of(e.getAreasDestino().split("\\|")).contains(ramo))
+            if (List.of(e.getAreasDestino().split("\\|")).contains(ramo))
                contadorPropostaRamo++;
          }
       }
@@ -404,72 +512,90 @@ public class ApoioPoE implements Serializable, Cloneable {
       int contadorAlunosRamo = 0;
 
       for (var aluno : alunos.values())
-         if(aluno.getSiglaRamo().equals(ramo))
+         if (aluno.getSiglaRamo().equals(ramo))
             contadorAlunosRamo++;
 
       return contadorPropostaRamo >= contadorAlunosRamo;
    }
-   public boolean todasCandidaturasComPropostaAtribuida(){
+
+   public boolean todasCandidaturasComPropostaAtribuida() {
 
       ArrayList<Long> alunosComPropostaAtribuida = new ArrayList<>();
 
-      for(var propostasAtribuida : propostasAtribuidas.values())
+      for (var propostasAtribuida : propostasAtribuidas.values())
          alunosComPropostaAtribuida.add(propostasAtribuida.getnAlunoAssociado());
 
       return alunosComPropostaAtribuida.containsAll(candidaturas.keySet());
    }
 
-   public int calculaNumeroOrientacoesDocente(String email){
+   public int calculaNumeroOrientacoesDocente(String email) {
       int contador = 0;
 
-      for(var propostaAtribuida : getPropostasAtribuidas())
-         if(propostaAtribuida.getEmailDocenteOrientador() != null &&
+      for (var propostaAtribuida : getPropostasAtribuidas())
+         if (propostaAtribuida.getEmailDocenteOrientador() != null &&
                  propostaAtribuida.getEmailDocenteOrientador().equals(email))
             contador++;
 
       return contador;
    }
 
-   private ApoioPoE(int faseBloqueada, HashMap<Long, Aluno> alunos, HashMap<String, Docente> docentes,
-                    HashMap<String, Proposta> propostas, HashMap<Long, Candidatura> candidaturas,
-                    HashMap<String, PropostaAtribuida> propostasAtribuidas) {
-      this.faseBloqueada = faseBloqueada;
-      this.alunos = alunos;
-      this.docentes = docentes;
-      this.propostas = propostas;
-      this.candidaturas = candidaturas;
-      this.propostasAtribuidas = propostasAtribuidas;
+   private ApoioPoE(ApoioPoE apoioPoE) {
+
+      this.faseBloqueada = apoioPoE.faseBloqueada;
+
+      this.alunos = new HashMap<>();
+      this.docentes = new HashMap<>();
+      this.propostas = new HashMap<>();
+      this.candidaturas = new HashMap<>();
+      this.propostasAtribuidas = new HashMap<>();
+
+      // deep copy dos HashMap
+      for (var key : apoioPoE.alunos.keySet())
+         this.alunos.put(key, apoioPoE.alunos.get(key).clone());
+
+      for (var key : apoioPoE.docentes.keySet())
+         this.docentes.put(key, apoioPoE.docentes.get(key).clone());
+
+      for (var key : apoioPoE.propostas.keySet())
+         this.propostas.put(key, apoioPoE.propostas.get(key).clone());
+
+      for (var key : apoioPoE.candidaturas.keySet())
+         this.candidaturas.put(key, apoioPoE.candidaturas.get(key).clone());
+
+      for (var key : apoioPoE.propostasAtribuidas.keySet())
+         this.propostasAtribuidas.put(key, apoioPoE.propostasAtribuidas.get(key).clone());
    }
 
    @Override
-   protected ApoioPoE clone(){
-      return new ApoioPoE(
-              faseBloqueada,
-              (HashMap<Long, Aluno>) alunos.clone(),
-              (HashMap<String, Docente>) docentes.clone(),
-              (HashMap<String, Proposta>) propostas.clone(),
-              (HashMap<Long, Candidatura>) candidaturas.clone(),
-              (HashMap<String, PropostaAtribuida>) propostasAtribuidas.clone()
-      );
+   protected ApoioPoE clone() {
+      return new ApoioPoE(this);
+   }
+
+   public String getTipoProposta(String id) {
+
+      if (getProposta(id) == null)
+         return null;
+
+      return getProposta(id).tipoProposta();
    }
 
    public boolean editaAluno(long nAluno, String nome, String siglaCurso, String siglaRamo,
-                             String classificacao, String acessoEstagio){
+                             String classificacao, String acessoEstagio) {
 
       double dClassificacao = 0.0;
 
-      if(!alunos.containsKey(nAluno))
+      if (!alunos.containsKey(nAluno))
          return false;
 
-      if(!siglaCurso.isBlank())
-         if(!Aluno.cursos.contains(siglaCurso))
+      if (!siglaCurso.isBlank())
+         if (!Aluno.cursos.contains(siglaCurso))
             return false;
 
-      if(!siglaRamo.isBlank())
-         if(!Aluno.ramos.contains(siglaRamo))
+      if (!siglaRamo.isBlank())
+         if (!Aluno.ramos.contains(siglaRamo))
             return false;
 
-      if(!classificacao.isBlank()) {
+      if (!classificacao.isBlank()) {
          dClassificacao = Double.parseDouble(classificacao);
 
          if (dClassificacao > 1.0 || dClassificacao < 0.0)
@@ -478,22 +604,558 @@ public class ApoioPoE implements Serializable, Cloneable {
 
       Aluno aluno = alunos.get(nAluno);
 
-      if(!nome.isBlank())
+      if (!nome.isBlank())
          aluno.setNome(nome);
 
-      if(!siglaCurso.isBlank())
+      if (!siglaCurso.isBlank())
          aluno.setSiglaCurso(siglaCurso);
 
-      if(!siglaRamo.isBlank())
+      if (!siglaRamo.isBlank())
          aluno.setSiglaRamo(siglaRamo);
 
-      if(!classificacao.isBlank())
+      if (!classificacao.isBlank())
          aluno.setClassificacao(dClassificacao);
 
-      if(!acessoEstagio.isBlank())
+      if (!acessoEstagio.isBlank())
          aluno.setAcessoEstagio(Boolean.parseBoolean(acessoEstagio));
 
       return true;
 
    }
+
+   public boolean editaDocente(String email, String nome) {
+
+      if (!docentes.containsKey(email))
+         return false;
+
+      if (nome.isBlank())
+         return false;
+
+      docentes.get(email).setNome(nome);
+
+      return true;
+   }
+
+   public boolean editaProposta(String id, String titulo, String ramos, String entidade_docente, String nAluno) {
+
+      if (!propostas.containsKey(id))
+         return false;
+
+      String[] array_ramos = ramos.trim().split("\\|");
+      if (!ramos.isBlank() && !Aluno.ramos.containsAll(List.of(array_ramos))) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
+         return false;
+      }
+
+      if (!nAluno.isBlank()) {
+         if (!alunos.containsKey(Long.parseLong(nAluno)))
+            return false;
+
+         for (var proposta : this.propostas.values())
+            if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno)) {
+               ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
+               return false;
+            }
+      }
+
+      Proposta proposta = propostas.get(id);
+
+      if (!titulo.isBlank())
+         proposta.setTitulo(titulo);
+
+      if (!nAluno.isBlank())
+         proposta.setnAlunoAssociado(Long.parseLong(nAluno));
+
+      if (proposta instanceof Estagio e) {
+
+         if (!entidade_docente.isBlank())
+            e.setEntidadeAcolhimento(entidade_docente);
+
+         if (!ramos.isBlank())
+            e.setAreasDestino(ramos);
+      }
+
+      if (proposta instanceof Projeto p) {
+         if (!entidade_docente.isBlank())
+            p.setEmailDocente(entidade_docente);
+
+         if (!ramos.isBlank())
+            p.setRamosDestino(ramos);
+      }
+
+      return true;
+   }
+
+   public boolean editaProposta(String id, String titulo, String nAluno) {
+
+      if (!propostas.containsKey(id))
+         return false;
+
+      if (!nAluno.isBlank()) {
+         if (!alunos.containsKey(Long.parseLong(nAluno)))
+            return false;
+
+         for (var proposta : this.propostas.values())
+            if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno)) {
+               ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
+               return false;
+            }
+      }
+
+      Proposta proposta = propostas.get(id);
+
+      if (!titulo.isBlank())
+         proposta.setTitulo(titulo);
+
+      if (!nAluno.isBlank())
+         proposta.setnAlunoAssociado(Long.parseLong(nAluno));
+
+      return true;
+   }
+
+   public boolean editaCandidatura(long nAluno, ArrayList<String> propostas) {
+
+      if (propostas.isEmpty()) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         return false;
+      }
+
+      if (!alunos.containsKey(nAluno)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         return false;
+      }
+
+      if (!candidaturas.containsKey(nAluno)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_NAO_TEM_CANDIDATURA);
+         return false;
+      }
+
+      for (var proposta : propostas) {
+         if (!this.propostas.containsKey(proposta)) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+            return false;
+         }
+
+         if (this.propostas.get(proposta).getnAlunoAssociado() != 0) {
+            ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_JA_TEM_ALUNO_ASSOCIADO);
+            return false;
+         }
+      }
+
+      HashSet<String> testeDuplicados = new HashSet<>(propostas);
+      if (testeDuplicados.size() != propostas.size()) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
+         return false;
+      }
+
+      candidaturas.get(nAluno).setIdPropostas(propostas);
+
+      return true;
+   }
+
+   public String consultarAlunosFase5(boolean comPropostaAtribuida){
+
+      HashSet<Aluno> resultado = new HashSet<>();
+      StringBuilder sb = new StringBuilder();
+
+      if(comPropostaAtribuida)
+
+         for (var propostasAtribuidas : propostasAtribuidas.values())
+            resultado.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
+
+      else{
+         HashSet<Long> alunosComProposta = new HashSet<>();
+
+         for(var propostasAtribuidas : propostasAtribuidas.values())
+            alunosComProposta.add(propostasAtribuidas.getnAlunoAssociado());
+
+         for(var aluno : alunos.values())
+            if(!alunosComProposta.contains(aluno.getnAluno()) && candidaturas.get(aluno.getnAluno()) != null)
+               resultado.add(aluno);
+      }
+
+      ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
+      Collections.sort(resultadoOrdenado);
+
+      for(var aluno : resultadoOrdenado) {
+
+         if (comPropostaAtribuida) {
+
+            sb.append("Ordem da preferência: ");
+
+            for(var propostaAtrib : propostasAtribuidas.values())
+               if(propostaAtrib.getnAlunoAssociado() == aluno.getnAluno())
+                  sb.append(propostaAtrib.getOrdemPreferencia()).append(System.lineSeparator());
+
+         }
+         sb.append(aluno).append(System.lineSeparator());
+      }
+
+      return sb.toString();
+   }
+
+   public String consultarAlunos(boolean comOrientadorAssociado) {
+
+      HashSet<Aluno> resultado = new HashSet<>();
+      StringBuilder sb = new StringBuilder();
+
+      if (comOrientadorAssociado) {
+         for (var propostasAtribuidas : propostasAtribuidas.values())
+            if (propostasAtribuidas.getEmailDocenteOrientador() != null)
+               resultado.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
+      } else
+         for (var propostasAtribuidas : propostasAtribuidas.values())
+            if (propostasAtribuidas.getEmailDocenteOrientador() == null)
+               resultado.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
+
+      ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
+      Collections.sort(resultadoOrdenado);
+
+      for (var aluno : resultadoOrdenado)
+         sb.append(aluno).append(System.lineSeparator());
+
+      return sb.toString();
+   }
+
+   public String consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean semCandidatura) {
+      HashSet<Aluno> resultado = new HashSet<>();
+      StringBuilder sb = new StringBuilder();
+
+      if (!autoproposta && !comCandidatura && !semCandidatura)
+         resultado = new HashSet<>(alunos.values());
+
+      if (autoproposta) {
+         for (var proposta : propostas.values())
+            if (proposta instanceof Autoproposto)
+               resultado.add(alunos.get(proposta.getnAlunoAssociado()));
+      }
+
+      if (comCandidatura) {
+         for (var candidatura : candidaturas.values())
+            resultado.add(alunos.get(candidatura.getnAluno()));
+      }
+
+      if (semCandidatura) {
+         HashSet<Long> alunosComCandidatura = new HashSet<>();
+
+         for (var candidatura : candidaturas.values())
+            alunosComCandidatura.add(candidatura.getnAluno());
+
+         for (var aluno : alunos.values())
+            if (!alunosComCandidatura.contains(aluno.getnAluno()))
+               resultado.add(aluno);
+      }
+
+      ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
+      Collections.sort(resultadoOrdenado);
+
+      for (var aluno : resultadoOrdenado)
+         sb.append(aluno).append(System.lineSeparator());
+
+      return sb.toString();
+   }
+
+   public String consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean comPropostaAtribuida, boolean semPropostaAtribuida) {
+
+      HashSet<Aluno> resultado = new HashSet<>();
+      HashSet<Aluno> resultadoComPropostaAtribuida = new HashSet<>();
+      StringBuilder sb = new StringBuilder();
+
+      if (!autoproposta && !comCandidatura && !comPropostaAtribuida && !semPropostaAtribuida)
+         resultado = new HashSet<>(alunos.values());
+
+      if (autoproposta) {
+         for (var proposta : propostas.values())
+            if (proposta instanceof Autoproposto)
+               resultado.add(alunos.get(proposta.getnAlunoAssociado()));
+      }
+
+      if (comCandidatura) {
+         for (var candidatura : candidaturas.values())
+            resultado.add(alunos.get(candidatura.getnAluno()));
+      }
+
+      if (comPropostaAtribuida) {
+         for (var propostasAtribuidas : propostasAtribuidas.values()) {
+            resultado.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
+            resultadoComPropostaAtribuida.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
+         }
+      }
+
+      if (semPropostaAtribuida) {
+         HashSet<Long> alunosComProposta = new HashSet<>();
+
+         for (var propostasAtribuidas : propostasAtribuidas.values())
+            alunosComProposta.add(propostasAtribuidas.getnAlunoAssociado());
+
+         for (var aluno : alunos.values())
+            if (!alunosComProposta.contains(aluno.getnAluno()))
+               resultado.add(aluno);
+      }
+
+      ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
+      Collections.sort(resultadoOrdenado);
+
+      for (var aluno : resultadoOrdenado) {
+
+         if (resultadoComPropostaAtribuida.contains(aluno)) {
+
+            sb.append("Ordem da preferência: ");
+
+            for (var propostaAtrib : propostasAtribuidas.values())
+               if (propostaAtrib.getnAlunoAssociado() == aluno.getnAluno())
+                  sb.append(propostaAtrib.getOrdemPreferencia()).append(System.lineSeparator());
+         }
+
+         sb.append(aluno).append(System.lineSeparator());
+      }
+
+      return sb.toString();
+   }
+
+   public String consultarDocentes(String filtro){
+      StringBuilder sb = new StringBuilder();
+
+           if(!filtro.isBlank()) {
+
+         if(docentes.get(filtro) == null)
+            return null;
+
+         sb.append("Docente: ").append(docentes.get(filtro).getNome()).append(System.lineSeparator());
+         sb.append("Número de orientações: ").append(calculaNumeroOrientacoesDocente(filtro));
+
+      } else{
+
+         int max = 0, min = 0;
+         double media = 0;
+
+         for(var docente : docentes.values()){
+            int nOrientacoes = calculaNumeroOrientacoesDocente(docente.getEmail());
+
+            if(nOrientacoes < min)
+               min = nOrientacoes;
+
+            if(nOrientacoes > max)
+               max = nOrientacoes;
+
+            media += nOrientacoes;
+         }
+
+         media /= docentes.size();
+
+         if(media == 0.0)
+            return null;
+
+         sb.append("Máximo de orientações de um docente: ").append(max).append(System.lineSeparator());
+         sb.append("Minimo de orientações de um docente: ").append(min).append(System.lineSeparator());
+         sb.append("Média de orientações de um docente: ").append(media);
+      }
+
+           sb.append(System.lineSeparator());
+
+           return sb.toString();
+   }
+
+   public String consultarPropostas(boolean propostasAtribuidas){
+
+      HashSet<String> resultado = new HashSet<>();
+      StringBuilder sb = new StringBuilder();
+
+      if(propostasAtribuidas){
+         for(var proposta : propostas.values())
+            for(var propostasAtribuida : this.propostasAtribuidas.values())
+               if(propostasAtribuida.getId().equals(proposta.getId())) {
+                  resultado.add(proposta.getId());
+                  break;
+               }
+      }else {
+
+         HashSet<Proposta> propostasAtribuidaHS = new HashSet<>();
+
+         for(var proposta : propostas.values())
+            for(var propostasAtribuida : this.propostasAtribuidas.values())
+               if(propostasAtribuida.getId().equals(proposta.getId())) {
+                  propostasAtribuidaHS.add(proposta);
+                  break;
+               }
+
+         for(var proposta : propostas.values())
+            if(!propostasAtribuidaHS.contains(proposta))
+               resultado.add(proposta.getId());
+
+      }
+
+      ArrayList<String> resultadoOrdenado = new ArrayList<>(resultado);
+      Collections.sort(resultadoOrdenado);
+
+      for(var proposta : resultadoOrdenado) {
+         if (propostasAtribuidas)
+            sb.append(this.propostasAtribuidas.get(proposta));
+         else
+            sb.append(propostas.get( proposta));
+         sb.append(System.lineSeparator());
+      }
+
+      return sb.toString();
+   }
+
+   public String consultarPropostas(boolean autopropostasAlunos, boolean propostasDocentes, boolean comCandidatura, boolean semCandidatura){
+
+      HashSet<Proposta> resultado = new HashSet<>();
+      StringBuilder sb = new StringBuilder();
+
+      if(!autopropostasAlunos && !propostasDocentes && !comCandidatura && !semCandidatura)
+         resultado = new HashSet<>(propostas.values());
+
+      if(autopropostasAlunos){
+         for(var proposta : propostas.values())
+            if(proposta instanceof Autoproposto)
+               resultado.add(proposta);
+      }
+
+      if(propostasDocentes){
+         for(var proposta : propostas.values())
+            if(proposta instanceof Projeto)
+               resultado.add(proposta);
+      }
+
+      if(comCandidatura){
+         for(var proposta : propostas.values())
+            for(var candidatura : candidaturas.values())
+               if (candidatura.getIdPropostas().contains(proposta.getId())) {
+                  resultado.add(proposta);
+                  break;
+               }
+      }
+
+      if(semCandidatura){
+         HashSet<String> propostasComCandidatura = new HashSet<>();
+
+         for(var proposta : propostas.values())
+            for(var candidatura : candidaturas.values())
+               if (candidatura.getIdPropostas().contains(proposta.getId())) {
+                  propostasComCandidatura.add(proposta.getId());
+                  break;
+               }
+
+         for (var proposta : propostas.values())
+            if(!propostasComCandidatura.contains(proposta.getId()))
+               resultado.add(proposta);
+      }
+
+      ArrayList<Proposta> resultadoOrdenado = new ArrayList<>(resultado);
+      Collections.sort(resultadoOrdenado);
+
+      for(var proposta : resultadoOrdenado)
+         sb.append(proposta).append(System.lineSeparator());
+
+      return sb.toString();
+   }
+
+   public String consultarPropostasFase3(boolean autopropostasAlunos, boolean propostasDocentes, boolean propostasDisponiveis, boolean propostasAtribuidas){
+
+      HashSet<Proposta> resultado = new HashSet<>();
+      StringBuilder sb = new StringBuilder();
+
+      if(!autopropostasAlunos && !propostasDocentes && !propostasDisponiveis && !propostasAtribuidas)
+         resultado = new HashSet<>(propostas.values());
+
+      if(autopropostasAlunos){
+         for(var proposta : propostas.values())
+            if(proposta instanceof Autoproposto)
+               resultado.add(proposta);
+      }
+
+      if(propostasDocentes){
+         for(var proposta : propostas.values())
+            if(proposta instanceof Projeto)
+               resultado.add(proposta);
+      }
+
+      if(propostasDisponiveis){
+
+         HashSet<Proposta> propostasAtribuidaHS = new HashSet<>();
+
+         for(var proposta : propostas.values())
+            for(var propostasAtribuida : this.propostasAtribuidas.values())
+               if(propostasAtribuida.getId().equals(proposta.getId())) {
+                  propostasAtribuidaHS.add(proposta);
+                  break;
+               }
+
+         for(var proposta : propostas.values())
+            if(!propostasAtribuidaHS.contains(proposta))
+               resultado.add(proposta);
+
+      }
+
+      if(propostasAtribuidas){
+         for(var proposta : propostas.values())
+            for(var propostasAtribuida : this.propostasAtribuidas.values())
+               if(propostasAtribuida.getId().equals(proposta.getId())) {
+                  resultado.add(proposta);
+                  break;
+               }
+      }
+
+      ArrayList<Proposta> resultadoOrdenado = new ArrayList<>(resultado);
+      Collections.sort(resultadoOrdenado);
+
+      for(var proposta : resultadoOrdenado)
+         sb.append(proposta).append(System.lineSeparator());
+
+      return sb.toString();
+   }
+
+   public ArrayList<PropostaAtribuida> consultarPropostasAtribuidasDocente(String email){
+
+      ArrayList<PropostaAtribuida> propostaAtribuidasOrientador = new ArrayList<>();
+
+      for(var propostasAtribuidas : propostasAtribuidas.values()) {
+
+         if(propostasAtribuidas.getEmailDocenteOrientador() == null)
+            continue;
+
+         if (propostasAtribuidas.getEmailDocenteOrientador().equalsIgnoreCase(email))
+            propostaAtribuidasOrientador.add(propostasAtribuidas);
+      }
+
+      return propostaAtribuidasOrientador;
+   }
+
+   public ArrayList<Aluno> getAlunosSemPropostaAtribuida(boolean soEstagio){
+
+      ArrayList<Aluno> alunosSemProposta = new ArrayList<>();
+
+      for(var aluno : alunos.values()) {
+
+         boolean insereAluno = true;
+
+         for (var proposta : propostas.values())
+            if (proposta.getnAlunoAssociado() == aluno.getnAluno()) {
+               insereAluno = false;
+               break;
+            }
+
+         for (var propostaAtribuida : propostasAtribuidas.values())
+            if (propostaAtribuida.getnAlunoAssociado() == aluno.getnAluno()) {
+               insereAluno = false;
+               break;
+            }
+
+         if (insereAluno) {
+
+            if(soEstagio && aluno.isAcessoEstagio())
+               alunosSemProposta.add(aluno);
+
+            else if (!soEstagio) {
+               alunosSemProposta.add(aluno);
+
+            }
+         }
+
+      }
+      return alunosSemProposta;
+   }
+
 }

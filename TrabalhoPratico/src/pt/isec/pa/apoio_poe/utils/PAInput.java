@@ -80,6 +80,28 @@ public final class PAInput {
         }
     }
 
+    public static String readLong(String title,boolean blankString) {
+        String value;
+        Scanner scanner;
+
+        while (true){
+
+            if (title != null)
+                System.out.print(title);
+            else
+                System.out.print("> ");
+
+            value = sc.nextLine();
+            scanner = new Scanner(value);
+
+            if (scanner.hasNextLong()) {
+                long longValue = scanner.nextLong();
+                return Long.toString(longValue);
+            } else if(value.trim().isBlank() && blankString)
+                return "";
+        }
+    }
+
     public static Double readDouble(String title) {
         while (true) {
             if (title != null)

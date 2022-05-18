@@ -46,6 +46,8 @@ public abstract class Proposta implements Comparable<Proposta>, Cloneable, Seria
         return id.equals(proposta.id);
     }
 
+    public abstract String tipoProposta();
+
     @Override
     public int hashCode() {
         return id.hashCode();
