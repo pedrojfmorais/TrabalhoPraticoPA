@@ -124,8 +124,6 @@ public class ApoioPoEContext {
     public boolean redo(){return state.redo();}
     public boolean hasRedo(){return state.hasRedo();}
 
-    //TODO: perguntar professor
-    //Pode ir logo aos dados????
     public String getTipoProposta(String id){return data.getTipoProposta(id);}
 
     public boolean loadStateInFile(String file, ApoioPoEContext context){

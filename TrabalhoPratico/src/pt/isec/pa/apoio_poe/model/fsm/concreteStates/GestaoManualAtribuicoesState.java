@@ -90,8 +90,11 @@ public class GestaoManualAtribuicoesState extends ApoioPoEAdapter {
     @Override
     public boolean removerTodosDados() {
 
+        if(data.getPropostasAtribuidas().size() == 0)
+            return false;
+
         while(data.getPropostasAtribuidas().size() > 0)
-            data.removePropostaAtribuida(data.getPropostasAtribuidas().get(0).getId());
+            facade.removeAtribuicaoAlunoProposta(data.getPropostasAtribuidas().get(0).getId());
 
         return data.getPropostasAtribuidas().size() == 0;
     }

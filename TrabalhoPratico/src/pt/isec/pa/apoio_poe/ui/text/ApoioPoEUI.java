@@ -72,6 +72,7 @@ public class ApoioPoEUI {
             case PROPOSTA_AINDA_NAO_ATRIBUIDA -> System.out.println("Esta proposta não se encontra atribuída a nenhum aluno!");
             case PROPOSTA_JA_TEM_ALUNO_ASSOCIADO -> System.out.println("Esta proposta já tem uma aluno associado!");
             case SEM_PROPOSTAS_ESPECIFICADAS -> System.out.println("Não foram especificadas propostas para a candidatura!");
+            case ALUNO_PROPOSTA_AREA_NAO_CORRESPONDEM -> System.out.println("O aluno e a proposta não correspondem ao mesmo ramo!");
             case PROBLEMS_READING_ALUNOS_FILE -> System.out.println("Não foram inseridos todos os alunos presentes no ficheiro!");
             case PROBLEMS_READING_DOCENTES_FILE -> System.out.println("Não foram inseridos todos os docentes presentes no ficheiro!");
             case PROBLEMS_READING_PROPOSTAS_FILE -> System.out.println("Não foram inseridas todas as propostas presentes no ficheiro!");

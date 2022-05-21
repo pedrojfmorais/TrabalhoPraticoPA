@@ -5,8 +5,6 @@ import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.propostas.*;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
-import pt.isec.pa.apoio_poe.model.memento.IMemento;
-import pt.isec.pa.apoio_poe.model.memento.IOriginator;
 
 import java.io.*;
 import java.util.*;
@@ -230,6 +228,26 @@ public class ApoioPoE implements Serializable, Cloneable {
             ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_JA_TEM_ALUNO_ASSOCIADO);
             return false;
          }
+
+         Proposta propostaAtual = this.propostas.get(proposta);
+
+         boolean areaDoAlunoCorrespondeADaProposta = false;
+         if(propostaAtual instanceof Estagio e) {
+            for (var area : e.getAreasDestino().split("\\|"))
+               if (area.equals(alunos.get(nAluno).getSiglaRamo()))
+                  areaDoAlunoCorrespondeADaProposta = true;
+
+         } else if(propostaAtual instanceof Projeto p) {
+            for (var area : p.getRamosDestino().split("\\|"))
+               if (area.equals(alunos.get(nAluno).getSiglaRamo()))
+                  areaDoAlunoCorrespondeADaProposta = true;
+         }
+
+         if(!areaDoAlunoCorrespondeADaProposta){
+            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_PROPOSTA_AREA_NAO_CORRESPONDEM);
+            return false;
+         }
+
       }
 
       for (var proposta : this.propostas.values())
@@ -237,6 +255,8 @@ public class ApoioPoE implements Serializable, Cloneable {
             ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
+
+
 
       HashSet<String> testeDuplicados = new HashSet<>(propostas);
       if (testeDuplicados.size() != propostas.size()) {
@@ -274,6 +294,23 @@ public class ApoioPoE implements Serializable, Cloneable {
             ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
+
+      boolean areaDoAlunoCorrespondeADaProposta = false;
+      if(propostaAtual instanceof Estagio e) {
+         for (var area : e.getAreasDestino().split("\\|"))
+            if (area.equals(alunos.get(nAluno).getSiglaRamo()))
+               areaDoAlunoCorrespondeADaProposta = true;
+
+      } else if(propostaAtual instanceof Projeto p) {
+         for (var area : p.getRamosDestino().split("\\|"))
+            if (area.equals(alunos.get(nAluno).getSiglaRamo()))
+               areaDoAlunoCorrespondeADaProposta = true;
+      }
+
+      if(!areaDoAlunoCorrespondeADaProposta){
+         ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_PROPOSTA_AREA_NAO_CORRESPONDEM);
+         return false;
+      }
 
       Candidatura candidaturaAluno = getCandidatura(nAluno);
       if (candidaturaAluno != null) {
@@ -406,7 +443,13 @@ public class ApoioPoE implements Serializable, Cloneable {
 
    public boolean removeAluno(long nAluno) {
 
-      removeCandidatura(nAluno);
+      if(!alunos.containsKey(nAluno)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         return false;
+      }
+
+      if(candidaturas.containsKey(nAluno))
+         removeCandidatura(nAluno);
 
       ArrayList<String> propostasRemover = new ArrayList<>();
 
@@ -428,6 +471,11 @@ public class ApoioPoE implements Serializable, Cloneable {
 
    public boolean removeDocente(String email) {
 
+      if(!docentes.containsKey(email)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
+         return false;
+      }
+
       ArrayList<String> propostasRemover = new ArrayList<>();
 
       for (var proposta : getPropostas())
@@ -446,7 +494,14 @@ public class ApoioPoE implements Serializable, Cloneable {
    }
 
    public boolean removeProposta(String id) {
-      removePropostaAtribuida(id);
+
+      if(!propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         return false;
+      }
+
+      if(propostasAtribuidas.containsKey(id))
+         removePropostaAtribuida(id);
 
       for (var candidatura : getCandidaturas()) {
          candidatura.removeProposta(id);
@@ -460,6 +515,11 @@ public class ApoioPoE implements Serializable, Cloneable {
 
    public boolean removeCandidatura(long nAluno) {
 
+      if(!candidaturas.containsKey(nAluno)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_CANDIDATURA);
+         return false;
+      }
+
       if (getCandidatura(nAluno) == null)
          return false;
 
@@ -471,6 +531,12 @@ public class ApoioPoE implements Serializable, Cloneable {
    }
 
    public boolean removePropostaAtribuida(String id) {
+
+      if(!propostas.containsKey(id)) {
+         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         return false;
+      }
+
       return propostasAtribuidas.remove(id) != null;
    }
 

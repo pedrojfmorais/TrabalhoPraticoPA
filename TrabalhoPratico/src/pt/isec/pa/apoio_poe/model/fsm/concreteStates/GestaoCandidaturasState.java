@@ -128,6 +128,9 @@ public class GestaoCandidaturasState extends ApoioPoEAdapter {
     @Override
     public boolean removerTodosDados() {
 
+        if(data.getCandidaturas().size() == 0)
+            return false;
+
         careTaker.save();
 
         while(data.getCandidaturas().size() > 0)

@@ -20,6 +20,10 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
 
     public Fase3AtribuicaoAutomaticaState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
+
+        propostaDisponiveisAluno1 = new ArrayList<>();
+        propostaDisponiveisAluno2 = new ArrayList<>();
+
         removeConflito();
     }
 

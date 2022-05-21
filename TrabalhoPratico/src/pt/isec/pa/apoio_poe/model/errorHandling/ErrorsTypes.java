@@ -23,6 +23,7 @@ public enum ErrorsTypes {
     PROPOSTA_AINDA_NAO_ATRIBUIDA("PropostaAindaNaoAtribuidaAUmAluno"),
     PROPOSTA_JA_TEM_ALUNO_ASSOCIADO("PropostaComAlunoJaAssociado"),
     SEM_PROPOSTAS_ESPECIFICADAS("NaoForamIndicadasPropostasParaACandidatura"),
+    ALUNO_PROPOSTA_AREA_NAO_CORRESPONDEM("PropostaEAlunoComAreaDiferentes"),
 
     PROBLEMS_READING_ALUNOS_FILE("NemTodosAlunosInseridosDoFicheiro"),
     PROBLEMS_READING_DOCENTES_FILE("NemTodosDocentesInseridosDoFicheiro"),

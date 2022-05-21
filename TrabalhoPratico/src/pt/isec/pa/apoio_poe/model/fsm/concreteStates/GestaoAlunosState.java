@@ -124,6 +124,10 @@ public class GestaoAlunosState extends ApoioPoEAdapter {
 
     @Override
     public boolean removerTodosDados() {
+
+        if(data.getAlunos().size() == 0)
+            return false;
+
         careTaker.save();
 
         while(data.getAlunos().size() > 0)
