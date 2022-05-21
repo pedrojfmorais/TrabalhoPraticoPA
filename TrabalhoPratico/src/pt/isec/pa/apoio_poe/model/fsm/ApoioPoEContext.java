@@ -126,7 +126,7 @@ public class ApoioPoEContext {
 
     public String getTipoProposta(String id){return data.getTipoProposta(id);}
 
-    public boolean loadStateInFile(String file, ApoioPoEContext context){
+    public boolean loadStateInFile(String file){
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))){
 
             retomarSave((ApoioPoEManager) ois.readObject(), (ApoioPoEState) ois.readObject());

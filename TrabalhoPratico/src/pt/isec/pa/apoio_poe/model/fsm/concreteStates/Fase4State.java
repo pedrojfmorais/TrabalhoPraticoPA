@@ -1,13 +1,8 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
-import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 
 public class Fase4State extends ApoioPoEAdapter {
     public Fase4State(ApoioPoEContext context, ApoioPoEManager data) {

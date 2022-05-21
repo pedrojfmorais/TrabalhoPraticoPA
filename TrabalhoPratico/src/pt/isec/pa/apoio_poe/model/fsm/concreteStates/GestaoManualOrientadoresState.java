@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class GestaoManualOrientadoresState extends ApoioPoEAdapter {
 
-    private GestaoManualOrientadoresManager facade;
+    private final GestaoManualOrientadoresManager facade;
     public GestaoManualOrientadoresState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
         facade = new GestaoManualOrientadoresManager(data);
@@ -90,7 +90,7 @@ public class GestaoManualOrientadoresState extends ApoioPoEAdapter {
     @Override
     public String consultarDados(String filtro) {
 
-        ArrayList<PropostaAtribuida> propostaAtribuidasFinal = new ArrayList<>();
+        ArrayList<PropostaAtribuida> propostaAtribuidasFinal;
 
         if(!filtro.isBlank()) {
 

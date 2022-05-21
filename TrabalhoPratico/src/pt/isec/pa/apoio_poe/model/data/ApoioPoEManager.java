@@ -409,6 +409,10 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             this.apoioPOE = base.getApoioPOE();
         }
 
+        @Override
+        public ApoioPoE getSnapshot() {
+            return apoioPOE;
+        }
     }
 
     @Override
@@ -420,7 +424,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
     public void restore(IMemento memento) {
 
         if(memento instanceof ApoioPoEManagerMemento apoioPoEManagerMemento){
-            this.apoioPOE = apoioPoEManagerMemento.apoioPOE;
+            this.apoioPOE = apoioPoEManagerMemento.getSnapshot();
 
         }
     }

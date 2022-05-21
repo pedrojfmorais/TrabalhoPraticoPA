@@ -35,10 +35,6 @@ public class CareTaker {
         history.push(originator.save());
         originator.restore(redoHist.pop());
     }
-    public void reset() {
-        history.clear();
-        redoHist.clear();
-    }
     public boolean hasUndo() {
         return !history.isEmpty();
     }

@@ -15,8 +15,8 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
 
     private Aluno aluno1Conflito;
     private Aluno aluno2Conflito;
-    private ArrayList<Proposta> propostaDisponiveisAluno1;
-    private ArrayList<Proposta> propostaDisponiveisAluno2;
+    private final ArrayList<Proposta> propostaDisponiveisAluno1;
+    private final ArrayList<Proposta> propostaDisponiveisAluno2;
 
     public Fase3AtribuicaoAutomaticaState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);

@@ -8,7 +8,6 @@ import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 
 import java.io.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ApoioPoE implements Serializable, Cloneable {
 
@@ -16,11 +15,11 @@ public class ApoioPoE implements Serializable, Cloneable {
    private static final long serialVersionUID = 1L;
    private int faseBloqueada;
 
-   private HashMap<Long, Aluno> alunos;
-   private HashMap<String, Docente> docentes;
-   private HashMap<String, Proposta> propostas;
-   private HashMap<Long, Candidatura> candidaturas;
-   private HashMap<String, PropostaAtribuida> propostasAtribuidas;
+   private final HashMap<Long, Aluno> alunos;
+   private final HashMap<String, Docente> docentes;
+   private final HashMap<String, Proposta> propostas;
+   private final HashMap<Long, Candidatura> candidaturas;
+   private final HashMap<String, PropostaAtribuida> propostasAtribuidas;
 
    public ApoioPoE() {
       alunos = new HashMap<>();

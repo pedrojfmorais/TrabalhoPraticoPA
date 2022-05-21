@@ -1,6 +1,5 @@
 package pt.isec.pa.apoio_poe.ui.text;
 
-import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
@@ -772,7 +771,7 @@ public class ApoioPoEUI {
             case 1 -> {
                 if(!fsm.adicionarDados(
                         PAInput.readString("Insira o identificador da proposta a atribuir: ", false),
-                        PAInput.readString("Insira o número do aluno a quem vai ser atribuida a proposta: ",
+                        PAInput.readLong("Insira o número do aluno a quem vai ser atribuida a proposta: ",
                                 false)
                 ))
                     System.out.println("Não foi possivel atribuir a proposta ao aluno!");
@@ -888,7 +887,7 @@ public class ApoioPoEUI {
         )){
             case 1 -> {
                 if(!fsm.adicionarDados(
-                        PAInput.readString("Insira o número do aluno com proposta atribuida: ", false),
+                        PAInput.readLong("Insira o número do aluno com proposta atribuida: ", false),
                         PAInput.readString("Insira o email do orientador a adicionar: ", false)
                 ))
                     System.out.println("Não foi possivel adicionar o orientador à proposta atribuida!");
@@ -896,14 +895,14 @@ public class ApoioPoEUI {
 
             case 2 -> {
                 if(!fsm.editarDados(
-                        PAInput.readString("Insira o número do aluno com proposta atribuida: ", false),
+                        PAInput.readLong("Insira o número do aluno com proposta atribuida: ", false),
                         PAInput.readString("Insira o email do novo orientador: ", false)
                 ))
                     System.out.println("Não foi possivel alterar o orientador da proposta atribuida!");
             }
             case 3 -> {
                 if(!fsm.removerDados(
-                        PAInput.readString("Insira o número do aluno com proposta atribuida: ", false)
+                        PAInput.readLong("Insira o número do aluno com proposta atribuida: ", false)
                 ))
                     System.out.println("Não foi possivel remover o orientador da proposta atribuida!");
             }

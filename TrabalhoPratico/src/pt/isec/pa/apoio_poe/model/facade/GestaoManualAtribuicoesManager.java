@@ -3,12 +3,13 @@ package pt.isec.pa.apoio_poe.model.facade;
 import pt.isec.pa.apoio_poe.model.cmd.CommandManager;
 import pt.isec.pa.apoio_poe.model.cmd.gestaoManualAtribuicoes.AddAtribuicaoAlunoProposta;
 import pt.isec.pa.apoio_poe.model.cmd.gestaoManualAtribuicoes.RemoveAtribuicaoAlunoProposta;
+import pt.isec.pa.apoio_poe.model.cmd.gestaoManualAtribuicoes.RemoveTodasAtribuicoesAlunoProposta;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
 public class GestaoManualAtribuicoesManager {
 
-    private ApoioPoEManager apoioPoeManager;
-    private CommandManager cm;
+    private final ApoioPoEManager apoioPoeManager;
+    private final CommandManager cm;
 
     public GestaoManualAtribuicoesManager(ApoioPoEManager apoioPoeManager) {
         this.apoioPoeManager = apoioPoeManager;
@@ -21,6 +22,10 @@ public class GestaoManualAtribuicoesManager {
 
     public boolean removeAtribuicaoAlunoProposta(String idProposta){
         return cm.invokeCommand(new RemoveAtribuicaoAlunoProposta(apoioPoeManager, idProposta));
+    }
+
+    public boolean removeTodasAtribuicoesAlunoProposta(){
+        return cm.invokeCommand(new RemoveTodasAtribuicoesAlunoProposta(apoioPoeManager));
     }
 
     public boolean hasUndo(){

@@ -3,8 +3,8 @@ package pt.isec.pa.apoio_poe.model.cmd;
 import java.util.Stack;
 
 public class CommandManager {
-    private Stack<ICommand> history;
-    private Stack<ICommand> redoCmd;
+    private final Stack<ICommand> history;
+    private final Stack<ICommand> redoCmd;
 
     public CommandManager(){
         history = new Stack<>();

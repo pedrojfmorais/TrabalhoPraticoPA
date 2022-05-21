@@ -11,7 +11,7 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
 public class GestaoManualAtribuicoesState extends ApoioPoEAdapter {
 
-    private GestaoManualAtribuicoesManager facade;
+    private final GestaoManualAtribuicoesManager facade;
     public GestaoManualAtribuicoesState(ApoioPoEContext context, ApoioPoEManager data) {
         super(context, data);
         this.facade = new GestaoManualAtribuicoesManager(data);
@@ -93,10 +93,7 @@ public class GestaoManualAtribuicoesState extends ApoioPoEAdapter {
         if(data.getPropostasAtribuidas().size() == 0)
             return false;
 
-        while(data.getPropostasAtribuidas().size() > 0)
-            facade.removeAtribuicaoAlunoProposta(data.getPropostasAtribuidas().get(0).getId());
-
-        return data.getPropostasAtribuidas().size() == 0;
+        return facade.removeTodasAtribuicoesAlunoProposta();
     }
 
     @Override

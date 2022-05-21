@@ -8,8 +8,8 @@ import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 
 public class GestaoManualOrientadoresManager {
 
-    private ApoioPoEManager apoioPoeManager;
-    private CommandManager cm;
+    private final ApoioPoEManager apoioPoeManager;
+    private final CommandManager cm;
 
     public GestaoManualOrientadoresManager(ApoioPoEManager apoioPoeManager) {
         this.apoioPoeManager = apoioPoeManager;

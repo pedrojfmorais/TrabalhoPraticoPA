@@ -32,7 +32,7 @@ public enum ErrorsTypes {
 
     NONE("NaN");
 
-    String sigla;
+    final String sigla;
 
     ErrorsTypes(String sigla){this.sigla = sigla;}
 }
