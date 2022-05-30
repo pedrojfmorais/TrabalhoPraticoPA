@@ -39,7 +39,8 @@ public class Inicio extends BorderPane {
 
         fcCarregarSave = new FileChooser();
 
-        btnComecarNovo.setPrefWidth(75);
+        btnComecarNovo.setPrefSize(125, 50);
+        btnCarregarSave.setPrefSize(100, 40);
         btnSair.setPrefWidth(75);
 
         lbTitulo.setAlignment(Pos.CENTER);
@@ -72,7 +73,6 @@ public class Inicio extends BorderPane {
 
         btnSair.setOnAction(ev -> Platform.exit());
     }
-
 
     private void update() {
         this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.INICIO);
