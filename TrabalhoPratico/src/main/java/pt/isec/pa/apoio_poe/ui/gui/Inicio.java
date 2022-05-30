@@ -9,19 +9,26 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+
+import java.io.File;
 
 public class Inicio extends BorderPane {
 
     ApoioPoEContext fsm;
 
-    Button comecarNovo, sair;
-    FileChooser carregarSave;
-    Label titulo, rodape;
+    Stage stage;
+
+    Button btnComecarNovo, btnCarregarSave, btnSair;
+    FileChooser fcCarregarSave;
+    Label lbTitulo;
 
     public Inicio(ApoioPoEContext fsm) {
 
         this.fsm = fsm;
+        this.stage = new Stage();
 
         createViews();
         registerHandlers();
@@ -29,52 +36,49 @@ public class Inicio extends BorderPane {
     }
 
     private void createViews() {
-        comecarNovo = new Button("Começar Novo");
-        sair = new Button("Sair");
-        titulo = new Label("Apoio PoE");
-        rodape = new Label("Mariri Pedro");
-        carregarSave = new FileChooser();
+        btnComecarNovo = new Button("Começar Novo");
+        btnCarregarSave = new Button("Carregar Save");
+        btnSair = new Button("Sair");
+        lbTitulo = new Label("Apoio PoE");
 
-        comecarNovo.setPrefWidth(75);
-        sair.setPrefWidth(75);
+        fcCarregarSave = new FileChooser();
 
-        titulo.setAlignment(Pos.CENTER);
-        titulo.setPrefWidth(Integer.MAX_VALUE);
-        titulo.setPadding(new Insets(20));
-        titulo.setFont(new Font("Courier New", 16));
+        btnComecarNovo.setPrefWidth(75);
+        btnSair.setPrefWidth(75);
 
-        rodape.setAlignment(Pos.CENTER);
-        rodape.setPrefWidth(Integer.MAX_VALUE);
-        rodape.setPadding(new Insets(20));
-        rodape.setBorder(new Border(new BorderStroke(Color.DARKGREY, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        rodape.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
-        rodape.setFont(new Font("Courier New", 16));
+        lbTitulo.setAlignment(Pos.CENTER);
+        lbTitulo.setPrefWidth(Integer.MAX_VALUE);
+        lbTitulo.setPadding(new Insets(20));
+        lbTitulo.setFont(new Font("Courier New", 16));
 
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
         vbox.setSpacing(10);
         vbox.setPadding(new Insets(10));
-        vbox.getChildren().addAll(comecarNovo, sair);
+        vbox.getChildren().addAll(btnComecarNovo, btnCarregarSave, btnSair);
 
-        this.setTop(titulo);
+        this.setTop(lbTitulo);
         this.setCenter(vbox);
-        this.setBottom(rodape);
     }
 
     private void registerHandlers() {
 
-        comecarNovo.setOnAction(ev -> {
+        btnComecarNovo.setOnAction(ev -> {
             fsm.comecarNovo();
             update();
         });
 
-        sair.setOnAction(ev -> {
-            Platform.exit();
+        btnCarregarSave.setOnAction(e -> {
+            File selectedFile = fcCarregarSave.showOpenDialog(stage);
+            fsm.carregarSave(selectedFile.getAbsolutePath());
+            update();
         });
+
+        btnSair.setOnAction(ev -> Platform.exit());
     }
 
 
     private void update() {
-
+        this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.INICIO);
     }
 }

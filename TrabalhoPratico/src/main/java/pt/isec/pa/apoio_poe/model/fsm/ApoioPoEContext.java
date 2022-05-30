@@ -4,6 +4,7 @@ import pt.isec.pa.apoio_poe.model.data.ApoioPoE;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+import pt.isec.pa.apoio_poe.utils.PAInput;
 
 import java.io.*;
 
@@ -12,7 +13,15 @@ public class ApoioPoEContext {
     private ApoioPoEManager data;
     private IApoioPoEState state;
 
-    public ApoioPoEContext(){
+    private static ApoioPoEContext instance = null;
+
+    public static ApoioPoEContext getInstance(){
+        if(instance == null)
+            instance = new ApoioPoEContext();
+        return instance;
+    }
+
+    private ApoioPoEContext(){
         init(ApoioPoEState.INICIO);
     }
 

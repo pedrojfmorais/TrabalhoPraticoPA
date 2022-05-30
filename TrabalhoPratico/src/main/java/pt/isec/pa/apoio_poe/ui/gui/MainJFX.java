@@ -8,12 +8,9 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 
 public class MainJFX extends Application {
     ApoioPoEContext fsm;
-//
-//    public MainJFX(ApoioPoEContext fsm) {
-//        this.fsm = fsm;
-//    }
+
     public MainJFX() {
-        this.fsm = new ApoioPoEContext();
+        this.fsm = ApoioPoEContext.getInstance();
     }
 
     @Override
@@ -23,9 +20,9 @@ public class MainJFX extends Application {
 
     @Override
     public void start(Stage stage) {
-        Scene scene = new Scene(new Inicio(fsm), 500, 500, Color.BLACK);
+        Scene scene = new Scene(new ApoioPoEGUI(fsm), 500, 500, Color.BLACK);
         stage.setScene(scene);
-        stage.setTitle("Maven");
+        stage.setTitle("Trabalho Prático");
         stage.show();
     }
 

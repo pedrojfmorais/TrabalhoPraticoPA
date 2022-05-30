@@ -9,10 +9,10 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        ApoioPoEContext fsm = new ApoioPoEContext();
+        ApoioPoEContext fsm = ApoioPoEContext.getInstance();
         ApoioPoEUI ui = new ApoioPoEUI(fsm);
 
-        // ui.start();
+        ui.start();
 
         Application.launch(MainJFX.class, args);
     }
