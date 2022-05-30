@@ -6,7 +6,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -19,8 +18,6 @@ public class Inicio extends BorderPane {
 
     ApoioPoEContext fsm;
 
-    Stage stage;
-
     Button btnComecarNovo, btnCarregarSave, btnSair;
     FileChooser fcCarregarSave;
     Label lbTitulo;
@@ -28,7 +25,6 @@ public class Inicio extends BorderPane {
     public Inicio(ApoioPoEContext fsm) {
 
         this.fsm = fsm;
-        this.stage = new Stage();
 
         createViews();
         registerHandlers();
@@ -69,7 +65,7 @@ public class Inicio extends BorderPane {
         });
 
         btnCarregarSave.setOnAction(e -> {
-            File selectedFile = fcCarregarSave.showOpenDialog(stage);
+            File selectedFile = fcCarregarSave.showOpenDialog(new Stage());
             fsm.carregarSave(selectedFile.getAbsolutePath());
             update();
         });
