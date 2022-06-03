@@ -19,7 +19,6 @@ public class Inicio extends BorderPane {
     ApoioPoEContext fsm;
 
     Button btnComecarNovo, btnCarregarSave, btnSair;
-    FileChooser fcCarregarSave;
     Label lbTitulo;
 
     public Inicio(ApoioPoEContext fsm) {
@@ -36,8 +35,6 @@ public class Inicio extends BorderPane {
         btnCarregarSave = new Button("Carregar Save");
         btnSair = new Button("Sair");
         lbTitulo = new Label("Apoio PoE");
-
-        fcCarregarSave = new FileChooser();
 
         btnComecarNovo.setPrefSize(125, 50);
         btnCarregarSave.setPrefSize(100, 40);
@@ -59,6 +56,7 @@ public class Inicio extends BorderPane {
     }
 
     private void registerHandlers() {
+        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_FASE, evt -> update());
 
         btnComecarNovo.setOnAction(ev -> {
             fsm.comecarNovo();
@@ -66,8 +64,18 @@ public class Inicio extends BorderPane {
         });
 
         btnCarregarSave.setOnAction(e -> {
-            File selectedFile = fcCarregarSave.showOpenDialog(new Stage());
-            fsm.carregarSave(selectedFile.getAbsolutePath());
+
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Carregar Save ...");
+            fileChooser.setInitialDirectory(new File("."));
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("All", "*")
+            );
+
+            File hFile = fileChooser.showOpenDialog(this.getScene().getWindow());
+
+            if(hFile != null)
+                fsm.carregarSave(hFile.getAbsolutePath());
             update();
         });
 

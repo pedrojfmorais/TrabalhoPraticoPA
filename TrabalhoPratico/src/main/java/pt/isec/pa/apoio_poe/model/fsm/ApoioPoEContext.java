@@ -6,10 +6,14 @@ import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 import pt.isec.pa.apoio_poe.utils.PAInput;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.*;
 
 public class ApoioPoEContext {
 
+    public static final String PROP_FASE = "_FASE_";
+    PropertyChangeSupport pcs;
     private ApoioPoEManager data;
     private IApoioPoEState state;
 
@@ -23,6 +27,7 @@ public class ApoioPoEContext {
 
     private ApoioPoEContext(){
         init(ApoioPoEState.INICIO);
+        pcs = new PropertyChangeSupport(this);
     }
 
     public void init(ApoioPoEState state){
@@ -35,10 +40,14 @@ public class ApoioPoEContext {
         data.adicionaPropostasDeFicheiro("files/propostas.csv");
         data.adicionaCandidaturaDeFicheiro("files/candidaturas.csv");
     }
+    public void addPropertyChangeListener(String property, PropertyChangeListener listener){
+        pcs.addPropertyChangeListener(property, listener);
+    }
 
     public void retomarSave(ApoioPoEManager data, ApoioPoEState state){
         this.data = data;
         this.state = state.createState(this, data);
+        pcs.firePropertyChange(PROP_FASE, null, null);
     }
 
     public void changeState(IApoioPoEState state){this.state = state;}
@@ -47,9 +56,17 @@ public class ApoioPoEContext {
         return state.getState() == null ? null : state.getState();
     }
 
-    public boolean comecarNovo(){return state.comecarNovo();}
+    public boolean comecarNovo(){
+        boolean result = state.comecarNovo();
+        pcs.firePropertyChange(PROP_FASE, null, null);
+        return result;
+    }
 
-    public boolean carregarSave(String file){return state.carregarSave(file);}
+    public boolean carregarSave(String file){
+        boolean result = state.carregarSave(file);
+        pcs.firePropertyChange(PROP_FASE, null, null);
+        return result;
+    }
 
     public boolean gerirAlunos(){return state.gerirAlunos();}
 
@@ -61,10 +78,22 @@ public class ApoioPoEContext {
 
     public boolean gerirDados(){return state.gerirDados();}
 
-    public boolean regressarFase(){return state.regressarFase();}
-    public boolean avancarFase(boolean bloquearFase){return state.avancarFase(bloquearFase);}
+    public boolean regressarFase(){
+        boolean result = state.regressarFase();
+        pcs.firePropertyChange(PROP_FASE, null, null);
+        return result;
+    }
+    public boolean avancarFase(boolean bloquearFase){
+        boolean result = state.avancarFase(bloquearFase);
+        pcs.firePropertyChange(PROP_FASE, null, null);
+        return result;
+    }
 
-    public boolean terminarAplicacao(String file){return state.terminarAplicacao(file);}
+    public boolean terminarAplicacao(String file){
+        boolean result = state.terminarAplicacao(file);
+        pcs.firePropertyChange(PROP_FASE, null, null);
+        return result;
+    }
 
     public String consultarAlunos(boolean ... filtros){
         return state.consultarAlunos(filtros);

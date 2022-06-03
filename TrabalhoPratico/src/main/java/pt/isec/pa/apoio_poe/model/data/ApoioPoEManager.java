@@ -8,6 +8,8 @@ import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 import pt.isec.pa.apoio_poe.model.memento.IMemento;
 import pt.isec.pa.apoio_poe.model.memento.IOriginator;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,7 +24,6 @@ public class ApoioPoEManager implements Serializable, IOriginator {
     public ApoioPoEManager(ApoioPoE apoioPOE) {
         this.apoioPOE = apoioPOE;
     }
-
     public int getFaseBloqueada() {
         return apoioPOE.getFaseBloqueada();
     }
@@ -494,4 +495,3 @@ public class ApoioPoEManager implements Serializable, IOriginator {
         return apoioPOE.getAlunosSemPropostaAtribuida(soEstagio);
     }
 }
-
