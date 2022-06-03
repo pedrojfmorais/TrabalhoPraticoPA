@@ -68,15 +68,31 @@ public class ApoioPoEContext {
         return result;
     }
 
-    public boolean gerirAlunos(){return state.gerirAlunos();}
+    public boolean gerirAlunos(){
+        boolean result = state.gerirAlunos();
+        pcs.firePropertyChange(PROP_FASE, null, null);
+        return result;
+    }
 
-    public boolean gerirDocentes(){return state.gerirDocentes();}
-    public boolean gerirPropostas(){return state.gerirPropostas();}
+    public boolean gerirDocentes(){
+        boolean result = state.gerirDocentes();
+        pcs.firePropertyChange(PROP_FASE, null, null);
+        return result;
+    }
+    public boolean gerirPropostas(){
+        boolean result = state.gerirPropostas();
+        pcs.firePropertyChange(PROP_FASE, null, null);
+        return result;
+    }
 
     public boolean atribuicaoAutomaticaPropostasComAluno(){return state.atribuicaoAutomaticaPropostasComAluno();}
     public boolean associacaoAutomaticaDocentesProponentes(){return state.associacaoAutomaticaDocentesProponentes();}
 
-    public boolean gerirDados(){return state.gerirDados();}
+    public boolean gerirDados(){
+        boolean result = state.gerirDados();
+        pcs.firePropertyChange(PROP_FASE, null, null);
+        return result;
+    }
 
     public boolean regressarFase(){
         boolean result = state.regressarFase();

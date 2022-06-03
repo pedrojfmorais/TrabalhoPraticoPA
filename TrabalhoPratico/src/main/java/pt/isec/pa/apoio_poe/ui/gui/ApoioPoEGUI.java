@@ -17,7 +17,7 @@ public class ApoioPoEGUI extends BorderPane {
 
     private void createViews() {
         StackPane stackPane = new StackPane(
-                new Inicio(fsm), new Fase1(fsm)
+                new Inicio(fsm), new Fase1(fsm), new GerirAlunos(fsm)
         );
         this.setTop(new AppMenu(fsm));
         this.setCenter(stackPane);

@@ -1,0 +1,18 @@
+.button {
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+}
+
+.toggle-button {
+    -fx-font-family: "Comic Sans MS";
+    -fx-font-size: 12;
+    -fx-font-style: italic;
+    -fx-text-fill: darkblue;
+}
+
+#specialButton {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+    -fx-font-style: normal;
+}
