@@ -2,6 +2,7 @@ package pt.isec.pa.apoio_poe.ui.gui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -9,6 +10,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
@@ -80,7 +83,14 @@ public class GerirAlunos extends BorderPane {
         });
 
         btnAdicionar.setOnAction(actionEvent -> {
+            Stage dialog = new Stage();
+            dialog.initOwner(this.getScene().getWindow());
+            dialog.initModality(Modality.APPLICATION_MODAL);
 
+            dialog.setScene(new Scene(new AdicionarAluno(fsm)));
+            dialog.setResizable(false);
+
+            dialog.showAndWait();
         });
 
     }

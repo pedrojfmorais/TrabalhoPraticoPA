@@ -1,8 +1,13 @@
 package pt.isec.pa.apoio_poe.ui.gui;
 
+import javafx.collections.FXCollections;
+import javafx.geometry.HPos;
+import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 
 public class AdicionarAluno extends BorderPane {
@@ -24,22 +29,24 @@ public class AdicionarAluno extends BorderPane {
     TextField tfClassif;
     CheckBox ckAcessoEstagio;
 
+    Button btnEnviar;
+
     public AdicionarAluno(ApoioPoEContext fsm){
         this.fsm = fsm;
 
         createViews();
-        registerHandlers();
-        update();
+//        registerHandlers();
+//        update();
     }
 
     private void createViews(){
-        lbNAluno = new Label("Numero Aluno");
-        lbNome = new Label("Nome");
-        lbEmail = new Label("Email");
-        lbSiglaCurso = new Label("Curso");
-        lbSiglaRamos = new Label("Ramo");
-        lbClassif = new Label("Classificação");
-        lbAcessoEstagio = new Label("Acesso a Estágio");
+        lbNAluno = new Label("Número Aluno:");
+        lbNome = new Label("Nome:");
+        lbEmail = new Label("Email:");
+        lbSiglaCurso = new Label("Curso:");
+        lbSiglaRamos = new Label("Ramo:");
+        lbClassif = new Label("Classificação:");
+        lbAcessoEstagio = new Label("Acesso a Estágio:");
 
         tfNAluno = new TextField();
         tfNome = new TextField();
@@ -49,17 +56,38 @@ public class AdicionarAluno extends BorderPane {
         tfClassif = new TextField();
         ckAcessoEstagio = new CheckBox();
 
-        tfNAluno.setPrefSize(125, 50);
-        tfNome.setPrefSize(125, 50);
-        tfEmail.setPrefSize(250, 50);
-        cbCurso.setPrefSize(125,50);
-        cbRamo.setPrefSize(125,50);
-        tfClassif.setPrefSize(125,50);
-        ckAcessoEstagio.setPrefSize(50,50);
+        btnEnviar = new Button("Adicionar");
+
+        tfNAluno.setPrefSize(125, 25);
+        tfNome.setPrefSize(125, 25);
+        tfEmail.setPrefSize(250, 25);
+        cbCurso.setPrefSize(125,25);
+        cbRamo.setPrefSize(125,25);
+        tfClassif.setPrefSize(125,25);
+        ckAcessoEstagio.setPrefSize(25,25);
+        btnEnviar.setPrefSize(100,25);
+
+        cbCurso.setItems(FXCollections.observableArrayList(Aluno.cursos));
+        cbRamo.setItems(FXCollections.observableArrayList(Aluno.ramos));
 
         GridPane gp = new GridPane();
         gp.setVgap(4);
         gp.setHgap(10);
+        gp.addRow(0, lbNAluno, lbNome);
+        gp.addRow(1, tfNAluno, tfNome);
+        gp.addRow(2, lbEmail);
+        gp.addRow(3, tfEmail);
+        gp.addRow(4, lbSiglaCurso, lbSiglaRamos);
+        gp.addRow(5, cbCurso, cbRamo);
+        gp.addRow(6, lbClassif, lbAcessoEstagio);
+        gp.addRow(7, tfClassif, ckAcessoEstagio);
+        gp.addRow(8, btnEnviar);
 
+        GridPane.setColumnSpan(tfEmail, 2);
+        GridPane.setColumnSpan(btnEnviar, 2);
+        GridPane.setHalignment(btnEnviar, HPos.RIGHT);
+        this.setPadding(new Insets(20));
+
+        this.setCenter(gp);
     }
 }

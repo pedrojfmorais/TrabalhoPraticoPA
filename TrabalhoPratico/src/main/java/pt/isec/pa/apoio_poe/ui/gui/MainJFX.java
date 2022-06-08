@@ -20,6 +20,10 @@ public class MainJFX extends Application {
 
     @Override
     public void start(Stage stage) {
+        configureGUI(stage);
+    }
+
+    private void configureGUI(Stage stage){
         Scene scene = new Scene(new ApoioPoEGUI(fsm), 500, 500, Color.BLACK);
         stage.setScene(scene);
         stage.setTitle("Trabalho Prático");
