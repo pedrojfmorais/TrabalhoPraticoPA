@@ -53,15 +53,15 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
                         return false;
                 }
 
-                if(data.getCandidatura(alunosSemProposta.get(i).getnAluno()) == null)
+                if(data.getCandidatura(alunosSemProposta.get(i).getNAluno()) == null)
                     continue;
 
-                for(var proposta : data.getCandidatura(alunosSemProposta.get(i).getnAluno()).getIdPropostas()) {
+                for(var proposta : data.getCandidatura(alunosSemProposta.get(i).getNAluno()).getIdPropostas()) {
 
                     if (data.getProposta(proposta) instanceof Estagio &&
                             data.getPropostaAtribuida(proposta) == null) { // se for estágio e ainda não estiver atribuido
 
-                        data.atribuirPropostaAluno(proposta, alunosSemProposta.get(i).getnAluno());
+                        data.atribuirPropostaAluno(proposta, alunosSemProposta.get(i).getNAluno());
                     }
                 }
             }
@@ -81,12 +81,12 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
                         return false;
                 }
 
-                if (data.getCandidatura(alunosSemProposta.get(i).getnAluno()) == null)
+                if (data.getCandidatura(alunosSemProposta.get(i).getNAluno()) == null)
                     continue;
 
-                for (var proposta : data.getCandidatura(alunosSemProposta.get(i).getnAluno()).getIdPropostas())
+                for (var proposta : data.getCandidatura(alunosSemProposta.get(i).getNAluno()).getIdPropostas())
                     if (data.getPropostaAtribuida(proposta) == null)
-                        data.atribuirPropostaAluno(proposta, alunosSemProposta.get(i).getnAluno());
+                        data.atribuirPropostaAluno(proposta, alunosSemProposta.get(i).getNAluno());
 
             }
         }
@@ -97,8 +97,8 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
     private boolean verificaConflito(Aluno aluno1, Aluno aluno2){
         if (aluno1.getClassificacao() == aluno2.getClassificacao()) {
 
-            if(data.getCandidatura(aluno1.getnAluno()) != null &&
-                    data.getCandidatura(aluno2.getnAluno()) != null) {
+            if(data.getCandidatura(aluno1.getNAluno()) != null &&
+                    data.getCandidatura(aluno2.getNAluno()) != null) {
 
                 setConflito(aluno1, aluno2);
 
@@ -113,11 +113,11 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
         this.aluno1Conflito = aluno1Conflito;
         this.aluno2Conflito = aluno2Conflito;
 
-        for(var proposta : data.getCandidatura(aluno1Conflito.getnAluno()).getIdPropostas())
+        for(var proposta : data.getCandidatura(aluno1Conflito.getNAluno()).getIdPropostas())
             if(data.getPropostaAtribuida(proposta) == null)
                 propostaDisponiveisAluno1.add(data.getProposta(proposta));
 
-        for(var proposta : data.getCandidatura(aluno2Conflito.getnAluno()).getIdPropostas())
+        for(var proposta : data.getCandidatura(aluno2Conflito.getNAluno()).getIdPropostas())
             if(data.getPropostaAtribuida(proposta) == null)
                 propostaDisponiveisAluno2.add(data.getProposta(proposta));
     }
@@ -166,11 +166,11 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
         if(dados.length != 2)
             return false;
 
-        if(Long.parseLong(dados[0]) == aluno1Conflito.getnAluno()) {
+        if(Long.parseLong(dados[0]) == aluno1Conflito.getNAluno()) {
             if (!propostaDisponiveisAluno1.contains(data.getProposta(dados[1])))
                 return false;
 
-        }else if(Long.parseLong(dados[0]) == aluno2Conflito.getnAluno()) {
+        }else if(Long.parseLong(dados[0]) == aluno2Conflito.getNAluno()) {
                 if (!propostaDisponiveisAluno2.contains(data.getProposta(dados[1])))
                     return false;
         }else

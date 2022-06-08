@@ -8,8 +8,6 @@ import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 import pt.isec.pa.apoio_poe.model.memento.IMemento;
 import pt.isec.pa.apoio_poe.model.memento.IOriginator;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -265,7 +263,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
 
             for(var aluno : apoioPOE.getAlunos()){
 
-                sb.append(aluno.getnAluno()).append(",").append(aluno.getNome()).append(",");
+                sb.append(aluno.getNAluno()).append(",").append(aluno.getNome()).append(",");
                 sb.append(aluno.getEmail()).append(",").append(aluno.getSiglaCurso()).append(",");
                 sb.append(aluno.getSiglaRamo()).append(",").append(aluno.getClassificacao()).append(",");
                 sb.append(aluno.isAcessoEstagio()).append(System.lineSeparator());

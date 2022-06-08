@@ -2,6 +2,7 @@ package pt.isec.pa.apoio_poe.model.fsm;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoE;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
+import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 import pt.isec.pa.apoio_poe.utils.PAInput;
@@ -9,6 +10,7 @@ import pt.isec.pa.apoio_poe.utils.PAInput;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.*;
+import java.util.ArrayList;
 
 public class ApoioPoEContext {
 
@@ -209,4 +211,6 @@ public class ApoioPoEContext {
 
         return true;
     }
+
+    public ArrayList<Aluno> getAlunos(){return data.getAlunos();}
 }

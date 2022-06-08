@@ -853,7 +853,7 @@ public class ApoioPoE implements Serializable, Cloneable {
             alunosComProposta.add(propostasAtribuidas.getnAlunoAssociado());
 
          for(var aluno : alunos.values())
-            if(!alunosComProposta.contains(aluno.getnAluno()) && candidaturas.get(aluno.getnAluno()) != null)
+            if(!alunosComProposta.contains(aluno.getNAluno()) && candidaturas.get(aluno.getNAluno()) != null)
                resultado.add(aluno);
       }
 
@@ -867,7 +867,7 @@ public class ApoioPoE implements Serializable, Cloneable {
             sb.append("Ordem da preferência: ");
 
             for(var propostaAtrib : propostasAtribuidas.values())
-               if(propostaAtrib.getnAlunoAssociado() == aluno.getnAluno())
+               if(propostaAtrib.getnAlunoAssociado() == aluno.getNAluno())
                   sb.append(propostaAtrib.getOrdemPreferencia()).append(System.lineSeparator());
 
          }
@@ -925,7 +925,7 @@ public class ApoioPoE implements Serializable, Cloneable {
             alunosComCandidatura.add(candidatura.getnAluno());
 
          for (var aluno : alunos.values())
-            if (!alunosComCandidatura.contains(aluno.getnAluno()))
+            if (!alunosComCandidatura.contains(aluno.getNAluno()))
                resultado.add(aluno);
       }
 
@@ -972,7 +972,7 @@ public class ApoioPoE implements Serializable, Cloneable {
             alunosComProposta.add(propostasAtribuidas.getnAlunoAssociado());
 
          for (var aluno : alunos.values())
-            if (!alunosComProposta.contains(aluno.getnAluno()))
+            if (!alunosComProposta.contains(aluno.getNAluno()))
                resultado.add(aluno);
       }
 
@@ -986,7 +986,7 @@ public class ApoioPoE implements Serializable, Cloneable {
             sb.append("Ordem da preferência: ");
 
             for (var propostaAtrib : propostasAtribuidas.values())
-               if (propostaAtrib.getnAlunoAssociado() == aluno.getnAluno())
+               if (propostaAtrib.getnAlunoAssociado() == aluno.getNAluno())
                   sb.append(propostaAtrib.getOrdemPreferencia()).append(System.lineSeparator());
          }
 
@@ -1215,13 +1215,13 @@ public class ApoioPoE implements Serializable, Cloneable {
          boolean insereAluno = true;
 
          for (var proposta : propostas.values())
-            if (proposta.getnAlunoAssociado() == aluno.getnAluno()) {
+            if (proposta.getnAlunoAssociado() == aluno.getNAluno()) {
                insereAluno = false;
                break;
             }
 
          for (var propostaAtribuida : propostasAtribuidas.values())
-            if (propostaAtribuida.getnAlunoAssociado() == aluno.getnAluno()) {
+            if (propostaAtribuida.getnAlunoAssociado() == aluno.getNAluno()) {
                insereAluno = false;
                break;
             }

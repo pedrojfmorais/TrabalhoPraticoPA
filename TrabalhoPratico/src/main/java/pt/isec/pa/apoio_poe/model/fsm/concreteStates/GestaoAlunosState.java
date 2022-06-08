@@ -131,7 +131,7 @@ public class GestaoAlunosState extends ApoioPoEAdapter {
         careTaker.save();
 
         while(data.getAlunos().size() > 0)
-            data.removeAluno(data.getAlunos().get(0).getnAluno());
+            data.removeAluno(data.getAlunos().get(0).getNAluno());
 
         return data.getAlunos().size() == 0;
     }

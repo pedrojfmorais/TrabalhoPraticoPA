@@ -3,9 +3,10 @@ package pt.isec.pa.apoio_poe.ui.gui;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
@@ -55,15 +56,40 @@ public class GerirAlunos extends BorderPane {
         this.setTop(hbox);
 
         this.setCenter(tAluno);
-    }
 
+        TableColumn<Aluno,String> tcNAluno = new TableColumn("Número Aluno");
+        tcNAluno.setCellValueFactory(new PropertyValueFactory<>("nAluno"));
+        TableColumn<Aluno,String> tcNome = new TableColumn("Nome");
+        tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        TableColumn<Aluno,String> tcEmail = new TableColumn("Email");
+        tcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        tAluno.getColumns().clear();
+        tAluno.getColumns().addAll(tcNAluno,tcNome,tcEmail);
+
+    }
 
     private void registerHandlers(){
         fsm.addPropertyChangeListener(ApoioPoEContext.PROP_FASE, evt -> update());
+
+        btnEliminar.setOnAction(actionEvent -> {
+            Aluno aluno = tAluno.getSelectionModel().getSelectedItem();
+            if(aluno != null)
+                fsm.removerDados(String.valueOf(aluno.getNAluno()));
+            update();
+        });
+
+        btnAdicionar.setOnAction(actionEvent -> {
+
+        });
 
     }
 
     private void update(){
         this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.GESTAO_ALUNOS);
+
+        tAluno.getItems().clear();
+        for (var aluno : fsm.getAlunos() )
+            tAluno.getItems().add(aluno);
     }
 }

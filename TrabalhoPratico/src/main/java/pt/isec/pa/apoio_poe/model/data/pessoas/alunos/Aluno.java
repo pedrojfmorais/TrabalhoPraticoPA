@@ -29,7 +29,7 @@ public class Aluno extends Pessoa implements Comparable<Aluno>{
         this.acessoEstagio = acessoEstagio;
     }
 
-    public long getnAluno() {
+    public long getNAluno() {
         return nAluno;
     }
 
