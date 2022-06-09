@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class ApoioPoEContext {
 
     public static final String PROP_FASE = "_FASE_";
+    public static final String PROP_ALUNO = "_ALUNO_";
     PropertyChangeSupport pcs;
     private ApoioPoEManager data;
     private IApoioPoEState state;
@@ -122,13 +123,19 @@ public class ApoioPoEContext {
     }
 
     public boolean adicionarDados(String... dados) {
-        return state.adicionarDados(dados);
+        boolean result = state.adicionarDados(dados);
+        pcs.firePropertyChange(PROP_ALUNO, null, null);
+        return result;
     }
     public boolean editarDados(String... dados) {
-        return state.editarDados(dados);
+        boolean result = state.editarDados(dados);
+        pcs.firePropertyChange(PROP_ALUNO, null, null);
+        return result;
     }
     public boolean removerDados(String... dados) {
-        return state.removerDados(dados);
+        boolean result = state.removerDados(dados);
+        pcs.firePropertyChange(PROP_ALUNO, null, null);
+        return result;
     }
     public String consultarDados(String filtro) {
         return state.consultarDados(filtro);
@@ -137,7 +144,9 @@ public class ApoioPoEContext {
     public boolean atribuicaoAutomaticaPropostasDisponiveis(){return state.atribuicaoAutomaticaPropostasDisponiveis();}
 
     public boolean importarDadosFicheiroCsv(String filename) {
-        return state.importarDadosFicheiroCsv(filename);
+        boolean result = state.importarDadosFicheiroCsv(filename);
+        pcs.firePropertyChange(PROP_ALUNO, null, null);
+        return result;
     }
     public boolean exportarDadosFicheiroCsv(String filename) {
         return state.exportarDadosFicheiroCsv(filename);
@@ -172,12 +181,24 @@ public class ApoioPoEContext {
         return state.exportarPropostasAtribuidasFicheiroCsv(filename, guardarOrientador);
     }
 
-    public boolean removerTodosDados(){return state.removerTodosDados();}
+    public boolean removerTodosDados(){
+        boolean result = state.removerTodosDados();
+        pcs.firePropertyChange(PROP_ALUNO, null, null);
+        return result;
+    }
 
-    public boolean undo(){return state.undo();}
+    public boolean undo(){
+        boolean result = state.undo();
+        pcs.firePropertyChange(PROP_ALUNO, null, null);
+        return result;
+    }
     public boolean hasUndo(){return state.hasUndo();}
 
-    public boolean redo(){return state.redo();}
+    public boolean redo(){
+        boolean result = state.redo();
+        pcs.firePropertyChange(PROP_ALUNO, null, null);
+        return result;
+    }
     public boolean hasRedo(){return state.hasRedo();}
 
     public String getTipoProposta(String id){return data.getTipoProposta(id);}

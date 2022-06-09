@@ -3,6 +3,7 @@ package pt.isec.pa.apoio_poe.ui.gui;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.ui.gui.aluno.GerirAlunos;
 
 public class ApoioPoEGUI extends BorderPane {
     ApoioPoEContext fsm;
