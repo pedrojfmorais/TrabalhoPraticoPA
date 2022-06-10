@@ -234,4 +234,5 @@ public class ApoioPoEContext {
     }
 
     public ArrayList<Aluno> getAlunos(){return data.getAlunos();}
+    public Aluno getAluno(long nAluno){return data.getAluno(nAluno);}
 }

@@ -26,7 +26,7 @@ public class MainJFX extends Application {
     private void configureGUI(Stage stage){
         Scene scene = new Scene(new ApoioPoEGUI(fsm), 500, 500, Color.BLACK);
         stage.setScene(scene);
-        stage.setTitle("Trabalho Prático");
+        stage.setTitle("Apoio Projeto ou Estágio");
         stage.show();
     }
 

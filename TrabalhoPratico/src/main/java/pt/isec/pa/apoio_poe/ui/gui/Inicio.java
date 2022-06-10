@@ -57,10 +57,7 @@ public class Inicio extends BorderPane {
     private void registerHandlers() {
         fsm.addPropertyChangeListener(ApoioPoEContext.PROP_FASE, evt -> update());
 
-        btnComecarNovo.setOnAction(ev -> {
-            fsm.comecarNovo();
-            update();
-        });
+        btnComecarNovo.setOnAction(ev -> fsm.comecarNovo());
 
         btnCarregarSave.setOnAction(e -> {
 
@@ -75,7 +72,6 @@ public class Inicio extends BorderPane {
 
             if(hFile != null)
                 fsm.carregarSave(hFile.getAbsolutePath());
-            update();
         });
 
         btnSair.setOnAction(ev -> Platform.exit());

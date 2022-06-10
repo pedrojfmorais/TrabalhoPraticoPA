@@ -21,8 +21,6 @@ public class ImageManager {
                 image = new Image(is);
                 images.put(filename, image);
             } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("aqui");
                 return null;
             }
         }

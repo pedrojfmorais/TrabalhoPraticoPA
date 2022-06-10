@@ -6,7 +6,8 @@ public class CSSManager {
     private CSSManager() { }
 
     public static void applyCSS(Parent parent, String filename) {
-        var url = CSSManager.class.getResource("css/"+filename);
+        var url = CSSManager.class.getResource("css/" +filename);
+        System.out.println(filename);
         if (url == null)
             return;
         String fileCSS = url.toExternalForm();

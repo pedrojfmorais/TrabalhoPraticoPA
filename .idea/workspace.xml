@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2239089f-0a11-4168-b998-ec0f481ff2a7" name="Changes" comment="alteração de organização de pastas" />
+    <list default="true" id="2239089f-0a11-4168-b998-ec0f481ff2a7" name="Changes" comment="alteração de organização de pastas">
+      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrabalhoPratico/TrabalhoPratico.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/TrabalhoPratico.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,9 +26,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Desktop/Escola/ISEC/Licenciatura de Engenharia Informática/Cadeiras/2º Ano/2º Semestre/Programação Avançada/Trabalho Prático/TrabalhoPratico",
+    "project.structure.last.edited": "Global Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="pt.isec.pa.apoio_poe.Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pt.isec.pa.apoio_poe.Main" />
+      <module name="TrabalhoPratico" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-17.0.2\lib&quot; --add-modules=javafx.controls" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pt.isec.pa.apoio_poe.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -35,6 +63,7 @@
       <updated>1651445284307</updated>
       <workItem from="1651445286868" duration="102000" />
       <workItem from="1651445549961" duration="9000" />
+      <workItem from="1654853599371" duration="271000" />
     </task>
     <task id="LOCAL-00001" summary="alteração de organização de pastas">
       <created>1651445362104</created>

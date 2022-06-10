@@ -54,18 +54,10 @@ public class Fase1 extends BorderPane {
 
         fsm.addPropertyChangeListener(ApoioPoEContext.PROP_FASE, evt -> update());
 
-        btnGerirAlunos.setOnAction(event -> {
-            fsm.gerirAlunos();
-            update();
-        });
-        btnGerirDocentes.setOnAction(event -> {
-            fsm.gerirDocentes();
-            update();
-        });
-        btnGerirPropostas.setOnAction(event -> {
-            fsm.gerirPropostas();
-            update();
-        });
+        btnGerirAlunos.setOnAction(event -> fsm.gerirAlunos());
+        btnGerirDocentes.setOnAction(event -> fsm.gerirDocentes());
+        btnGerirPropostas.setOnAction(event -> fsm.gerirPropostas());
+
         btnAvancar.setOnAction(event -> {
             Alert alert = new Alert(
                     Alert.AlertType.CONFIRMATION,
@@ -97,9 +89,7 @@ public class Fase1 extends BorderPane {
                 }
             });
         });
-        update();
     }
-
 
     private void update() {
         this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.FASE1);

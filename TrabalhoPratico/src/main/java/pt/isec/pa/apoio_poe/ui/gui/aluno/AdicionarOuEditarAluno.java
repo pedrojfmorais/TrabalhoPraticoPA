@@ -32,6 +32,8 @@ public class AdicionarOuEditarAluno extends BorderPane {
 
     Button btnEnviar;
 
+    boolean editar;
+
     public AdicionarOuEditarAluno(ApoioPoEContext fsm){
         this.fsm = fsm;
 
@@ -99,6 +101,8 @@ public class AdicionarOuEditarAluno extends BorderPane {
     private void registerHandlers(){
         btnEnviar.setOnAction(actionEvent -> {
 
+            System.out.println(tfNAluno.getStyleClass().get(tfNAluno.getStyleClass().size()-1));
+
             boolean errors = false;
 
             tfNAluno.getStyleClass().remove("error");
@@ -148,19 +152,36 @@ public class AdicionarOuEditarAluno extends BorderPane {
             }
 
             if(!errors){
-                if(fsm.adicionarDados(tfNAluno.getText(), tfNome.getText(), tfEmail.getText(),
-                        cbCurso.getSelectionModel().getSelectedItem(), cbRamo.getSelectionModel().getSelectedItem(),
-                        tfClassif.getText(), String.valueOf(ckAcessoEstagio.isSelected()))){
-                    this.getScene().getWindow().hide();
-                }else {
-                    switch (ErrorOccurred.getInstance().getLastError()){
+                if(!editar) { //adicionar
+                    if (fsm.adicionarDados(tfNAluno.getText(), tfNome.getText(), tfEmail.getText(),
+                            cbCurso.getSelectionModel().getSelectedItem(), cbRamo.getSelectionModel().getSelectedItem(),
+                            tfClassif.getText(), String.valueOf(ckAcessoEstagio.isSelected()))) {
+                        this.getScene().getWindow().hide();
+                    } else {
+                        switch (ErrorOccurred.getInstance().getLastError()) {
 
-                        case DUPLICATED_NUMERO_ALUNO, INVALID_NUMERO_ALUNO -> tfNAluno.getStyleClass().add("error");
-                        case DUPLICATED_EMAIL -> tfEmail.getStyleClass().add("error");
-                        case INVALID_CURSO -> cbCurso.getStyleClass().add("error");
-                        case INVALID_RAMO -> cbRamo.getStyleClass().add("error");
-                        case INVALID_CLASSIFICACAO -> tfClassif.getStyleClass().add("error");
+                            case DUPLICATED_NUMERO_ALUNO, INVALID_NUMERO_ALUNO -> tfNAluno.getStyleClass().add("error");
+                            case DUPLICATED_EMAIL -> tfEmail.getStyleClass().add("error");
+                            case INVALID_CURSO -> cbCurso.getStyleClass().add("error");
+                            case INVALID_RAMO -> cbRamo.getStyleClass().add("error");
+                            case INVALID_CLASSIFICACAO -> tfClassif.getStyleClass().add("error");
 
+                        }
+                    }
+                } else { //editar
+                    if (fsm.editarDados(tfNAluno.getText(), tfNome.getText(),
+                            cbCurso.getSelectionModel().getSelectedItem(), cbRamo.getSelectionModel().getSelectedItem(),
+                            tfClassif.getText(), String.valueOf(ckAcessoEstagio.isSelected()))) {
+                        this.getScene().getWindow().hide();
+                    } else {
+                        switch (ErrorOccurred.getInstance().getLastError()) {
+
+                            case INVALID_NUMERO_ALUNO -> tfNAluno.getStyleClass().add("error");
+                            case INVALID_CURSO -> cbCurso.getStyleClass().add("error");
+                            case INVALID_RAMO -> cbRamo.getStyleClass().add("error");
+                            case INVALID_CLASSIFICACAO -> tfClassif.getStyleClass().add("error");
+
+                        }
                     }
                 }
             }
@@ -169,6 +190,11 @@ public class AdicionarOuEditarAluno extends BorderPane {
 
     private void update() {
 
+        tfNAluno.setDisable(false);
+        tfEmail.setDisable(false);
+
+        editar = false;
+        btnEnviar.setText("Adicionar");
     }
 
     public void setData(){
@@ -181,6 +207,12 @@ public class AdicionarOuEditarAluno extends BorderPane {
             cbRamo.getSelectionModel().select(editarAluno.getSiglaRamo());
             tfClassif.setText(String.valueOf(editarAluno.getClassificacao()));
             ckAcessoEstagio.setSelected(editarAluno.isAcessoEstagio());
+
+            tfNAluno.setDisable(true);
+            tfEmail.setDisable(true);
+
+            btnEnviar.setText("Editar");
+            editar = true;
         }
     }
 }
