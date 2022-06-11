@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui;
+package pt.isec.pa.apoio_poe.ui.gui.Fase1;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,8 +11,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
-import pt.isec.pa.apoio_poe.ui.gui.aluno.PiechartAlunosRamos;
-import pt.isec.pa.apoio_poe.ui.gui.proposta.PiechartPropostasRamos;
+import pt.isec.pa.apoio_poe.ui.gui.Fase1.aluno.PiechartAlunosRamos;
+import pt.isec.pa.apoio_poe.ui.gui.Fase1.proposta.PiechartPropostasRamos;
 
 public class Fase1 extends BorderPane {
 
@@ -44,7 +44,7 @@ public class Fase1 extends BorderPane {
         btnGerirAlunos.setPrefSize(125, 50);
         btnGerirDocentes.setPrefSize(125, 50);
         btnGerirPropostas.setPrefSize(125, 50);
-        btnAvancar.setPrefSize(100, 40);
+        btnAvancar.setPrefSize(75, 30);
 
         VBox vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
@@ -139,5 +139,4 @@ public class Fase1 extends BorderPane {
         this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.FASE1);
         dialog.close();
     }
-
 }

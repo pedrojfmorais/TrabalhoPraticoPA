@@ -134,7 +134,7 @@ public class GestaoCandidaturasState extends ApoioPoEAdapter {
         careTaker.save();
 
         while(data.getCandidaturas().size() > 0)
-            data.removeCandidatura(data.getCandidaturas().get(0).getnAluno());
+            data.removeCandidatura(data.getCandidaturas().get(0).getNAluno());
 
         return data.getCandidaturas().size() == 0;
     }

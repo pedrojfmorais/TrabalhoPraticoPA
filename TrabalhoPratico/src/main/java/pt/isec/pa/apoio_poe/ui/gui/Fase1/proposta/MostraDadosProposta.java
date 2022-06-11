@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.proposta;
+package pt.isec.pa.apoio_poe.ui.gui.Fase1.proposta;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

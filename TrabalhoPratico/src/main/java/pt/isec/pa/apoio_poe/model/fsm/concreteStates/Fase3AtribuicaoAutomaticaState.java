@@ -130,34 +130,23 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
     }
 
     @Override
-    public String consultarAlunos(boolean... filtros) {
-        StringBuilder sb = new StringBuilder();
+    public ArrayList<Aluno> consultarAlunos(boolean... filtros) {
+        ArrayList<Aluno> alunos = new ArrayList<>();
+        alunos.add(aluno1Conflito);
+        alunos.add(aluno2Conflito);
 
-        sb.append("Aluno 1:").append(System.lineSeparator()).append(aluno1Conflito).append(System.lineSeparator());
-        sb.append("Aluno 2:").append(System.lineSeparator()).append(aluno2Conflito).append(System.lineSeparator());
-
-        return sb.toString();
+        return alunos;
     }
 
     @Override
-    public String consultarPropostas(boolean... filtros) {
-        if(filtros.length != 1)
+    public ArrayList<Proposta> consultarPropostas(boolean... filtros) {
+        if (filtros.length != 1)
             return null;
 
-        StringBuilder sb = new StringBuilder();
-
-        if(filtros[0]) {
-            sb.append("Propostas disponiveis para o aluno 1:").append(System.lineSeparator());
-            for (var proposta : propostaDisponiveisAluno1)
-                sb.append(proposta).append(System.lineSeparator());
-        }
-        else {
-            sb.append("Propostas disponiveis para o aluno 2:").append(System.lineSeparator());
-            for (var proposta : propostaDisponiveisAluno2)
-                sb.append(proposta).append(System.lineSeparator());
-        }
-
-        return sb.toString();
+        if (filtros[0])
+            return propostaDisponiveisAluno1;
+        else
+            return propostaDisponiveisAluno2;
     }
 
     @Override

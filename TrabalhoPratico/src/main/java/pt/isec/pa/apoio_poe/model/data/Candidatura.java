@@ -15,7 +15,7 @@ public class Candidatura implements Comparable<Candidatura>, Cloneable, Serializ
         this.idPropostas = idPropostas;
     }
 
-    public long getnAluno() {
+    public long getNAluno() {
         return nAluno;
     }
 

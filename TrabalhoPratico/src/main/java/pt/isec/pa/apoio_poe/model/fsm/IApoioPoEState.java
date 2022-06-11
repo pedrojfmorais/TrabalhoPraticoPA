@@ -1,5 +1,10 @@
 package pt.isec.pa.apoio_poe.model.fsm;
 
+import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
+import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
+
+import java.util.ArrayList;
+
 public interface IApoioPoEState {
 
     //Inicio
@@ -24,10 +29,10 @@ public interface IApoioPoEState {
     boolean terminarAplicacao(String file);
 
     //Fase 2, 3, 4, 5, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta, 3 Atribuição Automática
-    String consultarAlunos(boolean ... filtros);
+    ArrayList<Aluno> consultarAlunos(boolean ... filtros);
 
     //Fase 2, 3, 5, 2 Bloqueada, 3 Bloqueada, 3 Mas 2 Aberta, 3 Atribuição Automática
-    String consultarPropostas(boolean ... filtros);
+    ArrayList<Proposta> consultarPropostas(boolean ... filtros);
 
     //Os 6 estados de Gestão
     boolean adicionarDados(String ... dados);

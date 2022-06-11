@@ -506,7 +506,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          candidatura.removeProposta(id);
 
          if (candidatura.getIdPropostas().isEmpty())
-            removeCandidatura(candidatura.getnAluno());
+            removeCandidatura(candidatura.getNAluno());
       }
 
       return propostas.remove(id) != null;
@@ -842,10 +842,9 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
-   public String consultarAlunosFase5(boolean comPropostaAtribuida){
+   public ArrayList<Aluno> consultarAlunosFase5(boolean comPropostaAtribuida){
 
       HashSet<Aluno> resultado = new HashSet<>();
-      StringBuilder sb = new StringBuilder();
 
       if(comPropostaAtribuida)
 
@@ -866,27 +865,12 @@ public class ApoioPoE implements Serializable, Cloneable {
       ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
       Collections.sort(resultadoOrdenado);
 
-      for(var aluno : resultadoOrdenado) {
-
-         if (comPropostaAtribuida) {
-
-            sb.append("Ordem da preferência: ");
-
-            for(var propostaAtrib : propostasAtribuidas.values())
-               if(propostaAtrib.getnAlunoAssociado() == aluno.getNAluno())
-                  sb.append(propostaAtrib.getOrdemPreferencia()).append(System.lineSeparator());
-
-         }
-         sb.append(aluno).append(System.lineSeparator());
-      }
-
-      return sb.toString();
+      return resultadoOrdenado;
    }
 
-   public String consultarAlunos(boolean comOrientadorAssociado) {
+   public ArrayList<Aluno> consultarAlunos(boolean comOrientadorAssociado) {
 
       HashSet<Aluno> resultado = new HashSet<>();
-      StringBuilder sb = new StringBuilder();
 
       if (comOrientadorAssociado) {
          for (var propostasAtribuidas : propostasAtribuidas.values())
@@ -900,15 +884,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
       Collections.sort(resultadoOrdenado);
 
-      for (var aluno : resultadoOrdenado)
-         sb.append(aluno).append(System.lineSeparator());
-
-      return sb.toString();
+      return resultadoOrdenado;
    }
 
-   public String consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean semCandidatura) {
+   public ArrayList<Aluno> consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean semCandidatura) {
       HashSet<Aluno> resultado = new HashSet<>();
-      StringBuilder sb = new StringBuilder();
 
       if (!autoproposta && !comCandidatura && !semCandidatura)
          resultado = new HashSet<>(alunos.values());
@@ -921,14 +901,14 @@ public class ApoioPoE implements Serializable, Cloneable {
 
       if (comCandidatura) {
          for (var candidatura : candidaturas.values())
-            resultado.add(alunos.get(candidatura.getnAluno()));
+            resultado.add(alunos.get(candidatura.getNAluno()));
       }
 
       if (semCandidatura) {
          HashSet<Long> alunosComCandidatura = new HashSet<>();
 
          for (var candidatura : candidaturas.values())
-            alunosComCandidatura.add(candidatura.getnAluno());
+            alunosComCandidatura.add(candidatura.getNAluno());
 
          for (var aluno : alunos.values())
             if (!alunosComCandidatura.contains(aluno.getNAluno()))
@@ -938,17 +918,13 @@ public class ApoioPoE implements Serializable, Cloneable {
       ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
       Collections.sort(resultadoOrdenado);
 
-      for (var aluno : resultadoOrdenado)
-         sb.append(aluno).append(System.lineSeparator());
-
-      return sb.toString();
+      return resultadoOrdenado;
    }
 
-   public String consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean comPropostaAtribuida, boolean semPropostaAtribuida) {
+   public ArrayList<Aluno> consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean comPropostaAtribuida, boolean semPropostaAtribuida) {
 
       HashSet<Aluno> resultado = new HashSet<>();
       HashSet<Aluno> resultadoComPropostaAtribuida = new HashSet<>();
-      StringBuilder sb = new StringBuilder();
 
       if (!autoproposta && !comCandidatura && !comPropostaAtribuida && !semPropostaAtribuida)
          resultado = new HashSet<>(alunos.values());
@@ -961,7 +937,7 @@ public class ApoioPoE implements Serializable, Cloneable {
 
       if (comCandidatura) {
          for (var candidatura : candidaturas.values())
-            resultado.add(alunos.get(candidatura.getnAluno()));
+            resultado.add(alunos.get(candidatura.getNAluno()));
       }
 
       if (comPropostaAtribuida) {
@@ -985,21 +961,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
       Collections.sort(resultadoOrdenado);
 
-      for (var aluno : resultadoOrdenado) {
-
-         if (resultadoComPropostaAtribuida.contains(aluno)) {
-
-            sb.append("Ordem da preferência: ");
-
-            for (var propostaAtrib : propostasAtribuidas.values())
-               if (propostaAtrib.getnAlunoAssociado() == aluno.getNAluno())
-                  sb.append(propostaAtrib.getOrdemPreferencia()).append(System.lineSeparator());
-         }
-
-         sb.append(aluno).append(System.lineSeparator());
-      }
-
-      return sb.toString();
+      return resultadoOrdenado;
    }
 
    public String consultarDocentes(String filtro){
@@ -1045,7 +1007,7 @@ public class ApoioPoE implements Serializable, Cloneable {
            return sb.toString();
    }
 
-   public String consultarPropostas(boolean propostasAtribuidas){
+   public ArrayList<Proposta> consultarPropostas(boolean propostasAtribuidas){
 
       HashSet<String> resultado = new HashSet<>();
       StringBuilder sb = new StringBuilder();
@@ -1077,18 +1039,20 @@ public class ApoioPoE implements Serializable, Cloneable {
       ArrayList<String> resultadoOrdenado = new ArrayList<>(resultado);
       Collections.sort(resultadoOrdenado);
 
+      ArrayList<Proposta> res = new ArrayList<>();
+
       for(var proposta : resultadoOrdenado) {
          if (propostasAtribuidas)
-            sb.append(this.propostasAtribuidas.get(proposta));
+            res.add(this.propostasAtribuidas.get(proposta));
          else
-            sb.append(propostas.get( proposta));
+            res.add(propostas.get( proposta));
          sb.append(System.lineSeparator());
       }
 
-      return sb.toString();
+      return res;
    }
 
-   public String consultarPropostas(boolean autopropostasAlunos, boolean propostasDocentes, boolean comCandidatura, boolean semCandidatura){
+   public ArrayList<Proposta> consultarPropostas(boolean autopropostasAlunos, boolean propostasDocentes, boolean comCandidatura, boolean semCandidatura){
 
       HashSet<Proposta> resultado = new HashSet<>();
       StringBuilder sb = new StringBuilder();
@@ -1135,13 +1099,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       ArrayList<Proposta> resultadoOrdenado = new ArrayList<>(resultado);
       Collections.sort(resultadoOrdenado);
 
-      for(var proposta : resultadoOrdenado)
-         sb.append(proposta).append(System.lineSeparator());
-
-      return sb.toString();
+      return resultadoOrdenado;
    }
 
-   public String consultarPropostasFase3(boolean autopropostasAlunos, boolean propostasDocentes, boolean propostasDisponiveis, boolean propostasAtribuidas){
+   public ArrayList<Proposta> consultarPropostasFase3(boolean autopropostasAlunos, boolean propostasDocentes, boolean propostasDisponiveis, boolean propostasAtribuidas){
 
       HashSet<Proposta> resultado = new HashSet<>();
       StringBuilder sb = new StringBuilder();
@@ -1190,10 +1151,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       ArrayList<Proposta> resultadoOrdenado = new ArrayList<>(resultado);
       Collections.sort(resultadoOrdenado);
 
-      for(var proposta : resultadoOrdenado)
-         sb.append(proposta).append(System.lineSeparator());
-
-      return sb.toString();
+      return resultadoOrdenado;
    }
 
    public ArrayList<PropostaAtribuida> consultarPropostasAtribuidasDocente(String email){

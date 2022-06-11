@@ -1,8 +1,12 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
+import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
+import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+
+import java.util.ArrayList;
 
 public class Fase2State extends ApoioPoEAdapter {
     public Fase2State(ApoioPoEContext context, ApoioPoEManager data) {
@@ -51,7 +55,7 @@ public class Fase2State extends ApoioPoEAdapter {
     }
 
     @Override
-    public String consultarAlunos(boolean ... filtros) {
+    public ArrayList<Aluno> consultarAlunos(boolean ... filtros) {
 
         if(filtros.length != 3)
             return null;
@@ -60,7 +64,7 @@ public class Fase2State extends ApoioPoEAdapter {
     }
 
     @Override
-    public String consultarPropostas(boolean ... filtros) {
+    public ArrayList<Proposta> consultarPropostas(boolean ... filtros) {
 
         if(filtros.length != 4)
             return null;

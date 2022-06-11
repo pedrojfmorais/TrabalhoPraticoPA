@@ -825,9 +825,20 @@ public class ApoioPoEUI {
 
             switch (PAInput.chooseOption("Resolva o conflito: ", "Consultar dados alunos",
                     "Consultar propostas aluno 1", "Consultar propostas aluno 2", "Resolver Conflito")){
-                case 1 -> System.out.println(fsm.consultarAlunos());
-                case 2 -> System.out.println(fsm.consultarPropostas(true));
-                case 3 -> System.out.println(fsm.consultarPropostas(false));
+                case 1 -> {
+                    for(var aluno : fsm.consultarAlunos())
+                        System.out.println(aluno);
+                }
+                case 2 -> {
+                    System.out.println("Propostas disponiveis para o aluno 1:");
+                    for(var proposta : fsm.consultarPropostas(true))
+                        System.out.println(proposta);
+                }
+                case 3 -> {
+                    System.out.println("Propostas disponiveis para o aluno 2:");
+                    for (var proposta : fsm.consultarPropostas(false))
+                        System.out.println(proposta);
+                }
                 case 4 -> fsm.adicionarDados(
                         PAInput.readString("Insira o número do aluno a atribuir a proposta: ", false),
                         PAInput.readString("Insira o identificador da proposta a atribuir: ", false));
@@ -855,7 +866,8 @@ public class ApoioPoEUI {
                 boolean comOrientadorAssociado = PAInput.chooseOption(
                         "Com Orientador Associado: ", "Sim", "Não") == 1;
 
-                System.out.println(fsm.consultarAlunos(comOrientadorAssociado));
+                for(var aluno : fsm.consultarAlunos(comOrientadorAssociado))
+                    System.out.println(aluno);
             }
             case 4 -> consultarDadosDocenteFase4_5();
             case 5 -> exportarDados(true);
@@ -959,7 +971,8 @@ public class ApoioPoEUI {
                         "Sem propostas atribuídas e com opções de candidatura") == 1)
                     comPropostaAtribuida = true;
 
-                System.out.println(fsm.consultarAlunos(comPropostaAtribuida));
+                for(var aluno : fsm.consultarAlunos(comPropostaAtribuida))
+                    System.out.println(aluno);
             }
             case 2 -> {
                 boolean propostasAtribuidas = false;
@@ -967,7 +980,8 @@ public class ApoioPoEUI {
                 if(PAInput.chooseOption("Lista de propostas: ", "Atribuídas", "Disponíveis") == 1)
                     propostasAtribuidas = true;
 
-                System.out.println(fsm.consultarPropostas(propostasAtribuidas));
+                for(var proposta : fsm.consultarPropostas(propostasAtribuidas))
+                    System.out.println(proposta);
             }
             case 3 -> consultarDadosDocenteFase4_5();
             case 4 -> {
@@ -1025,8 +1039,9 @@ public class ApoioPoEUI {
         if(PAInput.chooseOption("Sem Candidatura registada: ", "Sim", "Não") == 1)
             semCandidatura = true;
 
-        System.out.println(fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
-                comCandidatura, semCandidatura));
+        for(var proposta : fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
+                comCandidatura, semCandidatura))
+            System.out.println(proposta);
     }
 
     private void listaAlunosFase2() {
@@ -1040,7 +1055,8 @@ public class ApoioPoEUI {
             case 3 -> semCandidatura = true;
         }
 
-        System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, semCandidatura));
+        for(var aluno : fsm.consultarAlunos(autoproposta, comCandidatura, semCandidatura))
+            System.out.println(aluno);
     }
 
     private void listaPropostasFase3() {
@@ -1062,8 +1078,9 @@ public class ApoioPoEUI {
         if(PAInput.chooseOption("Propostas atribuidas: ", "Sim", "Não") == 1)
             propostasAtribuidas = true;
 
-        System.out.println(fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
-                propostasDisponiveis, propostasAtribuidas));
+        for(var proposta : fsm.consultarPropostas(autopropostasAlunos, propostasDocentes,
+                propostasDisponiveis, propostasAtribuidas))
+            System.out.println(proposta);
     }
 
     private void listaAlunosFase3() {
@@ -1078,9 +1095,10 @@ public class ApoioPoEUI {
             case 3 -> comPropostaAtribuida = true;
             case 4 -> semPropostaAtribuida = true;
         }
+        for(var aluno : fsm.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida,
+                semPropostaAtribuida))
+            System.out.println(aluno);
 
-        System.out.println(fsm.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida,
-                semPropostaAtribuida));
     }
 
     private void consultarDadosDocenteFase4_5() {

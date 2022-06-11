@@ -12,7 +12,7 @@ public class Main {
         ApoioPoEContext fsm = ApoioPoEContext.getInstance();
         ApoioPoEUI ui = new ApoioPoEUI(fsm);
 
-        //ui.start();
+//        ui.start();
 
         Application.launch(MainJFX.class, args);
     }

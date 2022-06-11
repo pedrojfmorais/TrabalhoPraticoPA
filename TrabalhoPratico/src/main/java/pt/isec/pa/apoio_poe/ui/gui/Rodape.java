@@ -20,7 +20,7 @@ public class Rodape extends HBox {
     private void createViews() {
 
 
-        lbRodape = new Label("Mariri Pedro");
+        lbRodape = new Label("Maria Abreu - Pedro Morais");
 
         lbRodape.setAlignment(Pos.CENTER);
         lbRodape.setPrefWidth(Integer.MAX_VALUE);

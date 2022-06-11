@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.proposta;
+package pt.isec.pa.apoio_poe.ui.gui.Fase1.aluno;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -14,13 +14,13 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 
 import java.util.ArrayList;
 
-public class PiechartPropostasRamos extends BorderPane {
+public class PiechartAlunosRamos extends BorderPane {
 
     ApoioPoEContext fsm;
 
-    PieChart pcPropostasRamos;
+    PieChart pcAlunosRamos;
 
-    public PiechartPropostasRamos(ApoioPoEContext fsm) {
+    public PiechartAlunosRamos(ApoioPoEContext fsm) {
         this.fsm = fsm;
 
         createViews();
@@ -30,30 +30,30 @@ public class PiechartPropostasRamos extends BorderPane {
 
     private void createViews(){
 
-        pcPropostasRamos = new PieChart();
+        pcAlunosRamos = new PieChart();
 
-        pcPropostasRamos.setTitle("Propostas por Ramo");
+        pcAlunosRamos.setTitle("Alunos por Ramo");
 
-        pcPropostasRamos.setClockwise(true);
-        pcPropostasRamos.setLabelsVisible(true);
-        pcPropostasRamos.setLegendVisible(true);
+        pcAlunosRamos.setClockwise(true);
+        pcAlunosRamos.setLabelsVisible(true);
+        pcAlunosRamos.setLegendVisible(true);
 
         ArrayList<PieChart.Data> dados = new ArrayList<>();
 
         for(var ramo : Aluno.ramos)
-            dados.add(new PieChart.Data(ramo, fsm.propostasPorRamo(ramo)));
+            dados.add(new PieChart.Data(ramo, fsm.nAlunosPorRamo(ramo)));
 
-        pcPropostasRamos.setData(FXCollections.observableArrayList(dados));
+        pcAlunosRamos.setData(FXCollections.observableArrayList(dados));
 
-        this.setCenter(pcPropostasRamos);
+        this.setCenter(pcAlunosRamos);
     }
 
     private void registerHandlers(){
         fsm.addPropertyChangeListener(ApoioPoEContext.PROP_FASE, evt -> update());
-        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_PROPOSTA, evt -> update());
+        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_ALUNO, evt -> update());
 
-        pcPropostasRamos.setOnMouseEntered(e -> {
-            for (var data : pcPropostasRamos.getData()) {
+        pcAlunosRamos.setOnMouseEntered(e -> {
+            for (var data : pcAlunosRamos.getData()) {
                 data.getNode().setOnMouseEntered(ev -> {
 
                     Label caption = new Label("");
@@ -63,7 +63,7 @@ public class PiechartPropostasRamos extends BorderPane {
 
                     caption.setTranslateX(ev.getSceneX() - caption.getLayoutX());
                     caption.setTranslateY(ev.getSceneY() - caption.getLayoutY());
-                    caption.setText(Math.round(data.getPieValue()) + " propostas");
+                    caption.setText(Math.round(data.getPieValue()) + " alunos");
                 });
             }
         });
@@ -74,8 +74,8 @@ public class PiechartPropostasRamos extends BorderPane {
         ArrayList<PieChart.Data> dados = new ArrayList<>();
 
         for(var ramo : Aluno.ramos)
-            dados.add(new PieChart.Data(ramo, fsm.propostasPorRamo(ramo)));
+            dados.add(new PieChart.Data(ramo, fsm.nAlunosPorRamo(ramo)));
 
-        pcPropostasRamos.setData(FXCollections.observableArrayList(dados));
+        pcAlunosRamos.setData(FXCollections.observableArrayList(dados));
     }
 }

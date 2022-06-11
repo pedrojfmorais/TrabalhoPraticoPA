@@ -1,9 +1,13 @@
 package pt.isec.pa.apoio_poe.model.fsm.concreteStates;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
+import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
+import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.model.fsm.IApoioPoEState;
+
+import java.util.ArrayList;
 
 
 abstract class ApoioPoEAdapter implements IApoioPoEState {
@@ -62,12 +66,12 @@ abstract class ApoioPoEAdapter implements IApoioPoEState {
     }
 
     @Override
-    public String consultarAlunos(boolean ... filtros) {
+    public ArrayList<Aluno> consultarAlunos(boolean ... filtros) {
         return null;
     }
 
     @Override
-    public String consultarPropostas(boolean... filtros) {
+    public ArrayList<Proposta> consultarPropostas(boolean... filtros) {
         return null;
     }
 

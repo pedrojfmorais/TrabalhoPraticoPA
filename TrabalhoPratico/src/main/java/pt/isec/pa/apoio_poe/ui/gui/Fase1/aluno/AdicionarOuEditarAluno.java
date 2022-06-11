@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.aluno;
+package pt.isec.pa.apoio_poe.ui.gui.Fase1.aluno;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.HPos;

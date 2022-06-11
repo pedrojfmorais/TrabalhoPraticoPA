@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.docente;
+package pt.isec.pa.apoio_poe.ui.gui.Fase1.docente;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
