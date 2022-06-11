@@ -16,7 +16,7 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.ui.gui.resources.*;
 
-public class GerirAlunos extends BorderPane {
+public class GerirAluno extends BorderPane {
     ApoioPoEContext fsm;
 
     Button btnAdicionar, btnEditar, btnEliminar, btnProcurar, btnRegressarFase;
@@ -24,7 +24,7 @@ public class GerirAlunos extends BorderPane {
     TableView<Aluno> tAluno;
     TextField tfFiltros;
 
-    public GerirAlunos(ApoioPoEContext fsm){
+    public GerirAluno(ApoioPoEContext fsm){
         this.fsm = fsm;
 
         createViews();
@@ -62,6 +62,7 @@ public class GerirAlunos extends BorderPane {
         TableColumn<Aluno,String> tcEmail = new TableColumn("Email");
         tcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
 
+        tAluno.setPlaceholder(new Label("Ainda não foram inseridos Alunos"));
         tAluno.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tAluno.getColumns().clear();
         tAluno.getColumns().addAll(tcNAluno,tcNome,tcEmail);

@@ -8,8 +8,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.*;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
-import pt.isec.pa.apoio_poe.utils.PAInput;
 
+//TODO quando abre uma gestão abre tambem uma outra janela com um piechart, alunos por ramos, propostas por ramo
 
 public class Fase1 extends BorderPane {
 

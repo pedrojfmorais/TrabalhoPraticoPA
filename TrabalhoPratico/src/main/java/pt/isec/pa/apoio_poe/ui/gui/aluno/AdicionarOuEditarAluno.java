@@ -14,20 +14,10 @@ import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
 public class AdicionarOuEditarAluno extends BorderPane {
     ApoioPoEContext fsm;
 
-    Label lbNAluno;
-    Label lbNome;
-    Label lbEmail;
-    Label lbSiglaCurso;
-    Label lbSiglaRamos;
-    Label lbClassif;
-    Label lbAcessoEstagio;
+    Label lbNAluno, lbNome, lbEmail, lbSiglaCurso, lbSiglaRamos, lbClassif, lbAcessoEstagio;
 
-    TextField tfNAluno;
-    TextField tfNome;
-    TextField tfEmail;
-    ComboBox<String> cbCurso;
-    ComboBox<String> cbRamo;
-    TextField tfClassif;
+    TextField tfNAluno, tfNome, tfEmail, tfClassif;
+    ComboBox<String> cbCurso, cbRamo;
     CheckBox ckAcessoEstagio;
 
     Button btnEnviar;
@@ -100,8 +90,6 @@ public class AdicionarOuEditarAluno extends BorderPane {
 
     private void registerHandlers(){
         btnEnviar.setOnAction(actionEvent -> {
-
-            System.out.println(tfNAluno.getStyleClass().get(tfNAluno.getStyleClass().size()-1));
 
             boolean errors = false;
 

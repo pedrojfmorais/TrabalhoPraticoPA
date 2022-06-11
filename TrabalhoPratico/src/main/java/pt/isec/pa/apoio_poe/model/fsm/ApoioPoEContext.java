@@ -2,7 +2,9 @@ package pt.isec.pa.apoio_poe.model.fsm;
 
 import pt.isec.pa.apoio_poe.model.data.ApoioPoE;
 import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
+import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
+import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 import pt.isec.pa.apoio_poe.utils.PAInput;
@@ -16,6 +18,8 @@ public class ApoioPoEContext {
 
     public static final String PROP_FASE = "_FASE_";
     public static final String PROP_ALUNO = "_ALUNO_";
+    public static final String PROP_DOCENTE = "_DOCENTE_";
+    public static final String PROP_PROPOSTA = "_PROPOSTA_";
     PropertyChangeSupport pcs;
     private ApoioPoEManager data;
     private IApoioPoEState state;
@@ -125,16 +129,22 @@ public class ApoioPoEContext {
     public boolean adicionarDados(String... dados) {
         boolean result = state.adicionarDados(dados);
         pcs.firePropertyChange(PROP_ALUNO, null, null);
+        pcs.firePropertyChange(PROP_DOCENTE, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         return result;
     }
     public boolean editarDados(String... dados) {
         boolean result = state.editarDados(dados);
         pcs.firePropertyChange(PROP_ALUNO, null, null);
+        pcs.firePropertyChange(PROP_DOCENTE, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         return result;
     }
     public boolean removerDados(String... dados) {
         boolean result = state.removerDados(dados);
         pcs.firePropertyChange(PROP_ALUNO, null, null);
+        pcs.firePropertyChange(PROP_DOCENTE, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         return result;
     }
     public String consultarDados(String filtro) {
@@ -146,6 +156,8 @@ public class ApoioPoEContext {
     public boolean importarDadosFicheiroCsv(String filename) {
         boolean result = state.importarDadosFicheiroCsv(filename);
         pcs.firePropertyChange(PROP_ALUNO, null, null);
+        pcs.firePropertyChange(PROP_DOCENTE, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         return result;
     }
     public boolean exportarDadosFicheiroCsv(String filename) {
@@ -184,12 +196,16 @@ public class ApoioPoEContext {
     public boolean removerTodosDados(){
         boolean result = state.removerTodosDados();
         pcs.firePropertyChange(PROP_ALUNO, null, null);
+        pcs.firePropertyChange(PROP_DOCENTE, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         return result;
     }
 
     public boolean undo(){
         boolean result = state.undo();
         pcs.firePropertyChange(PROP_ALUNO, null, null);
+        pcs.firePropertyChange(PROP_DOCENTE, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         return result;
     }
     public boolean hasUndo(){return state.hasUndo();}
@@ -197,6 +213,8 @@ public class ApoioPoEContext {
     public boolean redo(){
         boolean result = state.redo();
         pcs.firePropertyChange(PROP_ALUNO, null, null);
+        pcs.firePropertyChange(PROP_DOCENTE, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         return result;
     }
     public boolean hasRedo(){return state.hasRedo();}
@@ -235,4 +253,8 @@ public class ApoioPoEContext {
 
     public ArrayList<Aluno> getAlunos(){return data.getAlunos();}
     public Aluno getAluno(long nAluno){return data.getAluno(nAluno);}
+    public ArrayList<Docente> getDocentes(){return data.getDocentes();}
+    public Docente getDocente(String email){return data.getDocente(email);}
+    public ArrayList<Proposta> getPropostas(){return data.getPropostas();}
+    public Proposta getProposta(String id){return data.getProposta(id);}
 }

@@ -725,13 +725,13 @@ public class ApoioPoE implements Serializable, Cloneable {
       }
 
       if (!nAluno.isBlank()) {
-         if (!alunos.containsKey(Long.parseLong(nAluno))) {
+         if (!alunos.containsKey(Long.parseLong(nAluno)) && !nAluno.equals("0")) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
             return false;
          }
 
          for (var proposta : this.propostas.values())
-            if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno)) {
+            if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno) && !proposta.getId().equals(id) && !nAluno.equals("0")) {
                ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
                return false;
             }
@@ -773,13 +773,13 @@ public class ApoioPoE implements Serializable, Cloneable {
       }
 
       if (!nAluno.isBlank()) {
-         if (!alunos.containsKey(Long.parseLong(nAluno))) {
+         if (!alunos.containsKey(Long.parseLong(nAluno)) && !nAluno.equals("0")) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
             return false;
          }
 
          for (var proposta : this.propostas.values())
-            if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno)) {
+            if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno) && !proposta.getId().equals(id) && !nAluno.equals("0")) {
                ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
                return false;
             }

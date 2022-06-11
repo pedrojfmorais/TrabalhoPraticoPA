@@ -4,7 +4,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
-import pt.isec.pa.apoio_poe.ui.gui.aluno.GerirAlunos;
+import pt.isec.pa.apoio_poe.ui.gui.aluno.GerirAluno;
+import pt.isec.pa.apoio_poe.ui.gui.docente.GerirDocente;
+import pt.isec.pa.apoio_poe.ui.gui.proposta.GerirProposta;
 
 public class ApoioPoEGUI extends BorderPane {
     ApoioPoEContext fsm;
@@ -18,7 +20,7 @@ public class ApoioPoEGUI extends BorderPane {
 
     private void createViews() {
         StackPane stackPane = new StackPane(
-                new Inicio(fsm), new Fase1(fsm), new GerirAlunos(fsm)
+                new Inicio(fsm), new Fase1(fsm), new GerirAluno(fsm), new GerirDocente(fsm), new GerirProposta(fsm)
         );
         this.setTop(new AppMenu(fsm));
         this.setCenter(stackPane);
