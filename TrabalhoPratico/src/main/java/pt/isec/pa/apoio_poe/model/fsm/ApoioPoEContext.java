@@ -257,4 +257,7 @@ public class ApoioPoEContext {
     public Docente getDocente(String email){return data.getDocente(email);}
     public ArrayList<Proposta> getPropostas(){return data.getPropostas();}
     public Proposta getProposta(String id){return data.getProposta(id);}
+
+    public int nAlunosPorRamo(String ramo){return data.nAlunosPorRamo(ramo);}
+    public int propostasPorRamo(String ramo){return data.propostasPorRamo(ramo);}
 }

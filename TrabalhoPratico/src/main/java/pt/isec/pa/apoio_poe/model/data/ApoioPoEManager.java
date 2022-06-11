@@ -492,4 +492,12 @@ public class ApoioPoEManager implements Serializable, IOriginator {
     public ArrayList<Aluno> getAlunosSemPropostaAtribuida(boolean soEstagio) {
         return apoioPOE.getAlunosSemPropostaAtribuida(soEstagio);
     }
+
+    public int nAlunosPorRamo(String ramo) {
+        return apoioPOE.nAlunosPorRamo(ramo);
+    }
+
+    public int propostasPorRamo(String ramo) {
+        return apoioPOE.propostasPorRamo(ramo);
+    }
 }

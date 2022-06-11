@@ -557,7 +557,10 @@ public class ApoioPoE implements Serializable, Cloneable {
    }
 
    public boolean propostasSufecienteParaRamo(String ramo) {
+      return propostasPorRamo(ramo) >= nAlunosPorRamo(ramo);
+   }
 
+   public int propostasPorRamo(String ramo){
       int contadorPropostaRamo = 0;
 
       for (var proposta : propostas.values()) {
@@ -573,14 +576,17 @@ public class ApoioPoE implements Serializable, Cloneable {
                contadorPropostaRamo++;
          }
       }
+      return contadorPropostaRamo;
+   }
 
+   public int nAlunosPorRamo(String ramo){
       int contadorAlunosRamo = 0;
 
       for (var aluno : alunos.values())
          if (aluno.getSiglaRamo().equals(ramo))
             contadorAlunosRamo++;
 
-      return contadorPropostaRamo >= contadorAlunosRamo;
+      return contadorAlunosRamo;
    }
 
    public boolean todasCandidaturasComPropostaAtribuida() {
