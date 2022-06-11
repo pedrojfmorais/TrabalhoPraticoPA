@@ -282,7 +282,7 @@ public class AdicionarOuEditarProposta extends BorderPane {
                 }
             }
 
-            boolean res = false;
+            boolean res;
 
             if(!errors){
                 if(!editar) { //adicionar
