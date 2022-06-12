@@ -13,11 +13,13 @@ import pt.isec.pa.apoio_poe.ui.gui.fase2.Fase2;
 import pt.isec.pa.apoio_poe.ui.gui.fase2.Fase2Bloqueada;
 import pt.isec.pa.apoio_poe.ui.gui.fase2.candidatura.GerirCandidatura;
 import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3;
+import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3Bloqueada;
 import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3MasFase2Aberta;
 import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.AtribuicaoAutomatica;
 import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.GestaoManualAtribuicoes;
 import pt.isec.pa.apoio_poe.ui.gui.fase4.Fase4;
 import pt.isec.pa.apoio_poe.ui.gui.fase4.docentesOrientadores.GestaoManualOrientacoes;
+import pt.isec.pa.apoio_poe.ui.gui.fase5.Fase5;
 
 public class ApoioPoEGUI extends BorderPane {
     ApoioPoEContext fsm;
@@ -41,11 +43,13 @@ public class ApoioPoEGUI extends BorderPane {
                 new Fase2Bloqueada(fsm),
                 new GerirCandidatura(fsm),
                 new Fase3(fsm),
+                new Fase3Bloqueada(fsm),
                 new Fase3MasFase2Aberta(fsm),
                 new GestaoManualAtribuicoes(fsm),
                 new AtribuicaoAutomatica(fsm),
                 new Fase4(fsm),
-                new GestaoManualOrientacoes(fsm)
+                new GestaoManualOrientacoes(fsm),
+                new Fase5(fsm)
         );
         this.setTop(new AppMenu(fsm));
         this.setCenter(stackPane);

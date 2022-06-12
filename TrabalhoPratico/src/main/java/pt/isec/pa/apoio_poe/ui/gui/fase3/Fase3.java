@@ -9,6 +9,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.ui.gui.ComumFases;
@@ -76,40 +77,9 @@ public class Fase3 extends BorderPane {
 
         btnGestaoManualAtribuicoes.setOnAction(event -> fsm.gerirDados());
 
-        btnListaAlunos.setOnAction(event -> {
-            Stage dialog = new Stage();
+        btnListaAlunos.setOnAction(event -> Fase3.listaAlunosFase3(this.getScene().getWindow(), fsm));
 
-            dialog.setTitle("Lista Alunos");
-
-            dialog.initOwner(this.getScene().getWindow());
-            dialog.initModality(Modality.APPLICATION_MODAL);
-
-            dialog.setWidth(450);
-            dialog.setHeight(400);
-
-
-            dialog.setScene(new Scene(new ListaAlunoFase3(fsm)));
-            dialog.setResizable(false);
-
-            dialog.showAndWait();
-        });
-
-        btnListaPropostas.setOnAction(event -> {
-            Stage dialog = new Stage();
-
-            dialog.setTitle("Lista Propostas");
-
-            dialog.initOwner(this.getScene().getWindow());
-            dialog.initModality(Modality.APPLICATION_MODAL);
-
-            dialog.setWidth(450);
-            dialog.setHeight(400);
-
-            dialog.setScene(new Scene(new ListaPropostaFase3(fsm)));
-            dialog.setResizable(false);
-
-            dialog.showAndWait();
-        });
+        btnListaPropostas.setOnAction(event -> Fase3.listaPropostasFase3(this.getScene().getWindow(), fsm));
 
         btnRegressar.setOnAction(event -> fsm.regressarFase());
 
@@ -118,5 +88,40 @@ public class Fase3 extends BorderPane {
 
     private void update() {
         this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.FASE3);
+    }
+
+    public static void listaAlunosFase3(Window window, ApoioPoEContext fsm){
+        Stage dialog = new Stage();
+
+        dialog.setTitle("Lista Alunos");
+
+        dialog.initOwner(window);
+        dialog.initModality(Modality.APPLICATION_MODAL);
+
+        dialog.setWidth(450);
+        dialog.setHeight(400);
+
+
+        dialog.setScene(new Scene(new ListaAlunoFase3(fsm)));
+        dialog.setResizable(false);
+
+        dialog.showAndWait();
+    }
+
+    public static void listaPropostasFase3(Window window, ApoioPoEContext fsm){
+        Stage dialog = new Stage();
+
+        dialog.setTitle("Lista Propostas");
+
+        dialog.initOwner(window);
+        dialog.initModality(Modality.APPLICATION_MODAL);
+
+        dialog.setWidth(450);
+        dialog.setHeight(400);
+
+        dialog.setScene(new Scene(new ListaPropostaFase3(fsm)));
+        dialog.setResizable(false);
+
+        dialog.showAndWait();
     }
 }

@@ -290,4 +290,8 @@ public class ApoioPoEContext {
         return data.consultarPropostasAtribuidasDocente(filtro);
     }
 
+    public ArrayList<Aluno> consultarAlunosFase5(boolean comPropostaAtribuida){
+        return data.consultarAlunosFase5(comPropostaAtribuida);
+    }
+
 }

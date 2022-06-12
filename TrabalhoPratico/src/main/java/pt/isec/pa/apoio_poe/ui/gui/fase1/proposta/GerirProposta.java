@@ -14,10 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
-import pt.isec.pa.apoio_poe.model.data.propostas.Autoproposto;
-import pt.isec.pa.apoio_poe.model.data.propostas.Estagio;
-import pt.isec.pa.apoio_poe.model.data.propostas.Projeto;
-import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
+import pt.isec.pa.apoio_poe.model.data.propostas.*;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.ui.gui.mostraDados.AbreMostraDados;
@@ -183,6 +180,8 @@ public class GerirProposta extends BorderPane {
                 return new ReadOnlyObjectWrapper<>("Estágio");
             else if(p.getValue() instanceof Autoproposto)
                 return new ReadOnlyObjectWrapper<>("Autoproposto");
+            else if(p.getValue() instanceof PropostaAtribuida)
+                return new ReadOnlyObjectWrapper<>("Atribuída");
             return new ReadOnlyObjectWrapper<>("");
         });
 

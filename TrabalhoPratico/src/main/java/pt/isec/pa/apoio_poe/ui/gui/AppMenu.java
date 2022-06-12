@@ -20,7 +20,10 @@ public class AppMenu extends MenuBar {
     static ApoioPoEContext fsm;
 
     Menu mnFile;
-    MenuItem miNew, miOpen, miSave, miExit;
+    MenuItem miNew;
+    MenuItem miOpen;
+    static MenuItem miSave;
+    MenuItem miExit;
 
     Menu mnImport, mnExport;
     MenuItem miImportarAlunos, miImportarDocentes, miImportarPropostas, miImportarCandidaturas;
@@ -129,26 +132,7 @@ public class AppMenu extends MenuBar {
 
         } );
 
-        miExit.setOnAction(actionEvent -> {
-
-            if (fsm.getState() == ApoioPoEState.INICIO)
-                Platform.exit();
-
-            Alert alert = new Alert(
-                    Alert.AlertType.CONFIRMATION,
-                    "",
-                    ButtonType.YES, ButtonType.NO
-            );
-            alert.setTitle("Guardar Estado");
-            alert.setHeaderText("Pretende guardar o estado atual?");
-
-            alert.showAndWait().ifPresent(response -> {
-                if (response.getButtonData() == ButtonBar.ButtonData.YES) {
-                    miSave.fire();
-                }
-                fsm.terminarAplicacao("");
-            });
-        });
+        miExit.setOnAction(actionEvent -> AppMenu.btnSair());
 
         mIUndo.setOnAction(actionEvent -> fsm.undo());
 
@@ -409,18 +393,38 @@ public class AppMenu extends MenuBar {
         }
 
         miExportarAlunos.setDisable(fsm.getState() != ApoioPoEState.GESTAO_ALUNOS &&
-                fsm.getState() != ApoioPoEState.FASE1_BLOQUEADA);
+                fsm.getState() != ApoioPoEState.FASE1_BLOQUEADA && fsm.getState() != ApoioPoEState.FASE5);
         miExportarDocentes.setDisable(fsm.getState() != ApoioPoEState.GESTAO_DOCENTES &&
-                fsm.getState() != ApoioPoEState.FASE1_BLOQUEADA);
+                fsm.getState() != ApoioPoEState.FASE1_BLOQUEADA && fsm.getState() != ApoioPoEState.FASE5);
         miExportarPropostas.setDisable(fsm.getState() != ApoioPoEState.GESTAO_PROPOSTAS &&
-                fsm.getState() != ApoioPoEState.FASE1_BLOQUEADA);
+                fsm.getState() != ApoioPoEState.FASE1_BLOQUEADA && fsm.getState() != ApoioPoEState.FASE5);
         miExportarCandidaturas.setDisable(fsm.getState() != ApoioPoEState.GESTAO_CANDIDATURAS &&
-                fsm.getState() != ApoioPoEState.FASE2_BLOQUEADA);
+                fsm.getState() != ApoioPoEState.FASE2_BLOQUEADA && fsm.getState() != ApoioPoEState.FASE5);
 
         switch (fsm.getState()){
             case GESTAO_ALUNOS, GESTAO_DOCENTES, GESTAO_PROPOSTAS, GESTAO_CANDIDATURAS, GESTAO_MANUAL_ATRIBUICOES ->
                     miRemoverTodosDados.setDisable(false);
             default -> miRemoverTodosDados.setDisable(true);
         }
+    }
+
+    public static void btnSair(){
+        if (fsm.getState() == ApoioPoEState.INICIO)
+            Platform.exit();
+
+        Alert alert = new Alert(
+                Alert.AlertType.CONFIRMATION,
+                "",
+                ButtonType.YES, ButtonType.NO
+        );
+        alert.setTitle("Guardar Estado");
+        alert.setHeaderText("Pretende guardar o estado atual?");
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response.getButtonData() == ButtonBar.ButtonData.YES) {
+                miSave.fire();
+            }
+            fsm.terminarAplicacao("");
+        });
     }
 }
