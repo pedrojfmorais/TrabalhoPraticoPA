@@ -66,7 +66,7 @@ public class Fase4State extends ApoioPoEAdapter {
     }
 
     @Override
-    public String consultarDocentes(String filtro) {
+    public ArrayList<String> consultarDocentes(String filtro) {
         return data.consultarDocentes(filtro);
     }
 

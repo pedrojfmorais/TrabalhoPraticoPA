@@ -4,6 +4,9 @@ import pt.isec.pa.apoio_poe.model.data.ApoioPoEManager;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class Fase1BloqueadaState extends ApoioPoEAdapter {
 
     public Fase1BloqueadaState(ApoioPoEContext context, ApoioPoEManager data) {
@@ -33,8 +36,8 @@ public class Fase1BloqueadaState extends ApoioPoEAdapter {
         return ApoioPoEState.GESTAO_ALUNOS.createState(context, data).consultarDados(filtro);
     }
     @Override
-    public String consultarDocentes(String filtro) {
-        return ApoioPoEState.GESTAO_DOCENTES.createState(context, data).consultarDados(filtro);
+    public ArrayList<String> consultarDocentes(String filtro) {
+        return new ArrayList<>(Collections.singleton(ApoioPoEState.GESTAO_DOCENTES.createState(context, data).consultarDados(filtro)));
     }
     @Override
     public String consultarPropostas(String filtro) {

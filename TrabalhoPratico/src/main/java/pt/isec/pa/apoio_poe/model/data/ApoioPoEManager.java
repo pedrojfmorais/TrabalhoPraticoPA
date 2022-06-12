@@ -469,7 +469,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
         return apoioPOE.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida, semPropostaAtribuida);
     }
 
-    public String consultarDocentes(String filtro) {
+    public ArrayList<String> consultarDocentes(String filtro) {
         return apoioPOE.consultarDocentes(filtro);
     }
 

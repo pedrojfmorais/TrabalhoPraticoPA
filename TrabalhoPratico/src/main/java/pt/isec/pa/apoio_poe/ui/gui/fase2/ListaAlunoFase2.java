@@ -14,6 +14,8 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.GerirAluno;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.MostraDadosAluno;
 
+import java.util.ArrayList;
+
 public class ListaAlunoFase2 extends BorderPane {
 
     ApoioPoEContext fsm;
@@ -85,9 +87,12 @@ public class ListaAlunoFase2 extends BorderPane {
         fsm.addPropertyChangeListener(ApoioPoEContext.PROP_ALUNO, evt -> update());
 
         tgFiltros.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
-            tAlunos.getItems().clear();
-            for (var aluno : fsm.consultarAlunos(rbAutoproposta.isSelected(), rbComCandidatura.isSelected(), rbSemCandidatura.isSelected()))
-                tAlunos.getItems().add(aluno);
+            ArrayList<Aluno> alunos = fsm.consultarAlunos(rbAutoproposta.isSelected(), rbComCandidatura.isSelected(), rbSemCandidatura.isSelected());
+            if(alunos != null) {
+                tAlunos.getItems().clear();
+                for (var aluno : alunos)
+                    tAlunos.getItems().add(aluno);
+            }
         });
 
         tAlunos.setRowFactory( tv -> {

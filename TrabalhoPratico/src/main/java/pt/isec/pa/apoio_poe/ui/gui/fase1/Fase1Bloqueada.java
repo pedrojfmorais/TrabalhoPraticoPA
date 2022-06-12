@@ -80,6 +80,18 @@ public class Fase1Bloqueada extends BorderPane {
     private void registerHandlers() {
 
         fsm.addPropertyChangeListener(ApoioPoEContext.PROP_FASE, evt -> update());
+        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_ALUNO, evt -> {
+            if(tbConsultarAlunos.isSelected())
+                GerirAluno.procurarAluno(tfFiltros, tableView, fsm);
+        });
+        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_DOCENTE, evt -> {
+            if(tbConsultarDocentes.isSelected())
+                GerirDocente.procurarDocente(tfFiltros, tableView, fsm);
+        });
+        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_PROPOSTA, evt -> {
+            if(tbConsultarPropostas.isSelected())
+                GerirProposta.procurarProposta(tfFiltros, tableView, fsm);
+        });
 
         tbConsultarAlunos.setOnAction(event -> {
 

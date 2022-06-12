@@ -124,7 +124,7 @@ abstract class ApoioPoEAdapter implements IApoioPoEState {
         return null;
     }
     @Override
-    public String consultarDocentes(String filtro) {
+    public ArrayList<String> consultarDocentes(String filtro) {
         return null;
     }
     @Override

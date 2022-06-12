@@ -57,15 +57,7 @@ public class GerirCandidatura extends BorderPane {
         hbox.getChildren().addAll(btnAdicionar, btnEditar, btnEliminar, tfFiltros, btnProcurar);
         this.setTop(hbox);
 
-        TableColumn<Candidatura,String> tcNAluno = new TableColumn("Número Aluno");
-        tcNAluno.setCellValueFactory(new PropertyValueFactory<>("nAluno"));
-        TableColumn<Candidatura, List<String>> tcPropostas = new TableColumn("Propostas da Candidatura");
-        tcPropostas.setCellValueFactory(new PropertyValueFactory<>("idPropostas"));
-
-        tCandidatura.setPlaceholder(new Label("Ainda não foram inseridas Candidaturas"));
-        tCandidatura.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tCandidatura.getColumns().clear();
-        tCandidatura.getColumns().addAll(tcNAluno,tcPropostas);
+        inicializarColunasCandidaturas(tCandidatura);
 
         VBox vBox = new VBox(tCandidatura, btnRegressarFase);
         vBox.setSpacing(10);
@@ -127,6 +119,30 @@ public class GerirCandidatura extends BorderPane {
                 fsm.removerDados(String.valueOf(candidatura.getNAluno()));
         });
 
+        pesquisarCandidaturas(tfFiltros, btnProcurar, tCandidatura, fsm);
+    }
+
+    private void update(){
+        this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.GESTAO_CANDIDATURAS);
+
+        tCandidatura.getItems().clear();
+        for (var candidatura : fsm.getCandidaturas())
+            tCandidatura.getItems().add(candidatura);
+    }
+
+    public static void inicializarColunasCandidaturas(TableView<Candidatura> tCandidatura) {
+        TableColumn<Candidatura,String> tcNAluno = new TableColumn("Número Aluno");
+        tcNAluno.setCellValueFactory(new PropertyValueFactory<>("nAluno"));
+        TableColumn<Candidatura, List<String>> tcPropostas = new TableColumn("Propostas da Candidatura");
+        tcPropostas.setCellValueFactory(new PropertyValueFactory<>("idPropostas"));
+
+        tCandidatura.setPlaceholder(new Label("Ainda não foram inseridas Candidaturas"));
+        tCandidatura.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tCandidatura.getColumns().clear();
+        tCandidatura.getColumns().addAll(tcNAluno,tcPropostas);
+    }
+
+    public static void pesquisarCandidaturas(TextField tfFiltros, Button btnProcurar, TableView<Candidatura> tCandidatura, ApoioPoEContext fsm) {
         tfFiltros.setOnKeyPressed(event -> {
             if(event.getCode() == KeyCode.ENTER)
                 btnProcurar.fire();
@@ -157,13 +173,5 @@ public class GerirCandidatura extends BorderPane {
                 tfFiltros.setText("");
             }
         });
-    }
-
-    private void update(){
-        this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.GESTAO_CANDIDATURAS);
-
-        tCandidatura.getItems().clear();
-        for (var candidatura : fsm.getCandidaturas())
-            tCandidatura.getItems().add(candidatura);
     }
 }

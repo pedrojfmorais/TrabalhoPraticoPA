@@ -10,10 +10,14 @@ import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.GerirAluno;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.docente.GerirDocente;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.GerirProposta;
 import pt.isec.pa.apoio_poe.ui.gui.fase2.Fase2;
+import pt.isec.pa.apoio_poe.ui.gui.fase2.Fase2Bloqueada;
 import pt.isec.pa.apoio_poe.ui.gui.fase2.candidatura.GerirCandidatura;
 import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3;
+import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3MasFase2Aberta;
 import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.AtribuicaoAutomatica;
 import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.GestaoManualAtribuicoes;
+import pt.isec.pa.apoio_poe.ui.gui.fase4.Fase4;
+import pt.isec.pa.apoio_poe.ui.gui.fase4.docentesOrientadores.GestaoManualOrientacoes;
 
 public class ApoioPoEGUI extends BorderPane {
     ApoioPoEContext fsm;
@@ -34,10 +38,14 @@ public class ApoioPoEGUI extends BorderPane {
                 new GerirDocente(fsm),
                 new GerirProposta(fsm),
                 new Fase2(fsm),
+                new Fase2Bloqueada(fsm),
                 new GerirCandidatura(fsm),
                 new Fase3(fsm),
+                new Fase3MasFase2Aberta(fsm),
                 new GestaoManualAtribuicoes(fsm),
-                new AtribuicaoAutomatica(fsm)
+                new AtribuicaoAutomatica(fsm),
+                new Fase4(fsm),
+                new GestaoManualOrientacoes(fsm)
         );
         this.setTop(new AppMenu(fsm));
         this.setCenter(stackPane);
@@ -67,7 +75,7 @@ public class ApoioPoEGUI extends BorderPane {
             case GESTAO_MANUAL_ATRIBUICOES -> titulo = "Gestão Manual de Atribuição de Propostas a Alunos";
             case Fase3AtribuicaoAutomatica -> titulo = "Gestão Automática Atribuições";
             case FASE4 -> titulo = "Fase 4 - Atribuição de orientadores";
-            case GESTAO_MANUAL_ORIENTADORES -> titulo = "Gestão Manual de Orientadores a Propostas Atribuídas";
+            case GESTAO_MANUAL_ORIENTADORES -> titulo = "Gestão Manual de Orientadores de Propostas Atribuídas";
             case FASE5 -> titulo = "Fase 5 - Consulta";
             default -> titulo = "";
         }

@@ -41,7 +41,7 @@ public class Fase5State extends ApoioPoEAdapter {
     }
 
     @Override
-    public String consultarDocentes(String filtro) {
+    public ArrayList<String> consultarDocentes(String filtro) {
         return ApoioPoEState.FASE4.createState(context, data).consultarDocentes(filtro);
     }
 

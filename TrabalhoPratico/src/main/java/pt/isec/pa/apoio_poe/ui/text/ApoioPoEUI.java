@@ -156,7 +156,7 @@ public class ApoioPoEUI {
                 String filtro = PAInput.readString(
                         "Insira o email do docente a consultar, ou em branco para ver todos.\n",
                         false, true);
-                String resultado = fsm.consultarDocentes(filtro);
+                ArrayList<String> resultado = fsm.consultarDocentes(filtro);
 
                 System.out.println();
 
@@ -165,8 +165,11 @@ public class ApoioPoEUI {
 
                 else if(resultado == null && !filtro.isBlank())
                     System.out.println("Não existe um docente com esse email.\n");
-                else
-                    System.out.println(resultado);
+                else {
+                    if(resultado != null)
+                        for (var docente : resultado)
+                            System.out.println(docente);
+                }
             }
             case 4 ->fsm.exportarDocentesFicheiroCsv(
                         PAInput.readString("Insira o nome do ficheiro: ", false)
@@ -1105,7 +1108,7 @@ public class ApoioPoEUI {
         String filtro = PAInput.readString(
                 "Insira o email do docente a consultar, ou em branco para ver dados de todos.\n",
                 false, true);
-        String resultado = fsm.consultarDocentes(filtro);
+        ArrayList<String> resultado = fsm.consultarDocentes(filtro);
 
         System.out.println();
 
@@ -1115,6 +1118,14 @@ public class ApoioPoEUI {
         else if(resultado == null && !filtro.isBlank())
             System.out.println("Este docente não existe.\n");
         else
-            System.out.println(resultado);
+            if(resultado != null)
+                if(filtro.isBlank()){
+                    System.out.println("Máximo de orientações de um docente: " + resultado.get(0) + System.lineSeparator());
+                    System.out.println("Minimo de orientações de um docente: " + resultado.get(1) + System.lineSeparator());
+                    System.out.println("Média de orientações de um docente: " + resultado.get(2));
+                } else {
+                    System.out.println("Docente: " + resultado.get(0) + System.lineSeparator());
+                    System.out.println("Número de orientações: " + resultado.get(1));
+                }
     }
 }

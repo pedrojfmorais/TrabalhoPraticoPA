@@ -58,7 +58,6 @@ public class ApoioPoEContext {
     public void retomarSave(ApoioPoEManager data, ApoioPoEState state){
         this.data = data;
         this.state = state.createState(this, data);
-        pcs.firePropertyChange(PROP_FASE, null, null);
     }
 
     public void changeState(IApoioPoEState state){
@@ -83,46 +82,40 @@ public class ApoioPoEContext {
     }
 
     public boolean gerirAlunos(){
-        boolean result = state.gerirAlunos();
-        pcs.firePropertyChange(PROP_FASE, null, null);
-        return result;
+        return state.gerirAlunos();
     }
 
     public boolean gerirDocentes(){
-        boolean result = state.gerirDocentes();
-        pcs.firePropertyChange(PROP_FASE, null, null);
-        return result;
+        return state.gerirDocentes();
     }
     public boolean gerirPropostas(){
-        boolean result = state.gerirPropostas();
-        pcs.firePropertyChange(PROP_FASE, null, null);
+        return state.gerirPropostas();
+    }
+
+    public boolean atribuicaoAutomaticaPropostasComAluno(){
+        boolean result = state.atribuicaoAutomaticaPropostasComAluno();
+        pcs.firePropertyChange(PROP_PROPOSTA_ATRIBUIDA, null, null);
+        return result;
+    }
+    public boolean associacaoAutomaticaDocentesProponentes(){
+        boolean result = state.associacaoAutomaticaDocentesProponentes();
+        pcs.firePropertyChange(PROP_PROPOSTA_ATRIBUIDA, null, null);
         return result;
     }
 
-    public boolean atribuicaoAutomaticaPropostasComAluno(){return state.atribuicaoAutomaticaPropostasComAluno();}
-    public boolean associacaoAutomaticaDocentesProponentes(){return state.associacaoAutomaticaDocentesProponentes();}
-
     public boolean gerirDados(){
-        boolean result = state.gerirDados();
-        pcs.firePropertyChange(PROP_FASE, null, null);
-        return result;
+        return state.gerirDados();
     }
 
     public boolean regressarFase(){
-        boolean result = state.regressarFase();
-        pcs.firePropertyChange(PROP_FASE, null, null);
-        return result;
+        return state.regressarFase();
     }
     public boolean avancarFase(boolean bloquearFase){
-        boolean result = state.avancarFase(bloquearFase);
-        pcs.firePropertyChange(PROP_FASE, null, null);
-        return result;
+        return state.avancarFase(bloquearFase);
     }
 
     public boolean terminarAplicacao(String file){
-        boolean result = state.terminarAplicacao(file);
-        pcs.firePropertyChange(PROP_FASE, null, null);
-        return result;
+        return state.terminarAplicacao(file);
     }
 
     public ArrayList<Aluno> consultarAlunos(boolean ... filtros){
@@ -148,6 +141,7 @@ public class ApoioPoEContext {
         pcs.firePropertyChange(PROP_DOCENTE, null, null);
         pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         pcs.firePropertyChange(PROP_CANDIDATURA, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA_ATRIBUIDA, null, null);
         return result;
     }
     public boolean removerDados(String... dados) {
@@ -163,7 +157,11 @@ public class ApoioPoEContext {
         return state.consultarDados(filtro);
     }
 
-    public boolean atribuicaoAutomaticaPropostasDisponiveis(){return state.atribuicaoAutomaticaPropostasDisponiveis();}
+    public boolean atribuicaoAutomaticaPropostasDisponiveis(){
+        boolean result = state.atribuicaoAutomaticaPropostasDisponiveis();
+        pcs.firePropertyChange(PROP_PROPOSTA_ATRIBUIDA, null, null);
+        return result;
+    }
 
     public boolean importarDadosFicheiroCsv(String filename) {
         boolean result = state.importarDadosFicheiroCsv(filename);
@@ -180,7 +178,7 @@ public class ApoioPoEContext {
     public String consultarAlunos(String filtro) {
         return state.consultarAlunos(filtro);
     }
-    public String consultarDocentes(String filtro) {
+    public ArrayList<String> consultarDocentes(String filtro) {
         return state.consultarDocentes(filtro);
     }
     public String consultarPropostas(String filtro) {
@@ -284,4 +282,12 @@ public class ApoioPoEContext {
 
     public int nAlunosPorRamo(String ramo){return data.nAlunosPorRamo(ramo);}
     public int propostasPorRamo(String ramo){return data.propostasPorRamo(ramo);}
+
+    public int calculaNumeroOrientacoesDocente(String filtro){
+        return data.calculaNumeroOrientacoesDocente(filtro);
+    }
+    public ArrayList<PropostaAtribuida> consultarPropostasAtribuidasDocente(String filtro){
+        return data.consultarPropostasAtribuidasDocente(filtro);
+    }
+
 }

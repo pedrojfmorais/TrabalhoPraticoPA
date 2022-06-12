@@ -964,16 +964,16 @@ public class ApoioPoE implements Serializable, Cloneable {
       return resultadoOrdenado;
    }
 
-   public String consultarDocentes(String filtro){
-      StringBuilder sb = new StringBuilder();
+   public ArrayList<String> consultarDocentes(String filtro){
+      ArrayList<String> res  = new ArrayList<>();
 
-           if(!filtro.isBlank()) {
+      if(!filtro.isBlank()) {
 
          if(docentes.get(filtro) == null)
             return null;
 
-         sb.append("Docente: ").append(docentes.get(filtro).getNome()).append(System.lineSeparator());
-         sb.append("Número de orientações: ").append(calculaNumeroOrientacoesDocente(filtro));
+         res.add(docentes.get(filtro).getNome());
+         res.add(String.valueOf(calculaNumeroOrientacoesDocente(filtro)));
 
       } else{
 
@@ -997,14 +997,12 @@ public class ApoioPoE implements Serializable, Cloneable {
          if(media == 0.0)
             return null;
 
-         sb.append("Máximo de orientações de um docente: ").append(max).append(System.lineSeparator());
-         sb.append("Minimo de orientações de um docente: ").append(min).append(System.lineSeparator());
-         sb.append("Média de orientações de um docente: ").append(media);
+         res.add(String.valueOf(max));
+         res.add(String.valueOf(min));
+         res.add(String.valueOf(media));
       }
 
-           sb.append(System.lineSeparator());
-
-           return sb.toString();
+      return res;
    }
 
    public ArrayList<Proposta> consultarPropostas(boolean propostasAtribuidas){

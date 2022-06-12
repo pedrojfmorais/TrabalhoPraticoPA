@@ -51,7 +51,7 @@ public interface IApoioPoEState {
     boolean exportarDadosFicheiroCsv(String filename);
 
     //Fase 1 Bloqueada, 4, 5
-    String consultarDocentes(String filtro);
+    ArrayList<String> consultarDocentes(String filtro);
 
     //Fase 1 Bloqueada
     String consultarAlunos(String filtro);
