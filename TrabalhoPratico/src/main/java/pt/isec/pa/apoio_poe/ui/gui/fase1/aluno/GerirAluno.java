@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.Fase1.aluno;
+package pt.isec.pa.apoio_poe.ui.gui.fase1.aluno;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+import pt.isec.pa.apoio_poe.ui.gui.mostraDados.AbreMostraDados;
 import pt.isec.pa.apoio_poe.ui.gui.resources.*;
 
 public class GerirAluno extends BorderPane {
@@ -55,17 +56,7 @@ public class GerirAluno extends BorderPane {
         hbox.getChildren().addAll(btnAdicionar, btnEditar, btnEliminar, tfFiltros, btnProcurar);
         this.setTop(hbox);
 
-        TableColumn<Aluno,String> tcNAluno = new TableColumn("Número Aluno");
-        tcNAluno.setCellValueFactory(new PropertyValueFactory<>("nAluno"));
-        TableColumn<Aluno,String> tcNome = new TableColumn("Nome");
-        tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        TableColumn<Aluno,String> tcEmail = new TableColumn("Email");
-        tcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-
-        tAluno.setPlaceholder(new Label("Ainda não foram inseridos Alunos"));
-        tAluno.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tAluno.getColumns().clear();
-        tAluno.getColumns().addAll(tcNAluno,tcNome,tcEmail);
+        setTabelaAluno(tAluno);
 
         VBox vBox = new VBox(tAluno, btnRegressarFase);
         vBox.setSpacing(10);
@@ -128,24 +119,8 @@ public class GerirAluno extends BorderPane {
         tAluno.setRowFactory( tv -> {
             TableRow<Aluno> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    Stage dialog = new Stage();
-
-                    dialog.setTitle("Informações Aluno");
-
-                    MostraDadosAluno mAluno = new MostraDadosAluno(fsm);
-                    mAluno.setUserData(row.getItem());
-
-                    dialog.initOwner(this.getScene().getWindow());
-                    dialog.initModality(Modality.APPLICATION_MODAL);
-
-                    dialog.setScene(new Scene(mAluno));
-                    dialog.setResizable(false);
-
-                    mAluno.setData();
-
-                    dialog.showAndWait();
-                }
+                if (event.getClickCount() == 2 && (! row.isEmpty()) )
+                    AbreMostraDados.abreMostraDadosAluno(fsm, row.getItem(), (Stage) this.getScene().getWindow());
             });
             return row ;
         });
@@ -157,28 +132,7 @@ public class GerirAluno extends BorderPane {
 
         btnProcurar.setOnAction(actionEvent -> {
 
-            long nAluno;
-
-            if(tfFiltros.getText().isBlank()){
-                tAluno.getItems().clear();
-                for (var aluno : fsm.getAlunos())
-                    tAluno.getItems().add(aluno);
-                return;
-            }
-
-            try {
-                nAluno = Long.parseLong(tfFiltros.getText());
-            } catch (NumberFormatException e){
-                return;
-            }
-
-            Aluno aluno = fsm.getAluno(nAluno);
-            if(aluno != null) {
-                tAluno.getItems().clear();
-                tAluno.getItems().add(aluno);
-
-                tfFiltros.setText("");
-            }
+            procurarAluno(tfFiltros, tAluno, fsm);
         });
     }
 
@@ -188,5 +142,44 @@ public class GerirAluno extends BorderPane {
         tAluno.getItems().clear();
         for (var aluno : fsm.getAlunos())
             tAluno.getItems().add(aluno);
+    }
+
+    public static void procurarAluno(TextField tfFiltros, TableView<Aluno> tAluno, ApoioPoEContext fsm) {
+        long nAluno;
+
+        if(tfFiltros.getText().isBlank()){
+            tAluno.getItems().clear();
+            for (var aluno : fsm.getAlunos())
+                tAluno.getItems().add(aluno);
+            return;
+        }
+
+        try {
+            nAluno = Long.parseLong(tfFiltros.getText());
+        } catch (NumberFormatException e){
+            return;
+        }
+
+        Aluno aluno = fsm.getAluno(nAluno);
+        if(aluno != null) {
+            tAluno.getItems().clear();
+            tAluno.getItems().add(aluno);
+
+            tfFiltros.setText("");
+        }
+    }
+
+    public static void setTabelaAluno(TableView<Aluno> tAluno) {
+        TableColumn<Aluno,String> tcNAluno = new TableColumn("Número Aluno");
+        tcNAluno.setCellValueFactory(new PropertyValueFactory<>("nAluno"));
+        TableColumn<Aluno,String> tcNome = new TableColumn("Nome");
+        tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        TableColumn<Aluno,String> tcEmail = new TableColumn("Email");
+        tcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        tAluno.setPlaceholder(new Label("Ainda não foram inseridos Alunos"));
+        tAluno.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tAluno.getColumns().clear();
+        tAluno.getColumns().addAll(tcNAluno,tcNome,tcEmail);
     }
 }

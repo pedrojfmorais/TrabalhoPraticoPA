@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.Fase1.proposta;
+package pt.isec.pa.apoio_poe.ui.gui.fase1.proposta;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -88,8 +88,8 @@ public class MostraDadosProposta extends BorderPane {
         if(mostraProposta != null){
             lbIdDados.setText(mostraProposta.getId());
             lbTituloDados.setText(mostraProposta.getTitulo());
-            if(mostraProposta.getnAlunoAssociado() != 0) {
-                lbNAlunoAssociadoDados.setText(String.valueOf(mostraProposta.getnAlunoAssociado()));
+            if(mostraProposta.getNAlunoAssociado() != 0) {
+                lbNAlunoAssociadoDados.setText(String.valueOf(mostraProposta.getNAlunoAssociado()));
                 vBox.getChildren().add(hBoxnAlunoAssociado);
             } else
                 vBox.getChildren().remove(hBoxnAlunoAssociado);

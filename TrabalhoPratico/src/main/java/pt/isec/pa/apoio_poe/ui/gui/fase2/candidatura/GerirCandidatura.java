@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.Fase1.docente;
+package pt.isec.pa.apoio_poe.ui.gui.fase2.candidatura;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,20 +11,22 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
+import pt.isec.pa.apoio_poe.model.data.Candidatura;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
-import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
+import pt.isec.pa.apoio_poe.ui.gui.resources.*;
 
-public class GerirDocente extends BorderPane {
+import java.util.List;
+
+public class GerirCandidatura extends BorderPane {
     ApoioPoEContext fsm;
 
     Button btnAdicionar, btnEditar, btnEliminar, btnProcurar, btnRegressarFase;
 
-    TableView<Docente> tDocente;
+    TableView<Candidatura> tCandidatura;
     TextField tfFiltros;
 
-    public GerirDocente(ApoioPoEContext fsm){
+    public GerirCandidatura(ApoioPoEContext fsm){
         this.fsm = fsm;
 
         createViews();
@@ -39,7 +41,7 @@ public class GerirDocente extends BorderPane {
         btnProcurar = new Button(null, ImageManager.getImageView("lupa.png",20));
         btnRegressarFase = new Button("Regressar");
 
-        tDocente = new TableView<>();
+        tCandidatura = new TableView<>();
         tfFiltros = new TextField();
 
         btnAdicionar.setPrefSize(125, 50);
@@ -55,17 +57,17 @@ public class GerirDocente extends BorderPane {
         hbox.getChildren().addAll(btnAdicionar, btnEditar, btnEliminar, tfFiltros, btnProcurar);
         this.setTop(hbox);
 
-        TableColumn<Docente,String> tcNome = new TableColumn("Nome");
-        tcNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        TableColumn<Docente,String> tcEmail = new TableColumn("Email");
-        tcEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        TableColumn<Candidatura,String> tcNAluno = new TableColumn("Número Aluno");
+        tcNAluno.setCellValueFactory(new PropertyValueFactory<>("nAluno"));
+        TableColumn<Candidatura, List<String>> tcPropostas = new TableColumn("Propostas da Candidatura");
+        tcPropostas.setCellValueFactory(new PropertyValueFactory<>("idPropostas"));
 
-        tDocente.setPlaceholder(new Label("Ainda não foram inseridos Docentes"));
-        tDocente.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tDocente.getColumns().clear();
-        tDocente.getColumns().addAll(tcNome,tcEmail);
+        tCandidatura.setPlaceholder(new Label("Ainda não foram inseridas Candidaturas"));
+        tCandidatura.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tCandidatura.getColumns().clear();
+        tCandidatura.getColumns().addAll(tcNAluno,tcPropostas);
 
-        VBox vBox = new VBox(tDocente, btnRegressarFase);
+        VBox vBox = new VBox(tCandidatura, btnRegressarFase);
         vBox.setSpacing(10);
         vBox.setAlignment(Pos.CENTER);
 
@@ -75,20 +77,21 @@ public class GerirDocente extends BorderPane {
 
     private void registerHandlers(){
         fsm.addPropertyChangeListener(ApoioPoEContext.PROP_FASE, evt -> update());
-        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_DOCENTE, evt -> update());
+        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_CANDIDATURA, evt -> update());
 
         btnRegressarFase.setOnAction(actionEvent -> fsm.regressarFase());
 
         btnAdicionar.setOnAction(actionEvent -> {
             Stage dialog = new Stage();
 
-            dialog.setTitle("Adicionar Docente");
+            dialog.setTitle("Adicionar Candidatura");
 
             dialog.initOwner(this.getScene().getWindow());
             dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.setHeight(300);
 
 
-            dialog.setScene(new Scene(new AdicionarOuEditarDocente(fsm)));
+            dialog.setScene(new Scene(new AdicionarOuEditarCandidatura(fsm)));
             dialog.setResizable(false);
 
             dialog.showAndWait();
@@ -96,31 +99,32 @@ public class GerirDocente extends BorderPane {
 
         btnEditar.setOnAction(actionEvent -> {
 
-            if(tDocente.getSelectionModel().getSelectedItem() == null)
+            if(tCandidatura.getSelectionModel().getSelectedItem() == null)
                 return;
 
             Stage dialog = new Stage();
 
-            dialog.setTitle("Editar Docente");
+            dialog.setTitle("Editar Candidatura");
 
-            AdicionarOuEditarDocente aeDocente = new AdicionarOuEditarDocente(fsm);
-            aeDocente.setUserData(tDocente.getSelectionModel().getSelectedItem());
+            AdicionarOuEditarCandidatura aeCandidatura = new AdicionarOuEditarCandidatura(fsm);
+            aeCandidatura.setUserData(tCandidatura.getSelectionModel().getSelectedItem());
 
             dialog.initOwner(this.getScene().getWindow());
             dialog.initModality(Modality.APPLICATION_MODAL);
+            dialog.setHeight(300);
 
-            dialog.setScene(new Scene(aeDocente));
+            dialog.setScene(new Scene(aeCandidatura));
             dialog.setResizable(false);
 
-            aeDocente.setData();
+            aeCandidatura.setData();
 
             dialog.showAndWait();
         });
 
         btnEliminar.setOnAction(actionEvent -> {
-            Docente docente = tDocente.getSelectionModel().getSelectedItem();
-            if(docente != null)
-                fsm.removerDados(docente.getEmail());
+            Candidatura candidatura = tCandidatura.getSelectionModel().getSelectedItem();
+            if(candidatura != null)
+                fsm.removerDados(String.valueOf(candidatura.getNAluno()));
         });
 
         tfFiltros.setOnKeyPressed(event -> {
@@ -130,21 +134,25 @@ public class GerirDocente extends BorderPane {
 
         btnProcurar.setOnAction(actionEvent -> {
 
-            String email;
+            long nAluno;
 
             if(tfFiltros.getText().isBlank()){
-                tDocente.getItems().clear();
-                for (var docente : fsm.getDocentes())
-                    tDocente.getItems().add(docente);
+                tCandidatura.getItems().clear();
+                for (var candidatura : fsm.getCandidaturas())
+                    tCandidatura.getItems().add(candidatura);
                 return;
             }
 
-            email = tfFiltros.getText();
+            try {
+                nAluno = Long.parseLong(tfFiltros.getText());
+            } catch (NumberFormatException e){
+                return;
+            }
 
-            Docente docente = fsm.getDocente(email);
-            if(docente != null) {
-                tDocente.getItems().clear();
-                tDocente.getItems().add(docente);
+            Candidatura candidatura = fsm.getCandidatura(nAluno);
+            if(candidatura != null) {
+                tCandidatura.getItems().clear();
+                tCandidatura.getItems().add(candidatura);
 
                 tfFiltros.setText("");
             }
@@ -152,10 +160,10 @@ public class GerirDocente extends BorderPane {
     }
 
     private void update(){
-        this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.GESTAO_DOCENTES);
+        this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.GESTAO_CANDIDATURAS);
 
-        tDocente.getItems().clear();
-        for (var docente : fsm.getDocentes())
-            tDocente.getItems().add(docente);
+        tCandidatura.getItems().clear();
+        for (var candidatura : fsm.getCandidaturas())
+            tCandidatura.getItems().add(candidatura);
     }
 }

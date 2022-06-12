@@ -13,7 +13,7 @@ public class RemoveAtribuicaoAlunoProposta extends CommandAdapter {
         this.idProposta = idProposta;
 
         if(apoioPoeManager.getPropostaAtribuida(idProposta) != null)
-            this.nAluno = apoioPoeManager.getPropostaAtribuida(idProposta).getnAlunoAssociado();
+            this.nAluno = apoioPoeManager.getPropostaAtribuida(idProposta).getNAlunoAssociado();
     }
 
     @Override

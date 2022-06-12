@@ -15,7 +15,7 @@ public class RemoveOrientador extends CommandAdapter {
         this.nAluno = nAluno;
 
         for(var propostasAtribuidas : apoioPoeManager.getPropostasAtribuidas())
-            if(propostasAtribuidas.getnAlunoAssociado() == nAluno)
+            if(propostasAtribuidas.getNAlunoAssociado() == nAluno)
                 this.antigoOrientador = propostasAtribuidas.getEmailDocenteOrientador();
     }
 
@@ -25,7 +25,7 @@ public class RemoveOrientador extends CommandAdapter {
         String idPropostaAtribuida = null;
 
         for(var propostasAtribuidas : apoioPoeManager.getPropostasAtribuidas())
-            if(propostasAtribuidas.getnAlunoAssociado() == nAluno)
+            if(propostasAtribuidas.getNAlunoAssociado() == nAluno)
                 idPropostaAtribuida = propostasAtribuidas.getId();
 
         if(idPropostaAtribuida == null)
@@ -39,7 +39,7 @@ public class RemoveOrientador extends CommandAdapter {
         String idPropostaAtribuida = null;
 
         for(var propostasAtribuidas : apoioPoeManager.getPropostasAtribuidas())
-            if(propostasAtribuidas.getnAlunoAssociado() == nAluno)
+            if(propostasAtribuidas.getNAlunoAssociado() == nAluno)
                 idPropostaAtribuida = propostasAtribuidas.getId();
 
         if(idPropostaAtribuida == null)

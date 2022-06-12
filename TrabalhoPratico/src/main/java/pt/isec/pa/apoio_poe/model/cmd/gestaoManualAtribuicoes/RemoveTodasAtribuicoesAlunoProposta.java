@@ -18,7 +18,7 @@ public class RemoveTodasAtribuicoesAlunoProposta extends CommandAdapter {
 
         for(var propostaAtribuida : apoioPoeManager.getPropostasAtribuidas()) {
             idPropostas.add(propostaAtribuida.getId());
-            nAlunos.add(propostaAtribuida.getnAlunoAssociado());
+            nAlunos.add(propostaAtribuida.getNAlunoAssociado());
         }
     }
 

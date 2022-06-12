@@ -31,10 +31,10 @@ public abstract class Proposta implements Comparable<Proposta>, Cloneable, Seria
         this.titulo = titulo;
     }
 
-    public long getnAlunoAssociado() {
+    public long getNAlunoAssociado() {
         return nAlunoAssociado;
     }
-    public void setnAlunoAssociado(long nAlunoAssociado) {
+    public void setNAlunoAssociado(long nAlunoAssociado) {
         this.nAlunoAssociado = nAlunoAssociado;
     }
 

@@ -31,7 +31,7 @@ public class GestaoManualOrientadoresState extends ApoioPoEAdapter {
             return false;
 
         for(var propostasAtribuidas : data.getPropostasAtribuidas())
-            if(propostasAtribuidas.getnAlunoAssociado() == Long.parseLong(dados[0]) &&
+            if(propostasAtribuidas.getNAlunoAssociado() == Long.parseLong(dados[0]) &&
                 propostasAtribuidas.getEmailDocenteOrientador() != null)
                 return false;
 
@@ -47,7 +47,7 @@ public class GestaoManualOrientadoresState extends ApoioPoEAdapter {
             return false;
 
         for(var propostasAtribuidas : data.getPropostasAtribuidas())
-            if(propostasAtribuidas.getnAlunoAssociado() == Long.parseLong(dados[0]) &&
+            if(propostasAtribuidas.getNAlunoAssociado() == Long.parseLong(dados[0]) &&
                     propostasAtribuidas.getEmailDocenteOrientador() == null)
                 return false;
 
@@ -62,7 +62,7 @@ public class GestaoManualOrientadoresState extends ApoioPoEAdapter {
             return false;
 
         for(var propostasAtribuidas : data.getPropostasAtribuidas())
-            if(propostasAtribuidas.getnAlunoAssociado() == Long.parseLong(dados[0]) &&
+            if(propostasAtribuidas.getNAlunoAssociado() == Long.parseLong(dados[0]) &&
                     propostasAtribuidas.getEmailDocenteOrientador() == null)
                 return false;
 

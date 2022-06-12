@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.Fase1.proposta;
+package pt.isec.pa.apoio_poe.ui.gui.fase1.proposta;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -121,23 +121,9 @@ public class AdicionarOuEditarProposta extends BorderPane {
         addRamo.setUserData("1");
         addArea.setUserData("1");
 
-        hBoxProjeto.getChildren().addAll(lbRamos, cbRamos1, addRamo);
-        hBoxProjeto.setSpacing(25);
+        setupEstagioOuProjeto(hBoxProjeto, lbRamos, cbRamos1, addRamo, gpProjeto, lbEmailDocente, tfEmailDocente);
 
-        gpProjeto.setVgap(10);
-        gpProjeto.setHgap(4);
-        gpProjeto.addRow(0, hBoxProjeto);
-        gpProjeto.addRow(1, lbEmailDocente, tfEmailDocente);
-        gpProjeto.setAlignment(Pos.CENTER);
-
-        hBoxEstagio.getChildren().addAll(lbArea, cbArea1, addArea);
-        hBoxEstagio.setSpacing(25);
-
-        gpEstagio.setVgap(10);
-        gpEstagio.setHgap(4);
-        gpEstagio.addRow(0, hBoxEstagio);
-        gpEstagio.addRow(1, lbEntidadeAcolhimento, tfEntidadeAcolhimento);
-        gpEstagio.setAlignment(Pos.CENTER);
+        setupEstagioOuProjeto(hBoxEstagio, lbArea, cbArea1, addArea, gpEstagio, lbEntidadeAcolhimento, tfEntidadeAcolhimento);
 
         gp = new GridPane();
         gp.setVgap(4);
@@ -176,29 +162,9 @@ public class AdicionarOuEditarProposta extends BorderPane {
             }
         });
 
-        addRamo.setOnAction(event -> {
-            String nRamos = (String) addRamo.getUserData();
+        setupActionEventAddRamoOuArea(addRamo, hBoxProjeto, lbRamos, cbRamos1, cbRamos2, cbRamos3);
 
-            hBoxProjeto.getChildren().clear();
-            if(nRamos.equals("1"))
-                hBoxProjeto.getChildren().addAll(lbRamos, cbRamos1, cbRamos2, addRamo);
-            else if(nRamos.equals("2"))
-                hBoxProjeto.getChildren().addAll(lbRamos, cbRamos1, cbRamos2, cbRamos3);
-
-            addRamo.setUserData(String.valueOf(Integer.parseInt(nRamos)+1));
-        });
-
-        addArea.setOnAction(event -> {
-            String nAreas = (String) addArea.getUserData();
-
-            hBoxEstagio.getChildren().clear();
-            if(nAreas.equals("1"))
-                hBoxEstagio.getChildren().addAll(lbArea, cbArea1, cbArea2, addArea);
-            else if(nAreas.equals("2"))
-                hBoxEstagio.getChildren().addAll(lbArea, cbArea1, cbArea2, cbArea3);
-
-            addArea.setUserData(String.valueOf(Integer.parseInt(nAreas)+1));
-        });
+        setupActionEventAddRamoOuArea(addArea, hBoxEstagio, lbArea, cbArea1, cbArea2, cbArea3);
 
         btnEnviar.setOnAction(actionEvent -> {
 
@@ -339,7 +305,7 @@ public class AdicionarOuEditarProposta extends BorderPane {
 
             tfId.setText(editarProposta.getId());
             tfTitulo.setText(editarProposta.getTitulo());
-            tfNAlunoAssociado.setText(String.valueOf(editarProposta.getnAlunoAssociado()));
+            tfNAlunoAssociado.setText(String.valueOf(editarProposta.getNAlunoAssociado()));
 
             gp.getChildren().removeAll(gpEstagio, gpProjeto);
 
@@ -349,22 +315,7 @@ public class AdicionarOuEditarProposta extends BorderPane {
 
                 var areas = e.getAreasDestino().split("\\|");
 
-                for (int i = 0; i < areas.length; i++) {
-                    switch (i){
-                        case 0 -> cbArea1.setValue(areas[i]);
-                        case 1 -> cbArea2.setValue(areas[i]);
-                        case 2 -> cbArea3.setValue(areas[i]);
-                    }
-                }
-
-                hBoxEstagio.getChildren().clear();
-                switch (areas.length){
-                    case 1 -> hBoxEstagio.getChildren().addAll(lbArea, cbArea1, addArea);
-                    case 2 -> hBoxEstagio.getChildren().addAll(lbArea, cbArea1, cbArea2, addArea);
-                    case 3 -> hBoxEstagio.getChildren().addAll(lbArea, cbArea1, cbArea2, cbArea3);
-                }
-
-                addArea.setUserData(String.valueOf(areas.length));
+                setValuesRamoOuArea(areas, cbArea1, cbArea2, cbArea3, hBoxEstagio, addArea);
 
                 tfEntidadeAcolhimento.setText(e.getEntidadeAcolhimento());
 
@@ -374,22 +325,7 @@ public class AdicionarOuEditarProposta extends BorderPane {
 
                 var ramos = p.getRamosDestino().split("\\|");
 
-                for (int i = 0; i < ramos.length; i++) {
-                    switch (i){
-                        case 0 -> cbRamos1.setValue(ramos[i]);
-                        case 1 -> cbRamos2.setValue(ramos[i]);
-                        case 2 -> cbRamos3.setValue(ramos[i]);
-                    }
-                }
-
-                hBoxProjeto.getChildren().clear();
-                switch (ramos.length){
-                    case 1 -> hBoxProjeto.getChildren().addAll(lbArea, cbRamos1, addRamo);
-                    case 2 -> hBoxProjeto.getChildren().addAll(lbArea, cbRamos1, cbRamos2, addRamo);
-                    case 3 -> hBoxProjeto.getChildren().addAll(lbArea, cbRamos1, cbRamos2, cbRamos3);
-                }
-
-                addRamo.setUserData(String.valueOf(ramos.length));
+                setValuesRamoOuArea(ramos, cbRamos1, cbRamos2, cbRamos3, hBoxProjeto, addRamo);
 
                 tfEmailDocente.setText(p.getEmailDocente());
 
@@ -402,5 +338,49 @@ public class AdicionarOuEditarProposta extends BorderPane {
             btnEnviar.setText("Editar");
             editar = true;
         }
+    }
+
+    private void setupEstagioOuProjeto(HBox hBoxProjeto, Label lbRamos, ComboBox<String> cbRamos1, Button addRamo, GridPane gpProjeto, Label lbEmailDocente, TextField tfEmailDocente) {
+        hBoxProjeto.getChildren().addAll(lbRamos, cbRamos1, addRamo);
+        hBoxProjeto.setSpacing(25);
+
+        gpProjeto.setVgap(10);
+        gpProjeto.setHgap(4);
+        gpProjeto.addRow(0, hBoxProjeto);
+        gpProjeto.addRow(1, lbEmailDocente, tfEmailDocente);
+        gpProjeto.setAlignment(Pos.CENTER);
+    }
+
+    private void setupActionEventAddRamoOuArea(Button addRamo, HBox hBoxProjeto, Label lbRamos, ComboBox<String> cbRamos1, ComboBox<String> cbRamos2, ComboBox<String> cbRamos3) {
+        addRamo.setOnAction(event -> {
+            String nRamos = (String) addRamo.getUserData();
+
+            hBoxProjeto.getChildren().clear();
+            if(nRamos.equals("1"))
+                hBoxProjeto.getChildren().addAll(lbRamos, cbRamos1, cbRamos2, addRamo);
+            else if(nRamos.equals("2"))
+                hBoxProjeto.getChildren().addAll(lbRamos, cbRamos1, cbRamos2, cbRamos3);
+
+            addRamo.setUserData(String.valueOf(Integer.parseInt(nRamos)+1));
+        });
+    }
+
+    private void setValuesRamoOuArea(String[] areas, ComboBox<String> cbArea1, ComboBox<String> cbArea2, ComboBox<String> cbArea3, HBox hBoxEstagio, Button addArea) {
+        for (int i = 0; i < areas.length; i++) {
+            switch (i){
+                case 0 -> cbArea1.setValue(areas[i]);
+                case 1 -> cbArea2.setValue(areas[i]);
+                case 2 -> cbArea3.setValue(areas[i]);
+            }
+        }
+
+        hBoxEstagio.getChildren().clear();
+        switch (areas.length){
+            case 1 -> hBoxEstagio.getChildren().addAll(lbArea, cbArea1, addArea);
+            case 2 -> hBoxEstagio.getChildren().addAll(lbArea, cbArea1, cbArea2, addArea);
+            case 3 -> hBoxEstagio.getChildren().addAll(lbArea, cbArea1, cbArea2, cbArea3);
+        }
+
+        addArea.setUserData(String.valueOf(areas.length));
     }
 }

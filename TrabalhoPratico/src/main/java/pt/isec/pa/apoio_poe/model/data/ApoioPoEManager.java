@@ -316,8 +316,8 @@ public class ApoioPoEManager implements Serializable, IOriginator {
                     sb.append("T1,").append(e.getId()).append(",").append(e.getAreasDestino()).append(",");
                     sb.append(e.getTitulo()).append(",").append(e.getEntidadeAcolhimento());
 
-                    if (e.getnAlunoAssociado() != 0)
-                        sb.append(",").append(e.getnAlunoAssociado());
+                    if (e.getNAlunoAssociado() != 0)
+                        sb.append(",").append(e.getNAlunoAssociado());
 
                     sb.append(System.lineSeparator());
 
@@ -325,14 +325,14 @@ public class ApoioPoEManager implements Serializable, IOriginator {
                     sb.append("T2,").append(p.getId()).append(",").append(p.getRamosDestino()).append(",");
                     sb.append(p.getTitulo()).append(",").append(p.getEmailDocente());
 
-                    if (p.getnAlunoAssociado() != 0)
-                        sb.append(",").append(p.getnAlunoAssociado());
+                    if (p.getNAlunoAssociado() != 0)
+                        sb.append(",").append(p.getNAlunoAssociado());
 
                     sb.append(System.lineSeparator());
                 }
                 else if(proposta instanceof Autoproposto a){
                     sb.append("T3,").append(a.getId()).append(",").append(a.getTitulo()).append(",");
-                    sb.append(a.getnAlunoAssociado()).append(System.lineSeparator());
+                    sb.append(a.getNAlunoAssociado()).append(System.lineSeparator());
                 }
             }
             pw.print(sb);
@@ -381,7 +381,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
 
             for(var propostaAtribuida : apoioPOE.getPropostasAtribuidas()){
 
-                sb.append(propostaAtribuida.getId()).append(",").append(propostaAtribuida.getnAlunoAssociado());
+                sb.append(propostaAtribuida.getId()).append(",").append(propostaAtribuida.getNAlunoAssociado());
                 sb.append(",").append(propostaAtribuida.getOrdemPreferencia());
 
                 if(guardarOrientador && propostaAtribuida.getEmailDocenteOrientador() != null)

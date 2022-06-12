@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.Fase1.proposta;
+package pt.isec.pa.apoio_poe.ui.gui.fase1.proposta;
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -20,6 +20,7 @@ import pt.isec.pa.apoio_poe.model.data.propostas.Projeto;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+import pt.isec.pa.apoio_poe.ui.gui.mostraDados.AbreMostraDados;
 import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class GerirProposta extends BorderPane {
@@ -60,26 +61,7 @@ public class GerirProposta extends BorderPane {
         hbox.getChildren().addAll(btnAdicionar, btnEditar, btnEliminar, tfFiltros, btnProcurar);
         this.setTop(hbox);
 
-        TableColumn tcTipo = new TableColumn("Tipo");
-        TableColumn tcId = new TableColumn("Identificador");
-        TableColumn tcTitulo = new TableColumn("Titulo");
-
-        tcTipo.setCellValueFactory((Callback<TableColumn.CellDataFeatures<Proposta, String>, ObservableValue<String>>) p -> {
-            if(p.getValue() instanceof Projeto)
-                return new ReadOnlyObjectWrapper<>("Projeto");
-            else if(p.getValue() instanceof Estagio)
-                return new ReadOnlyObjectWrapper<>("Estágio");
-            else if(p.getValue() instanceof Autoproposto)
-                return new ReadOnlyObjectWrapper<>("Autoproposto");
-            return new ReadOnlyObjectWrapper<>("");
-        });
-
-        tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        tProposta.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tProposta.getColumns().clear();
-        tProposta.getColumns().addAll(tcTipo,tcId,tcTitulo);
-        tProposta.setPlaceholder(new Label("Ainda não foram inseridos Propostas"));
+        setTabelaProposta(tProposta);
 
         VBox vBox = new VBox(tProposta, btnRegressarFase);
         vBox.setSpacing(10);
@@ -105,7 +87,7 @@ public class GerirProposta extends BorderPane {
 
 
             dialog.setScene(new Scene(new AdicionarOuEditarProposta(fsm)));
-//            dialog.setResizable(false);
+            dialog.setResizable(false);
 
             dialog.showAndWait();
         });
@@ -143,22 +125,7 @@ public class GerirProposta extends BorderPane {
             TableRow<Proposta> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    Stage dialog = new Stage();
-
-                    dialog.setTitle("Informações Proposta");
-
-                    MostraDadosProposta mProposta = new MostraDadosProposta(fsm);
-                    mProposta.setUserData(row.getItem());
-
-                    dialog.initOwner(this.getScene().getWindow());
-                    dialog.initModality(Modality.APPLICATION_MODAL);
-
-                    dialog.setScene(new Scene(mProposta));
-                    dialog.setResizable(false);
-
-                    mProposta.setData();
-
-                    dialog.showAndWait();
+                    AbreMostraDados.abreMostraDadosProposta(fsm, row.getItem(), (Stage) this.getScene().getWindow());
                 }
             });
             return row ;
@@ -171,24 +138,7 @@ public class GerirProposta extends BorderPane {
 
         btnProcurar.setOnAction(actionEvent -> {
 
-            String idProposta;
-
-            if(tfFiltros.getText().isBlank()){
-                tProposta.getItems().clear();
-                for (var proposta : fsm.getPropostas())
-                    tProposta.getItems().add(proposta);
-                return;
-            }
-
-            idProposta = tfFiltros.getText();
-
-            Proposta proposta = fsm.getProposta(idProposta);
-            if(proposta != null) {
-                tProposta.getItems().clear();
-                tProposta.getItems().add(proposta);
-
-                tfFiltros.setText("");
-            }
+            procurarProposta(tfFiltros, tProposta, fsm);
         });
     }
 
@@ -198,5 +148,49 @@ public class GerirProposta extends BorderPane {
         tProposta.getItems().clear();
         for (var proposta : fsm.getPropostas())
             tProposta.getItems().add(proposta);
+    }
+
+    public static void procurarProposta(TextField tfFiltros, TableView<Proposta> tProposta, ApoioPoEContext fsm) {
+        String idProposta;
+
+        if(tfFiltros.getText().isBlank()){
+            tProposta.getItems().clear();
+            for (var proposta : fsm.getPropostas())
+                tProposta.getItems().add(proposta);
+            return;
+        }
+
+        idProposta = tfFiltros.getText();
+
+        Proposta proposta = fsm.getProposta(idProposta);
+        if(proposta != null) {
+            tProposta.getItems().clear();
+            tProposta.getItems().add(proposta);
+
+            tfFiltros.setText("");
+        }
+    }
+
+    public static void setTabelaProposta(TableView<Proposta> tProposta) {
+        TableColumn tcTipo = new TableColumn("Tipo");
+        TableColumn tcId = new TableColumn("Identificador");
+        TableColumn tcTitulo = new TableColumn("Titulo");
+
+        tcTipo.setCellValueFactory((Callback<TableColumn.CellDataFeatures<Proposta, String>, ObservableValue<String>>) p -> {
+            if(p.getValue() instanceof Projeto)
+                return new ReadOnlyObjectWrapper<>("Projeto");
+            else if(p.getValue() instanceof Estagio)
+                return new ReadOnlyObjectWrapper<>("Estágio");
+            else if(p.getValue() instanceof Autoproposto)
+                return new ReadOnlyObjectWrapper<>("Autoproposto");
+            return new ReadOnlyObjectWrapper<>("");
+        });
+
+        tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        tcTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+        tProposta.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tProposta.getColumns().clear();
+        tProposta.getColumns().addAll(tcTipo,tcId,tcTitulo);
+        tProposta.setPlaceholder(new Label("Ainda não foram inseridos Propostas"));
     }
 }

@@ -17,7 +17,7 @@ public class ChangeOrientador extends CommandAdapter {
         this.novoOrientador = novoOrientador;
 
         for(var propostasAtribuidas : apoioPoeManager.getPropostasAtribuidas())
-            if(propostasAtribuidas.getnAlunoAssociado() == nAluno)
+            if(propostasAtribuidas.getNAlunoAssociado() == nAluno)
                 this.antigoOrientador = propostasAtribuidas.getEmailDocenteOrientador();
 
     }
@@ -28,7 +28,7 @@ public class ChangeOrientador extends CommandAdapter {
         String idPropostaAtribuida = null;
 
         for(var propostasAtribuidas : apoioPoeManager.getPropostasAtribuidas())
-            if(propostasAtribuidas.getnAlunoAssociado() == nAluno)
+            if(propostasAtribuidas.getNAlunoAssociado() == nAluno)
                 idPropostaAtribuida = propostasAtribuidas.getId();
 
         if(idPropostaAtribuida == null)
@@ -43,7 +43,7 @@ public class ChangeOrientador extends CommandAdapter {
         String idPropostaAtribuida = null;
 
         for(var propostasAtribuidas : apoioPoeManager.getPropostasAtribuidas())
-            if(propostasAtribuidas.getnAlunoAssociado() == nAluno)
+            if(propostasAtribuidas.getNAlunoAssociado() == nAluno)
                 idPropostaAtribuida = propostasAtribuidas.getId();
 
         if(idPropostaAtribuida == null)

@@ -116,7 +116,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       }
 
       for (var proposta : this.propostas.values())
-         if (proposta.getnAlunoAssociado() == nAlunoAssociado) {
+         if (proposta.getNAlunoAssociado() == nAlunoAssociado) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
@@ -187,7 +187,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       }
 
       for (var proposta : propostas.values())
-         if (proposta.getnAlunoAssociado() == nAlunoAssociado) {
+         if (proposta.getNAlunoAssociado() == nAlunoAssociado) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
@@ -223,7 +223,7 @@ public class ApoioPoE implements Serializable, Cloneable {
             return false;
          }
 
-         if (this.propostas.get(proposta).getnAlunoAssociado() != 0) {
+         if (this.propostas.get(proposta).getNAlunoAssociado() != 0) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_JA_TEM_ALUNO_ASSOCIADO);
             return false;
          }
@@ -250,7 +250,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       }
 
       for (var proposta : this.propostas.values())
-         if (proposta.getnAlunoAssociado() == nAluno) {
+         if (proposta.getNAlunoAssociado() == nAluno) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
@@ -289,7 +289,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       }
 
       for (var propostaAtribuida : propostasAtribuidas.values())
-         if (propostaAtribuida.getnAlunoAssociado() == nAluno) {
+         if (propostaAtribuida.getNAlunoAssociado() == nAluno) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
@@ -334,14 +334,14 @@ public class ApoioPoE implements Serializable, Cloneable {
 
       for (var proposta : propostas.values())
 
-         if (proposta instanceof Autoproposto || (proposta instanceof Projeto && proposta.getnAlunoAssociado() != 0))
+         if (proposta instanceof Autoproposto || (proposta instanceof Projeto && proposta.getNAlunoAssociado() != 0))
             propostasAtribuir.add(proposta);
 
       if (propostasAtribuir.isEmpty())
          return false;
 
       for (var p : propostasAtribuir)
-         atribuirPropostaAluno(p.getId(), p.getnAlunoAssociado());
+         atribuirPropostaAluno(p.getId(), p.getNAlunoAssociado());
 
       return true;
    }
@@ -453,11 +453,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       ArrayList<String> propostasRemover = new ArrayList<>();
 
       for (var proposta : getPropostas()) {
-         if (proposta instanceof Autoproposto && proposta.getnAlunoAssociado() == nAluno)
+         if (proposta instanceof Autoproposto && proposta.getNAlunoAssociado() == nAluno)
             propostasRemover.add(proposta.getId());
 
-         if (proposta.getnAlunoAssociado() == nAluno)
-            proposta.setnAlunoAssociado(0);
+         if (proposta.getNAlunoAssociado() == nAluno)
+            proposta.setNAlunoAssociado(0);
       }
 
       for (var p : propostasRemover)
@@ -523,7 +523,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          return false;
 
       for (var propostaAtribuida : getPropostasAtribuidas())
-         if (propostaAtribuida.getnAlunoAssociado() == nAluno)
+         if (propostaAtribuida.getNAlunoAssociado() == nAluno)
             removePropostaAtribuida(propostaAtribuida.getId());
 
       return candidaturas.remove(nAluno) != null;
@@ -594,7 +594,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       ArrayList<Long> alunosComPropostaAtribuida = new ArrayList<>();
 
       for (var propostasAtribuida : propostasAtribuidas.values())
-         alunosComPropostaAtribuida.add(propostasAtribuida.getnAlunoAssociado());
+         alunosComPropostaAtribuida.add(propostasAtribuida.getNAlunoAssociado());
 
       return alunosComPropostaAtribuida.containsAll(candidaturas.keySet());
    }
@@ -737,7 +737,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          }
 
          for (var proposta : this.propostas.values())
-            if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno) && !proposta.getId().equals(id) && !nAluno.equals("0")) {
+            if (proposta.getNAlunoAssociado() == Long.parseLong(nAluno) && !proposta.getId().equals(id) && !nAluno.equals("0")) {
                ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
                return false;
             }
@@ -749,7 +749,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          proposta.setTitulo(titulo);
 
       if (!nAluno.isBlank())
-         proposta.setnAlunoAssociado(Long.parseLong(nAluno));
+         proposta.setNAlunoAssociado(Long.parseLong(nAluno));
 
       if (proposta instanceof Estagio e) {
 
@@ -785,7 +785,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          }
 
          for (var proposta : this.propostas.values())
-            if (proposta.getnAlunoAssociado() == Long.parseLong(nAluno) && !proposta.getId().equals(id) && !nAluno.equals("0")) {
+            if (proposta.getNAlunoAssociado() == Long.parseLong(nAluno) && !proposta.getId().equals(id) && !nAluno.equals("0")) {
                ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
                return false;
             }
@@ -797,7 +797,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          proposta.setTitulo(titulo);
 
       if (!nAluno.isBlank())
-         proposta.setnAlunoAssociado(Long.parseLong(nAluno));
+         proposta.setNAlunoAssociado(Long.parseLong(nAluno));
 
       return true;
    }
@@ -825,7 +825,7 @@ public class ApoioPoE implements Serializable, Cloneable {
             return false;
          }
 
-         if (this.propostas.get(proposta).getnAlunoAssociado() != 0) {
+         if (this.propostas.get(proposta).getNAlunoAssociado() != 0) {
             ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_JA_TEM_ALUNO_ASSOCIADO);
             return false;
          }
@@ -849,13 +849,13 @@ public class ApoioPoE implements Serializable, Cloneable {
       if(comPropostaAtribuida)
 
          for (var propostasAtribuidas : propostasAtribuidas.values())
-            resultado.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
+            resultado.add(alunos.get(propostasAtribuidas.getNAlunoAssociado()));
 
       else{
          HashSet<Long> alunosComProposta = new HashSet<>();
 
          for(var propostasAtribuidas : propostasAtribuidas.values())
-            alunosComProposta.add(propostasAtribuidas.getnAlunoAssociado());
+            alunosComProposta.add(propostasAtribuidas.getNAlunoAssociado());
 
          for(var aluno : alunos.values())
             if(!alunosComProposta.contains(aluno.getNAluno()) && candidaturas.get(aluno.getNAluno()) != null)
@@ -875,11 +875,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       if (comOrientadorAssociado) {
          for (var propostasAtribuidas : propostasAtribuidas.values())
             if (propostasAtribuidas.getEmailDocenteOrientador() != null)
-               resultado.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
+               resultado.add(alunos.get(propostasAtribuidas.getNAlunoAssociado()));
       } else
          for (var propostasAtribuidas : propostasAtribuidas.values())
             if (propostasAtribuidas.getEmailDocenteOrientador() == null)
-               resultado.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
+               resultado.add(alunos.get(propostasAtribuidas.getNAlunoAssociado()));
 
       ArrayList<Aluno> resultadoOrdenado = new ArrayList<>(resultado);
       Collections.sort(resultadoOrdenado);
@@ -896,7 +896,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       if (autoproposta) {
          for (var proposta : propostas.values())
             if (proposta instanceof Autoproposto)
-               resultado.add(alunos.get(proposta.getnAlunoAssociado()));
+               resultado.add(alunos.get(proposta.getNAlunoAssociado()));
       }
 
       if (comCandidatura) {
@@ -932,7 +932,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       if (autoproposta) {
          for (var proposta : propostas.values())
             if (proposta instanceof Autoproposto)
-               resultado.add(alunos.get(proposta.getnAlunoAssociado()));
+               resultado.add(alunos.get(proposta.getNAlunoAssociado()));
       }
 
       if (comCandidatura) {
@@ -942,8 +942,8 @@ public class ApoioPoE implements Serializable, Cloneable {
 
       if (comPropostaAtribuida) {
          for (var propostasAtribuidas : propostasAtribuidas.values()) {
-            resultado.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
-            resultadoComPropostaAtribuida.add(alunos.get(propostasAtribuidas.getnAlunoAssociado()));
+            resultado.add(alunos.get(propostasAtribuidas.getNAlunoAssociado()));
+            resultadoComPropostaAtribuida.add(alunos.get(propostasAtribuidas.getNAlunoAssociado()));
          }
       }
 
@@ -951,7 +951,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          HashSet<Long> alunosComProposta = new HashSet<>();
 
          for (var propostasAtribuidas : propostasAtribuidas.values())
-            alunosComProposta.add(propostasAtribuidas.getnAlunoAssociado());
+            alunosComProposta.add(propostasAtribuidas.getNAlunoAssociado());
 
          for (var aluno : alunos.values())
             if (!alunosComProposta.contains(aluno.getNAluno()))
@@ -1179,13 +1179,13 @@ public class ApoioPoE implements Serializable, Cloneable {
          boolean insereAluno = true;
 
          for (var proposta : propostas.values())
-            if (proposta.getnAlunoAssociado() == aluno.getNAluno()) {
+            if (proposta.getNAlunoAssociado() == aluno.getNAluno()) {
                insereAluno = false;
                break;
             }
 
          for (var propostaAtribuida : propostasAtribuidas.values())
-            if (propostaAtribuida.getnAlunoAssociado() == aluno.getNAluno()) {
+            if (propostaAtribuida.getNAlunoAssociado() == aluno.getNAluno()) {
                insereAluno = false;
                break;
             }

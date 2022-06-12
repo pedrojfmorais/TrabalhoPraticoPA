@@ -1087,7 +1087,7 @@ public class ApoioPoEUI {
         boolean autoproposta = false, comCandidatura = false, comPropostaAtribuida = false,
                 semPropostaAtribuida = false;
 
-        switch (PAInput.chooseOption("Selecione um opção:", "Com Autoproposta",
+        switch (PAInput.chooseOption("Selecione uma opção:", "Com Autoproposta",
                 "Com Candidatura registada", "Com proposta atribuida", "Sem proposta atribuida")){
 
             case 1 -> autoproposta = true;

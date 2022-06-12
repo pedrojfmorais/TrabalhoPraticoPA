@@ -1,35 +1,35 @@
-package pt.isec.pa.apoio_poe.ui.gui.Fase2;
+package pt.isec.pa.apoio_poe.ui.gui.fase3;
 
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableRow;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import pt.isec.pa.apoio_poe.model.data.propostas.Autoproposto;
-import pt.isec.pa.apoio_poe.model.data.propostas.Estagio;
-import pt.isec.pa.apoio_poe.model.data.propostas.Projeto;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
-import pt.isec.pa.apoio_poe.ui.gui.Fase1.proposta.MostraDadosProposta;
+import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.GerirProposta;
+import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.MostraDadosProposta;
 
-public class ListaProposta extends BorderPane {
+import java.util.ArrayList;
+
+public class ListaPropostaFase3 extends BorderPane {
     ApoioPoEContext fsm;
 
-    Label lbAutoproposta, lbPropostasDocentes, lbComCandidatura, lbSemCandidatura;
-    CheckBox ckAutoproposta, ckPropostasDocentes, ckComCandidatura, ckSemCandidatura;
+    Label lbAutoproposta, lbPropostasDocentes, lbPropostasAtribuidas, lbPropostasDisponiveis;
+    CheckBox ckAutoproposta, ckPropostasDocentes, ckPropostasAtribuidas, ckPropostasDisponiveis;
     TableView<Proposta> tPropostas;
 
-    public ListaProposta(ApoioPoEContext fsm) {
+    public ListaPropostaFase3(ApoioPoEContext fsm) {
         this.fsm = fsm;
 
         createViews();
@@ -41,48 +41,29 @@ public class ListaProposta extends BorderPane {
 
         lbAutoproposta = new Label("Autopropostas de Alunos ");
         lbPropostasDocentes = new Label("Propostas de Docentes ");
-        lbComCandidatura = new Label("Com Candidatura registada ");
-        lbSemCandidatura = new Label("Sem Candidatura registada ");
+        lbPropostasAtribuidas = new Label("Propostas Atribuídas ");
+        lbPropostasDisponiveis = new Label("Propostas Disponíveis ");
 
         ckAutoproposta = new CheckBox();
         ckPropostasDocentes = new CheckBox();
-        ckComCandidatura = new CheckBox();
-        ckSemCandidatura = new CheckBox();
+        ckPropostasAtribuidas = new CheckBox();
+        ckPropostasDisponiveis = new CheckBox();
 
         tPropostas = new TableView<>();
 
         lbAutoproposta.setLabelFor(ckAutoproposta);
         lbPropostasDocentes.setLabelFor(ckPropostasDocentes);
-        lbComCandidatura.setLabelFor(ckComCandidatura);
-        lbSemCandidatura.setLabelFor(ckSemCandidatura);
+        lbPropostasAtribuidas.setLabelFor(ckPropostasAtribuidas);
+        lbPropostasDisponiveis.setLabelFor(ckPropostasDisponiveis);
 
-        TableColumn tcTipo = new TableColumn("Tipo");
-        TableColumn tcId = new TableColumn("Identificador");
-        TableColumn tcTitulo = new TableColumn("Titulo");
-
-        tcTipo.setCellValueFactory((Callback<TableColumn.CellDataFeatures<Proposta, String>, ObservableValue<String>>) p -> {
-            if(p.getValue() instanceof Projeto)
-                return new ReadOnlyObjectWrapper<>("Projeto");
-            else if(p.getValue() instanceof Estagio)
-                return new ReadOnlyObjectWrapper<>("Estágio");
-            else if(p.getValue() instanceof Autoproposto)
-                return new ReadOnlyObjectWrapper<>("Autoproposto");
-            return new ReadOnlyObjectWrapper<>("");
-        });
-
-        tcId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        tcTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-        tPropostas.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tPropostas.getColumns().clear();
-        tPropostas.getColumns().addAll(tcTipo,tcId,tcTitulo);
-        tPropostas.setPlaceholder(new Label("Ainda não foram inseridos Propostas"));
+        GerirProposta.setTabelaProposta(tPropostas);
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(
                 new HBox(lbAutoproposta, ckAutoproposta),
                 new HBox(lbPropostasDocentes, ckPropostasDocentes),
-                new HBox(lbComCandidatura, ckComCandidatura),
-                new HBox(lbSemCandidatura, ckSemCandidatura)
+                new HBox(lbPropostasAtribuidas, ckPropostasAtribuidas),
+                new HBox(lbPropostasDisponiveis, ckPropostasDisponiveis)
         );
         vBox.setAlignment(Pos.CENTER);
 
@@ -98,25 +79,26 @@ public class ListaProposta extends BorderPane {
 
     private void registerHandlers(){
         fsm.addPropertyChangeListener(ApoioPoEContext.PROP_FASE, evt -> update());
-        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_ALUNO, evt -> update());
+        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_PROPOSTA, evt -> update());
 
         EventHandler<ActionEvent> eh = event -> {
             if (event.getSource() instanceof CheckBox) {
                 tPropostas.getItems().clear();
-                for (var aluno : fsm.consultarPropostas(
+
+                for (var proposta : fsm.consultarPropostas(
                         ckAutoproposta.isSelected(),
                         ckPropostasDocentes.isSelected(),
-                        ckComCandidatura.isSelected(),
-                        ckSemCandidatura.isSelected())
-                )
-                    tPropostas.getItems().add(aluno);
+                        ckPropostasDisponiveis.isSelected(),
+                        ckPropostasAtribuidas.isSelected()
+                ))
+                    tPropostas.getItems().add(proposta);
             }
         };
 
         ckAutoproposta.setOnAction(eh);
         ckPropostasDocentes.setOnAction(eh);
-        ckComCandidatura.setOnAction(eh);
-        ckSemCandidatura.setOnAction(eh);
+        ckPropostasAtribuidas.setOnAction(eh);
+        ckPropostasDisponiveis.setOnAction(eh);
 
         tPropostas.setRowFactory( tv -> {
             TableRow<Proposta> row = new TableRow<>();
@@ -148,8 +130,8 @@ public class ListaProposta extends BorderPane {
 
         ckAutoproposta.setSelected(false);
         ckPropostasDocentes.setSelected(false);
-        ckComCandidatura.setSelected(false);
-        ckSemCandidatura.setSelected(false);
+        ckPropostasAtribuidas.setSelected(false);
+        ckPropostasDisponiveis.setSelected(false);
 
         tPropostas.getItems().clear();
         for (var proposta : fsm.getPropostas())

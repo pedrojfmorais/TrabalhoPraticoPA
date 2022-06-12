@@ -6,6 +6,7 @@ import pt.isec.pa.apoio_poe.model.data.Candidatura;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
+import pt.isec.pa.apoio_poe.model.data.propostas.PropostaAtribuida;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
 import pt.isec.pa.apoio_poe.utils.PAInput;
@@ -22,6 +23,7 @@ public class ApoioPoEContext {
     public static final String PROP_DOCENTE = "_DOCENTE_";
     public static final String PROP_PROPOSTA = "_PROPOSTA_";
     public static final String PROP_CANDIDATURA = "_CANDIDATURA_";
+    public static final String PROP_PROPOSTA_ATRIBUIDA = "_PROPOSTA_ATRIBUIDA_";
     PropertyChangeSupport pcs;
     private ApoioPoEManager data;
     private IApoioPoEState state;
@@ -59,7 +61,10 @@ public class ApoioPoEContext {
         pcs.firePropertyChange(PROP_FASE, null, null);
     }
 
-    public void changeState(IApoioPoEState state){this.state = state;}
+    public void changeState(IApoioPoEState state){
+        this.state = state;
+        pcs.firePropertyChange(PROP_FASE, null, null);
+    }
 
     public ApoioPoEState getState(){
         return state.getState() == null ? null : state.getState();
@@ -134,6 +139,7 @@ public class ApoioPoEContext {
         pcs.firePropertyChange(PROP_DOCENTE, null, null);
         pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         pcs.firePropertyChange(PROP_CANDIDATURA, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA_ATRIBUIDA, null, null);
         return result;
     }
     public boolean editarDados(String... dados) {
@@ -150,6 +156,7 @@ public class ApoioPoEContext {
         pcs.firePropertyChange(PROP_DOCENTE, null, null);
         pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         pcs.firePropertyChange(PROP_CANDIDATURA, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA_ATRIBUIDA, null, null);
         return result;
     }
     public String consultarDados(String filtro) {
@@ -205,6 +212,7 @@ public class ApoioPoEContext {
         pcs.firePropertyChange(PROP_DOCENTE, null, null);
         pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         pcs.firePropertyChange(PROP_CANDIDATURA, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA_ATRIBUIDA, null, null);
         return result;
     }
 
@@ -214,6 +222,7 @@ public class ApoioPoEContext {
         pcs.firePropertyChange(PROP_DOCENTE, null, null);
         pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         pcs.firePropertyChange(PROP_CANDIDATURA, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA_ATRIBUIDA, null, null);
         return result;
     }
     public boolean hasUndo(){return state.hasUndo();}
@@ -224,8 +233,10 @@ public class ApoioPoEContext {
         pcs.firePropertyChange(PROP_DOCENTE, null, null);
         pcs.firePropertyChange(PROP_PROPOSTA, null, null);
         pcs.firePropertyChange(PROP_CANDIDATURA, null, null);
+        pcs.firePropertyChange(PROP_PROPOSTA_ATRIBUIDA, null, null);
         return result;
     }
+
     public boolean hasRedo(){return state.hasRedo();}
 
     public String getTipoProposta(String id){return data.getTipoProposta(id);}
@@ -268,6 +279,8 @@ public class ApoioPoEContext {
     public Proposta getProposta(String id){return data.getProposta(id);}
     public ArrayList<Candidatura> getCandidaturas(){return data.getCandidaturas();}
     public Candidatura getCandidatura(long nAluno){return data.getCandidatura(nAluno);}
+    public ArrayList<PropostaAtribuida> getPropostasAtribuidas(){return data.getPropostasAtribuidas();}
+    public PropostaAtribuida getPropostaAtribuida(String id){return data.getPropostaAtribuida(id);}
 
     public int nAlunosPorRamo(String ramo){return data.nAlunosPorRamo(ramo);}
     public int propostasPorRamo(String ramo){return data.propostasPorRamo(ramo);}

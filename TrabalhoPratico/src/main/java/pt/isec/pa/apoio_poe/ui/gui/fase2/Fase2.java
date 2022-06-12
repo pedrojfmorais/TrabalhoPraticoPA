@@ -1,11 +1,9 @@
-package pt.isec.pa.apoio_poe.ui.gui.Fase2;
+package pt.isec.pa.apoio_poe.ui.gui.fase2;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -13,7 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
-import pt.isec.pa.apoio_poe.ui.gui.Fase1.aluno.AdicionarOuEditarAluno;
+import pt.isec.pa.apoio_poe.ui.gui.ComumFases;
 
 public class Fase2 extends BorderPane {
     ApoioPoEContext fsm;
@@ -77,7 +75,7 @@ public class Fase2 extends BorderPane {
             dialog.setHeight(400);
 
 
-            dialog.setScene(new Scene(new ListaAluno(fsm)));
+            dialog.setScene(new Scene(new ListaAlunoFase2(fsm)));
             dialog.setResizable(false);
 
             dialog.showAndWait();
@@ -95,7 +93,7 @@ public class Fase2 extends BorderPane {
             dialog.setHeight(400);
 
 
-            dialog.setScene(new Scene(new ListaProposta(fsm)));
+            dialog.setScene(new Scene(new ListaPropostaFase2(fsm)));
             dialog.setResizable(false);
 
             dialog.showAndWait();
@@ -103,37 +101,7 @@ public class Fase2 extends BorderPane {
 
         btnRegressar.setOnAction(event -> fsm.regressarFase());
 
-        btnAvancar.setOnAction(event -> {
-            Alert alert = new Alert(
-                    Alert.AlertType.CONFIRMATION,
-                    "",
-                    ButtonType.YES, ButtonType.NO
-            );
-            alert.setTitle("Avançar Fase");
-            alert.setHeaderText("Pretende bloquear a fase?");
-
-            alert.showAndWait().ifPresent(response -> {
-                switch (response.getButtonData()){
-                    case YES -> {
-                        boolean result = fsm.avancarFase(true);
-                        if(!result) {
-                            Alert errorMessage = new Alert(
-                                    Alert.AlertType.ERROR,
-                                    "",
-                                    ButtonType.OK
-                            );
-
-                            errorMessage.setTitle("Erro Bloquear Fase");
-                            errorMessage.setHeaderText("Neste momento não é possivel bloquear a fase!");
-
-                            errorMessage.showAndWait();
-                        }
-
-                    }
-                    case NO -> fsm.avancarFase(false);
-                }
-            });
-        });
+        ComumFases.alertaAvancarFase(btnAvancar, fsm);
     }
 
     private void update() {

@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.Fase1.proposta;
+package pt.isec.pa.apoio_poe.ui.gui.fase1.proposta;
 
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;

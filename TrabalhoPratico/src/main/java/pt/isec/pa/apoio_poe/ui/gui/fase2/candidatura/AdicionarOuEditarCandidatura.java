@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.Fase2.candidatura;
+package pt.isec.pa.apoio_poe.ui.gui.fase2.candidatura;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -172,7 +172,7 @@ public class AdicionarOuEditarCandidatura extends BorderPane {
 
                         case PROPOSTA_JA_TEM_ALUNO_ASSOCIADO -> {
                             for (TextField tfProposta : tfPropostas) {
-                                if (fsm.getProposta(tfProposta.getText()).getnAlunoAssociado() != 0)
+                                if (fsm.getProposta(tfProposta.getText()).getNAlunoAssociado() != 0)
                                     tfProposta.getStyleClass().add("error");
                             }
                         }

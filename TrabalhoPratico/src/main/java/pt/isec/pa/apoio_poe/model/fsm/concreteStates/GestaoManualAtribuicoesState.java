@@ -45,7 +45,7 @@ public class GestaoManualAtribuicoesState extends ApoioPoEAdapter {
             return false;
 
         else if (proposta instanceof Projeto p)
-            if(p.getnAlunoAssociado() != 0)
+            if(p.getNAlunoAssociado() != 0)
                 return false;
 
         return facade.removeAtribuicaoAlunoProposta(dados[0]);

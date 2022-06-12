@@ -1,19 +1,23 @@
 package pt.isec.pa.apoio_poe.ui.gui;
 
 import javafx.application.Platform;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
-import pt.isec.pa.apoio_poe.model.fsm.concreteStates.Fase2BloqueadaState;
+import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.PiechartAlunosRamos;
+import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.PiechartPropostasRamos;
 
 import java.io.File;
 
 public class AppMenu extends MenuBar {
-    ApoioPoEContext fsm;
+    static ApoioPoEContext fsm;
 
     Menu mnFile;
     MenuItem miNew, miOpen, miSave, miExit;
@@ -26,8 +30,13 @@ public class AppMenu extends MenuBar {
     Menu mnEdit;
     MenuItem mIUndo, miRedo, miRemoverTodosDados;
 
+    Menu mnView;
+    MenuItem miAlunosRamos, miPropostasRamos;
+
+    static Stage dialog;
+
     public AppMenu(ApoioPoEContext fsm){
-        this.fsm = fsm;
+        AppMenu.fsm = fsm;
 
         createViews();
         registerHandlers();
@@ -35,6 +44,7 @@ public class AppMenu extends MenuBar {
     }
 
     private void createViews() {
+
         mnFile = new Menu("File");
         miNew = new MenuItem("New");
         miNew.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
@@ -73,7 +83,12 @@ public class AppMenu extends MenuBar {
         miRemoverTodosDados = new MenuItem("Remover Todos Dados");
         mnEdit.getItems().addAll(mIUndo, miRedo, miRemoverTodosDados);
 
-        this.getMenus().addAll(mnFile, mnEdit);
+        mnView = new Menu("View");
+        miAlunosRamos = new MenuItem("Alunos por Ramos");
+        miPropostasRamos = new MenuItem("Propostas por Ramos");
+        mnView.getItems().addAll(miAlunosRamos, miPropostasRamos);
+
+        this.getMenus().addAll(mnFile, mnEdit, mnView);
         this.setUseSystemMenuBar(true);
 
     }
@@ -289,6 +304,58 @@ public class AppMenu extends MenuBar {
         });
 
         miRemoverTodosDados.setOnAction(actionEvent -> fsm.removerTodosDados());
+
+        miAlunosRamos.setOnAction(event -> mostraAlunosRamo((Stage) this.getScene().getWindow()));
+        miPropostasRamos.setOnAction(event -> mostraPropostasRamo((Stage) this.getScene().getWindow()));
+    }
+
+    public static void mostraAlunosRamo(Stage stage){
+
+        AppMenu.closeDialog();
+
+        dialog = new Stage();
+
+        dialog.initOwner(stage);
+        dialog.setHeight(stage.getHeight());
+        dialog.setX(stage.getX() + stage.getWidth());
+        dialog.setY(stage.getY());
+
+        dialog.setTitle("Alunos por Ramo");
+
+        dialog.initModality(Modality.NONE);
+        dialog.setResizable(false);
+        dialog.setWidth(300);
+
+        dialog.setScene(new Scene(new PiechartAlunosRamos(fsm)));
+        dialog.show();
+    }
+
+    public static void mostraPropostasRamo(Stage stage){
+
+        AppMenu.closeDialog();
+
+        dialog = new Stage();
+
+        dialog.initOwner(stage);
+        dialog.setHeight(stage.getHeight());
+        dialog.setX(stage.getX() + stage.getWidth());
+        dialog.setY(stage.getY());
+
+        dialog.setTitle("Propostas por Ramo");
+
+        dialog.initModality(Modality.NONE);
+        dialog.setResizable(false);
+        dialog.setWidth(300);
+
+        dialog.setScene(new Scene(new PiechartPropostasRamos(fsm)));
+        dialog.setResizable(false);
+
+        dialog.show();
+    }
+
+    public static void closeDialog(){
+        if(dialog != null)
+            dialog.hide();
     }
 
     private void update() {
