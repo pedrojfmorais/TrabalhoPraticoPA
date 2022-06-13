@@ -5,15 +5,43 @@ import pt.isec.pa.apoio_poe.model.data.pessoas.Pessoa;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Classe Aluno com as informações dos Alunos
+ * @author Maria Abreu e Pedro Morais
+ * @version 1.0.0
+ *
+ */
 public class Aluno extends Pessoa implements Comparable<Aluno>{
+    /**
+     * número de aluno
+     */
     private final long nAluno;
+    /**
+     * sigla do curso
+     */
     private String siglaCurso;
+    /**
+     * sigla do ramo
+     */
     private String siglaRamo;
+    /**
+     * classificação do aluno
+     */
     private double classificacao;
+    /**
+     * aluno tem acesso a estágio
+     */
     private boolean acessoEstagio;
 
+    /**
+     * vários cursos disponíveis
+     */
     public static final ArrayList<String> cursos;
+    /**
+     * vários ramos disponíveis
+     */
     public static final ArrayList<String> ramos;
+
 
     static{
         cursos = new ArrayList<>(Arrays.asList("LEI", "LEI-PL"));
