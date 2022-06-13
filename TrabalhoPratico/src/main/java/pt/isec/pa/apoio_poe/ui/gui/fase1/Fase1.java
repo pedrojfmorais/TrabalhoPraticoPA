@@ -68,6 +68,5 @@ public class Fase1 extends BorderPane {
 
     private void update() {
         this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.FASE1);
-        AppMenu.closeDialog();
     }
 }

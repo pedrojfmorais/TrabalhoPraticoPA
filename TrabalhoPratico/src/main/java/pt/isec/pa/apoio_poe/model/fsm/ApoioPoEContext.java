@@ -9,12 +9,12 @@ import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.data.propostas.PropostaAtribuida;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
-import pt.isec.pa.apoio_poe.utils.PAInput;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ApoioPoEContext {
 
@@ -294,4 +294,15 @@ public class ApoioPoEContext {
         return data.consultarAlunosFase5(comPropostaAtribuida);
     }
 
+    public ArrayList<Integer> propostasAtribuidas_NaoAtribuidas_Total() {
+        return data.propostasAtribuidas_NaoAtribuidas_Total();
+    }
+
+    public HashMap<String, Number> top5EmpresasEstagio() {
+        return data.top5EmpresasEstagio();
+    }
+
+    public HashMap<String, Number> top5DocentesOrientacoes() {
+        return data.top5DocentesOrientacoes();
+    }
 }

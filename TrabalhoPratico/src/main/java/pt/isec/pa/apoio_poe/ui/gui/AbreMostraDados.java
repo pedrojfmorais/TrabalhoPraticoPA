@@ -1,4 +1,4 @@
-package pt.isec.pa.apoio_poe.ui.gui.mostraDados;
+package pt.isec.pa.apoio_poe.ui.gui;
 
 import javafx.scene.Scene;
 import javafx.stage.Modality;

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.data.propostas.PropostaAtribuida;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
-import pt.isec.pa.apoio_poe.ui.gui.mostraDados.AbreMostraDados;
+import pt.isec.pa.apoio_poe.ui.gui.AbreMostraDados;
 import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 import java.util.ArrayList;

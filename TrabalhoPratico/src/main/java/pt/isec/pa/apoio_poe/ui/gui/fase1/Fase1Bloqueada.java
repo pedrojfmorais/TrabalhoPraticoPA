@@ -16,7 +16,7 @@ import pt.isec.pa.apoio_poe.ui.gui.AppMenu;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.GerirAluno;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.docente.GerirDocente;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.GerirProposta;
-import pt.isec.pa.apoio_poe.ui.gui.mostraDados.AbreMostraDados;
+import pt.isec.pa.apoio_poe.ui.gui.AbreMostraDados;
 import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class Fase1Bloqueada extends BorderPane {
@@ -184,7 +184,5 @@ public class Fase1Bloqueada extends BorderPane {
         tbConsultarAlunos.fire();
         tbConsultarAlunos.setSelected(true);
         this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.FASE1_BLOQUEADA);
-
-        AppMenu.closeDialog();
     }
 }

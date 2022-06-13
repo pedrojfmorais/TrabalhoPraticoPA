@@ -1203,4 +1203,75 @@ public class ApoioPoE implements Serializable, Cloneable {
       return alunosSemProposta;
    }
 
+   public ArrayList<Integer> propostasAtribuidas_NaoAtribuidas_Total(){
+      ArrayList<Integer> resultado = new ArrayList<>(List.of(0,0,0));
+      for(var proposta : propostas.values()){
+         if(propostasAtribuidas.containsKey(proposta.getId()))
+            resultado.set(0, resultado.get(0) + 1);
+         else
+            resultado.set(1, resultado.get(1) + 1);
+      }
+      resultado.set(2, propostas.size());
+
+      return resultado;
+   }
+
+   public HashMap<String, Number> top5EmpresasEstagio(){
+      HashMap<String, Integer> top5 = new HashMap<>();
+
+      for (var proposta : propostas.values()) {
+         if(proposta instanceof Estagio e){
+            if(top5.containsKey(e.getEntidadeAcolhimento())){
+               top5.replace(e.getEntidadeAcolhimento(), top5.get(e.getEntidadeAcolhimento())+1);
+            }else{
+               top5.put(e.getEntidadeAcolhimento(), 1);
+            }
+         }
+      }
+      List<Map.Entry<String, Integer> > list =
+              new LinkedList<>(top5.entrySet());
+
+      list.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
+
+      HashMap<String, Number> top5Final = new HashMap<>();
+
+      int cont = 0;
+      for(var item : list){
+         top5Final.put(item.getKey(), item.getValue());
+         cont++;
+
+         if(cont == 5)
+            break;
+      }
+      return top5Final;
+   }
+
+   public HashMap<String, Number> top5DocentesOrientacoes(){
+      HashMap<String, Integer> top5 = new HashMap<>();
+
+      for (var proposta : propostasAtribuidas.values()) {
+         if(proposta.getEmailDocenteOrientador() != null){
+            if(top5.containsKey(proposta.getEmailDocenteOrientador()))
+               top5.replace(proposta.getEmailDocenteOrientador(), top5.get(proposta.getEmailDocenteOrientador())+1);
+            else
+               top5.put(proposta.getEmailDocenteOrientador(), 1);
+         }
+      }
+      List<Map.Entry<String, Integer> > list =
+              new LinkedList<>(top5.entrySet());
+
+      list.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
+
+      HashMap<String, Number> top5Final = new HashMap<>();
+
+      int cont = 0;
+      for(var item : list){
+         top5Final.put(docentes.get(item.getKey()).getNome(), item.getValue());
+         cont++;
+
+         if(cont == 5)
+            break;
+      }
+      return top5Final;
+   }
 }

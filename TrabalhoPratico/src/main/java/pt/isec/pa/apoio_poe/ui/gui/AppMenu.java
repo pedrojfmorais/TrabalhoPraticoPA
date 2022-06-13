@@ -11,8 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
-import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.PiechartAlunosRamos;
-import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.PiechartPropostasRamos;
+import pt.isec.pa.apoio_poe.ui.gui.graficos.*;
 
 import java.io.File;
 
@@ -34,7 +33,7 @@ public class AppMenu extends MenuBar {
     MenuItem mIUndo, miRedo, miRemoverTodosDados;
 
     Menu mnView;
-    MenuItem miAlunosRamos, miPropostasRamos;
+    MenuItem miAlunosRamos, miPropostasRamos, miPropostasAtribuidas, miTop5EmpresasEstagios, miTop5DocentesOrientacoes;
 
     static Stage dialog;
 
@@ -89,7 +88,10 @@ public class AppMenu extends MenuBar {
         mnView = new Menu("View");
         miAlunosRamos = new MenuItem("Alunos por Ramos");
         miPropostasRamos = new MenuItem("Propostas por Ramos");
-        mnView.getItems().addAll(miAlunosRamos, miPropostasRamos);
+        miPropostasAtribuidas = new MenuItem("Propostas Atribuídas");
+        miTop5EmpresasEstagios = new MenuItem("Empresas com mais Estágios");
+        miTop5DocentesOrientacoes = new MenuItem("Orientações por Docente");
+        mnView.getItems().addAll(miAlunosRamos, miPropostasRamos, miPropostasAtribuidas, miTop5EmpresasEstagios, miTop5DocentesOrientacoes);
 
         this.getMenus().addAll(mnFile, mnEdit, mnView);
         this.setUseSystemMenuBar(true);
@@ -291,6 +293,9 @@ public class AppMenu extends MenuBar {
 
         miAlunosRamos.setOnAction(event -> mostraAlunosRamo((Stage) this.getScene().getWindow()));
         miPropostasRamos.setOnAction(event -> mostraPropostasRamo((Stage) this.getScene().getWindow()));
+        miPropostasAtribuidas.setOnAction(event -> mostraPropostasAtribuida((Stage) this.getScene().getWindow()));
+        miTop5EmpresasEstagios.setOnAction(event -> mostraTop5Empresas((Stage) this.getScene().getWindow()));
+        miTop5DocentesOrientacoes.setOnAction(event -> mostraTop5Docentes((Stage) this.getScene().getWindow()));
     }
 
     public static void mostraAlunosRamo(Stage stage){
@@ -332,6 +337,74 @@ public class AppMenu extends MenuBar {
         dialog.setWidth(300);
 
         dialog.setScene(new Scene(new PiechartPropostasRamos(fsm)));
+        dialog.setResizable(false);
+
+        dialog.show();
+    }
+
+    public static void mostraPropostasAtribuida(Stage stage){
+
+        AppMenu.closeDialog();
+
+        dialog = new Stage();
+
+        dialog.initOwner(stage);
+        dialog.setHeight(stage.getHeight());
+        dialog.setX(stage.getX() + stage.getWidth());
+        dialog.setY(stage.getY());
+
+        dialog.setTitle("Propostas Atribuídas");
+
+        dialog.initModality(Modality.NONE);
+        dialog.setResizable(false);
+        dialog.setWidth(300);
+
+        dialog.setScene(new Scene(new PiechartPropostasAtribuidas(fsm)));
+        dialog.setResizable(false);
+
+        dialog.show();
+    }
+
+    public static void mostraTop5Empresas(Stage stage){
+
+        AppMenu.closeDialog();
+
+        dialog = new Stage();
+
+        dialog.initOwner(stage);
+        dialog.setHeight(stage.getHeight());
+        dialog.setX(stage.getX() + stage.getWidth());
+        dialog.setY(stage.getY());
+
+        dialog.setTitle("Top 5 Empresas com mais Estágios");
+
+        dialog.initModality(Modality.NONE);
+        dialog.setResizable(false);
+        dialog.setWidth(300);
+
+        dialog.setScene(new Scene(new BarChartEmpresasEstagios(fsm)));
+        dialog.setResizable(false);
+
+        dialog.show();
+    }
+    public static void mostraTop5Docentes(Stage stage){
+
+        AppMenu.closeDialog();
+
+        dialog = new Stage();
+
+        dialog.initOwner(stage);
+        dialog.setHeight(stage.getHeight());
+        dialog.setX(stage.getX() + stage.getWidth());
+        dialog.setY(stage.getY());
+
+        dialog.setTitle("Top 5 Docentes com mais Orientações");
+
+        dialog.initModality(Modality.NONE);
+        dialog.setResizable(false);
+        dialog.setWidth(300);
+
+        dialog.setScene(new Scene(new BarChartDocentesOrientacoes(fsm)));
         dialog.setResizable(false);
 
         dialog.show();
@@ -409,6 +482,7 @@ public class AppMenu extends MenuBar {
     }
 
     public static void btnSair(){
+        closeDialog();
         if (fsm.getState() == ApoioPoEState.INICIO)
             Platform.exit();
 

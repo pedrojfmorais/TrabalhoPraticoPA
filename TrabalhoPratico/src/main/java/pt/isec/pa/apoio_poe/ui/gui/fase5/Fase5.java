@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.ui.gui.AppMenu;
-import pt.isec.pa.apoio_poe.ui.gui.fase4.ListaAlunoFase4;
 import pt.isec.pa.apoio_poe.ui.gui.fase4.ListaDocentesFase4;
 
 public class Fase5 extends BorderPane {

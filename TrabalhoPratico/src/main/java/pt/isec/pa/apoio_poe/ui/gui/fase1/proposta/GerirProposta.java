@@ -17,7 +17,7 @@ import javafx.util.Callback;
 import pt.isec.pa.apoio_poe.model.data.propostas.*;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
-import pt.isec.pa.apoio_poe.ui.gui.mostraDados.AbreMostraDados;
+import pt.isec.pa.apoio_poe.ui.gui.AbreMostraDados;
 import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class GerirProposta extends BorderPane {

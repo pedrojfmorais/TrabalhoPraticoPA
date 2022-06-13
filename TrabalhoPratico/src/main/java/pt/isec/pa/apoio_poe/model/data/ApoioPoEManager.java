@@ -11,6 +11,7 @@ import pt.isec.pa.apoio_poe.model.memento.IOriginator;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class ApoioPoEManager implements Serializable, IOriginator {
@@ -499,5 +500,17 @@ public class ApoioPoEManager implements Serializable, IOriginator {
 
     public int propostasPorRamo(String ramo) {
         return apoioPOE.propostasPorRamo(ramo);
+    }
+
+    public ArrayList<Integer> propostasAtribuidas_NaoAtribuidas_Total() {
+        return apoioPOE.propostasAtribuidas_NaoAtribuidas_Total();
+    }
+
+    public HashMap<String, Number> top5EmpresasEstagio() {
+        return apoioPOE.top5EmpresasEstagio();
+    }
+
+    public HashMap<String, Number> top5DocentesOrientacoes() {
+        return apoioPOE.top5DocentesOrientacoes();
     }
 }
