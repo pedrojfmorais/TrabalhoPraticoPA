@@ -4,22 +4,22 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
-import pt.isec.pa.apoio_poe.ui.gui.fase1.Fase1;
-import pt.isec.pa.apoio_poe.ui.gui.fase1.Fase1Bloqueada;
-import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.GerirAluno;
-import pt.isec.pa.apoio_poe.ui.gui.fase1.docente.GerirDocente;
-import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.GerirProposta;
-import pt.isec.pa.apoio_poe.ui.gui.fase2.Fase2;
-import pt.isec.pa.apoio_poe.ui.gui.fase2.Fase2Bloqueada;
-import pt.isec.pa.apoio_poe.ui.gui.fase2.candidatura.GerirCandidatura;
-import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3;
-import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3Bloqueada;
-import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3MasFase2Aberta;
-import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.AtribuicaoAutomatica;
-import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.GestaoManualAtribuicoes;
-import pt.isec.pa.apoio_poe.ui.gui.fase4.Fase4;
-import pt.isec.pa.apoio_poe.ui.gui.fase4.docentesOrientadores.GestaoManualOrientacoes;
-import pt.isec.pa.apoio_poe.ui.gui.fase5.Fase5;
+import pt.isec.pa.apoio_poe.ui.gui.fase1.Fase1GUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase1.Fase1BloqueadaGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.GerirAlunoGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase1.docente.GerirDocenteGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.GerirPropostaGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase2.Fase2GUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase2.Fase2BloqueadaGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase2.candidatura.GerirCandidaturaGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3GUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3BloqueadaGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase3.Fase3MasFase2AbertaGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.AtribuicaoAutomaticaGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.GestaoManualAtribuicoesGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase4.Fase4GUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase4.docentesOrientadores.GestaoManualOrientacoesGUI;
+import pt.isec.pa.apoio_poe.ui.gui.fase5.Fase5GUI;
 
 public class ApoioPoEGUI extends BorderPane {
     ApoioPoEContext fsm;
@@ -33,27 +33,27 @@ public class ApoioPoEGUI extends BorderPane {
 
     private void createViews() {
         StackPane stackPane = new StackPane(
-                new Inicio(fsm),
-                new Fase1(fsm),
-                new Fase1Bloqueada(fsm),
-                new GerirAluno(fsm),
-                new GerirDocente(fsm),
-                new GerirProposta(fsm),
-                new Fase2(fsm),
-                new Fase2Bloqueada(fsm),
-                new GerirCandidatura(fsm),
-                new Fase3(fsm),
-                new Fase3Bloqueada(fsm),
-                new Fase3MasFase2Aberta(fsm),
-                new GestaoManualAtribuicoes(fsm),
-                new AtribuicaoAutomatica(fsm),
-                new Fase4(fsm),
-                new GestaoManualOrientacoes(fsm),
-                new Fase5(fsm)
+                new InicioGUI(fsm),
+                new Fase1GUI(fsm),
+                new Fase1BloqueadaGUI(fsm),
+                new GerirAlunoGUI(fsm),
+                new GerirDocenteGUI(fsm),
+                new GerirPropostaGUI(fsm),
+                new Fase2GUI(fsm),
+                new Fase2BloqueadaGUI(fsm),
+                new GerirCandidaturaGUI(fsm),
+                new Fase3GUI(fsm),
+                new Fase3BloqueadaGUI(fsm),
+                new Fase3MasFase2AbertaGUI(fsm),
+                new GestaoManualAtribuicoesGUI(fsm),
+                new AtribuicaoAutomaticaGUI(fsm),
+                new Fase4GUI(fsm),
+                new GestaoManualOrientacoesGUI(fsm),
+                new Fase5GUI(fsm)
         );
-        this.setTop(new AppMenu(fsm));
+        this.setTop(new AppMenuGUI(fsm));
         this.setCenter(stackPane);
-        this.setBottom(new Rodape());
+        this.setBottom(new RodapeGUI());
     }
 
     private void registerHandlers() {

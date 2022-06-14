@@ -47,7 +47,17 @@ public class Aluno extends Pessoa implements Comparable<Aluno>{
         cursos = new ArrayList<>(Arrays.asList("LEI", "LEI-PL"));
         ramos = new ArrayList<>(Arrays.asList("DA", "RAS", "SI"));
     }
-
+    /**
+     * Construtor público
+     *
+     * @param nAluno número de estudante
+     * @param nome nome do aluno
+     * @param email email do aluno
+     * @param siglaCurso sigla do curso do aluno
+     * @param siglaRamo sigla do ramo do aluno
+     * @param classificacao classificação do aluno (0.0 a 1.0)
+     * @param acessoEstagio aluno tem acesso a estágio (sim ou não)
+     */
     public Aluno(long nAluno, String nome, String email, String siglaCurso, String siglaRamo, double classificacao, boolean acessoEstagio){
         super(nome, email);             //vai usar o construtor da classe Pessoa
         this.nAluno = nAluno;
@@ -57,38 +67,74 @@ public class Aluno extends Pessoa implements Comparable<Aluno>{
         this.acessoEstagio = acessoEstagio;
     }
 
+    /**
+     * Obter número de estudante
+     * @return nAluno - número de estudante
+     */
     public long getNAluno() {
         return nAluno;
     }
-
+    /**
+     * Obter sigla do curso
+     * @return siglaCurso - sigla do curso do aluno
+     */
     public String getSiglaCurso() {
         return siglaCurso;
     }
+    /**
+     * Alterar sigla do curso do aluno
+     * @param siglaCurso nova sigla do curso do aluno
+     */
     public void setSiglaCurso(String siglaCurso) {
         this.siglaCurso = siglaCurso;
     }
-
+    /**
+     * Obter sigla do ramo do aluno
+     * @return siglaRamo - sigla do ramo do aluno
+     */
     public String getSiglaRamo() {
         return siglaRamo;
     }
+    /**
+     * Alterar sigla do ramo do aluno
+     * @param siglaRamo nova sigla do ramo do aluno
+     */
     public void setSiglaRamo(String siglaRamo) {
         this.siglaRamo = siglaRamo;
     }
-
+    /**
+     * Obter classificação do aluno
+     * @return classificacao - classificação do aluno
+     */
     public double getClassificacao() {
         return classificacao;
     }
+    /**
+     * Alterar classificação do aluno
+     * @param classificacao nova classificação do aluno
+     */
     public void setClassificacao(double classificacao) {
         this.classificacao = classificacao;
     }
-
+    /**
+     * Obter se o aluno tem acesso a estágio ou não
+     * @return acessoEstagio - aluno tem acesso a estágio (true/false)
+     */
     public boolean isAcessoEstagio() {
         return acessoEstagio;
     }
+    /**
+     * Alterar acesso a estágio do aluno
+     * @param acessoEstagio novo acesso a estágio do aluno
+     */
     public void setAcessoEstagio(boolean acessoEstagio) {
         this.acessoEstagio = acessoEstagio;
     }
-
+    /**
+     * Comparar Alunos pelo número de estudante e email
+     * @param o objeto a comparar
+     * @return boolean - retorna se os dois alunos tem o número estudante ou email igual
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,12 +145,18 @@ public class Aluno extends Pessoa implements Comparable<Aluno>{
 
         return nAluno == aluno.nAluno || getEmail().equals(aluno.getEmail());
     }
-
+    /**
+     * Gera o hashCode para os objetos Aluno
+     * @return hashCode - retorna um inteiro único que identifica este objeto
+     */
     @Override
     public int hashCode() {
         return (int) nAluno + getEmail().hashCode();
     }
-
+    /**
+     * Obter informações da Aluno
+     * @return sb.toString() - string com as informações do Aluno
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -118,12 +170,19 @@ public class Aluno extends Pessoa implements Comparable<Aluno>{
 
         return sb.toString();
     }
-
+    /**
+     * Compara este objeto Aluno a outro através do número de estudante
+     * @param o objeto a comparar
+     * @return boolean - retorna se os dois alunos tem o número de estudante igual
+     */
     @Override
     public int compareTo(Aluno o) {
         return Long.compare(nAluno, o.nAluno);
     }
-
+    /**
+     * Obter clone do objeto Aluno
+     * @return Aluno - clone deste objeto Aluno
+     */
     @Override
     public Aluno clone() {
         return (Aluno) super.clone();

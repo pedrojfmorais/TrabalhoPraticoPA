@@ -513,4 +513,8 @@ public class ApoioPoEManager implements Serializable, IOriginator {
     public HashMap<String, Number> top5DocentesOrientacoes() {
         return apoioPOE.top5DocentesOrientacoes();
     }
+
+    public int getNumPropotasAtribuidasComOrientador() {
+        return apoioPOE.getNumPropotasAtribuidasComOrientador();
+    }
 }

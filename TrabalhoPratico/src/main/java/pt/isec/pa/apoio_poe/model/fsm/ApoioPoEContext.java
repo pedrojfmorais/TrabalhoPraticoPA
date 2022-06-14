@@ -305,4 +305,7 @@ public class ApoioPoEContext {
     public HashMap<String, Number> top5DocentesOrientacoes() {
         return data.top5DocentesOrientacoes();
     }
+    public int getNumPropotasAtribuidasComOrientador() {
+        return data.getNumPropotasAtribuidasComOrientador();
+    }
 }

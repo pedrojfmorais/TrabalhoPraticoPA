@@ -1274,4 +1274,14 @@ public class ApoioPoE implements Serializable, Cloneable {
       }
       return top5Final;
    }
+
+   public int getNumPropotasAtribuidasComOrientador(){
+      int cont = 0;
+
+      for(var propostaAtribuida : propostasAtribuidas.values())
+         if (propostaAtribuida.getEmailDocenteOrientador() != null)
+            cont++;
+
+      return cont;
+   }
 }

@@ -19,6 +19,7 @@ public class Docente extends Pessoa implements Comparable<Docente>{
 
     /**
      * Comparar Docentes pelo email
+     * @param o objeto a comparar
      * @return boolean - retorna se os dois docentes tem o email igual
      */
     @Override
@@ -42,6 +43,7 @@ public class Docente extends Pessoa implements Comparable<Docente>{
 
     /**
      * Compara este objeto Docente a outro através do email
+     * @param o objeto a comparar
      * @return boolean - retorna se os dois docentes tem o email igual
      */
     @Override
