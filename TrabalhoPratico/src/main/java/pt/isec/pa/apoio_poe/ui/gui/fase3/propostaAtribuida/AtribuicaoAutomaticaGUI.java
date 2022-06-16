@@ -78,7 +78,7 @@ public class AtribuicaoAutomaticaGUI extends BorderPane {
 
     private void update(){
 
-        if(fsm != null && fsm.getState() == ApoioPoEState.Fase3AtribuicaoAutomatica) {
+        if(fsm != null && fsm.getState() == ApoioPoEState.FASE3_ATRIBUICAO_AUTOMATICA) {
             this.setVisible(true);
             executaAutomaticamente();
         }else

@@ -77,7 +77,7 @@ public class ApoioPoEGUI extends BorderPane {
             case FASE3, FASE3_MAS_FASE2_ABERTA -> titulo = "Fase 3 - Atribuição de propostas";
             case FASE3_BLOQUEADA -> titulo = "Fase 3 - Atribuição de propostas (Bloqueada)";
             case GESTAO_MANUAL_ATRIBUICOES -> titulo = "Gestão Manual de Atribuição de Propostas a Alunos";
-            case Fase3AtribuicaoAutomatica -> titulo = "Gestão Automática Atribuições";
+            case FASE3_ATRIBUICAO_AUTOMATICA -> titulo = "Gestão Automática Atribuições";
             case FASE4 -> titulo = "Fase 4 - Atribuição de orientadores";
             case GESTAO_MANUAL_ORIENTADORES -> titulo = "Gestão Manual de Orientadores de Propostas Atribuídas";
             case FASE5 -> titulo = "Fase 5 - Consulta";

@@ -34,7 +34,7 @@ public class ApoioPoEUI {
                 case FASE3_MAS_FASE2_ABERTA -> fase3MasFase2AbertaStateUI();
                 case FASE3_BLOQUEADA -> fase3BloqueadaUI();
                 case GESTAO_MANUAL_ATRIBUICOES -> gestaoManualAtribuicoesUI();
-                case Fase3AtribuicaoAutomatica -> fase3AtribuicaoAutomaticaUI();
+                case FASE3_ATRIBUICAO_AUTOMATICA -> fase3AtribuicaoAutomaticaUI();
                 case FASE4 -> fase4UI();
                 case GESTAO_MANUAL_ORIENTADORES -> gestaoManualOrientadoresUI();
                 case FASE5 -> fase5UI();

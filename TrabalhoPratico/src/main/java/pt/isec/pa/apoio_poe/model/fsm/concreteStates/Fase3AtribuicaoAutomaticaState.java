@@ -170,6 +170,6 @@ public class Fase3AtribuicaoAutomaticaState extends ApoioPoEAdapter {
 
     @Override
     public ApoioPoEState getState() {
-        return ApoioPoEState.Fase3AtribuicaoAutomatica;
+        return ApoioPoEState.FASE3_ATRIBUICAO_AUTOMATICA;
     }
 }

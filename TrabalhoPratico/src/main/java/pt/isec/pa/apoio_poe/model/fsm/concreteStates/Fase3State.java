@@ -56,7 +56,7 @@ public class Fase3State extends ApoioPoEAdapter {
 
     @Override
     public boolean atribuicaoAutomaticaPropostasDisponiveis() {
-        changeState(ApoioPoEState.Fase3AtribuicaoAutomatica);
+        changeState(ApoioPoEState.FASE3_ATRIBUICAO_AUTOMATICA);
         return true;
     }
 
