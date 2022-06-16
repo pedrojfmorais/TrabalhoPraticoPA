@@ -74,6 +74,6 @@ public class Fase3MasFase2AbertaState extends ApoioPoEAdapter {
 
     @Override
     public ApoioPoEState getState() {
-        return ApoioPoEState.Fase3MasFase2AbertaState;
+        return ApoioPoEState.FASE3_MAS_FASE2_ABERTA;
     }
 }

@@ -34,7 +34,7 @@ public class Fase4State extends ApoioPoEAdapter {
     public boolean regressarFase() {
 
         if(data.getFaseBloqueada() < 2)
-            changeState(ApoioPoEState.Fase3MasFase2AbertaState);
+            changeState(ApoioPoEState.FASE3_MAS_FASE2_ABERTA);
 
         else if(data.getFaseBloqueada() == 2)
             changeState(ApoioPoEState.FASE3);

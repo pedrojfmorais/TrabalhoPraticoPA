@@ -419,7 +419,7 @@ public class AppMenuGUI extends MenuBar {
 
         switch (fsm.getState()) {
             case FASE1, FASE1_BLOQUEADA, FASE2, FASE2_BLOQUEADA, FASE3,
-                    FASE3_BLOQUEADA, Fase3MasFase2AbertaState, FASE4, FASE5 -> {
+                    FASE3_BLOQUEADA, FASE3_MAS_FASE2_ABERTA, FASE4, FASE5 -> {
                 miSave.setDisable(false);
                 miExit.setDisable(false);
             }
@@ -449,7 +449,7 @@ public class AppMenuGUI extends MenuBar {
         miImportarCandidaturas.setDisable(fsm.getState() != ApoioPoEState.GESTAO_CANDIDATURAS);
 
         switch (fsm.getState()){
-            case FASE3, Fase3MasFase2AbertaState, FASE3_BLOQUEADA, FASE4, FASE5 -> {
+            case FASE3, FASE3_MAS_FASE2_ABERTA, FASE3_BLOQUEADA, FASE4, FASE5 -> {
                 miExportarAlunos.setDisable(false);
                 miExportarDocentes.setDisable(false);
                 miExportarPropostas.setDisable(false);

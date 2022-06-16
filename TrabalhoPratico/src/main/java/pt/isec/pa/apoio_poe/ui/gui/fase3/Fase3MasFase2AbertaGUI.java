@@ -74,6 +74,6 @@ public class Fase3MasFase2AbertaGUI extends BorderPane {
     }
 
     private void update() {
-        this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.Fase3MasFase2AbertaState);
+        this.setVisible(fsm != null && fsm.getState() == ApoioPoEState.FASE3_MAS_FASE2_ABERTA);
     }
 }

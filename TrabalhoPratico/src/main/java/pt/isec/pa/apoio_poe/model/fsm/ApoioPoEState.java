@@ -8,7 +8,7 @@ public enum ApoioPoEState {
     INICIO,
     FASE1, FASE1_BLOQUEADA, GESTAO_ALUNOS, GESTAO_DOCENTES, GESTAO_PROPOSTAS,
     FASE2, FASE2_BLOQUEADA, GESTAO_CANDIDATURAS,
-    FASE3, Fase3MasFase2AbertaState, FASE3_BLOQUEADA, GESTAO_MANUAL_ATRIBUICOES, Fase3AtribuicaoAutomatica,
+    FASE3, FASE3_MAS_FASE2_ABERTA, FASE3_BLOQUEADA, GESTAO_MANUAL_ATRIBUICOES, Fase3AtribuicaoAutomatica,
     FASE4, GESTAO_MANUAL_ORIENTADORES,
     FASE5;
 
@@ -24,7 +24,7 @@ public enum ApoioPoEState {
             case FASE2_BLOQUEADA -> new Fase2BloqueadaState(context, data);
             case GESTAO_CANDIDATURAS -> new GestaoCandidaturasState(context, data);
             case FASE3 -> new Fase3State(context, data);
-            case Fase3MasFase2AbertaState -> new Fase3MasFase2AbertaState(context, data);
+            case FASE3_MAS_FASE2_ABERTA -> new Fase3MasFase2AbertaState(context, data);
             case FASE3_BLOQUEADA -> new Fase3BloqueadaState(context, data);
             case GESTAO_MANUAL_ATRIBUICOES -> new GestaoManualAtribuicoesState(context, data);
             case Fase3AtribuicaoAutomatica -> new Fase3AtribuicaoAutomaticaState(context, data);

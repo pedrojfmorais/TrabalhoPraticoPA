@@ -32,7 +32,7 @@ public class Fase2State extends ApoioPoEAdapter {
         if(data.getFaseBloqueada() == 2)
             changeState(ApoioPoEState.FASE3);
         else if(data.getFaseBloqueada() < 2)
-            changeState(ApoioPoEState.Fase3MasFase2AbertaState);
+            changeState(ApoioPoEState.FASE3_MAS_FASE2_ABERTA);
         return true;
     }
 
