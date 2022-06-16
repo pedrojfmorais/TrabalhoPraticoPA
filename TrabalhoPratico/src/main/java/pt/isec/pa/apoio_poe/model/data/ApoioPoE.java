@@ -9,18 +9,48 @@ import pt.isec.pa.apoio_poe.model.errorHandling.ErrorType;
 import java.io.*;
 import java.util.*;
 
+/**
+ * Classe ApoioPoE que guarda as informações dos alunos, docentes e propostas e a lógica do programa
+ * @author Maria Abreu e Pedro Morais
+ * @version 1.0.0
+ */
 public class ApoioPoE implements Serializable, Cloneable {
 
+   /**
+    * Versão do Serial da classe
+    */
    @Serial
    private static final long serialVersionUID = 1L;
+
+   /**
+    * Indica a fase bloqueada
+    */
    private int faseBloqueada;
 
+   /**
+    * Lista de alunos, em que a chave é o número de aluno
+    */
    private final HashMap<Long, Aluno> alunos;
+   /**
+    * Lista de docentes, em que a chave é o email do docente
+    */
    private final HashMap<String, Docente> docentes;
+   /**
+    * Lista de propostas, em que a chave é o id da proposta
+    */
    private final HashMap<String, Proposta> propostas;
+   /**
+    * Lista de candidaturas, em que a chave é o número de aluno associado à candidatura
+    */
    private final HashMap<Long, Candidatura> candidaturas;
+   /**
+    * Lista de propostas atribuídas, em que a chave é o id da proposta
+    */
    private final HashMap<String, PropostaAtribuida> propostasAtribuidas;
 
+   /**
+    * Construtor público
+    */
    public ApoioPoE() {
       alunos = new HashMap<>();
       docentes = new HashMap<>();
@@ -31,13 +61,34 @@ public class ApoioPoE implements Serializable, Cloneable {
       faseBloqueada = 0;
    }
 
+   /**
+    * Obter o número correspondente à fase bloqueada
+    * @return faseBloqueada - número correspondente à fase bloqueada
+    */
    public int getFaseBloqueada() {
       return faseBloqueada;
    }
 
+   /**
+    * Alterar o número correspondente à fase bloqueada
+    * @param faseBloqueada nova faseBloqueada
+    */
    public void setFaseBloqueada(int faseBloqueada) {
       this.faseBloqueada = faseBloqueada;
    }
+
+
+   /**
+    * Adicionar alunos, realizando as verificações necessárias
+    * @param nAluno - número de aluno
+    * @param nome - nome do aluno
+    * @param email - email do aluno
+    * @param siglaCurso - sigla correspondente ao curso do aluno
+    * @param siglaRamo - sigla correspondente ao ramo do aluno
+    * @param classificacao - classificação do aluno
+    * @param acessoEstagio - o aluno tem acesso a estágio? sim ou não
+    * @return se o aluno foi adicionado ou não
+    */
 
    public boolean adicionaAluno(long nAluno, String nome, String email, String siglaCurso, String siglaRamo,
                                 double classificacao, boolean acessoEstagio) {
@@ -78,6 +129,12 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Adicionar docentes, fazendo as verificações necessárias
+    * @param nome - nome do docente
+    * @param email - email do docente
+    * @return se o docente foi adicionado ou não
+    */
    public boolean adicionaDocente(String nome, String email) {
 
       if (docentes.containsKey(email)) {
@@ -96,6 +153,16 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Adicionar propostas com aluno associado, fazendo as verificações necessárias
+    * @param tipo - tipo de proposta
+    * @param id - id da proposta
+    * @param titulo - titulo da proposta
+    * @param nAlunoAssociado - número do aluno associado à proposta
+    * @param areasDestino - área correspondente à proposta
+    * @param entidadeOuDocente - entidade ou docente associados à proposta
+    * @return se a proposta foi adicionada ou não
+    */
    public boolean adicionaProposta(String tipo, String id, String titulo, long nAlunoAssociado,
                                    String areasDestino, String entidadeOuDocente) {
 
@@ -140,6 +207,15 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Adicionar propostas sem associar aluno, fazendo as verificações necessárias
+    * @param tipo - tipo de proposta
+    * @param id - id da proposta
+    * @param titulo - título da proposta
+    * @param areasDestino - área correspondente à proposta
+    * @param entidadeOuDocente - entidade ou docente associados à proposta
+    * @return se a proposta foi adicionada ou não
+    */
    public boolean adicionaProposta(String tipo, String id, String titulo,
                                    String areasDestino, String entidadeOuDocente) {
 
@@ -174,6 +250,14 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Adicionar proposta do tipo autoproposta, realizando as verificações necessárias
+    * @param tipo - tipo da proposta
+    * @param id - id da proposta
+    * @param titulo - título da proposta
+    * @param nAlunoAssociado - número do aluno associado à proposta
+    * @return se a proposta foi adicionada ou não
+    */
    public boolean adicionaProposta(String tipo, String id, String titulo, long nAlunoAssociado) {
 
       if (propostas.containsKey(id)) {
@@ -200,6 +284,12 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Adicionar candidaturas, realizando as verificações necessárias
+    * @param nAluno - número de aluno
+    * @param propostas - lista de propostas
+    * @return se a candidatura foi adicionada ou não
+    */
    public boolean adicionaCandidatura(long nAluno, ArrayList<String> propostas) {
 
       if (propostas.isEmpty()) {
@@ -267,6 +357,12 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Atribuir propostas aos alunos, realizando as verificações necessárias
+    * @param idProposta - id da proposta
+    * @param nAluno - número de aluno
+    * @return se a proposta foi atribuída ou não
+    */
    public boolean atribuirPropostaAluno(String idProposta, long nAluno) {
 
       int ordemPreferencia = 1;
@@ -328,6 +424,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Atrbuição automática de propostas, que já têm aluno associado
+    * @return se existem propostas para atribuir automaticamente
+    */
    public boolean atribuicaoAutomaticaPropostasComAluno() {
 
       HashSet<Proposta> propostasAtribuir = new HashSet<>();
@@ -346,6 +446,12 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Atribuir propostas aos docentes orientadores
+    * @param idProposta - id da proposta
+    * @param email - email do docente
+    * @return se a proposta foi atribuída ou não
+    */
    public boolean atribuirPropostaDocenteOrientador(String idProposta, String email) {
 
       if (!propostasAtribuidas.containsKey(idProposta) && propostas.containsKey(idProposta)) {
@@ -368,6 +474,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Atribuição automática de docentes às propostas atribuídas
+    * @return se algum docente foi atribuído
+    */
    public boolean associacaoAutomaticaDocentesProponentes() {
 
       boolean associadoAlgum = false;
@@ -383,31 +493,60 @@ public class ApoioPoE implements Serializable, Cloneable {
       return associadoAlgum;
    }
 
+   /**
+    * Obter clone de um aluno
+    * @param nAluno - número do aluno a procurar
+    * @return clone do aluno pretendido, ou null caso este não exitsa
+    */
    public Aluno getAluno(long nAluno) {
       Aluno aux = alunos.get(nAluno);
       return aux != null ? aux.clone() : null;
    }
 
+   /**
+    * Obter clone de um docente
+    * @param email - email do docente a procurar
+    * @return clone do docente pretendido ou null caso este não exista
+    */
    public Docente getDocente(String email) {
       Docente aux = docentes.get(email);
       return aux != null ? aux.clone() : null;
    }
 
+   /**
+    * Obter clone de uma proposta
+    * @param id - id da proposta a procurar
+    * @return clone da proposta pretendida ou null caso esta não exista
+    */
    public Proposta getProposta(String id) {
       Proposta aux = propostas.get(id);
       return aux != null ? aux.clone() : null;
    }
 
+   /**
+    * Obter clone de uma candidatura
+    * @param nAluno - número do aluno a procurar
+    * @return clone da candidatura pretendida ou null caso esta não exista
+    */
    public Candidatura getCandidatura(long nAluno) {
       Candidatura aux = candidaturas.get(nAluno);
       return aux != null ? aux.clone() : null;
    }
 
+   /**
+    * Obter clone de uma proposta atribuída
+    * @param id - id da proposta atribuída a procurar
+    * @return clone da proposta atribuída pretendida ou null caso esta não exista
+    */
    public PropostaAtribuida getPropostaAtribuida(String id) {
       PropostaAtribuida aux = propostasAtribuidas.get(id);
       return aux != null ? aux.clone() : null;
    }
 
+   /**
+    * Obter todos os alunos
+    * @return clone com a lista de alunos ordenada
+    */
    public ArrayList<Aluno> getAlunos() {
       ArrayList<Aluno> alunosOrdenados = new ArrayList<>(alunos.values());
 
@@ -415,6 +554,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       return (ArrayList<Aluno>) alunosOrdenados.clone();
    }
 
+   /**
+    * Obter todos os docentes
+    * @return clone com a lista de docentes ordenada
+    */
    public ArrayList<Docente> getDocentes() {
       ArrayList<Docente> docentesOrdenados = new ArrayList<>(docentes.values());
 
@@ -422,24 +565,41 @@ public class ApoioPoE implements Serializable, Cloneable {
       return (ArrayList<Docente>) docentesOrdenados.clone();
    }
 
+   /**
+    * Obter todas as propostas
+    * @return clone com a lista de propostas ordenada
+    */
    public ArrayList<Proposta> getPropostas() {
       ArrayList<Proposta> propostasOrdenadas = new ArrayList<>(propostas.values());
       Collections.sort(propostasOrdenadas);
       return (ArrayList<Proposta>) propostasOrdenadas.clone();
    }
 
+   /**
+    * Obter todas as candidaturas
+    * @return clone com a lista de candidaturas ordenada
+    */
    public ArrayList<Candidatura> getCandidaturas() {
       ArrayList<Candidatura> candidaturasOrdenadas = new ArrayList<>(candidaturas.values());
       Collections.sort(candidaturasOrdenadas);
       return (ArrayList<Candidatura>) candidaturasOrdenadas.clone();
    }
 
+   /**
+    * Obter todas as propostas atribuídas
+    * @return clone com a lista de propostas atribuídas ordenada
+    */
    public ArrayList<PropostaAtribuida> getPropostasAtribuidas() {
       ArrayList<PropostaAtribuida> propostaAtribuidaOrdenadas = new ArrayList<>(propostasAtribuidas.values());
       Collections.sort(propostaAtribuidaOrdenadas);
       return (ArrayList<PropostaAtribuida>) propostaAtribuidaOrdenadas.clone();
    }
 
+   /**
+    * Remover um aluno, através do número de aluno
+    * @param nAluno - número de aluno
+    * @return se o aluno foi removido ou não
+    */
    public boolean removeAluno(long nAluno) {
 
       if(!alunos.containsKey(nAluno)) {
@@ -468,6 +628,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return alunos.remove(nAluno) != null;
    }
 
+   /**
+    * Remover um docente, através do email
+    * @param email - email do docente
+    * @return se o docente foi removido ou não
+    */
    public boolean removeDocente(String email) {
 
       if(!docentes.containsKey(email)) {
@@ -492,6 +657,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return docentes.remove(email) != null;
    }
 
+   /**
+    * Remover uma proposta
+    * @param id - id da proposta
+    * @return se a proposta foi removida ou não
+    */
    public boolean removeProposta(String id) {
 
       if(!propostas.containsKey(id)) {
@@ -512,6 +682,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return propostas.remove(id) != null;
    }
 
+   /**
+    * Remover candidatura de um aluno, através do respetivo número de aluno
+    * @param nAluno - número de aluno
+    * @return se a candidatura foi removida ou não
+    */
    public boolean removeCandidatura(long nAluno) {
 
       if(!candidaturas.containsKey(nAluno)) {
@@ -529,6 +704,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return candidaturas.remove(nAluno) != null;
    }
 
+   /**
+    * Remover propostas atribuídas
+    * @param id - id da proposta
+    * @return se a proposta atribuída foi removida ou não
+    */
    public boolean removePropostaAtribuida(String id) {
 
       if(!propostas.containsKey(id)) {
@@ -539,6 +719,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return propostasAtribuidas.remove(id) != null;
    }
 
+   /**
+    * Remover docente orientador atribuído a uma proposta
+    * @param id - id da proposta atribuída
+    * @return se o docente orientador foi removido ou não
+    */
    public boolean removeOrientadorPropostaAtribuida(String id) {
 
       if (!propostas.containsKey(id)) {
@@ -556,10 +741,20 @@ public class ApoioPoE implements Serializable, Cloneable {
       return propostasAtribuidas.get(id).getEmailDocenteOrientador() == null;
    }
 
-   public boolean propostasSufecienteParaRamo(String ramo) {
+   /**
+    * Verifica se existem propostas suficientes para os alunos de um determinado ramo
+    * @param ramo - ramo a verificar
+    * @return se existem propostas suficentes
+    */
+   public boolean propostasSuficienteParaRamo(String ramo) {
       return propostasPorRamo(ramo) >= nAlunosPorRamo(ramo);
    }
 
+   /**
+    * Obter número de propostas para um determinado ramo
+    * @param ramo - ramo a verificar
+    * @return número de propostas para um determinado ramo
+    */
    public int propostasPorRamo(String ramo){
       int contadorPropostaRamo = 0;
 
@@ -579,6 +774,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return contadorPropostaRamo;
    }
 
+   /**
+    * Obter o número de alunos por ramo
+    * @param ramo - ramo a verificar
+    * @return número de alunos por ramo
+    */
    public int nAlunosPorRamo(String ramo){
       int contadorAlunosRamo = 0;
 
@@ -589,6 +789,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       return contadorAlunosRamo;
    }
 
+   /**
+    * Verifica se todas as candidaturas têm proposta atribuída
+    * @return se toas as candidaturas têm proposta atribuída
+    */
    public boolean todasCandidaturasComPropostaAtribuida() {
 
       ArrayList<Long> alunosComPropostaAtribuida = new ArrayList<>();
@@ -599,6 +803,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return alunosComPropostaAtribuida.containsAll(candidaturas.keySet());
    }
 
+   /**
+    * Calcula o número de orientações para um determinado docente
+    * @param email - email do docente
+    * @return número de orientações para um determinado docente
+    */
    public int calculaNumeroOrientacoesDocente(String email) {
       int contador = 0;
 
@@ -610,6 +819,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       return contador;
    }
 
+   /**
+    * Construtor por cópia privado
+    * @param apoioPoE - objeto a ser copiado
+    */
    private ApoioPoE(ApoioPoE apoioPoE) {
 
       this.faseBloqueada = apoioPoE.faseBloqueada;
@@ -637,11 +850,20 @@ public class ApoioPoE implements Serializable, Cloneable {
          this.propostasAtribuidas.put(key, apoioPoE.propostasAtribuidas.get(key).clone());
    }
 
+   /**
+    * Clone do objeto ApoioPoE
+    * @return clone
+    */
    @Override
    protected ApoioPoE clone() {
       return new ApoioPoE(this);
    }
 
+   /**
+    * Obter o tipo de proposta de uma determinada proposta
+    * @param id - id da proposta
+    * @return tipo de proposta de uma determinada proposta
+    */
    public String getTipoProposta(String id) {
 
       if (getProposta(id) == null)
@@ -650,6 +872,16 @@ public class ApoioPoE implements Serializable, Cloneable {
       return getProposta(id).tipoProposta();
    }
 
+   /**
+    * Editar aluno
+    * @param nAluno - número de aluno a editar
+    * @param nome - novo nome do aluno
+    * @param siglaCurso - nova sigla do curso do aluno
+    * @param siglaRamo - nova sigla do ramo do aluno
+    * @param classificacao - nova classificação do aluno
+    * @param acessoEstagio - o aluno tem acesso a estágio? sim ou não
+    * @return se o aluno foi editado ou não
+    */
    public boolean editaAluno(long nAluno, String nome, String siglaCurso, String siglaRamo,
                              String classificacao, String acessoEstagio) {
 
@@ -702,6 +934,12 @@ public class ApoioPoE implements Serializable, Cloneable {
 
    }
 
+   /**
+    * Editar docentes
+    * @param email - email do docente a editar
+    * @param nome - novo nome do docente
+    * @return se o docente foi editado ou não
+    */
    public boolean editaDocente(String email, String nome) {
 
       if (!docentes.containsKey(email)) {
@@ -717,6 +955,15 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Editar propostas
+    * @param id - id da proposta a editar
+    * @param titulo - novo título da proposta
+    * @param ramos - novo ramo da proposta
+    * @param entidade_docente - novos entidade ou docente associados à proposta
+    * @param nAluno - novo número de aluno
+    * @return se a proposta foi editada ou não
+    */
    public boolean editaProposta(String id, String titulo, String ramos, String entidade_docente, String nAluno) {
 
       if (!propostas.containsKey(id)) {
@@ -771,6 +1018,13 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Editar autopropostas
+    * @param id - id da proposta a editar
+    * @param titulo - novo título da proposta
+    * @param nAluno - novo número de aluno da proposta
+    * @return se a autoproposta foi editada ou não
+    */
    public boolean editaProposta(String id, String titulo, String nAluno) {
 
       if (!propostas.containsKey(id)) {
@@ -802,6 +1056,12 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Editar candidaturas
+    * @param nAluno - número do aluno associado à candidatura, que vai ser editada
+    * @param propostas - lista de propostas a editar
+    * @return se a candidatura foi editada
+    */
    public boolean editaCandidatura(long nAluno, ArrayList<String> propostas) {
 
       if (propostas.isEmpty()) {
@@ -842,6 +1102,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return true;
    }
 
+   /**
+    * Consultar alunos, segundo os filtros da fase 5
+    * @param comPropostaAtribuida - lista de alunos que têm proposta atribuída e que não têm proposta atribuída
+    * @return lista de alunos, segundo os filtors da fase 5
+    */
    public ArrayList<Aluno> consultarAlunosFase5(boolean comPropostaAtribuida){
 
       HashSet<Aluno> resultado = new HashSet<>();
@@ -868,6 +1133,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return resultadoOrdenado;
    }
 
+   /**
+    * Consultar alunos com orientadores associados
+    * @param comOrientadorAssociado - lista de alunos com arientadores e sem orientadores
+    * @return lista de alunos com orientadores associados
+    */
    public ArrayList<Aluno> consultarAlunos(boolean comOrientadorAssociado) {
 
       HashSet<Aluno> resultado = new HashSet<>();
@@ -887,6 +1157,13 @@ public class ApoioPoE implements Serializable, Cloneable {
       return resultadoOrdenado;
    }
 
+   /**
+    * Consultar alunos segundo os filtros recebidos
+    * @param autoproposta - lista de alunos com autoproposta atribuída e sem autoproposta atribuída
+    * @param comCandidatura - lista de alunos com candidatura atribuída
+    * @param semCandidatura - lista de alunos sem candidatura atribuída
+    * @return lista de alunos segundo os filtros recebidos
+    */
    public ArrayList<Aluno> consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean semCandidatura) {
       HashSet<Aluno> resultado = new HashSet<>();
 
@@ -921,6 +1198,14 @@ public class ApoioPoE implements Serializable, Cloneable {
       return resultadoOrdenado;
    }
 
+   /**
+    * Consultar alunos segundo filtros recebidos
+    * @param autoproposta - lista de alunos com autoprosta
+    * @param comCandidatura - lista de alunos com candidatura
+    * @param comPropostaAtribuida - lista de alunos com proposta atribuída
+    * @param semPropostaAtribuida - lista de alunos sem proposta atribuída
+    * @return lista de alunos, segundo filtros recebidos
+    */
    public ArrayList<Aluno> consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean comPropostaAtribuida, boolean semPropostaAtribuida) {
 
       HashSet<Aluno> resultado = new HashSet<>();
@@ -964,6 +1249,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return resultadoOrdenado;
    }
 
+   /**
+    * Consultar número de orientações dos docentes
+    * @param filtro - email do docente
+    * @return lista de orientações dos docentes
+    */
    public ArrayList<String> consultarDocentes(String filtro){
       ArrayList<String> res  = new ArrayList<>();
 
@@ -1005,6 +1295,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return res;
    }
 
+   /**
+    * Consultar propostas
+    * @param propostasAtribuidas - boolean propostas atribuídas ou não atribuídas
+    * @return lista de propostas
+    */
    public ArrayList<Proposta> consultarPropostas(boolean propostasAtribuidas){
 
       HashSet<String> resultado = new HashSet<>();
@@ -1050,6 +1345,14 @@ public class ApoioPoE implements Serializable, Cloneable {
       return res;
    }
 
+   /**
+    * Consultar propostas, segundo os filtros recebidos
+    * @param autopropostasAlunos - autopropostas de alunos
+    * @param propostasDocentes - propostas de docentes
+    * @param comCandidatura - propostas com candidatura
+    * @param semCandidatura - propostas sem candidatura
+    * @return lista de propostas
+    */
    public ArrayList<Proposta> consultarPropostas(boolean autopropostasAlunos, boolean propostasDocentes, boolean comCandidatura, boolean semCandidatura){
 
       HashSet<Proposta> resultado = new HashSet<>();
@@ -1100,6 +1403,14 @@ public class ApoioPoE implements Serializable, Cloneable {
       return resultadoOrdenado;
    }
 
+   /**
+    * Consultar propostas segundo os filtros da fase 3
+    * @param autopropostasAlunos - autopropostas de alunos
+    * @param propostasDocentes - propostas de docentes
+    * @param propostasDisponiveis - propostas que ainda não foram atribuídas
+    * @param propostasAtribuidas - propostas atribuídas
+    * @return lista de propostas, segundo os filtros
+    */
    public ArrayList<Proposta> consultarPropostasFase3(boolean autopropostasAlunos, boolean propostasDocentes, boolean propostasDisponiveis, boolean propostasAtribuidas){
 
       HashSet<Proposta> resultado = new HashSet<>();
@@ -1152,6 +1463,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return resultadoOrdenado;
    }
 
+   /**
+    * Consultar propostas atribuídas a um docente
+    * @param email - email do docente
+    * @return lista de propostas
+    */
    public ArrayList<PropostaAtribuida> consultarPropostasAtribuidasDocente(String email){
 
       ArrayList<PropostaAtribuida> propostaAtribuidasOrientador = new ArrayList<>();
@@ -1168,6 +1484,11 @@ public class ApoioPoE implements Serializable, Cloneable {
       return propostaAtribuidasOrientador;
    }
 
+   /**
+    * Obter alunos sem propostas atribuída
+    * @param soEstagio - só alunos com acesso a estágio ou todos os alunos
+    * @return lista de alunos sem propostas atribuídas
+    */
    public ArrayList<Aluno> getAlunosSemPropostaAtribuida(boolean soEstagio){
 
       ArrayList<Aluno> alunosSemProposta = new ArrayList<>();
@@ -1203,6 +1524,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       return alunosSemProposta;
    }
 
+   /**
+    * Resumo de propostas atribuídas
+    * @return um array com o número de propostas atribuídas, não atribuídas e total de propostas
+    */
    public ArrayList<Integer> propostas_Atribuidas_NaoAtribuidas_Total(){
       ArrayList<Integer> resultado = new ArrayList<>(List.of(0,0,0));
       for(var proposta : propostas.values()){
@@ -1216,6 +1541,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       return resultado;
    }
 
+   /**
+    * 5 Empresas com mais estágios
+    * @return lista nome e número de estágios das 5 empresas com mais estágios
+    */
    public HashMap<String, Number> top5EmpresasEstagio(){
       HashMap<String, Integer> top5 = new HashMap<>();
 
@@ -1246,6 +1575,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       return top5Final;
    }
 
+   /**
+    * 5 docentes com mais orientações
+    * @return lista de docentes e número de orientações dos 5 docentes com mais orientações
+    */
    public HashMap<String, Number> top5DocentesOrientacoes(){
       HashMap<String, Integer> top5 = new HashMap<>();
 
@@ -1275,6 +1608,10 @@ public class ApoioPoE implements Serializable, Cloneable {
       return top5Final;
    }
 
+   /**
+    * Obter número de propostas atribuídas com docente orientador
+    * @return número de propostas atribuídas com docente orientador
+    */
    public int getNumPropotasAtribuidasComOrientador(){
       int cont = 0;
 

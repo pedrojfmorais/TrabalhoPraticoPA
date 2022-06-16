@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="TP" pattern="src[TrabalhoPratico]:pt.isec.pa.apoio_poe.model.data..*||src[TrabalhoPratico]:pt.isec.pa.apoio_poe.model.errorHandling..*||src[TrabalhoPratico]:pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext" />
+</component>

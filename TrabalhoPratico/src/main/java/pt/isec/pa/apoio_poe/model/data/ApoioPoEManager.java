@@ -128,7 +128,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
     }
 
     public boolean propostasSufecienteParaRamo(String ramo) {
-        return apoioPOE.propostasSufecienteParaRamo(ramo);
+        return apoioPOE.propostasSuficienteParaRamo(ramo);
     }
 
     public boolean todasCandidaturasComPropostaAtribuida() {
