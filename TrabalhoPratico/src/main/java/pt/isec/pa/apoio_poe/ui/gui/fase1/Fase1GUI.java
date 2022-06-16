@@ -9,6 +9,7 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.ui.gui.AppMenuGUI;
 import pt.isec.pa.apoio_poe.ui.gui.ComumFasesGUI;
+import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
 
 public class Fase1GUI extends BorderPane {
 
@@ -29,6 +30,10 @@ public class Fase1GUI extends BorderPane {
     }
 
     private void createViews() {
+
+        CSSManager.applyCSS(this,"backgroundColors.css");
+        this.getStyleClass().add("fase1");
+
         btnGerirAlunos = new Button("Gerir Alunos");
         btnGerirDocentes = new Button("Gerir Docentes");
         btnGerirPropostas = new Button("Gerir Propostas");

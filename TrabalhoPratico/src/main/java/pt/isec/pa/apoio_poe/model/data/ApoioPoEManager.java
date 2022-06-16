@@ -139,6 +139,95 @@ public class ApoioPoEManager implements Serializable, IOriginator {
         return apoioPOE.calculaNumeroOrientacoesDocente(email);
     }
 
+    public String getTipoProposta(String id) {
+        return apoioPOE.getTipoProposta(id);
+    }
+
+    public boolean editaAluno(long nAluno, String nome, String siglaCurso, String siglaRamo,
+                              String classificacao, String acessoEstagio) {
+        return apoioPOE.editaAluno(nAluno, nome, siglaCurso, siglaRamo, classificacao, acessoEstagio);
+    }
+
+    public boolean editaDocente(String email, String nome) {
+        return apoioPOE.editaDocente(email, nome);
+    }
+
+    public boolean editaProposta(String id, String titulo, String ramos, String entidade_docente, String nAluno) {
+        return apoioPOE.editaProposta(id, titulo, ramos, entidade_docente, nAluno);
+    }
+
+    public boolean editaProposta(String id, String titulo, String nAluno) {
+        return apoioPOE.editaProposta(id, titulo, nAluno);
+    }
+
+    public boolean editaCandidatura(long nAluno, ArrayList<String> propostas) {
+        return apoioPOE.editaCandidatura(nAluno, propostas);
+    }
+
+    public ArrayList<Aluno> consultarAlunosFase5(boolean comPropostaAtribuida) {
+        return apoioPOE.consultarAlunosFase5(comPropostaAtribuida);
+    }
+
+    public ArrayList<Aluno> consultarAlunos(boolean comOrientadorAssociado) {
+        return apoioPOE.consultarAlunos(comOrientadorAssociado);
+    }
+
+    public ArrayList<Aluno> consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean semCandidatura) {
+        return apoioPOE.consultarAlunos(autoproposta, comCandidatura, semCandidatura);
+    }
+
+    public ArrayList<Aluno> consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean comPropostaAtribuida, boolean semPropostaAtribuida) {
+        return apoioPOE.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida, semPropostaAtribuida);
+    }
+
+    public ArrayList<String> consultarDocentes(String filtro) {
+        return apoioPOE.consultarDocentes(filtro);
+    }
+
+    public ArrayList<Proposta> consultarPropostas(boolean propostasAtribuidas) {
+        return apoioPOE.consultarPropostas(propostasAtribuidas);
+    }
+
+    public ArrayList<Proposta> consultarPropostas(boolean autopropostasAlunos, boolean propostasDocentes, boolean comCandidatura, boolean semCandidatura) {
+        return apoioPOE.consultarPropostas(autopropostasAlunos, propostasDocentes, comCandidatura, semCandidatura);
+    }
+
+    public ArrayList<Proposta> consultarPropostasFase3(boolean autopropostasAlunos, boolean propostasDocentes, boolean propostasDisponiveis, boolean propostasAtribuidas) {
+        return apoioPOE.consultarPropostasFase3(autopropostasAlunos, propostasDocentes, propostasDisponiveis, propostasAtribuidas);
+    }
+
+    public ArrayList<PropostaAtribuida> consultarPropostasAtribuidasDocente(String email) {
+        return apoioPOE.consultarPropostasAtribuidasDocente(email);
+    }
+
+    public ArrayList<Aluno> getAlunosSemPropostaAtribuida(boolean soEstagio) {
+        return apoioPOE.getAlunosSemPropostaAtribuida(soEstagio);
+    }
+
+    public int nAlunosPorRamo(String ramo) {
+        return apoioPOE.nAlunosPorRamo(ramo);
+    }
+
+    public int propostasPorRamo(String ramo) {
+        return apoioPOE.propostasPorRamo(ramo);
+    }
+
+    public ArrayList<Integer> propostasAtribuidas_NaoAtribuidas_Total() {
+        return apoioPOE.propostas_Atribuidas_NaoAtribuidas_Total();
+    }
+
+    public HashMap<String, Number> top5EmpresasEstagio() {
+        return apoioPOE.top5EmpresasEstagio();
+    }
+
+    public HashMap<String, Number> top5DocentesOrientacoes() {
+        return apoioPOE.top5DocentesOrientacoes();
+    }
+
+    public int getNumPropotasAtribuidasComOrientador() {
+        return apoioPOE.getNumPropotasAtribuidasComOrientador();
+    }
+
     public boolean adicionaAlunosDeFicheiro(String nomeFicheiro){
 
         try (FileReader fr = new FileReader(nomeFicheiro);
@@ -257,7 +346,7 @@ public class ApoioPoEManager implements Serializable, IOriginator {
                 new BufferedWriter(
                         new FileWriter(filename)
                 )
-            )
+        )
         ){
 
             StringBuilder sb = new StringBuilder();
@@ -348,17 +437,17 @@ public class ApoioPoEManager implements Serializable, IOriginator {
                 new BufferedWriter(
                         new FileWriter(filename)
                 )
-            )
+        )
         ){
 
             StringBuilder sb = new StringBuilder();
 
             for(var candidatura : apoioPOE.getCandidaturas()){
 
-                    sb.append(candidatura.getNAluno());
+                sb.append(candidatura.getNAluno());
 
-                    for(var proposta : candidatura.getIdPropostas())
-                        sb.append(",").append(proposta);
+                for(var proposta : candidatura.getIdPropostas())
+                    sb.append(",").append(proposta);
 
                 sb.append(System.lineSeparator());
             }
@@ -427,94 +516,5 @@ public class ApoioPoEManager implements Serializable, IOriginator {
             this.apoioPOE = apoioPoEManagerMemento.getSnapshot();
 
         }
-    }
-
-    public String getTipoProposta(String id) {
-        return apoioPOE.getTipoProposta(id);
-    }
-
-    public boolean editaAluno(long nAluno, String nome, String siglaCurso, String siglaRamo,
-                              String classificacao, String acessoEstagio) {
-        return apoioPOE.editaAluno(nAluno, nome, siglaCurso, siglaRamo, classificacao, acessoEstagio);
-    }
-
-    public boolean editaDocente(String email, String nome) {
-        return apoioPOE.editaDocente(email, nome);
-    }
-
-    public boolean editaProposta(String id, String titulo, String ramos, String entidade_docente, String nAluno) {
-        return apoioPOE.editaProposta(id, titulo, ramos, entidade_docente, nAluno);
-    }
-
-    public boolean editaProposta(String id, String titulo, String nAluno) {
-        return apoioPOE.editaProposta(id, titulo, nAluno);
-    }
-
-    public boolean editaCandidatura(long nAluno, ArrayList<String> propostas) {
-        return apoioPOE.editaCandidatura(nAluno, propostas);
-    }
-
-    public ArrayList<Aluno> consultarAlunosFase5(boolean comPropostaAtribuida) {
-        return apoioPOE.consultarAlunosFase5(comPropostaAtribuida);
-    }
-
-    public ArrayList<Aluno> consultarAlunos(boolean comOrientadorAssociado) {
-        return apoioPOE.consultarAlunos(comOrientadorAssociado);
-    }
-
-    public ArrayList<Aluno> consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean semCandidatura) {
-        return apoioPOE.consultarAlunos(autoproposta, comCandidatura, semCandidatura);
-    }
-
-    public ArrayList<Aluno> consultarAlunos(boolean autoproposta, boolean comCandidatura, boolean comPropostaAtribuida, boolean semPropostaAtribuida) {
-        return apoioPOE.consultarAlunos(autoproposta, comCandidatura, comPropostaAtribuida, semPropostaAtribuida);
-    }
-
-    public ArrayList<String> consultarDocentes(String filtro) {
-        return apoioPOE.consultarDocentes(filtro);
-    }
-
-    public ArrayList<Proposta> consultarPropostas(boolean propostasAtribuidas) {
-        return apoioPOE.consultarPropostas(propostasAtribuidas);
-    }
-
-    public ArrayList<Proposta> consultarPropostas(boolean autopropostasAlunos, boolean propostasDocentes, boolean comCandidatura, boolean semCandidatura) {
-        return apoioPOE.consultarPropostas(autopropostasAlunos, propostasDocentes, comCandidatura, semCandidatura);
-    }
-
-    public ArrayList<Proposta> consultarPropostasFase3(boolean autopropostasAlunos, boolean propostasDocentes, boolean propostasDisponiveis, boolean propostasAtribuidas) {
-        return apoioPOE.consultarPropostasFase3(autopropostasAlunos, propostasDocentes, propostasDisponiveis, propostasAtribuidas);
-    }
-
-    public ArrayList<PropostaAtribuida> consultarPropostasAtribuidasDocente(String email) {
-        return apoioPOE.consultarPropostasAtribuidasDocente(email);
-    }
-
-    public ArrayList<Aluno> getAlunosSemPropostaAtribuida(boolean soEstagio) {
-        return apoioPOE.getAlunosSemPropostaAtribuida(soEstagio);
-    }
-
-    public int nAlunosPorRamo(String ramo) {
-        return apoioPOE.nAlunosPorRamo(ramo);
-    }
-
-    public int propostasPorRamo(String ramo) {
-        return apoioPOE.propostasPorRamo(ramo);
-    }
-
-    public ArrayList<Integer> propostasAtribuidas_NaoAtribuidas_Total() {
-        return apoioPOE.propostasAtribuidas_NaoAtribuidas_Total();
-    }
-
-    public HashMap<String, Number> top5EmpresasEstagio() {
-        return apoioPOE.top5EmpresasEstagio();
-    }
-
-    public HashMap<String, Number> top5DocentesOrientacoes() {
-        return apoioPOE.top5DocentesOrientacoes();
-    }
-
-    public int getNumPropotasAtribuidasComOrientador() {
-        return apoioPOE.getNumPropotasAtribuidasComOrientador();
     }
 }

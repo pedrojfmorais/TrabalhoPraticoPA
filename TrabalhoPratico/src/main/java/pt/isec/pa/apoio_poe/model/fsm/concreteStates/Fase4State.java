@@ -21,10 +21,13 @@ public class Fase4State extends ApoioPoEAdapter {
     @Override
     public boolean avancarFase(boolean bloquearFase) {
 
-        data.setFaseBloqueada(4);
+        if(bloquearFase) {
+            data.setFaseBloqueada(4);
 
-        changeState(ApoioPoEState.FASE5);
-        return true;
+            changeState(ApoioPoEState.FASE5);
+            return true;
+        }
+        return false;
     }
 
     @Override

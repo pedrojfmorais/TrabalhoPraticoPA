@@ -1203,7 +1203,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       return alunosSemProposta;
    }
 
-   public ArrayList<Integer> propostasAtribuidas_NaoAtribuidas_Total(){
+   public ArrayList<Integer> propostas_Atribuidas_NaoAtribuidas_Total(){
       ArrayList<Integer> resultado = new ArrayList<>(List.of(0,0,0));
       for(var proposta : propostas.values()){
          if(propostasAtribuidas.containsKey(proposta.getId()))

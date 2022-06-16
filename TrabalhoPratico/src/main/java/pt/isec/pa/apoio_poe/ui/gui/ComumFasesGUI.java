@@ -28,8 +28,12 @@ public class ComumFasesGUI {
                             );
 
                             errorMessage.setTitle("Erro Bloquear Fase");
-                            errorMessage.setHeaderText("Neste momento não é possivel bloquear a fase!");
 
+                            switch (fsm.getState()){
+                                case FASE1 -> errorMessage.setHeaderText("Não existem propostas sufecientes para cada Ramo!");
+                                case FASE2 -> errorMessage.setHeaderText("Fase 1 encontra-se aberta!");
+                                case FASE3 -> errorMessage.setHeaderText("Existem alunos com candidatura sem Proposta Atribuída!");
+                            }
                             errorMessage.showAndWait();
                         }
 

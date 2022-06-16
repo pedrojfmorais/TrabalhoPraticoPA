@@ -23,7 +23,7 @@ import java.util.List;
 public class GestaoManualAtribuicoesGUI extends BorderPane {
 
     ApoioPoEContext fsm;
-
+    Stage resumo;
     Button btnAdicionar, btnEliminar, btnProcurar, btnRegressarFase;
 
     TableView<PropostaAtribuida> tPropostasAtribuidas;
@@ -38,6 +38,7 @@ public class GestaoManualAtribuicoesGUI extends BorderPane {
     }
 
     private void createViews(){
+        resumo = new Stage();
         btnAdicionar = new Button("Adicionar");
         btnEliminar = new Button("Eliminar");
         btnProcurar = new Button(null, ImageManager.getImageView("lupa.png",20));
@@ -142,10 +143,13 @@ public class GestaoManualAtribuicoesGUI extends BorderPane {
 
     private void update(){
         if(fsm != null && fsm.getState() == ApoioPoEState.GESTAO_MANUAL_ATRIBUICOES) {
+            if(!this.isVisible())
+                resumo = AbreMostraDadosGUI.abreResumoPropostasAtribuidas(fsm, (Stage) this.getScene().getWindow());
             this.setVisible(true);
-            AbreMostraDadosGUI.abreResumoPropostasAtribuidas(fsm, (Stage) this.getScene().getWindow());
-        }else
+        } else {
             this.setVisible(false);
+            resumo.close();
+        }
 
         tPropostasAtribuidas.getItems().clear();
         if(fsm.getPropostasAtribuidas() != null)

@@ -21,6 +21,7 @@ import java.util.List;
 
 public class GerirCandidaturaGUI extends BorderPane {
     ApoioPoEContext fsm;
+    Stage resumo;
 
     Button btnAdicionar, btnEditar, btnEliminar, btnProcurar, btnRegressarFase;
 
@@ -36,6 +37,8 @@ public class GerirCandidaturaGUI extends BorderPane {
     }
 
     private void createViews(){
+        resumo = new Stage();
+
         btnAdicionar = new Button("Adicionar");
         btnEditar = new Button("Editar");
         btnEliminar = new Button("Eliminar");
@@ -125,10 +128,13 @@ public class GerirCandidaturaGUI extends BorderPane {
 
     private void update(){
         if(fsm != null && fsm.getState() == ApoioPoEState.GESTAO_CANDIDATURAS){
+            if(!this.isVisible())
+                resumo = AbreMostraDadosGUI.abreResumoCandidaturas(fsm, (Stage) this.getScene().getWindow());
             this.setVisible(true);
-            AbreMostraDadosGUI.abreResumoCandidaturas(fsm, (Stage) this.getScene().getWindow());
-        } else
+        } else {
             this.setVisible(false);
+            resumo.close();
+        }
 
         tCandidatura.getItems().clear();
         for (var candidatura : fsm.getCandidaturas())

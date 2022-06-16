@@ -19,6 +19,7 @@ public class PiechartAlunosRamosGUI extends BorderPane {
     ApoioPoEContext fsm;
 
     PieChart pcAlunosRamos;
+    Label caption;
 
     public PiechartAlunosRamosGUI(ApoioPoEContext fsm) {
         this.fsm = fsm;
@@ -29,6 +30,10 @@ public class PiechartAlunosRamosGUI extends BorderPane {
     }
 
     private void createViews(){
+
+        caption = new Label("");
+
+        caption.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 
         pcAlunosRamos = new PieChart();
 
@@ -46,6 +51,7 @@ public class PiechartAlunosRamosGUI extends BorderPane {
         pcAlunosRamos.setData(FXCollections.observableArrayList(dados));
 
         this.setCenter(pcAlunosRamos);
+        this.setTop(caption);
     }
 
     private void registerHandlers(){
@@ -55,18 +61,13 @@ public class PiechartAlunosRamosGUI extends BorderPane {
         pcAlunosRamos.setOnMouseEntered(e -> {
             for (var data : pcAlunosRamos.getData()) {
                 data.getNode().setOnMouseEntered(ev -> {
-
-                    Label caption = new Label("");
-                    caption.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
-
-                    this.setTop(caption);
-
                     caption.setTranslateX(ev.getSceneX() - caption.getLayoutX());
                     caption.setTranslateY(ev.getSceneY() - caption.getLayoutY());
                     caption.setText(Math.round(data.getPieValue()) + " alunos");
                 });
             }
         });
+        this.setOnMouseExited(event -> caption.setText(""));
     }
 
     private void update(){

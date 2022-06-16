@@ -57,7 +57,7 @@ public abstract class Pessoa implements Cloneable, Serializable {
 
     /**
      * Obter informações da Pessoa
-     * @return sb.toString() - string com as informações da Pessoa
+     * @return String - string com as informações da Pessoa
      */
     @Override
     public String toString(){

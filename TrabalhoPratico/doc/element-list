@@ -1,2 +1,6 @@
+pt.isec.pa.apoio_poe.model.data
 pt.isec.pa.apoio_poe.model.data.pessoas
 pt.isec.pa.apoio_poe.model.data.pessoas.alunos
+pt.isec.pa.apoio_poe.model.data.propostas
+pt.isec.pa.apoio_poe.model.errorHandling
+pt.isec.pa.apoio_poe.model.fsm

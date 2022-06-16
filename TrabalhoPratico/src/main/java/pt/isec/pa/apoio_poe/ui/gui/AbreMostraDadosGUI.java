@@ -72,7 +72,7 @@ public class AbreMostraDadosGUI {
         dialog.showAndWait();
     }
 
-    public static void abreResumoCandidaturas(ApoioPoEContext fsm, Stage stage) {
+    public static Stage abreResumoCandidaturas(ApoioPoEContext fsm, Stage stage) {
         Stage dialog = new Stage();
 
         dialog.setTitle("Resumo Candidaturas");
@@ -81,7 +81,7 @@ public class AbreMostraDadosGUI {
 
         dialog.initOwner(stage);
         dialog.setWidth(250);
-        dialog.setX(stage.getX() + stage.getWidth());
+        dialog.setX(stage.getX() - dialog.getWidth());
         dialog.setY(stage.getY());
         dialog.initModality(Modality.NONE);
 
@@ -89,9 +89,10 @@ public class AbreMostraDadosGUI {
         dialog.setResizable(false);
 
         dialog.show();
+        return dialog;
     }
 
-    public static void abreResumoPropostasAtribuidas(ApoioPoEContext fsm, Stage stage) {
+    public static Stage abreResumoPropostasAtribuidas(ApoioPoEContext fsm, Stage stage) {
         Stage dialog = new Stage();
 
         dialog.setTitle("Resumo Propostas Atribuídas");
@@ -100,7 +101,7 @@ public class AbreMostraDadosGUI {
 
         dialog.initOwner(stage);
         dialog.setWidth(300);
-        dialog.setX(stage.getX() + stage.getWidth());
+        dialog.setX(stage.getX() - dialog.getWidth());
         dialog.setY(stage.getY());
         dialog.initModality(Modality.NONE);
 
@@ -108,9 +109,10 @@ public class AbreMostraDadosGUI {
         dialog.setResizable(false);
 
         dialog.show();
+        return dialog;
     }
 
-    public static void abreResumoOrientadoresPropostasAtribuidas(ApoioPoEContext fsm, Stage stage) {
+    public static Stage abreResumoOrientadoresPropostasAtribuidas(ApoioPoEContext fsm, Stage stage) {
         Stage dialog = new Stage();
 
         dialog.setTitle("Resumo Orientadores Propostas Atribuídas");
@@ -119,7 +121,7 @@ public class AbreMostraDadosGUI {
 
         dialog.initOwner(stage);
         dialog.setWidth(350);
-        dialog.setX(stage.getX() + stage.getWidth());
+        dialog.setX(stage.getX() - dialog.getWidth());
         dialog.setY(stage.getY());
         dialog.initModality(Modality.NONE);
 
@@ -127,5 +129,6 @@ public class AbreMostraDadosGUI {
         dialog.setResizable(false);
 
         dialog.show();
+        return dialog;
     }
 }

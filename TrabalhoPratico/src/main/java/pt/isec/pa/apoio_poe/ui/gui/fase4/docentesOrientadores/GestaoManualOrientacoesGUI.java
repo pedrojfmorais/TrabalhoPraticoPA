@@ -23,7 +23,7 @@ import java.util.List;
 public class GestaoManualOrientacoesGUI extends BorderPane {
 
     ApoioPoEContext fsm;
-
+    Stage resumo;
     Button btnAdicionar, btnEditar, btnEliminar, btnProcurar, btnRegressarFase;
 
     TableView<PropostaAtribuida> tPropostasAtribuidas;
@@ -38,6 +38,7 @@ public class GestaoManualOrientacoesGUI extends BorderPane {
     }
 
     private void createViews(){
+        resumo = new Stage();
         btnAdicionar = new Button("Adicionar");
         btnEditar = new Button("Editar");
         btnEliminar = new Button("Eliminar");
@@ -171,10 +172,13 @@ public class GestaoManualOrientacoesGUI extends BorderPane {
 
     private void update(){
         if(fsm != null && fsm.getState() == ApoioPoEState.GESTAO_MANUAL_ORIENTADORES){
+            if(!this.isVisible())
+                resumo = AbreMostraDadosGUI.abreResumoOrientadoresPropostasAtribuidas(fsm, (Stage) this.getScene().getWindow());
             this.setVisible(true);
-            AbreMostraDadosGUI.abreResumoOrientadoresPropostasAtribuidas(fsm, (Stage) this.getScene().getWindow());
-        } else
+        } else {
             this.setVisible(false);
+            resumo.close();
+        }
 
         tPropostasAtribuidas.getItems().clear();
         if(fsm.getPropostasAtribuidas() != null)

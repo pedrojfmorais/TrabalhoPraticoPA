@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Classe Aluno com as informações dos Alunos
+ * Classe Aluno com as informações dos Alunos, derivada da classe Pessoa
  * @author Maria Abreu e Pedro Morais
  * @version 1.0.0
- *
  */
 public class Aluno extends Pessoa implements Comparable<Aluno>{
     /**
@@ -155,7 +154,7 @@ public class Aluno extends Pessoa implements Comparable<Aluno>{
     }
     /**
      * Obter informações da Aluno
-     * @return sb.toString() - string com as informações do Aluno
+     * @return String - string com as informações do Aluno
      */
     @Override
     public String toString() {
@@ -173,7 +172,7 @@ public class Aluno extends Pessoa implements Comparable<Aluno>{
     /**
      * Compara este objeto Aluno a outro através do número de estudante
      * @param o objeto a comparar
-     * @return boolean - retorna se os dois alunos tem o número de estudante igual
+     * @return boolean - retorna qual deles é lexicograficamente superior ao outro
      */
     @Override
     public int compareTo(Aluno o) {

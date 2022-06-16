@@ -9,7 +9,7 @@ import java.util.Comparator;
  */
 public class AlunoClassificacaoComparator implements Comparator<Aluno> {
     /**
-     * Compara dois objetos alunos através ca classificação
+     * Compara dois objetos alunos através da classificação
      * @param o1 primeiro objeto aluno a comparar
      * @param o2 segundo objeto aluno a comparar
      * @return boolean - retorna 0 se forem iguais, inferior a 0 se o2 for superior a o1 ou superior a 0 se o1 for superior a o2

@@ -1,7 +1,7 @@
 package pt.isec.pa.apoio_poe.model.data.pessoas;
 
 /**
- * Classe Docente com as informações dos Docentes
+ * Classe Docente com as informações dos Docentes, derivada da classe Pessoa
  * @author Maria Abreu e Pedro Morais
  * @version 1.0.0
  *
@@ -44,7 +44,7 @@ public class Docente extends Pessoa implements Comparable<Docente>{
     /**
      * Compara este objeto Docente a outro através do email
      * @param o objeto a comparar
-     * @return boolean - retorna se os dois docentes tem o email igual
+     * @return boolean - retorna qual deles é lexicograficamente superior ao outro
      */
     @Override
     public int compareTo(Docente o) {

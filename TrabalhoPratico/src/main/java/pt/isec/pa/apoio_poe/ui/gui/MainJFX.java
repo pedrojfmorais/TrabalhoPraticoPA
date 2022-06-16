@@ -9,7 +9,7 @@ import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 public class MainJFX extends Application {
     ApoioPoEContext fsm;
 
-    public MainJFX() {
+        public MainJFX() {
         this.fsm = ApoioPoEContext.getInstance();
     }
 

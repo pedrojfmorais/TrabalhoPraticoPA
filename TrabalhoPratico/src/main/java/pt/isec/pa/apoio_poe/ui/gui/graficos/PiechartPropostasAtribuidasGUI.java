@@ -22,6 +22,7 @@ public class PiechartPropostasAtribuidasGUI extends BorderPane {
 
     final static ArrayList<String> nomePie = new ArrayList<>(List.of("Atribuídas", "Não Atribuídas"));
     ArrayList<Integer> dadosPieChart;
+    Label caption;
 
     public PiechartPropostasAtribuidasGUI(ApoioPoEContext fsm) {
         this.fsm = fsm;
@@ -32,6 +33,10 @@ public class PiechartPropostasAtribuidasGUI extends BorderPane {
     }
 
     private void createViews(){
+
+        caption = new Label("");
+
+        caption.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 
         pcPropostasRamos = new PieChart();
 
@@ -46,6 +51,7 @@ public class PiechartPropostasAtribuidasGUI extends BorderPane {
         update();
 
         this.setCenter(pcPropostasRamos);
+        this.setTop(caption);
     }
 
     private void registerHandlers(){
@@ -57,12 +63,6 @@ public class PiechartPropostasAtribuidasGUI extends BorderPane {
             for (int i = 0; i < pcPropostasRamos.getData().size(); i++) {
                 int finalI = i;
                 pcPropostasRamos.getData().get(i).getNode().setOnMouseEntered(ev -> {
-
-                    Label caption = new Label("");
-                    caption.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
-
-                    this.setTop(caption);
-
                     caption.setTranslateX(ev.getSceneX() - caption.getLayoutX());
                     caption.setTranslateY(ev.getSceneY() - caption.getLayoutY());
                     caption.setText(Math.round(dadosPieChart.get(finalI)) + " " + nomePie.get(finalI) + " ("
@@ -70,6 +70,8 @@ public class PiechartPropostasAtribuidasGUI extends BorderPane {
                 });
             }
         });
+
+        this.setOnMouseExited(event -> caption.setText(""));
     }
 
     private void update(){
