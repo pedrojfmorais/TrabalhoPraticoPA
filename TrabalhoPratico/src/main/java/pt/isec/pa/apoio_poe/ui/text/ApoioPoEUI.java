@@ -2,7 +2,7 @@ package pt.isec.pa.apoio_poe.ui.text;
 
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
-import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorType;
 import pt.isec.pa.apoio_poe.model.fsm.*;
 import pt.isec.pa.apoio_poe.utils.PAInput;
 
@@ -44,7 +44,7 @@ public class ApoioPoEUI {
 
     private void exceptionMessages(){
 
-        if(ErrorOccurred.getInstance().getLastError() == ErrorsTypes.NONE)
+        if(ErrorOccurred.getInstance().getLastError() == ErrorType.NONE)
             return;
 
         System.out.println("\n\n\n**************************************************\n");
@@ -81,7 +81,7 @@ public class ApoioPoEUI {
         }
         System.out.println("\n**************************************************\n");
 
-        ErrorOccurred.getInstance().setError(ErrorsTypes.NONE);
+        ErrorOccurred.getInstance().setError(ErrorType.NONE);
     }
 
     private void inicioUI(){
@@ -232,7 +232,7 @@ public class ApoioPoEUI {
                 String aluno = fsm.consultarDados(nAluno.toString());
 
                 if(aluno == null){
-                    ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+                    ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
                     return;
                 }
 
@@ -330,7 +330,7 @@ public class ApoioPoEUI {
                 String docente = fsm.consultarDados(email);
 
                 if(docente == null) {
-                    ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
+                    ErrorOccurred.getInstance().setError(ErrorType.INVALID_DOCENTE);
                     return;
                 }
 
@@ -423,7 +423,7 @@ public class ApoioPoEUI {
                 String proposta = fsm.consultarDados(id);
 
                 if(proposta == null) {
-                   ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+                   ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
                    return;
                 }
 
@@ -612,7 +612,7 @@ public class ApoioPoEUI {
 
                 String candidatura = fsm.consultarDados(nAluno);
                 if(candidatura == null) {
-                    ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_CANDIDATURA);
+                    ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_CANDIDATURA);
                     return;
                 }
                 System.out.println(candidatura);

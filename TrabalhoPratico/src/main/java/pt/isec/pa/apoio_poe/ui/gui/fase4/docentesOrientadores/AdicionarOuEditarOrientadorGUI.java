@@ -10,7 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import pt.isec.pa.apoio_poe.model.data.propostas.PropostaAtribuida;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
-import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorType;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
 
@@ -103,12 +103,12 @@ public class AdicionarOuEditarOrientadorGUI extends BorderPane {
                 if(res)
                     this.getScene().getWindow().hide();
                 else {
-                    if (ErrorOccurred.getInstance().getLastError() == ErrorsTypes.INVALID_DOCENTE) {
+                    if (ErrorOccurred.getInstance().getLastError() == ErrorType.INVALID_DOCENTE) {
                         tfEmailDocente.getStyleClass().add("error");
                     } else {
                         tfNAluno.getStyleClass().add("error");
                     }
-                    ErrorOccurred.getInstance().setError(ErrorsTypes.NONE);
+                    ErrorOccurred.getInstance().setError(ErrorType.NONE);
                 }
             }
         });

@@ -9,7 +9,7 @@ public class ErrorOccurred {
     /**
      * Último erro que ocorreu
      */
-    private ErrorsTypes error;
+    private ErrorType error;
 
     /**
      * Instância estática da classe ErrorOccurred
@@ -30,14 +30,14 @@ public class ErrorOccurred {
      * Construtor privado que permite criar uma nova instância de ErrorOccurred, utilizado apenas uma vez
      */
     private ErrorOccurred(){
-        error = ErrorsTypes.NONE;
+        error = ErrorType.NONE;
     }
 
     /**
      * Método que permite obter o enumerável do último erro que ocorreu
      * @return error - último erro que ocorreu
      */
-    public ErrorsTypes getLastError() {
+    public ErrorType getLastError() {
         return error;
     }
 
@@ -45,7 +45,7 @@ public class ErrorOccurred {
      * Método que permite definir o tipo de erro
      * @param error constante do enumerável que representa um erro
      */
-    public void setError(ErrorsTypes error) {
+    public void setError(ErrorType error) {
         this.error = error;
     }
 }

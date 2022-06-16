@@ -1,7 +1,7 @@
 package pt.isec.pa.apoio_poe.model.data.pessoas;
 
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
-import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorType;
 
 import java.io.Serializable;
 /**
@@ -77,7 +77,7 @@ public abstract class Pessoa implements Cloneable, Serializable {
             return (Pessoa) super.clone();
 
         } catch (CloneNotSupportedException e) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.CLONE_NOT_FOUND);
+            ErrorOccurred.getInstance().setError(ErrorType.CLONE_NOT_FOUND);
         }
         return null;
     }

@@ -1,7 +1,7 @@
 package pt.isec.pa.apoio_poe.model.data.propostas;
 
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
-import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorType;
 
 import java.io.Serializable;
 /**
@@ -139,7 +139,7 @@ public abstract class Proposta implements Comparable<Proposta>, Cloneable, Seria
         try {
             return (Proposta) super.clone();
         } catch (CloneNotSupportedException e) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.CLONE_NOT_FOUND);
+            ErrorOccurred.getInstance().setError(ErrorType.CLONE_NOT_FOUND);
         }
         return null;
     }

@@ -5,7 +5,7 @@ package pt.isec.pa.apoio_poe.model.errorHandling;
  * @author Maria Abreu e Pedro Morais
  * @version 1.0.0
  */
-public enum ErrorsTypes {
+public enum ErrorType {
 
     /**
      * Ficheiro não encontrado

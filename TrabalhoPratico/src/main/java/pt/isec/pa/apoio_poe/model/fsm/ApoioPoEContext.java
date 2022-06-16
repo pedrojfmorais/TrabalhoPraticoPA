@@ -8,7 +8,7 @@ import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.data.propostas.PropostaAtribuida;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
-import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorType;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -245,11 +245,11 @@ public class ApoioPoEContext {
             retomarSave((ApoioPoEManager) ois.readObject(), (ApoioPoEState) ois.readObject());
 
         } catch (FileNotFoundException e) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.FILE_NOT_FOUND);
+            ErrorOccurred.getInstance().setError(ErrorType.FILE_NOT_FOUND);
         } catch (IOException e) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
+            ErrorOccurred.getInstance().setError(ErrorType.IO_EXCEPTION);
         } catch (ClassNotFoundException e) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.CLASS_NOT_FOUND);
+            ErrorOccurred.getInstance().setError(ErrorType.CLASS_NOT_FOUND);
         }
         return true;
     }
@@ -261,9 +261,9 @@ public class ApoioPoEContext {
             oos.writeObject(state);
 
         } catch (FileNotFoundException e) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.FILE_NOT_FOUND);
+            ErrorOccurred.getInstance().setError(ErrorType.FILE_NOT_FOUND);
         } catch (IOException e) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.IO_EXCEPTION);
+            ErrorOccurred.getInstance().setError(ErrorType.IO_EXCEPTION);
         }
 
         return true;

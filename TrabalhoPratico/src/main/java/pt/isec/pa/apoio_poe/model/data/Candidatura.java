@@ -1,7 +1,7 @@
 package pt.isec.pa.apoio_poe.model.data;
 
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
-import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorType;
 
 import java.io.Serializable;
 import java.util.List;
@@ -98,7 +98,7 @@ public class Candidatura implements Comparable<Candidatura>, Cloneable, Serializ
         try {
             return (Candidatura) super.clone();
         } catch (CloneNotSupportedException e) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.CLONE_NOT_FOUND);
+            ErrorOccurred.getInstance().setError(ErrorType.CLONE_NOT_FOUND);
         }
         return null;
     }

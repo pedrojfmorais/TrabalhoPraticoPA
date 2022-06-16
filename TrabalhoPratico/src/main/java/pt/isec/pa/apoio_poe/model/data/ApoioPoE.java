@@ -4,7 +4,7 @@ import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.data.propostas.*;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
-import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorType;
 
 import java.io.*;
 import java.util.*;
@@ -43,33 +43,33 @@ public class ApoioPoE implements Serializable, Cloneable {
                                 double classificacao, boolean acessoEstagio) {
 
       if (alunos.containsKey(nAluno)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_NUMERO_ALUNO);
+         ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_NUMERO_ALUNO);
          return false;
       }
 
       if (docentes.containsKey(email)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_EMAIL);
+         ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_EMAIL);
          return false;
       }
 
       for (var aluno : alunos.values())
          if (aluno.getEmail().equals(email)) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_EMAIL);
+            ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_EMAIL);
             return false;
          }
 
       if (!Aluno.cursos.contains(siglaCurso)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_CURSO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_CURSO);
          return false;
       }
 
       if (!Aluno.ramos.contains(siglaRamo)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_RAMO);
          return false;
       }
 
       if (classificacao > 1.0 || classificacao < 0.0) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_CLASSIFICACAO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_CLASSIFICACAO);
          return false;
       }
 
@@ -81,13 +81,13 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean adicionaDocente(String nome, String email) {
 
       if (docentes.containsKey(email)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_EMAIL);
+         ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_EMAIL);
          return false;
       }
 
       for (var aluno : alunos.values())
          if (aluno.getEmail().equals(email)) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_EMAIL);
+            ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_EMAIL);
             return false;
          }
 
@@ -100,24 +100,24 @@ public class ApoioPoE implements Serializable, Cloneable {
                                    String areasDestino, String entidadeOuDocente) {
 
       if (propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_ID_PROPOSTA);
          return false;
       }
 
       if (!alunos.containsKey(nAlunoAssociado)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
          return false;
       }
 
       String[] areas = areasDestino.trim().split("\\|");
       if (!Aluno.ramos.containsAll(List.of(areas))) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_RAMO);
          return false;
       }
 
       for (var proposta : this.propostas.values())
          if (proposta.getNAlunoAssociado() == nAlunoAssociado) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
+            ErrorOccurred.getInstance().setError(ErrorType.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
 
@@ -126,7 +126,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          case "T2" -> {
 
             if (!docentes.containsKey(entidadeOuDocente)) {
-               ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
+               ErrorOccurred.getInstance().setError(ErrorType.INVALID_DOCENTE);
                return false;
             }
 
@@ -144,14 +144,14 @@ public class ApoioPoE implements Serializable, Cloneable {
                                    String areasDestino, String entidadeOuDocente) {
 
       if (propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_ID_PROPOSTA);
          return false;
       }
 
       String[] areas = areasDestino.trim().split("\\|");
 
       if (!Aluno.ramos.containsAll(List.of(areas))) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_RAMO);
          return false;
       }
 
@@ -160,7 +160,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          case "T2" -> {
 
             if (!docentes.containsKey(entidadeOuDocente)) {
-               ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
+               ErrorOccurred.getInstance().setError(ErrorType.INVALID_DOCENTE);
                return false;
             }
 
@@ -177,18 +177,18 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean adicionaProposta(String tipo, String id, String titulo, long nAlunoAssociado) {
 
       if (propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_ID_PROPOSTA);
          return false;
       }
 
       if (!alunos.containsKey(nAlunoAssociado)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
          return false;
       }
 
       for (var proposta : propostas.values())
          if (proposta.getNAlunoAssociado() == nAlunoAssociado) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
+            ErrorOccurred.getInstance().setError(ErrorType.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
 
@@ -203,28 +203,28 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean adicionaCandidatura(long nAluno, ArrayList<String> propostas) {
 
       if (propostas.isEmpty()) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
          return false;
       }
 
       if (candidaturas.containsKey(nAluno)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_CANDIDATURA);
+         ErrorOccurred.getInstance().setError(ErrorType.ALUNO_JA_TEM_CANDIDATURA);
          return false;
       }
 
       if (!alunos.containsKey(nAluno)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
          return false;
       }
 
       for (var proposta : propostas) {
          if (!this.propostas.containsKey(proposta)) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+            ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
             return false;
          }
 
          if (this.propostas.get(proposta).getNAlunoAssociado() != 0) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_JA_TEM_ALUNO_ASSOCIADO);
+            ErrorOccurred.getInstance().setError(ErrorType.PROPOSTA_JA_TEM_ALUNO_ASSOCIADO);
             return false;
          }
 
@@ -243,7 +243,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          }
 
          if(!areaDoAlunoCorrespondeADaProposta){
-            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_PROPOSTA_AREA_NAO_CORRESPONDEM);
+            ErrorOccurred.getInstance().setError(ErrorType.ALUNO_PROPOSTA_AREA_NAO_CORRESPONDEM);
             return false;
          }
 
@@ -251,7 +251,7 @@ public class ApoioPoE implements Serializable, Cloneable {
 
       for (var proposta : this.propostas.values())
          if (proposta.getNAlunoAssociado() == nAluno) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
+            ErrorOccurred.getInstance().setError(ErrorType.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
 
@@ -259,7 +259,7 @@ public class ApoioPoE implements Serializable, Cloneable {
 
       HashSet<String> testeDuplicados = new HashSet<>(propostas);
       if (testeDuplicados.size() != propostas.size()) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_ID_PROPOSTA);
          return false;
       }
       candidaturas.put(nAluno, new Candidatura(nAluno, propostas));
@@ -272,25 +272,25 @@ public class ApoioPoE implements Serializable, Cloneable {
       int ordemPreferencia = 1;
 
       if (propostasAtribuidas.containsKey(idProposta)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_JA_FOI_ATRIBUIDA);
+         ErrorOccurred.getInstance().setError(ErrorType.PROPOSTA_JA_FOI_ATRIBUIDA);
          return false;
       }
 
       Proposta propostaAtual = propostas.get(idProposta);
 
       if (propostaAtual == null) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
          return false;
       }
 
       if (!alunos.containsKey(nAluno)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
          return false;
       }
 
       for (var propostaAtribuida : propostasAtribuidas.values())
          if (propostaAtribuida.getNAlunoAssociado() == nAluno) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
+            ErrorOccurred.getInstance().setError(ErrorType.ALUNO_JA_TEM_PROPOSTA);
             return false;
          }
 
@@ -307,7 +307,7 @@ public class ApoioPoE implements Serializable, Cloneable {
       }
 
       if(!areaDoAlunoCorrespondeADaProposta){
-         ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_PROPOSTA_AREA_NAO_CORRESPONDEM);
+         ErrorOccurred.getInstance().setError(ErrorType.ALUNO_PROPOSTA_AREA_NAO_CORRESPONDEM);
          return false;
       }
 
@@ -349,17 +349,17 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean atribuirPropostaDocenteOrientador(String idProposta, String email) {
 
       if (!propostasAtribuidas.containsKey(idProposta) && propostas.containsKey(idProposta)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_AINDA_NAO_ATRIBUIDA);
+         ErrorOccurred.getInstance().setError(ErrorType.PROPOSTA_AINDA_NAO_ATRIBUIDA);
          return false;
       }
 
       if (!propostas.containsKey(idProposta)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
          return false;
       }
 
       if (!docentes.containsKey(email)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_DOCENTE);
          return false;
       }
 
@@ -443,7 +443,7 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean removeAluno(long nAluno) {
 
       if(!alunos.containsKey(nAluno)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
          return false;
       }
 
@@ -471,7 +471,7 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean removeDocente(String email) {
 
       if(!docentes.containsKey(email)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_DOCENTE);
          return false;
       }
 
@@ -495,7 +495,7 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean removeProposta(String id) {
 
       if(!propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
          return false;
       }
 
@@ -515,7 +515,7 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean removeCandidatura(long nAluno) {
 
       if(!candidaturas.containsKey(nAluno)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_CANDIDATURA);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_CANDIDATURA);
          return false;
       }
 
@@ -532,7 +532,7 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean removePropostaAtribuida(String id) {
 
       if(!propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
          return false;
       }
 
@@ -542,12 +542,12 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean removeOrientadorPropostaAtribuida(String id) {
 
       if (!propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
          return false;
       }
 
       if (propostasAtribuidas.get(id) == null) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_AINDA_NAO_ATRIBUIDA);
+         ErrorOccurred.getInstance().setError(ErrorType.PROPOSTA_AINDA_NAO_ATRIBUIDA);
          return false;
       }
 
@@ -656,19 +656,19 @@ public class ApoioPoE implements Serializable, Cloneable {
       double dClassificacao = 0.0;
 
       if (!alunos.containsKey(nAluno)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
          return false;
       }
 
       if (!siglaCurso.isBlank())
          if (!Aluno.cursos.contains(siglaCurso)) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_CURSO);
+            ErrorOccurred.getInstance().setError(ErrorType.INVALID_CURSO);
             return false;
          }
 
       if (!siglaRamo.isBlank())
          if (!Aluno.ramos.contains(siglaRamo)) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
+            ErrorOccurred.getInstance().setError(ErrorType.INVALID_RAMO);
             return false;
          }
 
@@ -676,7 +676,7 @@ public class ApoioPoE implements Serializable, Cloneable {
          dClassificacao = Double.parseDouble(classificacao);
 
          if (dClassificacao > 1.0 || dClassificacao < 0.0) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_CLASSIFICACAO);
+            ErrorOccurred.getInstance().setError(ErrorType.INVALID_CLASSIFICACAO);
             return false;
          }
       }
@@ -705,7 +705,7 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean editaDocente(String email, String nome) {
 
       if (!docentes.containsKey(email)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_DOCENTE);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_DOCENTE);
          return false;
       }
 
@@ -720,25 +720,25 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean editaProposta(String id, String titulo, String ramos, String entidade_docente, String nAluno) {
 
       if (!propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
          return false;
       }
 
       String[] array_ramos = ramos.trim().split("\\|");
       if (!ramos.isBlank() && !Aluno.ramos.containsAll(List.of(array_ramos))) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_RAMO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_RAMO);
          return false;
       }
 
       if (!nAluno.isBlank()) {
          if (!alunos.containsKey(Long.parseLong(nAluno)) && !nAluno.equals("0")) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+            ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
             return false;
          }
 
          for (var proposta : this.propostas.values())
             if (proposta.getNAlunoAssociado() == Long.parseLong(nAluno) && !proposta.getId().equals(id) && !nAluno.equals("0")) {
-               ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
+               ErrorOccurred.getInstance().setError(ErrorType.ALUNO_JA_TEM_PROPOSTA);
                return false;
             }
       }
@@ -774,19 +774,19 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean editaProposta(String id, String titulo, String nAluno) {
 
       if (!propostas.containsKey(id)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
          return false;
       }
 
       if (!nAluno.isBlank()) {
          if (!alunos.containsKey(Long.parseLong(nAluno)) && !nAluno.equals("0")) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+            ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
             return false;
          }
 
          for (var proposta : this.propostas.values())
             if (proposta.getNAlunoAssociado() == Long.parseLong(nAluno) && !proposta.getId().equals(id) && !nAluno.equals("0")) {
-               ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_JA_TEM_PROPOSTA);
+               ErrorOccurred.getInstance().setError(ErrorType.ALUNO_JA_TEM_PROPOSTA);
                return false;
             }
       }
@@ -805,35 +805,35 @@ public class ApoioPoE implements Serializable, Cloneable {
    public boolean editaCandidatura(long nAluno, ArrayList<String> propostas) {
 
       if (propostas.isEmpty()) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.SEM_PROPOSTAS_ESPECIFICADAS);
+         ErrorOccurred.getInstance().setError(ErrorType.SEM_PROPOSTAS_ESPECIFICADAS);
          return false;
       }
 
       if (!alunos.containsKey(nAluno)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_NUMERO_ALUNO);
+         ErrorOccurred.getInstance().setError(ErrorType.INVALID_NUMERO_ALUNO);
          return false;
       }
 
       if (!candidaturas.containsKey(nAluno)) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.ALUNO_NAO_TEM_CANDIDATURA);
+         ErrorOccurred.getInstance().setError(ErrorType.ALUNO_NAO_TEM_CANDIDATURA);
          return false;
       }
 
       for (var proposta : propostas) {
          if (!this.propostas.containsKey(proposta)) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.INVALID_ID_PROPOSTA);
+            ErrorOccurred.getInstance().setError(ErrorType.INVALID_ID_PROPOSTA);
             return false;
          }
 
          if (this.propostas.get(proposta).getNAlunoAssociado() != 0) {
-            ErrorOccurred.getInstance().setError(ErrorsTypes.PROPOSTA_JA_TEM_ALUNO_ASSOCIADO);
+            ErrorOccurred.getInstance().setError(ErrorType.PROPOSTA_JA_TEM_ALUNO_ASSOCIADO);
             return false;
          }
       }
 
       HashSet<String> testeDuplicados = new HashSet<>(propostas);
       if (testeDuplicados.size() != propostas.size()) {
-         ErrorOccurred.getInstance().setError(ErrorsTypes.DUPLICATED_ID_PROPOSTA);
+         ErrorOccurred.getInstance().setError(ErrorType.DUPLICATED_ID_PROPOSTA);
          return false;
       }
 

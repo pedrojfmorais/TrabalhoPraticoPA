@@ -7,7 +7,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
-import pt.isec.pa.apoio_poe.model.errorHandling.ErrorsTypes;
+import pt.isec.pa.apoio_poe.model.errorHandling.ErrorType;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
 
@@ -96,7 +96,7 @@ public class AdicionarOuEditarDocenteGUI extends BorderPane {
                     if (fsm.editarDados(tfEmail.getText(), tfNome.getText())) {
                         this.getScene().getWindow().hide();
                     } else {
-                        if (ErrorOccurred.getInstance().getLastError() == ErrorsTypes.INVALID_DOCENTE) {
+                        if (ErrorOccurred.getInstance().getLastError() == ErrorType.INVALID_DOCENTE) {
                             tfNome.getStyleClass().add("error");
                         }
                     }
