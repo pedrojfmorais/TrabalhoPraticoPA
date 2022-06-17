@@ -39,7 +39,6 @@ public class BarChartEmpresasEstagiosGUI extends BorderPane {
     }
 
     private void registerHandlers(){
-        fsm.addPropertyChangeListener(ApoioPoEContext.PROP_FASE, evt -> update());
         fsm.addPropertyChangeListener(ApoioPoEContext.PROP_PROPOSTA, evt -> update());
     }
 
