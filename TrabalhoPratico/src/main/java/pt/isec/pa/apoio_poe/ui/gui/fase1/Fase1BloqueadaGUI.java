@@ -16,6 +16,7 @@ import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.GerirAlunoGUI;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.docente.GerirDocenteGUI;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.GerirPropostaGUI;
 import pt.isec.pa.apoio_poe.ui.gui.AbreMostraDadosGUI;
+import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
 import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class Fase1BloqueadaGUI extends BorderPane {
@@ -41,6 +42,10 @@ public class Fase1BloqueadaGUI extends BorderPane {
     }
 
     private void createViews() {
+
+        CSSManager.applyCSS(this,"backgroundColors.css");
+        this.getStyleClass().add("faseBloqueada");
+
         tbConsultarAlunos = new ToggleButton("Alunos");
         tbConsultarDocentes = new ToggleButton("Docentes");
         tbConsultarPropostas = new ToggleButton("Propostas");
@@ -163,7 +168,6 @@ public class Fase1BloqueadaGUI extends BorderPane {
         });
 
         btnProcurar.setOnAction(actionEvent -> {
-            System.out.println(tbConsultarAlunos.isSelected() + " " + tbConsultarDocentes.isSelected() + " " + tbConsultarPropostas.isSelected());
 
             tableView.getItems().clear();
 

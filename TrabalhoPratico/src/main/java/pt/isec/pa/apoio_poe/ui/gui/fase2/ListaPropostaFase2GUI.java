@@ -15,6 +15,7 @@ import pt.isec.pa.apoio_poe.model.data.propostas.Proposta;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.GerirPropostaGUI;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.proposta.MostraDadosPropostaGUI;
+import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class ListaPropostaFase2GUI extends BorderPane {
     ApoioPoEContext fsm;
@@ -98,6 +99,7 @@ public class ListaPropostaFase2GUI extends BorderPane {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Stage dialog = new Stage();
+                    dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
                     dialog.setTitle("Informações Proposta");
 

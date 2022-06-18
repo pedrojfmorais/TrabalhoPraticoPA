@@ -38,12 +38,20 @@ public class GerirCandidaturaGUI extends BorderPane {
 
     private void createViews(){
         resumo = new Stage();
+        resumo.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
+
+        CSSManager.applyCSS(this,"backgroundColors.css");
 
         btnAdicionar = new Button("Adicionar");
         btnEditar = new Button("Editar");
         btnEliminar = new Button("Eliminar");
         btnProcurar = new Button(null, ImageManager.getImageView("lupa.png",20));
         btnRegressarFase = new Button("Regressar");
+
+        btnAdicionar.getStyleClass().add("btnAdicionar");
+        btnEditar.getStyleClass().add("btnEditar");
+        btnEliminar.getStyleClass().add("btnEliminar");
+        this.getStyleClass().add("gestaoBG");
 
         tCandidatura = new TableView<>();
         tfFiltros = new TextField();
@@ -79,6 +87,7 @@ public class GerirCandidaturaGUI extends BorderPane {
 
         btnAdicionar.setOnAction(actionEvent -> {
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Adicionar Candidatura");
 
@@ -99,6 +108,7 @@ public class GerirCandidaturaGUI extends BorderPane {
                 return;
 
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Editar Candidatura");
 

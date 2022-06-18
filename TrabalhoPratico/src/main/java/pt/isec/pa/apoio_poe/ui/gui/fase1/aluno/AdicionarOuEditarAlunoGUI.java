@@ -6,10 +6,13 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.errorHandling.ErrorOccurred;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
+
+import java.text.DecimalFormat;
 
 public class AdicionarOuEditarAlunoGUI extends BorderPane {
     ApoioPoEContext fsm;
@@ -17,6 +20,7 @@ public class AdicionarOuEditarAlunoGUI extends BorderPane {
     Label lbNAluno, lbNome, lbEmail, lbSiglaCurso, lbSiglaRamos, lbClassif, lbAcessoEstagio;
 
     TextField tfNAluno, tfNome, tfEmail, tfClassif;
+    Slider slClassif;
     ComboBox<String> cbCurso, cbRamo;
     CheckBox ckAcessoEstagio;
 
@@ -51,6 +55,7 @@ public class AdicionarOuEditarAlunoGUI extends BorderPane {
         cbCurso = new ComboBox<>();
         cbRamo = new ComboBox<>();
         tfClassif = new TextField();
+        slClassif = new Slider(0, 1, 0.01);
         ckAcessoEstagio = new CheckBox();
 
         btnEnviar = new Button("Adicionar");
@@ -60,7 +65,8 @@ public class AdicionarOuEditarAlunoGUI extends BorderPane {
         tfEmail.setPrefSize(250, 25);
         cbCurso.setPrefSize(125,25);
         cbRamo.setPrefSize(125,25);
-        tfClassif.setPrefSize(125,25);
+        tfClassif.setMaxSize(40,25);
+        slClassif.setMaxSize(100, 25);
         ckAcessoEstagio.setPrefSize(25,25);
         btnEnviar.setPrefSize(100,25);
 
@@ -77,7 +83,7 @@ public class AdicionarOuEditarAlunoGUI extends BorderPane {
         gp.addRow(4, lbSiglaCurso, lbSiglaRamos);
         gp.addRow(5, cbCurso, cbRamo);
         gp.addRow(6, lbClassif, lbAcessoEstagio);
-        gp.addRow(7, tfClassif, ckAcessoEstagio);
+        gp.addRow(7, new HBox(tfClassif, slClassif), ckAcessoEstagio);
         gp.addRow(8, btnEnviar);
 
         GridPane.setColumnSpan(tfEmail, 2);
@@ -89,6 +95,21 @@ public class AdicionarOuEditarAlunoGUI extends BorderPane {
     }
 
     private void registerHandlers(){
+
+        slClassif.valueProperty().addListener((observableValue, oldValue, newValue) -> {
+            DecimalFormat f = new DecimalFormat("#.##");
+            tfClassif.setText(f.format(newValue));
+        });
+
+        tfClassif.textProperty().addListener((observableValue, oldValue, newValue) -> {
+
+            try {
+                slClassif.setValue(Double.parseDouble(tfClassif.getText()));
+            }catch (Exception ignored) {
+
+            }
+        });
+
         btnEnviar.setOnAction(actionEvent -> {
 
             boolean errors = false;
@@ -132,8 +153,10 @@ public class AdicionarOuEditarAlunoGUI extends BorderPane {
                 errors = true;
             }
 
+            String classficacao = tfClassif.getText().replace(',', '.');
             try {
-                double d = Double.parseDouble(tfClassif.getText());
+
+                double d = Double.parseDouble(classficacao);
             } catch (NumberFormatException nfe) {
                 tfClassif.getStyleClass().add("error");
                 errors = true;
@@ -143,7 +166,7 @@ public class AdicionarOuEditarAlunoGUI extends BorderPane {
                 if(!editar) { //adicionar
                     if (fsm.adicionarDados(tfNAluno.getText(), tfNome.getText(), tfEmail.getText(),
                             cbCurso.getSelectionModel().getSelectedItem(), cbRamo.getSelectionModel().getSelectedItem(),
-                            tfClassif.getText(), String.valueOf(ckAcessoEstagio.isSelected()))) {
+                            classficacao, String.valueOf(ckAcessoEstagio.isSelected()))) {
                         this.getScene().getWindow().hide();
                     } else {
                         switch (ErrorOccurred.getInstance().getLastError()) {
@@ -159,7 +182,7 @@ public class AdicionarOuEditarAlunoGUI extends BorderPane {
                 } else { //editar
                     if (fsm.editarDados(tfNAluno.getText(), tfNome.getText(),
                             cbCurso.getSelectionModel().getSelectedItem(), cbRamo.getSelectionModel().getSelectedItem(),
-                            tfClassif.getText(), String.valueOf(ckAcessoEstagio.isSelected()))) {
+                            classficacao, String.valueOf(ckAcessoEstagio.isSelected()))) {
                         this.getScene().getWindow().hide();
                     } else {
                         switch (ErrorOccurred.getInstance().getLastError()) {

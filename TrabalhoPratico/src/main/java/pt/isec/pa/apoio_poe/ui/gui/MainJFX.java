@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
+import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class MainJFX extends Application {
     ApoioPoEContext fsm;
@@ -27,6 +28,7 @@ public class MainJFX extends Application {
         Scene scene = new Scene(new ApoioPoEGUI(fsm), 500, 500, Color.BLACK);
         stage.setScene(scene);
         stage.setTitle("Apoio Projeto ou Estágio");
+        stage.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
         stage.show();
     }
 

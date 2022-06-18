@@ -13,6 +13,8 @@ import javafx.stage.Window;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.ui.gui.ComumFasesGUI;
+import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
+import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class Fase3GUI extends BorderPane {
     ApoioPoEContext fsm;
@@ -31,6 +33,10 @@ public class Fase3GUI extends BorderPane {
     }
 
     private void createViews() {
+
+        CSSManager.applyCSS(this,"backgroundColors.css");
+        this.getStyleClass().add("fase");
+
         btnAtribuicaoAutomaticaAutopropostaEPropostasDocentes = new Button("Confirmar Auto Atribuições");
         btnAtribuicaoAutomaticaAlunosSemAtribuicao = new Button("Atribuição Automática");
         btnGestaoManualAtribuicoes = new Button("Gerir Atribuições");
@@ -92,6 +98,7 @@ public class Fase3GUI extends BorderPane {
 
     public static void listaAlunosFase3(Window window, ApoioPoEContext fsm){
         Stage dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.setTitle("Lista Alunos");
 
@@ -110,6 +117,7 @@ public class Fase3GUI extends BorderPane {
 
     public static void listaPropostasFase3(Window window, ApoioPoEContext fsm){
         Stage dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.setTitle("Lista Propostas");
 

@@ -32,7 +32,7 @@ public class Fase1GUI extends BorderPane {
     private void createViews() {
 
         CSSManager.applyCSS(this,"backgroundColors.css");
-        this.getStyleClass().add("fase1");
+        this.getStyleClass().add("fase");
 
         btnGerirAlunos = new Button("Gerir Alunos");
         btnGerirDocentes = new Button("Gerir Docentes");

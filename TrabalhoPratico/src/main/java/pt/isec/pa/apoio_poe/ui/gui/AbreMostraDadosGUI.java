@@ -13,10 +13,12 @@ import pt.isec.pa.apoio_poe.ui.gui.fase2.candidatura.ResumoCandidaturasGUI;
 import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.MostraDadosPropostaAtribuidaGUI;
 import pt.isec.pa.apoio_poe.ui.gui.fase3.propostaAtribuida.ResumoPropostasAtribuidasGUI;
 import pt.isec.pa.apoio_poe.ui.gui.fase4.docentesOrientadores.ResumoOrientadoresGUI;
+import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class AbreMostraDadosGUI {
     public static void abreMostraDadosAluno(ApoioPoEContext fsm, Aluno aluno, Stage owner){
         Stage dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.setTitle("Informações Aluno");
 
@@ -36,6 +38,7 @@ public class AbreMostraDadosGUI {
 
     public static void abreMostraDadosProposta(ApoioPoEContext fsm, Proposta proposta, Stage owner){
         Stage dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.setTitle("Informações Proposta");
 
@@ -55,6 +58,7 @@ public class AbreMostraDadosGUI {
 
     public static void abreMostraDadosPropostaAtribuida(ApoioPoEContext fsm, PropostaAtribuida item, Stage window) {
         Stage dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.setTitle("Informações Proposta Atribuída");
 
@@ -74,6 +78,7 @@ public class AbreMostraDadosGUI {
 
     public static Stage abreResumoCandidaturas(ApoioPoEContext fsm, Stage stage) {
         Stage dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.setTitle("Resumo Candidaturas");
 
@@ -94,6 +99,7 @@ public class AbreMostraDadosGUI {
 
     public static Stage abreResumoPropostasAtribuidas(ApoioPoEContext fsm, Stage stage) {
         Stage dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.setTitle("Resumo Propostas Atribuídas");
 
@@ -114,6 +120,7 @@ public class AbreMostraDadosGUI {
 
     public static Stage abreResumoOrientadoresPropostasAtribuidas(ApoioPoEContext fsm, Stage stage) {
         Stage dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.setTitle("Resumo Orientadores Propostas Atribuídas");
 

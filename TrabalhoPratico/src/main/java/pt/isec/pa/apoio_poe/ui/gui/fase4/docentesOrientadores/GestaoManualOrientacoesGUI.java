@@ -15,6 +15,7 @@ import pt.isec.pa.apoio_poe.model.data.propostas.PropostaAtribuida;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.ui.gui.AbreMostraDadosGUI;
+import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
 import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 import java.util.ArrayList;
@@ -39,11 +40,20 @@ public class GestaoManualOrientacoesGUI extends BorderPane {
 
     private void createViews(){
         resumo = new Stage();
+        resumo.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
+
+        CSSManager.applyCSS(this,"backgroundColors.css");
+
         btnAdicionar = new Button("Adicionar");
         btnEditar = new Button("Editar");
         btnEliminar = new Button("Eliminar");
         btnProcurar = new Button(null, ImageManager.getImageView("lupa.png",20));
         btnRegressarFase = new Button("Regressar");
+
+        btnAdicionar.getStyleClass().add("btnAdicionar");
+        btnEditar.getStyleClass().add("btnEditar");
+        btnEliminar.getStyleClass().add("btnEliminar");
+        this.getStyleClass().add("gestaoBG");
 
         tPropostasAtribuidas = new TableView<>();
         tfFiltros = new TextField();
@@ -89,6 +99,7 @@ public class GestaoManualOrientacoesGUI extends BorderPane {
 
         btnAdicionar.setOnAction(actionEvent -> {
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Adicionar Orientador");
 
@@ -107,6 +118,7 @@ public class GestaoManualOrientacoesGUI extends BorderPane {
                 return;
 
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Editar Orientador");
 

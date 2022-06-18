@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.ui.gui.graficos.*;
+import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 import java.io.File;
 
@@ -303,6 +304,7 @@ public class AppMenuGUI extends MenuBar {
         AppMenuGUI.closeDialog();
 
         dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.initOwner(stage);
         dialog.setHeight(stage.getHeight());
@@ -324,6 +326,7 @@ public class AppMenuGUI extends MenuBar {
         AppMenuGUI.closeDialog();
 
         dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.initOwner(stage);
         dialog.setHeight(stage.getHeight());
@@ -347,6 +350,7 @@ public class AppMenuGUI extends MenuBar {
         AppMenuGUI.closeDialog();
 
         dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.initOwner(stage);
         dialog.setHeight(stage.getHeight());
@@ -370,6 +374,7 @@ public class AppMenuGUI extends MenuBar {
         AppMenuGUI.closeDialog();
 
         dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.initOwner(stage);
         dialog.setHeight(stage.getHeight());
@@ -392,6 +397,7 @@ public class AppMenuGUI extends MenuBar {
         AppMenuGUI.closeDialog();
 
         dialog = new Stage();
+        dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
         dialog.initOwner(stage);
         dialog.setHeight(stage.getHeight());

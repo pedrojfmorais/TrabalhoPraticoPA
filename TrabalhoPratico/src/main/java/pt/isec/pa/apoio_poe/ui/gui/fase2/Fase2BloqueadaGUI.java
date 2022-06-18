@@ -13,6 +13,7 @@ import pt.isec.pa.apoio_poe.model.data.Candidatura;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
 import pt.isec.pa.apoio_poe.ui.gui.fase2.candidatura.GerirCandidaturaGUI;
+import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
 import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class Fase2BloqueadaGUI extends BorderPane {
@@ -34,6 +35,10 @@ public class Fase2BloqueadaGUI extends BorderPane {
     }
 
     private void createViews() {
+
+        CSSManager.applyCSS(this,"backgroundColors.css");
+        this.getStyleClass().add("faseBloqueada");
+
         btnListaAlunos = new Button("Lista Alunos");
         btnListaPropostas = new Button("Lista Propostas");
         btnRegressar = new Button("Regressar");
@@ -76,6 +81,7 @@ public class Fase2BloqueadaGUI extends BorderPane {
 
         btnListaAlunos.setOnAction(event -> {
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Lista Alunos");
 
@@ -94,6 +100,7 @@ public class Fase2BloqueadaGUI extends BorderPane {
 
         btnListaPropostas.setOnAction(event -> {
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Lista Propostas");
 

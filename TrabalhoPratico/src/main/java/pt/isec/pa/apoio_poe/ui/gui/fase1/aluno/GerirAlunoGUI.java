@@ -34,11 +34,19 @@ public class GerirAlunoGUI extends BorderPane {
     }
 
     private void createViews(){
+
+        CSSManager.applyCSS(this,"backgroundColors.css");
+
         btnAdicionar = new Button("Adicionar");
         btnEditar = new Button("Editar");
         btnEliminar = new Button("Eliminar");
         btnProcurar = new Button(null, ImageManager.getImageView("lupa.png",20));
         btnRegressarFase = new Button("Regressar");
+
+        btnAdicionar.getStyleClass().add("btnAdicionar");
+        btnEditar.getStyleClass().add("btnEditar");
+        btnEliminar.getStyleClass().add("btnEliminar");
+        this.getStyleClass().add("gestaoBG");
 
         tAluno = new TableView<>();
         tfFiltros = new TextField();
@@ -74,6 +82,7 @@ public class GerirAlunoGUI extends BorderPane {
 
         btnAdicionar.setOnAction(actionEvent -> {
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Adicionar Aluno");
 
@@ -93,6 +102,7 @@ public class GerirAlunoGUI extends BorderPane {
                 return;
 
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Editar Aluno");
 

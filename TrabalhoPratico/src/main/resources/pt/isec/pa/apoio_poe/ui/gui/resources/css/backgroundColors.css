@@ -1,3 +1,43 @@
-.fase1{
-    -fx-background-color: linear-gradient(red, yellow);
+.inicio, .rodape{
+    -fx-background-color: linear-gradient(to bottom right, #FDFCFB, #E2D1C3);
+}
+
+.fase{
+    -fx-background-color: linear-gradient(to bottom right, #5761B2, #1FC5A8);
+}
+
+.faseBloqueada{
+    -fx-background-color: linear-gradient(to bottom right, #FF3E9D, #0E1F40);
+}
+
+
+.btnAdicionar{
+    -fx-background-color: #10D164;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}.btnAdicionar:hover{
+    -fx-background-color: #10b364;
+}
+
+.btnEditar{
+    -fx-background-color: #fcda21;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}.btnEditar:hover{
+    -fx-background-color: #fcc621;
+}
+
+.btnEliminar{
+    -fx-background-color: #ff2424;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}.btnEliminar:hover{
+    -fx-background-color: #cd2424;
+}
+
+.gestaoBG{
+    -fx-background-color: rgba(100, 162, 215, 0.25);
 }

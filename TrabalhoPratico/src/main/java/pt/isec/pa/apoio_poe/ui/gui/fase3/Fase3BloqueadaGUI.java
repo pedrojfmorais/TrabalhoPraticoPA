@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
 
 public class Fase3BloqueadaGUI extends BorderPane {
     ApoioPoEContext fsm;
@@ -25,6 +26,10 @@ public class Fase3BloqueadaGUI extends BorderPane {
     }
 
     private void createViews() {
+
+        CSSManager.applyCSS(this,"backgroundColors.css");
+        this.getStyleClass().add("faseBloqueada");
+
         btnListaAlunos = new Button("Lista Alunos");
         btnListaPropostas = new Button("Lista Propostas");
         btnRegressar = new Button("Regressar");

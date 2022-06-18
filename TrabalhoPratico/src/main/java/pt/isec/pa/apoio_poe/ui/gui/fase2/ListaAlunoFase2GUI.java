@@ -13,6 +13,7 @@ import pt.isec.pa.apoio_poe.model.data.pessoas.alunos.Aluno;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.GerirAlunoGUI;
 import pt.isec.pa.apoio_poe.ui.gui.fase1.aluno.MostraDadosAlunoGUI;
+import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 import java.util.ArrayList;
 
@@ -100,6 +101,7 @@ public class ListaAlunoFase2GUI extends BorderPane {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     Stage dialog = new Stage();
+                    dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
                     dialog.setTitle("Informações Aluno");
 

@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import pt.isec.pa.apoio_poe.model.data.pessoas.Docente;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext;
 import pt.isec.pa.apoio_poe.model.fsm.ApoioPoEState;
+import pt.isec.pa.apoio_poe.ui.gui.resources.CSSManager;
 import pt.isec.pa.apoio_poe.ui.gui.resources.ImageManager;
 
 public class GerirDocenteGUI extends BorderPane {
@@ -33,11 +34,19 @@ public class GerirDocenteGUI extends BorderPane {
     }
 
     private void createViews(){
+
+        CSSManager.applyCSS(this,"backgroundColors.css");
+
         btnAdicionar = new Button("Adicionar");
         btnEditar = new Button("Editar");
         btnEliminar = new Button("Eliminar");
         btnProcurar = new Button(null, ImageManager.getImageView("lupa.png",20));
         btnRegressarFase = new Button("Regressar");
+
+        btnAdicionar.getStyleClass().add("btnAdicionar");
+        btnEditar.getStyleClass().add("btnEditar");
+        btnEliminar.getStyleClass().add("btnEliminar");
+        this.getStyleClass().add("gestaoBG");
 
         tDocente = new TableView<>();
         tfFiltros = new TextField();
@@ -73,6 +82,7 @@ public class GerirDocenteGUI extends BorderPane {
 
         btnAdicionar.setOnAction(actionEvent -> {
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Adicionar Docente");
 
@@ -92,6 +102,7 @@ public class GerirDocenteGUI extends BorderPane {
                 return;
 
             Stage dialog = new Stage();
+            dialog.getIcons().add(ImageManager.getImage("mini_logo_isec.png"));
 
             dialog.setTitle("Editar Docente");
 
