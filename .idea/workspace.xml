@@ -9,11 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2239089f-0a11-4168-b998-ec0f481ff2a7" name="Changes" comment="alteração de organização de pastas">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/scopes/TP.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrabalhoPratico/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TrabalhoPratico/src/main/java/pt/isec/pa/apoio_poe/model/data/ApoioPoE.java" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/src/main/java/pt/isec/pa/apoio_poe/model/data/ApoioPoE.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TrabalhoPratico/src/main/java/pt/isec/pa/apoio_poe/model/data/ApoioPoEManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/src/main/java/pt/isec/pa/apoio_poe/model/data/ApoioPoEManager.java" afterDir="false" />
     </list>
@@ -116,7 +113,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651445362104</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="alteração de organização de pastas">
+      <created>1655397292633</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1655397292633</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

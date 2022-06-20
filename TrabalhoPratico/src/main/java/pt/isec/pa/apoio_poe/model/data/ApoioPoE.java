@@ -791,7 +791,7 @@ public class ApoioPoE implements Serializable, Cloneable {
 
    /**
     * Verifica se todas as candidaturas têm proposta atribuída
-    * @return se toas as candidaturas têm proposta atribuída
+    * @return se todas as candidaturas têm proposta atribuída
     */
    public boolean todasCandidaturasComPropostaAtribuida() {
 
