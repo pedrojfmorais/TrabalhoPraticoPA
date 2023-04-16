@@ -9,10 +9,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2239089f-0a11-4168-b998-ec0f481ff2a7" name="Changes" comment="alteração de organização de pastas">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/cssdialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/scopes/javadoc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/TrabalhoPratico.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/files/alunos.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/files/candidaturas.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/files/docentes.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/files/propostas.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Projeto_IntelliJ/TrabalhoPratico/src/main/java/pt/isec/pa/apoio_poe/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Meta2/Maria-Abreu-2020130937_Pedro-Morais-2018020733/Relatório.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TrabalhoPratico/save_com_conflito" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_06_2022_17_21_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_06_2022_17_21__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_06_2022_01_04_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_06_2022_01_04__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_06_2022_01_04__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_06_2022_01_04__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrabalhoPratico/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrabalhoPratico/src/main/java/pt/isec/pa/apoio_poe/model/data/ApoioPoE.java" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/src/main/java/pt/isec/pa/apoio_poe/model/data/ApoioPoE.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrabalhoPratico/src/main/java/pt/isec/pa/apoio_poe/model/data/ApoioPoEManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/src/main/java/pt/isec/pa/apoio_poe/model/data/ApoioPoEManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrabalhoPratico/Relatório.docx" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/Relatório.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrabalhoPratico/Relatório.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/Relatório.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrabalhoPratico/TrabalhoPratico.iml" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/TrabalhoPratico.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TrabalhoPratico/asd" beforeDir="false" afterPath="$PROJECT_DIR$/TrabalhoPratico/asd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,11 +74,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-  </component>
-  <component name="RunManager" selected="Maven.TrabalhoPratico [javafx:run]">
-    <configuration name="pt.isec.pa.apoio_poe.Main" type="Application" factoryName="Application" nameIsGenerated="true">
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Desktop/Escola/ISEC/Licenciatura de Engenharia Informática/Cadeiras/2º Ano/2º Semestre/Programação Avançada&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;SDKs&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
+  }
+}</component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="pt.isec.pa.apoio_poe.Main" />
       <module name="TrabalhoPratico" />
       <option name="VM_PARAMETERS" value="--module-path &quot;C:\Program Files\Java\javafx-sdk-17.0.2\lib&quot; --add-modules=javafx.controls" />
@@ -105,6 +142,22 @@
       <workItem from="1651445286868" duration="102000" />
       <workItem from="1651445549961" duration="9000" />
       <workItem from="1654853599371" duration="271000" />
+      <workItem from="1657315246952" duration="7686000" />
+      <workItem from="1657379251399" duration="1669000" />
+      <workItem from="1657386518413" duration="612000" />
+      <workItem from="1657488250329" duration="24000" />
+      <workItem from="1657488400055" duration="3038000" />
+      <workItem from="1657499976832" duration="519000" />
+      <workItem from="1657564436106" duration="470000" />
+      <workItem from="1657564962584" duration="1169000" />
+      <workItem from="1658442101244" duration="1292000" />
+      <workItem from="1658447053623" duration="571000" />
+      <workItem from="1658450217426" duration="20000" />
+      <workItem from="1659224262877" duration="7000" />
+      <workItem from="1664621971944" duration="24000" />
+      <workItem from="1664622011466" duration="8000" />
+      <workItem from="1664622837347" duration="367000" />
+      <workItem from="1664623220309" duration="80000" />
     </task>
     <task id="LOCAL-00001" summary="alteração de organização de pastas">
       <created>1651445362104</created>

@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="javadoc" pattern="src:pt.isec.pa.apoio_poe.model.data..*||src:pt.isec.pa.apoio_poe.model.errorHandling..*||src:pt.isec.pa.apoio_poe.model.fsm.ApoioPoEContext" />
+</component>
